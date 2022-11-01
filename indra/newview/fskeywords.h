@@ -33,16 +33,16 @@ class LLChat;
 
 class FSKeywords : public LLSingleton<FSKeywords>
 {
-	LLSINGLETON(FSKeywords);
-	virtual ~FSKeywords();
+    LLSINGLETON(FSKeywords);
+    virtual ~FSKeywords();
 
 public:
-	void updateKeywords();
-	bool chatContainsKeyword(const LLChat& chat, bool is_local);
-	void static notify(const LLChat& chat); // <FS:PP> FIRE-10178: Keyword Alerts in group IM do not work unless the group is in the foreground
+    void updateKeywords();
+    bool chatContainsKeyword(const LLChat& chat, bool is_local);
+    void static notify(const LLChat& chat); // <FS:PP> FIRE-10178: Keyword Alerts in group IM do not work unless the group is in the foreground
 
 private:
-	std::vector<std::string> mWordList;
+    std::vector<std::string> mWordList;
 };
 
 #endif // FS_KEYWORDS_H

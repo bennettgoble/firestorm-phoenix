@@ -34,44 +34,44 @@ class LLTextEditor;
 class LLFloaterSearchReplace : public LLFloater
 {
 public:
-	LLFloaterSearchReplace(const LLSD& sdKey);
-	~LLFloaterSearchReplace();
+    LLFloaterSearchReplace(const LLSD& sdKey);
+    ~LLFloaterSearchReplace();
 
-	/*
-	 * LLView overrides
-	 */
+    /*
+     * LLView overrides
+     */
 public:
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const;
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& sdKey);
-	/*virtual*/ void onClose(bool fQuiting);
-	void			 setCanReplace(bool can_replace);
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const;
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& sdKey);
+    /*virtual*/ void onClose(bool fQuiting);
+    void             setCanReplace(bool can_replace);
 
-	/*
-	 * Member functions
-	 */
+    /*
+     * Member functions
+     */
 public:
-	static LLFloaterSearchReplace* show(LLTextEditor* pEditor);
-	static LLFloaterSearchReplace* findInstance();
-	LLTextEditor* getEditor() const;
+    static LLFloaterSearchReplace* show(LLTextEditor* pEditor);
+    static LLFloaterSearchReplace* findInstance();
+    LLTextEditor* getEditor() const;
 
 protected:
-	void          refreshHighlight();
-	void          onSearchClick();
-	void          onSearchKeystroke();
-	void          onReplaceClick();
-	void          onReplaceAllClick();
+    void          refreshHighlight();
+    void          onSearchClick();
+    void          onSearchKeystroke();
+    void          onReplaceClick();
+    void          onReplaceAllClick();
 
-	/*
-	 * Member variables
-	 */
+    /*
+     * Member variables
+     */
 private:
-	LLLineEditor*      m_pSearchEditor;
-	LLLineEditor*      m_pReplaceEditor;
-	LLCheckBoxCtrl*    m_pCaseInsensitiveCheck;
-	LLCheckBoxCtrl*    m_pSearchUpCheck;
-	LLHandle<LLUICtrl> m_EditorHandle;
+    LLLineEditor*      m_pSearchEditor;
+    LLLineEditor*      m_pReplaceEditor;
+    LLCheckBoxCtrl*    m_pCaseInsensitiveCheck;
+    LLCheckBoxCtrl*    m_pSearchUpCheck;
+    LLHandle<LLUICtrl> m_EditorHandle;
 };
 
 // ============================================================================

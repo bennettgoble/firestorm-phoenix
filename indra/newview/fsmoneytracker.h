@@ -37,32 +37,32 @@ class LLTextBox;
 class FSMoneyTracker: public LLFloater
 {
 public:
-	FSMoneyTracker(const LLSD& key);
-	virtual ~FSMoneyTracker() {};
-	virtual void onClose(bool app_quitting);
+    FSMoneyTracker(const LLSD& key);
+    virtual ~FSMoneyTracker() {};
+    virtual void onClose(bool app_quitting);
 
-	BOOL postBuild();
-	void addPayment(const LLUUID other_id, bool is_group, S32 amount, bool incoming);
+    BOOL postBuild();
+    void addPayment(const LLUUID other_id, bool is_group, S32 amount, bool incoming);
 
 private:
-	void clear();
-	std::string getTime(time_t utc_time);
-	std::string getDate(time_t utc_time);
+    void clear();
+    std::string getTime(time_t utc_time);
+    std::string getDate(time_t utc_time);
 
-	LLNameListCtrl*	mTransactionHistory;
-	LLTextBox*		mSummary;
+    LLNameListCtrl* mTransactionHistory;
+    LLTextBox*      mSummary;
 
-	S32 mAmountPaid;
-	S32 mAmountReceived;
+    S32 mAmountPaid;
+    S32 mAmountReceived;
 };
 
 class FSMoneyTrackerListMenu : public LLListContextMenu
 {
 public:
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 private:
-	void onContextMenuItemClick(const LLSD& userdata);
-	bool onContextMenuItemEnable(const LLSD& userdata);
+    void onContextMenuItemClick(const LLSD& userdata);
+    bool onContextMenuItemEnable(const LLSD& userdata);
 };
 
 extern FSMoneyTrackerListMenu gFSMoneyTrackerListMenu;

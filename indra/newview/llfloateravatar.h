@@ -31,20 +31,20 @@
 #include "llfloater.h"
 
 class LLFloaterAvatar:
-	public LLFloater
+    public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 private:
-	LLFloaterAvatar(const LLSD& key);
-	/*virtual*/	~LLFloaterAvatar();
-	/*virtual*/	BOOL postBuild();
+    LLFloaterAvatar(const LLSD& key);
+    /*virtual*/ ~LLFloaterAvatar();
+    /*virtual*/ BOOL postBuild();
 
-	// <FS:Ansariel> Avatar chooser does not change between OpenSim grids
-	/*virtual*/ void onOpen(const LLSD& key);
-	void handleUrlChanged(const std::string& url);
+    // <FS:Ansariel> Avatar chooser does not change between OpenSim grids
+    /*virtual*/ void onOpen(const LLSD& key);
+    void handleUrlChanged(const std::string& url);
 
-	boost::signals2::connection mAvatarPickerUrlChangedSignal;
-	// </FS:Ansariel>
+    boost::signals2::connection mAvatarPickerUrlChangedSignal;
+    // </FS:Ansariel>
 };
 
 #endif

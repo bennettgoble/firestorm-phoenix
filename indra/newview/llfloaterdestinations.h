@@ -31,20 +31,20 @@
 #include "llfloater.h"
 
 class LLFloaterDestinations:
-	public LLFloater
+    public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 private:
-	LLFloaterDestinations(const LLSD& key);
-	/*virtual*/	~LLFloaterDestinations();
-	/*virtual*/	BOOL postBuild();
+    LLFloaterDestinations(const LLSD& key);
+    /*virtual*/ ~LLFloaterDestinations();
+    /*virtual*/ BOOL postBuild();
 
-	// <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
-	/*virtual*/ void onOpen(const LLSD& key);
-	void handleUrlChanged(const std::string& url);
+    // <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
+    /*virtual*/ void onOpen(const LLSD& key);
+    void handleUrlChanged(const std::string& url);
 
-	boost::signals2::connection mDestinationGuideUrlChangedSignal;
-	// </FS:Ansariel>
+    boost::signals2::connection mDestinationGuideUrlChangedSignal;
+    // </FS:Ansariel>
 };
 
 #endif

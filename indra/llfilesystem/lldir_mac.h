@@ -38,26 +38,26 @@
 class LLDir_Mac : public LLDir
 {
 public:
-	LLDir_Mac();
-	virtual ~LLDir_Mac();
+    LLDir_Mac();
+    virtual ~LLDir_Mac();
 
-	/*virtual*/ void initAppDirs(const std::string &app_name,
-		const std::string& app_read_only_data_dir);
+    /*virtual*/ void initAppDirs(const std::string &app_name,
+        const std::string& app_read_only_data_dir);
 
-	virtual std::string getCurPath();
-	virtual U32 countFilesInDir(const std::string &dirname, const std::string &mask);
-	virtual BOOL getNextFileInDir(const std::string &dirname, const std::string &mask, std::string &fname);
-	//virtual BOOL fileExists(const std::string &filename) const;
-	virtual bool fileExists(const std::string &filename) const;
+    virtual std::string getCurPath();
+    virtual U32 countFilesInDir(const std::string &dirname, const std::string &mask);
+    virtual BOOL getNextFileInDir(const std::string &dirname, const std::string &mask, std::string &fname);
+    //virtual BOOL fileExists(const std::string &filename) const;
+    virtual bool fileExists(const std::string &filename) const;
 
-	/*virtual*/ std::string getLLPluginLauncher();
-	/*virtual*/ std::string getLLPluginFilename(std::string base_name);
+    /*virtual*/ std::string getLLPluginLauncher();
+    /*virtual*/ std::string getLLPluginFilename(std::string base_name);
 
 //<FS:TS> Used by LGG's selection beams
 private:
-	int mCurrentDirIndex;
-	int mCurrentDirCount;
-	std::string mCurrentDir;
+    int mCurrentDirIndex;
+    int mCurrentDirCount;
+    std::string mCurrentDir;
 };
 
 #endif // LL_LLDIR_MAC_H

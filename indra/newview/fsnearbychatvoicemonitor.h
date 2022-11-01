@@ -36,26 +36,26 @@ class FSNearbyChatVoiceControl : public FSNearbyChatControl
 {
 
 public:
-	struct Params : public LLInitParam::Block<Params, FSNearbyChatControl::Params>
-	{
-		Optional<S32>							voice_monitor_padding;
-		Optional<NearbyVoiceMonitor::Params>	nearby_voice_monitor;
+    struct Params : public LLInitParam::Block<Params, FSNearbyChatControl::Params>
+    {
+        Optional<S32>                           voice_monitor_padding;
+        Optional<NearbyVoiceMonitor::Params>    nearby_voice_monitor;
 
-		Params();
-	};
+        Params();
+    };
 
-	FSNearbyChatVoiceControl(const Params& p);
+    FSNearbyChatVoiceControl(const Params& p);
 
-	void draw();
+    void draw();
 
 protected:
-	friend class LLUICtrlFactory;
+    friend class LLUICtrlFactory;
 
-	NearbyVoiceMonitor*	mVoiceMonitor;
-	S32					mOriginalTextpadLeft;
-	S32					mOriginalTextpadRight;
-	S32					mVoiceMonitorPadding;
-	bool				mVoiceMonitorVisible;
+    NearbyVoiceMonitor* mVoiceMonitor;
+    S32                 mOriginalTextpadLeft;
+    S32                 mOriginalTextpadRight;
+    S32                 mVoiceMonitorPadding;
+    bool                mVoiceMonitorVisible;
 };
 
 #endif // FS_NEARBYCHATVOICEMONITOR_H

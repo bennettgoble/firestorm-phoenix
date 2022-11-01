@@ -32,42 +32,42 @@
 
 enum EFSRegistrarFunctionActionType
 {
-	FS_RGSTR_ACT_ADD_FRIEND,
-	FS_RGSTR_ACT_REMOVE_FRIEND,
-	FS_RGSTR_ACT_SEND_IM,
-	FS_RGSTR_ACT_VIEW_TRANSCRIPT,
-	FS_RGSTR_ACT_ZOOM_IN,
-	FS_RGSTR_ACT_OFFER_TELEPORT,
-	FS_RGSTR_ACT_SHOW_PROFILE,
-	FS_RGSTR_ACT_TRACK_AVATAR,
-	FS_RGSTR_ACT_TELEPORT_TO,
-	FS_RGSTR_ACT_REQUEST_TELEPORT,
-	FS_RGSTR_CHK_AVATAR_BLOCKED,
-	FS_RGSTR_CHK_IS_SELF,
-	FS_RGSTR_CHK_IS_NOT_SELF,
-	FS_RGSTR_CHK_WAITING_FOR_GROUP_DATA,
-	FS_RGSTR_CHK_HAVE_GROUP_DATA,
-	FS_RGSTR_CHK_CAN_LEAVE_GROUP,
-	FS_RGSTR_CHK_CAN_JOIN_GROUP,
-	FS_RGSTR_CHK_GROUP_NOT_ACTIVE
+    FS_RGSTR_ACT_ADD_FRIEND,
+    FS_RGSTR_ACT_REMOVE_FRIEND,
+    FS_RGSTR_ACT_SEND_IM,
+    FS_RGSTR_ACT_VIEW_TRANSCRIPT,
+    FS_RGSTR_ACT_ZOOM_IN,
+    FS_RGSTR_ACT_OFFER_TELEPORT,
+    FS_RGSTR_ACT_SHOW_PROFILE,
+    FS_RGSTR_ACT_TRACK_AVATAR,
+    FS_RGSTR_ACT_TELEPORT_TO,
+    FS_RGSTR_ACT_REQUEST_TELEPORT,
+    FS_RGSTR_CHK_AVATAR_BLOCKED,
+    FS_RGSTR_CHK_IS_SELF,
+    FS_RGSTR_CHK_IS_NOT_SELF,
+    FS_RGSTR_CHK_WAITING_FOR_GROUP_DATA,
+    FS_RGSTR_CHK_HAVE_GROUP_DATA,
+    FS_RGSTR_CHK_CAN_LEAVE_GROUP,
+    FS_RGSTR_CHK_CAN_JOIN_GROUP,
+    FS_RGSTR_CHK_GROUP_NOT_ACTIVE
 };
 
 class FSRegistrarUtils
 {
 public:
-	FSRegistrarUtils();
-	~FSRegistrarUtils() { };
+    FSRegistrarUtils();
+    ~FSRegistrarUtils() { };
 
-	typedef boost::function<bool(const LLUUID&, EFSRegistrarFunctionActionType)> enable_check_function_t;
-	void setEnableCheckFunction(const enable_check_function_t& func)
-	{
-		mEnableCheckFunction = func;
-	}
+    typedef boost::function<bool(const LLUUID&, EFSRegistrarFunctionActionType)> enable_check_function_t;
+    void setEnableCheckFunction(const enable_check_function_t& func)
+    {
+        mEnableCheckFunction = func;
+    }
 
-	bool checkIsEnabled(LLUUID av_id, EFSRegistrarFunctionActionType action);
+    bool checkIsEnabled(LLUUID av_id, EFSRegistrarFunctionActionType action);
 
 private:
-	enable_check_function_t mEnableCheckFunction;
+    enable_check_function_t mEnableCheckFunction;
 };
 
 extern FSRegistrarUtils gFSRegistrarUtils;

@@ -69,8 +69,8 @@ BOOL LLFloaterNotificationsTabbed::postBuild()
     mNotificationsSeparator->initTaggedList(LLNotificationListItem::getTransactionTypes(), mTransactionMessageList);
     mNotificationsSeparator->initUnTaggedList(mSystemMessageList);
     mNotificationsTabContainer = getChild<LLTabContainer>("notifications_tab_container");
-	// <FS:Ansariel> Remember last tab used
-	mNotificationsTabContainer->selectTab(gSavedPerAccountSettings.getS32("FSLastNotificationsTab"));
+    // <FS:Ansariel> Remember last tab used
+    mNotificationsTabContainer->selectTab(gSavedPerAccountSettings.getS32("FSLastNotificationsTab"));
 
     mDeleteAllBtn = getChild<LLButton>("delete_all_button");
     mDeleteAllBtn->setClickedCallback(boost::bind(&LLFloaterNotificationsTabbed::onClickDeleteAllBtn,this));
@@ -119,19 +119,19 @@ void LLFloaterNotificationsTabbed::setSysWellChiclet(LLSysWellChiclet* chiclet)
 //---------------------------------------------------------------------------------
 LLFloaterNotificationsTabbed::~LLFloaterNotificationsTabbed()
 {
-	// <FS:Ansariel> Remember last tab used
-	gSavedPerAccountSettings.setS32("FSLastNotificationsTab", mNotificationsTabContainer->getCurrentPanelIndex());
+    // <FS:Ansariel> Remember last tab used
+    gSavedPerAccountSettings.setS32("FSLastNotificationsTab", mNotificationsTabContainer->getCurrentPanelIndex());
 }
 
 //---------------------------------------------------------------------------------
 void LLFloaterNotificationsTabbed::removeItemByID(const LLUUID& id, std::string type)
 {
-	// <FS:Ansariel> Ignore for script dialogs that are not listed in the notifications list
-	if (type == "ScriptDialog" || type == "ScriptDialogGroup")
-	{
-		return;
-	}
-	// </FS:Ansariel>
+    // <FS:Ansariel> Ignore for script dialogs that are not listed in the notifications list
+    if (type == "ScriptDialog" || type == "ScriptDialogGroup")
+    {
+        return;
+    }
+    // </FS:Ansariel>
 
     if(mNotificationsSeparator->removeItemByID(type, id))
     {
@@ -190,23 +190,23 @@ void LLFloaterNotificationsTabbed::setVisible(BOOL visible)
     {
         if (NULL == getDockControl() && getDockTongue().notNull())
         {
-			// <FS:Ansariel> Group notices, IMs and chiclets position
+            // <FS:Ansariel> Group notices, IMs and chiclets position
             //setDockControl(new LLDockControl(
             //    LLChicletBar::getInstance()->getChild<LLView>(getAnchorViewName()), this,
             //    getDockTongue(), LLDockControl::BOTTOM));
-			if (gSavedSettings.getBOOL("InternalShowGroupNoticesTopRight"))
-			{
-			setDockControl(new LLDockControl(
-				LLChicletBar::getInstance()->getChild<LLView>(getAnchorViewName()), this,
-				getDockTongue(), LLDockControl::BOTTOM));
-			}
-			else
-			{
-				setDockControl(new LLDockControl(
-					LLChicletBar::getInstance()->getChild<LLView>(getAnchorViewName()), this,
-					getDockTongue(), LLDockControl::TOP));
-			}
-			// </FS:Ansariel> Group notices, IMs and chiclets position
+            if (gSavedSettings.getBOOL("InternalShowGroupNoticesTopRight"))
+            {
+            setDockControl(new LLDockControl(
+                LLChicletBar::getInstance()->getChild<LLView>(getAnchorViewName()), this,
+                getDockTongue(), LLDockControl::BOTTOM));
+            }
+            else
+            {
+                setDockControl(new LLDockControl(
+                    LLChicletBar::getInstance()->getChild<LLView>(getAnchorViewName()), this,
+                    getDockTongue(), LLDockControl::TOP));
+            }
+            // </FS:Ansariel> Group notices, IMs and chiclets position
         }
     }
 
@@ -215,7 +215,7 @@ void LLFloaterNotificationsTabbed::setVisible(BOOL visible)
 
     LLTransientDockableFloater::setVisible(visible);
 
-    // update notification channel state	
+    // update notification channel state    
     initChannel(); // make sure the channel still exists
     if(mChannel)
     {
@@ -404,7 +404,7 @@ void LLFloaterNotificationsTabbed::clearScreenChannels()
 //---------------------------------------------------------------------------------
 void LLFloaterNotificationsTabbed::onStoreToast(LLPanel* info_panel, LLUUID id)
 {
-    LLNotificationListItem::Params p;	
+    LLNotificationListItem::Params p;   
     p.notification_id = id;
     p.title = static_cast<LLToastPanel*>(info_panel)->getTitle();
     LLNotificationPtr notify = mChannel->getToastByNotificationID(id)->getNotification();

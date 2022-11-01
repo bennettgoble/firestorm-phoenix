@@ -37,24 +37,24 @@ class LLMenuButton;
 class FSFloaterTeleportHistory : public LLFloater
 {
 public:
-	FSFloaterTeleportHistory(const LLSD& seed);
-	virtual ~FSFloaterTeleportHistory();
+    FSFloaterTeleportHistory(const LLSD& seed);
+    virtual ~FSFloaterTeleportHistory();
 
-	BOOL postBuild();
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const { return true; }
+    BOOL postBuild();
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const { return true; }
 
-	void resetFilter();
+    void resetFilter();
 
 private:
-	void onFilterEdit(const std::string& search_string, bool force_filter);
-	void onGearMenuClick();
-	void onSortingMenuClick();
+    void onFilterEdit(const std::string& search_string, bool force_filter);
+    void onGearMenuClick();
+    void onSortingMenuClick();
 
-	LLTeleportHistoryPanel*	mHistoryPanel;
-	LLFilterEditor*			mFilterEditor;
-	LLMenuButton*				mGearMenuButton;
-	LLMenuButton*				mSortingMenuButton;
+    LLTeleportHistoryPanel* mHistoryPanel;
+    LLFilterEditor*         mFilterEditor;
+    LLMenuButton*               mGearMenuButton;
+    LLMenuButton*               mSortingMenuButton;
 };
 
 #endif // FS_FLOATERTELEPORTHISTORY_H

@@ -216,7 +216,7 @@ namespace tut
     }
 
     void test_data::postAndWait1()
-	{
+    {
         BEGIN
         {
             mSync.bump();

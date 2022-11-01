@@ -35,18 +35,18 @@ class LLFilterEditor;
 class FSFloaterPartialInventory : public LLFloater
 {
 public:
-	FSFloaterPartialInventory(const LLSD& key);
-	virtual ~FSFloaterPartialInventory();
+    FSFloaterPartialInventory(const LLSD& key);
+    virtual ~FSFloaterPartialInventory();
 
-	BOOL postBuild() override;
-	void onOpen(const LLSD& key) override;
+    BOOL postBuild() override;
+    void onOpen(const LLSD& key) override;
 
-	LLInventoryPanel* getInventoryPanel() const { return mInventoryList; };
+    LLInventoryPanel* getInventoryPanel() const { return mInventoryList; };
 
 private:
-	LLUUID				mRootFolderId;
-	LLInventoryPanel*	mInventoryList{ nullptr };
-	LLFilterEditor*		mFilterEdit{ nullptr };
+    LLUUID              mRootFolderId;
+    LLInventoryPanel*   mInventoryList{ nullptr };
+    LLFilterEditor*     mFilterEdit{ nullptr };
 };
 
 #endif

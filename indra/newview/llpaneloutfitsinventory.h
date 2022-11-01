@@ -42,84 +42,84 @@ class LLInventoryCategoriesObserver; // <FS:Ansariel> FIRE-17626: Attachment cou
 
 class LLPanelOutfitsInventory : public LLPanel
 {
-	LOG_CLASS(LLPanelOutfitsInventory);
+    LOG_CLASS(LLPanelOutfitsInventory);
 public:
-	LLPanelOutfitsInventory();
-	virtual ~LLPanelOutfitsInventory();
+    LLPanelOutfitsInventory();
+    virtual ~LLPanelOutfitsInventory();
 
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& key);
-	
-	void onSearchEdit(const std::string& string);
-	void onSave();
-	void saveOutfit(bool as_new = false);
-	
-	bool onSaveCommit(const LLSD& notification, const LLSD& response);
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& key);
+    
+    void onSearchEdit(const std::string& string);
+    void onSave();
+    void saveOutfit(bool as_new = false);
+    
+    bool onSaveCommit(const LLSD& notification, const LLSD& response);
 
-	static LLSidepanelAppearance* getAppearanceSP();
+    static LLSidepanelAppearance* getAppearanceSP();
 
 // [RLVa:KB] - Checked: 2010-08-24 (RLVa-1.4.0a) | Added: RLVa-1.2.1a
-	LLTabContainer* getAppearanceTabs()		{ return mAppearanceTabs; }
-	LLOutfitsList*  getMyOutfitsPanel()		{ return mMyOutfitsPanel; }
-	LLPanelWearing* getCurrentOutfitPanel()	{ return mCurrentOutfitPanel; }
+    LLTabContainer* getAppearanceTabs()     { return mAppearanceTabs; }
+    LLOutfitsList*  getMyOutfitsPanel()     { return mMyOutfitsPanel; }
+    LLPanelWearing* getCurrentOutfitPanel() { return mCurrentOutfitPanel; }
 // [/RLVa:KB]
 
-	static LLPanelOutfitsInventory* findInstance();
+    static LLPanelOutfitsInventory* findInstance();
 
-	void openApearanceTab(const std::string& tab_name);
+    void openApearanceTab(const std::string& tab_name);
 
-	// <FS:Ansariel> Show avatar complexity in appearance floater
-	void updateAvatarComplexity(U32 complexity, const std::map<LLUUID, U32>& item_complexity, const std::map<LLUUID, U32>& temp_item_complexity, U32 body_parts_complexity);
+    // <FS:Ansariel> Show avatar complexity in appearance floater
+    void updateAvatarComplexity(U32 complexity, const std::map<LLUUID, U32>& item_complexity, const std::map<LLUUID, U32>& temp_item_complexity, U32 body_parts_complexity);
 
 protected:
-	void updateVerbs();
+    void updateVerbs();
 
 private:
-	LLTabContainer*			mAppearanceTabs;
-	std::string 			mFilterSubString;
+    LLTabContainer*         mAppearanceTabs;
+    std::string             mFilterSubString;
 
-	// <FS:Ansariel> FIRE-17626: Attachment count in appearance floater
-	LLInventoryCategoriesObserver* mCategoriesObserver;
-	void onCOFChanged();
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-17626: Attachment count in appearance floater
+    LLInventoryCategoriesObserver* mCategoriesObserver;
+    void onCOFChanged();
+    // </FS:Ansariel>
 
-	//////////////////////////////////////////////////////////////////////////////////
-	// tab panels                                                                   //
+    //////////////////////////////////////////////////////////////////////////////////
+    // tab panels                                                                   //
 protected:
-	void 					initTabPanels();
-	void 					onTabChange();
-	bool 					isCOFPanelActive() const;
-	bool 					isOutfitsListPanelActive() const;
-	bool 					isOutfitsGalleryPanelActive() const;
+    void                    initTabPanels();
+    void                    onTabChange();
+    bool                    isCOFPanelActive() const;
+    bool                    isOutfitsListPanelActive() const;
+    bool                    isOutfitsGalleryPanelActive() const;
 
 private:
-	LLPanelAppearanceTab*	mActivePanel;
-	LLOutfitsList*			mMyOutfitsPanel;
+    LLPanelAppearanceTab*   mActivePanel;
+    LLOutfitsList*          mMyOutfitsPanel;
     LLOutfitGallery*        mOutfitGalleryPanel;
-	LLPanelWearing*			mCurrentOutfitPanel;
+    LLPanelWearing*         mCurrentOutfitPanel;
 
-	// tab panels                                                                   //
-	//////////////////////////////////////////////////////////////////////////////////
+    // tab panels                                                                   //
+    //////////////////////////////////////////////////////////////////////////////////
 
-	//////////////////////////////////////////////////////////////////////////////////
-	// List Commands                                                                //
+    //////////////////////////////////////////////////////////////////////////////////
+    // List Commands                                                                //
 protected:
-	void initListCommandsHandlers();
-	void updateListCommands();
-	void onWearButtonClick();
-	void showGearMenu();
-	void onTrashButtonClick();
-	bool isActionEnabled(const LLSD& userdata);
-	void setWearablesLoading(bool val);
-	void onWearablesLoaded();
-	void onWearablesLoading();
+    void initListCommandsHandlers();
+    void updateListCommands();
+    void onWearButtonClick();
+    void showGearMenu();
+    void onTrashButtonClick();
+    bool isActionEnabled(const LLSD& userdata);
+    void setWearablesLoading(bool val);
+    void onWearablesLoaded();
+    void onWearablesLoading();
 private:
-	LLPanel*					mListCommands;
-	LLMenuGL*					mMenuAdd;
-	// List Commands                                                                //
-	//////////////////////////////////////////////////////////////////////////////////
+    LLPanel*                    mListCommands;
+    LLMenuGL*                   mMenuAdd;
+    // List Commands                                                                //
+    //////////////////////////////////////////////////////////////////////////////////
 
-	bool mInitialized;
+    bool mInitialized;
 };
 
 #endif //LL_LLPANELOUTFITSINVENTORY_H

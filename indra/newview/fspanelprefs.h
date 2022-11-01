@@ -34,32 +34,32 @@ class FSEmbeddedItemDropTarget;
 class FSPanelPrefs : public LLPanelPreference
 {
 public:
-	FSPanelPrefs();
-	virtual ~FSPanelPrefs() {}
+    FSPanelPrefs();
+    virtual ~FSPanelPrefs() {}
 
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& key);
-	/*virtual*/ void apply();
-	/*virtual*/ void cancel();
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& key);
+    /*virtual*/ void apply();
+    /*virtual*/ void cancel();
 
-	void refreshBeamLists();
+    void refreshBeamLists();
 
 private:
-	void onBeamColorNew();
-	void onBeamNew();
-	void onBeamColorDelete();
-	void onBeamDelete();
+    void onBeamColorNew();
+    void onBeamNew();
+    void onBeamColorDelete();
+    void onBeamDelete();
 
-	void onCommitTexture(const LLSD& data);
-	void onCommitCopy();
-	void onCommitTrans();
+    void onCommitTexture(const LLSD& data);
+    void onCommitCopy();
+    void onCommitTrans();
 
-	void onDADEmbeddedItem(const LLUUID& item_id);
+    void onDADEmbeddedItem(const LLUUID& item_id);
 
-	void onResetDefaultFolders();
+    void onResetDefaultFolders();
 
-	FSEmbeddedItemDropTarget*	mInvDropTarget;
-	std::string					mEmbeddedItem;
+    FSEmbeddedItemDropTarget*   mInvDropTarget;
+    std::string                 mEmbeddedItem;
 };
 
 #endif // FS_PANELPREFS_H

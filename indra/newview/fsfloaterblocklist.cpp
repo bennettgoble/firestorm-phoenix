@@ -30,8 +30,8 @@
 #include "fsfloaterblocklist.h"
 
 FSFloaterBlocklist::FSFloaterBlocklist(const LLSD& seed)
-	: LLFloater(seed),
-	mBlockedListPanel(NULL)
+    : LLFloater(seed),
+    mBlockedListPanel(NULL)
 {
 }
 
@@ -41,19 +41,19 @@ FSFloaterBlocklist::~FSFloaterBlocklist()
 
 BOOL FSFloaterBlocklist::postBuild()
 {
-	mBlockedListPanel = getChild<LLPanel>("panel_block_list_sidetray");
-	if (!mBlockedListPanel)
-	{
-		return FALSE;
-	}
+    mBlockedListPanel = getChild<LLPanel>("panel_block_list_sidetray");
+    if (!mBlockedListPanel)
+    {
+        return FALSE;
+    }
 
-	return TRUE;
+    return TRUE;
 }
 
 void FSFloaterBlocklist::onOpen(const LLSD& key)
 {
-	if (mBlockedListPanel)
-	{
-		mBlockedListPanel->onOpen(key);
-	}
+    if (mBlockedListPanel)
+    {
+        mBlockedListPanel->onOpen(key);
+    }
 }

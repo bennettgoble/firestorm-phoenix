@@ -29,17 +29,17 @@
 #include "fsregistrarutils.h"
 
 FSRegistrarUtils::FSRegistrarUtils() :
-	mEnableCheckFunction(NULL)
+    mEnableCheckFunction(NULL)
 {
 }
 
 bool FSRegistrarUtils::checkIsEnabled(LLUUID av_id, EFSRegistrarFunctionActionType action)
 {
-	if (mEnableCheckFunction)
-	{
-		return mEnableCheckFunction(av_id, action);
-	}
-	return false;
+    if (mEnableCheckFunction)
+    {
+        return mEnableCheckFunction(av_id, action);
+    }
+    return false;
 }
 
 FSRegistrarUtils gFSRegistrarUtils;

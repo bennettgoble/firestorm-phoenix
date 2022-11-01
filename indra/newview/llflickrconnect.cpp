@@ -30,7 +30,7 @@
 #include "llflickrconnect.h"
 
 #include "llagent.h"
-#include "llcallingcard.h"			// for LLAvatarTracker
+#include "llcallingcard.h"          // for LLAvatarTracker
 #include "llcommandhandler.h"
 #include "llnotificationsutil.h"
 #include "llurlaction.h"
@@ -54,13 +54,13 @@ void log_flickr_connect_error(const std::string& request, U32 status, const std:
     // Note: 302 (redirect) is *not* an error that warrants logging
     if (status != 302)
     {
-		LL_WARNS("FlickrConnect") << request << " request failed with a " << status << " " << reason << ". Reason: " << code << " (" << description << ")" << LL_ENDL;
+        LL_WARNS("FlickrConnect") << request << " request failed with a " << status << " " << reason << ". Reason: " << code << " (" << description << ")" << LL_ENDL;
     }
 }
 
 void toast_user_for_flickr_success()
 {
-	LLSD args;
+    LLSD args;
     args["MESSAGE"] = LLTrans::getString("flickr_post_success");
     LLNotificationsUtil::add("FlickrConnect", args);
 }
@@ -391,29 +391,29 @@ void LLFlickrConnect::flickrInfoCoro()
 ///////////////////////////////////////////////////////////////////////////////
 //
 LLFlickrConnect::LLFlickrConnect()
-:	mConnectionState(FLICKR_NOT_CONNECTED),
-	mConnected(false),
-	mInfo(),
-	mRefreshInfo(false),
-	mReadFromMaster(false)
+:   mConnectionState(FLICKR_NOT_CONNECTED),
+    mConnected(false),
+    mInfo(),
+    mRefreshInfo(false),
+    mReadFromMaster(false)
 {
 }
 
 void LLFlickrConnect::openFlickrWeb(std::string url)
 {
-	LLFloaterWebContent::Params p;
+    LLFloaterWebContent::Params p;
     p.url(url);
     p.show_chrome(true);
     p.allow_back_forward_navigation(false);
     p.clean_browser(true);
-	LLFloater *floater = LLFloaterReg::showInstance("flickr_web", p);
-	//the internal web browser has a bug that prevents it from gaining focus unless a mouse event occurs first (it seems).
-	//So when showing the internal web browser, set focus to it's containing floater "flickr_web". When a mouse event 
-	//occurs on the "webbrowser" panel part of the floater, a mouse cursor will properly show and the "webbrowser" will gain focus.
-	//flickr_web floater contains the "webbrowser" panel.    JIRA: ACME-744
-	gFocusMgr.setKeyboardFocus( floater );
+    LLFloater *floater = LLFloaterReg::showInstance("flickr_web", p);
+    //the internal web browser has a bug that prevents it from gaining focus unless a mouse event occurs first (it seems).
+    //So when showing the internal web browser, set focus to it's containing floater "flickr_web". When a mouse event 
+    //occurs on the "webbrowser" panel part of the floater, a mouse cursor will properly show and the "webbrowser" will gain focus.
+    //flickr_web floater contains the "webbrowser" panel.    JIRA: ACME-744
+    gFocusMgr.setKeyboardFocus( floater );
 
-	//LLUrlAction::openURLExternal(url);
+    //LLUrlAction::openURLExternal(url);
 }
 
 std::string LLFlickrConnect::getFlickrConnectURL(const std::string& route, bool include_read_from_master)
@@ -422,7 +422,7 @@ std::string LLFlickrConnect::getFlickrConnectURL(const std::string& route, bool 
     LLViewerRegion *regionp = gAgent.getRegion();
     if (regionp)
     {
-		//url = "http://pdp15.lindenlab.com/flickr/agent/" + gAgentID.asString(); // TEMPORARY FOR TESTING - CHO
+        //url = "http://pdp15.lindenlab.com/flickr/agent/" + gAgentID.asString(); // TEMPORARY FOR TESTING - CHO
         url = regionp->getCapability("FlickrConnect");
         url += route;
     
@@ -431,7 +431,7 @@ std::string LLFlickrConnect::getFlickrConnectURL(const std::string& route, bool 
             url += "?read_from_master=true";
         }
     }
-	return url;
+    return url;
 }
 
 void LLFlickrConnect::connectToFlickr(const std::string& request_token, const std::string& oauth_verifier)
@@ -454,21 +454,21 @@ void LLFlickrConnect::checkConnectionToFlickr(bool auto_connect)
 
 void LLFlickrConnect::loadFlickrInfo()
 {
-	if(mRefreshInfo)
-	{
+    if(mRefreshInfo)
+    {
         LLCoros::instance().launch("LLFlickrConnect::flickrInfoCoro",
             boost::bind(&LLFlickrConnect::flickrInfoCoro, this));
-	}
+    }
 }
 
 void LLFlickrConnect::uploadPhoto(const std::string& image_url, const std::string& title, const std::string& description, const std::string& tags, int safety_level)
 {
-	LLSD body;
-	body["image"] = image_url;
-	body["title"] = title;
-	body["description"] = description;
-	body["tags"] = tags;
-	body["safety_level"] = safety_level;
+    LLSD body;
+    body["image"] = image_url;
+    body["title"] = title;
+    body["description"] = description;
+    body["tags"] = tags;
+    body["safety_level"] = safety_level;
 
     setConnectionState(LLFlickrConnect::FLICKR_POSTING);
 
@@ -487,56 +487,56 @@ void LLFlickrConnect::uploadPhoto(LLPointer<LLImageFormatted> image, const std::
 
 void LLFlickrConnect::storeInfo(const LLSD& info)
 {
-	mInfo = info;
-	mRefreshInfo = false;
+    mInfo = info;
+    mRefreshInfo = false;
 
-	sInfoWatcher->post(info);
+    sInfoWatcher->post(info);
 }
 
 const LLSD& LLFlickrConnect::getInfo() const
 {
-	return mInfo;
+    return mInfo;
 }
 
 void LLFlickrConnect::clearInfo()
 {
-	mInfo = LLSD();
+    mInfo = LLSD();
 }
 
 void LLFlickrConnect::setDataDirty()
 {
-	mRefreshInfo = true;
+    mRefreshInfo = true;
 }
 
 void LLFlickrConnect::setConnectionState(LLFlickrConnect::EConnectionState connection_state)
 {
-	if(connection_state == FLICKR_CONNECTED)
-	{
-		mReadFromMaster = true;
-		setConnected(true);
-		setDataDirty();
-	}
-	else if(connection_state == FLICKR_NOT_CONNECTED)
-	{
-		setConnected(false);
-	}
-	else if(connection_state == FLICKR_POSTED)
-	{
-		mReadFromMaster = false;
-	}
+    if(connection_state == FLICKR_CONNECTED)
+    {
+        mReadFromMaster = true;
+        setConnected(true);
+        setDataDirty();
+    }
+    else if(connection_state == FLICKR_NOT_CONNECTED)
+    {
+        setConnected(false);
+    }
+    else if(connection_state == FLICKR_POSTED)
+    {
+        mReadFromMaster = false;
+    }
 
-	if (mConnectionState != connection_state)
-	{
-		// set the connection state before notifying watchers
-		mConnectionState = connection_state;
+    if (mConnectionState != connection_state)
+    {
+        // set the connection state before notifying watchers
+        mConnectionState = connection_state;
 
-		LLSD state_info;
-		state_info["enum"] = connection_state;
-		sStateWatcher->post(state_info);
-	}
+        LLSD state_info;
+        state_info["enum"] = connection_state;
+        sStateWatcher->post(state_info);
+    }
 }
 
 void LLFlickrConnect::setConnected(bool connected)
 {
-	mConnected = connected;
+    mConnected = connected;
 }

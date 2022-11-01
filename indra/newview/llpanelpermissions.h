@@ -46,65 +46,65 @@ class LLViewerObject;
 class LLPanelPermissions : public LLPanel
 {
 public:
-	LLPanelPermissions();
-	virtual ~LLPanelPermissions();
+    LLPanelPermissions();
+    virtual ~LLPanelPermissions();
 
-	/*virtual*/	BOOL	postBuild();
+    /*virtual*/ BOOL    postBuild();
 
-	//void updateOwnerName(const LLUUID& owner_id, const LLAvatarName& owner_name, const LLStyle::Params& style_params);
-	//void updateCreatorName(const LLUUID& creator_id, const LLAvatarName& creator_name, const LLStyle::Params& style_params);
-	void refresh();							// refresh all labels as needed
-
-protected:
-	// statics
-	static void onClickClaim(void*);
-	static void onClickRelease(void*);
-		   void onClickGroup();
-		   void cbGroupID(LLUUID group_id);
-	static void onClickDeedToGroup(void*);
-
-	static void onCommitPerm(LLUICtrl *ctrl, void *data, U8 field, U32 perm);
-
-	static void onCommitGroupShare(LLUICtrl *ctrl, void *data);
-
-	static void onCommitEveryoneMove(LLUICtrl *ctrl, void *data);
-	static void onCommitEveryoneCopy(LLUICtrl *ctrl, void *data);
-
-	static void onCommitNextOwnerModify(LLUICtrl* ctrl, void* data);
-	static void onCommitNextOwnerCopy(LLUICtrl* ctrl, void* data);
-	static void onCommitNextOwnerTransfer(LLUICtrl* ctrl, void* data);
-	
-	static void onCommitName(LLUICtrl* ctrl, void* data);
-	static void onCommitDesc(LLUICtrl* ctrl, void* data);
-
-	void onCommitForSale();
-	void onCommitSaleInfo();
-	void setAllSaleInfo();
-	void showMarkForSale(BOOL show);
-
-	static void	onCommitClickAction(LLUICtrl* ctrl, void*);
-	static void onCommitIncludeInSearch(LLUICtrl* ctrl, void*);
-
-	static LLViewerInventoryItem* findItem(LLUUID &object_id);
-	
-	static void onCommitExport(LLUICtrl* ctrl, void* data);	// <FS:CR> OpenSim export permissions
+    //void updateOwnerName(const LLUUID& owner_id, const LLAvatarName& owner_name, const LLStyle::Params& style_params);
+    //void updateCreatorName(const LLUUID& creator_id, const LLAvatarName& creator_name, const LLStyle::Params& style_params);
+    void refresh();                         // refresh all labels as needed
 
 protected:
-	void disableAll();
-	
+    // statics
+    static void onClickClaim(void*);
+    static void onClickRelease(void*);
+           void onClickGroup();
+           void cbGroupID(LLUUID group_id);
+    static void onClickDeedToGroup(void*);
+
+    static void onCommitPerm(LLUICtrl *ctrl, void *data, U8 field, U32 perm);
+
+    static void onCommitGroupShare(LLUICtrl *ctrl, void *data);
+
+    static void onCommitEveryoneMove(LLUICtrl *ctrl, void *data);
+    static void onCommitEveryoneCopy(LLUICtrl *ctrl, void *data);
+
+    static void onCommitNextOwnerModify(LLUICtrl* ctrl, void* data);
+    static void onCommitNextOwnerCopy(LLUICtrl* ctrl, void* data);
+    static void onCommitNextOwnerTransfer(LLUICtrl* ctrl, void* data);
+    
+    static void onCommitName(LLUICtrl* ctrl, void* data);
+    static void onCommitDesc(LLUICtrl* ctrl, void* data);
+
+    void onCommitForSale();
+    void onCommitSaleInfo();
+    void setAllSaleInfo();
+    void showMarkForSale(BOOL show);
+
+    static void onCommitClickAction(LLUICtrl* ctrl, void*);
+    static void onCommitIncludeInSearch(LLUICtrl* ctrl, void*);
+
+    static LLViewerInventoryItem* findItem(LLUUID &object_id);
+    
+    static void onCommitExport(LLUICtrl* ctrl, void* data); // <FS:CR> OpenSim export permissions
+
+protected:
+    void disableAll();
+    
 private:
-	// LLNameBox*		mLabelGroupName;		// group name
+    // LLNameBox*       mLabelGroupName;        // group name
 
-	//LLTextBox*		mLabelOwnerName;
-	//LLTextBox*		mLabelCreatorName;
-	LLUUID			mCreatorID;
-	LLUUID			mOwnerID;
-	LLUUID			mLastOwnerID;
+    //LLTextBox*        mLabelOwnerName;
+    //LLTextBox*        mLabelCreatorName;
+    LLUUID          mCreatorID;
+    LLUUID          mOwnerID;
+    LLUUID          mLastOwnerID;
 
-	//boost::signals2::connection mOwnerCacheConnection;
-	//boost::signals2::connection mCreatorCacheConnection;
+    //boost::signals2::connection mOwnerCacheConnection;
+    //boost::signals2::connection mCreatorCacheConnection;
 
-	LLPointer<LLViewerObject> mLastSelectedObject;
+    LLPointer<LLViewerObject> mLastSelectedObject;
 };
 
 

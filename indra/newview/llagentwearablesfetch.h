@@ -40,34 +40,34 @@
 //--------------------------------------------------------------------
 class LLInitialWearablesFetch : public LLInventoryFetchDescendentsObserver
 {
-	LOG_CLASS(LLInitialWearablesFetch);
+    LOG_CLASS(LLInitialWearablesFetch);
 
 public:
-	LLInitialWearablesFetch(const LLUUID& cof_id);
-	~LLInitialWearablesFetch();
-	virtual void done();
+    LLInitialWearablesFetch(const LLUUID& cof_id);
+    ~LLInitialWearablesFetch();
+    virtual void done();
 
-	struct InitialWearableData
-	{
-		LLWearableType::EType mType;
-		LLUUID mItemID;
-		LLUUID mAssetID;
-		InitialWearableData(LLWearableType::EType type, LLUUID& itemID, LLUUID& assetID) :
-			mType(type),
-			mItemID(itemID),
-			mAssetID(assetID)
-		{}
-	};
+    struct InitialWearableData
+    {
+        LLWearableType::EType mType;
+        LLUUID mItemID;
+        LLUUID mAssetID;
+        InitialWearableData(LLWearableType::EType type, LLUUID& itemID, LLUUID& assetID) :
+            mType(type),
+            mItemID(itemID),
+            mAssetID(assetID)
+        {}
+    };
 
-	void add(InitialWearableData &data);
+    void add(InitialWearableData &data);
 
 protected:
-	void processWearablesMessage();
-	void processContents();
+    void processWearablesMessage();
+    void processContents();
 
 private:
-	typedef std::vector<InitialWearableData> initial_wearable_data_vec_t;
-	initial_wearable_data_vec_t mAgentInitialWearables; // Wearables from the old agent wearables msg
+    typedef std::vector<InitialWearableData> initial_wearable_data_vec_t;
+    initial_wearable_data_vec_t mAgentInitialWearables; // Wearables from the old agent wearables msg
 };
 
 //--------------------------------------------------------------------
@@ -79,36 +79,36 @@ private:
 class LLLibraryOutfitsFetch : public LLInventoryFetchDescendentsObserver
 {
 public:
-	enum ELibraryOutfitFetchStep
-	{
-		LOFS_FOLDER = 0,
-		LOFS_OUTFITS,
-		LOFS_LIBRARY,
-		LOFS_IMPORTED,
-		LOFS_CONTENTS
-	};
+    enum ELibraryOutfitFetchStep
+    {
+        LOFS_FOLDER = 0,
+        LOFS_OUTFITS,
+        LOFS_LIBRARY,
+        LOFS_IMPORTED,
+        LOFS_CONTENTS
+    };
 
-	LLLibraryOutfitsFetch(const LLUUID& my_outfits_id);
-	~LLLibraryOutfitsFetch();
+    LLLibraryOutfitsFetch(const LLUUID& my_outfits_id);
+    ~LLLibraryOutfitsFetch();
 
-	virtual void done();
-	void doneIdle();
-	LLUUID mMyOutfitsID;
-	void importedFolderFetch();
+    virtual void done();
+    void doneIdle();
+    LLUUID mMyOutfitsID;
+    void importedFolderFetch();
 protected:
-	void folderDone();
-	void outfitsDone();
-	void libraryDone();
-	void importedFolderDone();
-	void contentsDone();
-	enum ELibraryOutfitFetchStep mCurrFetchStep;
-	uuid_vec_t mLibraryClothingFolders;
-	uuid_vec_t mImportedClothingFolders;
-	bool mOutfitsPopulated;
-	LLUUID mClothingID;
-	LLUUID mLibraryClothingID;
-	LLUUID mImportedClothingID;
-	std::string mImportedClothingName;
+    void folderDone();
+    void outfitsDone();
+    void libraryDone();
+    void importedFolderDone();
+    void contentsDone();
+    enum ELibraryOutfitFetchStep mCurrFetchStep;
+    uuid_vec_t mLibraryClothingFolders;
+    uuid_vec_t mImportedClothingFolders;
+    bool mOutfitsPopulated;
+    LLUUID mClothingID;
+    LLUUID mLibraryClothingID;
+    LLUUID mImportedClothingID;
+    std::string mImportedClothingName;
 };
 
 #endif // LL_AGENTWEARABLESINITIALFETCH_H

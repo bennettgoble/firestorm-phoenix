@@ -40,119 +40,119 @@ class LLViewerTexture;
 
 class ParticleEditor : public LLFloater
 {
-	friend class ParticleScriptCreationCallback;
-	friend class ParticleScriptUploadResponder;
+    friend class ParticleScriptCreationCallback;
+    friend class ParticleScriptUploadResponder;
 
-	public:
-		ParticleEditor(const LLSD& key);
-		/* virtual */ ~ParticleEditor();
+    public:
+        ParticleEditor(const LLSD& key);
+        /* virtual */ ~ParticleEditor();
 
-		/* virtual */ BOOL postBuild();
+        /* virtual */ BOOL postBuild();
 
-		void setObject(LLViewerObject* objectp);
-		void scriptInjectReturned( );
+        void setObject(LLViewerObject* objectp);
+        void scriptInjectReturned( );
 
-	protected:
-		void clearParticles();
-		void updateParticles();
-		void updateUI();
+    protected:
+        void clearParticles();
+        void updateParticles();
+        void updateUI();
 
-		std::string createScript();
+        std::string createScript();
 
-		void onParameterChange();
-		void onCopyButtonClicked();
-		void onInjectButtonClicked();
+        void onParameterChange();
+        void onCopyButtonClicked();
+        void onInjectButtonClicked();
 
-		void onClearTargetButtonClicked();
-		void onTargetPickerButtonClicked();
-		static void startPicking(void* userdata);
-		static void onTargetPicked(void* userdata);
+        void onClearTargetButtonClicked();
+        void onTargetPickerButtonClicked();
+        static void startPicking(void* userdata);
+        static void onTargetPicked(void* userdata);
 
-		void callbackReturned(const LLUUID& inv_item);
+        void callbackReturned(const LLUUID& inv_item);
 
-		std::string lslVector(F32 x, F32 y, F32 z);
-		std::string lslColor(const LLColor4& color);
+        std::string lslVector(F32 x, F32 y, F32 z);
+        std::string lslColor(const LLColor4& color);
 
-		LLViewerObject* mObject;
-		LLViewerTexture* mTexture;
-		LLViewerInventoryItem* mParticleScriptInventoryItem;
+        LLViewerObject* mObject;
+        LLViewerTexture* mTexture;
+        LLViewerInventoryItem* mParticleScriptInventoryItem;
 
-		LLViewerTexture* mDefaultParticleTexture;
+        LLViewerTexture* mDefaultParticleTexture;
 
-		LLPartSysData mParticles;
+        LLPartSysData mParticles;
 
-		std::map<std::string, U8> mPatternMap;
-		std::map<std::string, std::string> mScriptPatternMap;
+        std::map<std::string, U8> mPatternMap;
+        std::map<std::string, std::string> mScriptPatternMap;
 
-		std::map<std::string, U8> mBlendMap;
-		std::map<std::string, std::string> mScriptBlendMap;
+        std::map<std::string, U8> mBlendMap;
+        std::map<std::string, std::string> mScriptBlendMap;
 
-		LLPanel* mMainPanel;
+        LLPanel* mMainPanel;
 
-		LLComboBox* mPatternTypeCombo;
-		LLTextureCtrl* mTexturePicker;
+        LLComboBox* mPatternTypeCombo;
+        LLTextureCtrl* mTexturePicker;
 
-		LLSpinCtrl* mBurstRateSpinner;
-		LLSpinCtrl* mBurstCountSpinner;
-		LLSpinCtrl* mBurstRadiusSpinner;
-		LLSpinCtrl* mAngleBeginSpinner;
-		LLSpinCtrl* mAngleEndSpinner;
-		LLSpinCtrl* mBurstSpeedMinSpinner;
-		LLSpinCtrl* mBurstSpeedMaxSpinner;
-		LLSpinCtrl* mStartAlphaSpinner;
-		LLSpinCtrl* mEndAlphaSpinner;
-		LLSpinCtrl* mScaleStartXSpinner;
-		LLSpinCtrl* mScaleStartYSpinner;
-		LLSpinCtrl* mScaleEndXSpinner;
-		LLSpinCtrl* mScaleEndYSpinner;
-		LLSpinCtrl* mSourceMaxAgeSpinner;
-		LLSpinCtrl* mParticlesMaxAgeSpinner;
-		LLSpinCtrl* mStartGlowSpinner;
-		LLSpinCtrl* mEndGlowSpinner;
+        LLSpinCtrl* mBurstRateSpinner;
+        LLSpinCtrl* mBurstCountSpinner;
+        LLSpinCtrl* mBurstRadiusSpinner;
+        LLSpinCtrl* mAngleBeginSpinner;
+        LLSpinCtrl* mAngleEndSpinner;
+        LLSpinCtrl* mBurstSpeedMinSpinner;
+        LLSpinCtrl* mBurstSpeedMaxSpinner;
+        LLSpinCtrl* mStartAlphaSpinner;
+        LLSpinCtrl* mEndAlphaSpinner;
+        LLSpinCtrl* mScaleStartXSpinner;
+        LLSpinCtrl* mScaleStartYSpinner;
+        LLSpinCtrl* mScaleEndXSpinner;
+        LLSpinCtrl* mScaleEndYSpinner;
+        LLSpinCtrl* mSourceMaxAgeSpinner;
+        LLSpinCtrl* mParticlesMaxAgeSpinner;
+        LLSpinCtrl* mStartGlowSpinner;
+        LLSpinCtrl* mEndGlowSpinner;
 
-		LLComboBox* mBlendFuncSrcCombo;
-		LLComboBox* mBlendFuncDestCombo;
+        LLComboBox* mBlendFuncSrcCombo;
+        LLComboBox* mBlendFuncDestCombo;
 
-		LLCheckBoxCtrl* mBounceCheckBox;
-		LLCheckBoxCtrl* mEmissiveCheckBox;
-		LLCheckBoxCtrl* mFollowSourceCheckBox;
-		LLCheckBoxCtrl* mFollowVelocityCheckBox;
-		LLCheckBoxCtrl* mInterpolateColorCheckBox;
-		LLCheckBoxCtrl* mInterpolateScaleCheckBox;
-		LLCheckBoxCtrl* mTargetPositionCheckBox;
-		LLCheckBoxCtrl* mTargetLinearCheckBox;
-		LLCheckBoxCtrl* mWindCheckBox;
-		LLCheckBoxCtrl* mRibbonCheckBox;
+        LLCheckBoxCtrl* mBounceCheckBox;
+        LLCheckBoxCtrl* mEmissiveCheckBox;
+        LLCheckBoxCtrl* mFollowSourceCheckBox;
+        LLCheckBoxCtrl* mFollowVelocityCheckBox;
+        LLCheckBoxCtrl* mInterpolateColorCheckBox;
+        LLCheckBoxCtrl* mInterpolateScaleCheckBox;
+        LLCheckBoxCtrl* mTargetPositionCheckBox;
+        LLCheckBoxCtrl* mTargetLinearCheckBox;
+        LLCheckBoxCtrl* mWindCheckBox;
+        LLCheckBoxCtrl* mRibbonCheckBox;
 
-		LLLineEditor* mTargetKeyInput;
-		LLButton* mClearTargetButton;
-		LLButton* mPickTargetButton;
+        LLLineEditor* mTargetKeyInput;
+        LLButton* mClearTargetButton;
+        LLButton* mPickTargetButton;
 
-		LLSpinCtrl* mAcellerationXSpinner;
-		LLSpinCtrl* mAcellerationYSpinner;
-		LLSpinCtrl* mAcellerationZSpinner;
+        LLSpinCtrl* mAcellerationXSpinner;
+        LLSpinCtrl* mAcellerationYSpinner;
+        LLSpinCtrl* mAcellerationZSpinner;
 
-		LLSpinCtrl* mOmegaXSpinner;
-		LLSpinCtrl* mOmegaYSpinner;
-		LLSpinCtrl* mOmegaZSpinner;
+        LLSpinCtrl* mOmegaXSpinner;
+        LLSpinCtrl* mOmegaYSpinner;
+        LLSpinCtrl* mOmegaZSpinner;
 
-		LLColorSwatchCtrl* mStartColorSelector;
-		LLColorSwatchCtrl* mEndColorSelector;
+        LLColorSwatchCtrl* mStartColorSelector;
+        LLColorSwatchCtrl* mEndColorSelector;
 
-		LLButton* mCopyToLSLButton;
-		LLButton* mInjectScriptButton;
+        LLButton* mCopyToLSLButton;
+        LLButton* mInjectScriptButton;
 };
 
 class ParticleScriptCreationCallback : public LLInventoryCallback
 {
-	public:
-		ParticleScriptCreationCallback(ParticleEditor* editor);
-		void fire(const LLUUID& inventoryItem);
+    public:
+        ParticleScriptCreationCallback(ParticleEditor* editor);
+        void fire(const LLUUID& inventoryItem);
 
-	protected:
-		~ParticleScriptCreationCallback();
+    protected:
+        ~ParticleScriptCreationCallback();
 
-		ParticleEditor* mEditor;
+        ParticleEditor* mEditor;
 };
 
 #endif // PARTICLEEDITOR_H

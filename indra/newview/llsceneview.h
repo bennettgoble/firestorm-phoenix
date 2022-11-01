@@ -33,16 +33,16 @@
 class LLSceneView : public LLFloater
 {
 public:
-	LLSceneView(const LLRect& rect);
+    LLSceneView(const LLRect& rect);
 
-	virtual void draw();
-	
+    virtual void draw();
+    
 protected:
-	// <FS:Ansariel> FIRE-14144 / MAINT-4256 / BUG-6664: Crash when opening stats after closing via X
-	//virtual void onClose(bool app_qutting = false);
+    // <FS:Ansariel> FIRE-14144 / MAINT-4256 / BUG-6664: Crash when opening stats after closing via X
+    //virtual void onClose(bool app_qutting = false);
     //virtual void onClickCloseBtn(bool app_qutting = false);
-	virtual void closeFloater(bool app_qutting = false);
-	// </FS:Ansariel>
+    virtual void closeFloater(bool app_qutting = false);
+    // </FS:Ansariel>
 
 
 };

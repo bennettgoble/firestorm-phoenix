@@ -44,81 +44,81 @@ class LLPanelOutfitsInventory;
 
 class LLSidepanelAppearance : public LLPanel
 {
-	LOG_CLASS(LLSidepanelAppearance);
+    LOG_CLASS(LLSidepanelAppearance);
 public:
-	LLSidepanelAppearance();
-	virtual ~LLSidepanelAppearance();
+    LLSidepanelAppearance();
+    virtual ~LLSidepanelAppearance();
 
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& key);	
-	// <FS:Ansariel> CTRL-F focusses local search editor
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const { return true; }
-	// </FS:Ansariel>
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& key);   
+    // <FS:Ansariel> CTRL-F focusses local search editor
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const { return true; }
+    // </FS:Ansariel>
 
-	void refreshCurrentOutfitName(const std::string& name = "");
+    void refreshCurrentOutfitName(const std::string& name = "");
 
-	static void editWearable(LLViewerWearable *wearable, LLView *data, BOOL disable_camera_switch = FALSE);
+    static void editWearable(LLViewerWearable *wearable, LLView *data, BOOL disable_camera_switch = FALSE);
 
-	void fetchInventory();
-	void inventoryFetched();
+    void fetchInventory();
+    void inventoryFetched();
 
     void showOutfitsInventoryPanel(); // last selected
-	void showOutfitsInventoryPanel(const std::string& tab_name);
-	void showOutfitEditPanel();
-	void showWearableEditPanel(LLViewerWearable *wearable = NULL, BOOL disable_camera_switch = FALSE);
-	void setWearablesLoading(bool val);
-	void showDefaultSubpart();
-	void updateScrollingPanelList();
-	void updateToVisibility( const LLSD& new_visibility );
-	LLPanelEditWearable* getWearable(){ return mEditWearable; }
+    void showOutfitsInventoryPanel(const std::string& tab_name);
+    void showOutfitEditPanel();
+    void showWearableEditPanel(LLViewerWearable *wearable = NULL, BOOL disable_camera_switch = FALSE);
+    void setWearablesLoading(bool val);
+    void showDefaultSubpart();
+    void updateScrollingPanelList();
+    void updateToVisibility( const LLSD& new_visibility );
+    LLPanelEditWearable* getWearable(){ return mEditWearable; }
 
 // [RLVa:KB] - Checked: 2010-09-16 (RLVa-1.2.1a) | Added: RLVa-1.2.1a
-	bool isOutfitEditPanelVisible() const;
-	bool isWearableEditPanelVisible() const;
+    bool isOutfitEditPanelVisible() const;
+    bool isWearableEditPanelVisible() const;
 
-	LLPanelOutfitEdit*	 getOutfitEditPanel() { return mOutfitEdit; }
-	LLPanelEditWearable* getWearableEditPanel() { return mEditWearable; }
+    LLPanelOutfitEdit*   getOutfitEditPanel() { return mOutfitEdit; }
+    LLPanelEditWearable* getWearableEditPanel() { return mEditWearable; }
 // [/RLVa:KB]
 
-	// <FS:Ansariel> Show avatar complexity in appearance floater
-	static void updateAvatarComplexity(U32 complexity, const std::map<LLUUID, U32>& item_complexity, const std::map<LLUUID, U32>& temp_item_complexity, U32 body_parts_complexity);
+    // <FS:Ansariel> Show avatar complexity in appearance floater
+    static void updateAvatarComplexity(U32 complexity, const std::map<LLUUID, U32>& item_complexity, const std::map<LLUUID, U32>& temp_item_complexity, U32 body_parts_complexity);
 
 private:
-	void onFilterEdit(const std::string& search_string);
-	void onVisibilityChanged ( const LLSD& new_visibility );
+    void onFilterEdit(const std::string& search_string);
+    void onVisibilityChanged ( const LLSD& new_visibility );
 
-	void onOpenOutfitButtonClicked();
-	void onEditAppearanceButtonClicked();
+    void onOpenOutfitButtonClicked();
+    void onEditAppearanceButtonClicked();
 
-	void toggleMyOutfitsPanel(BOOL visible, const std::string& tab_name);
-	void toggleOutfitEditPanel(BOOL visible, BOOL disable_camera_switch = FALSE);
-	void toggleWearableEditPanel(BOOL visible, LLViewerWearable* wearable = NULL, BOOL disable_camera_switch = FALSE);
+    void toggleMyOutfitsPanel(BOOL visible, const std::string& tab_name);
+    void toggleOutfitEditPanel(BOOL visible, BOOL disable_camera_switch = FALSE);
+    void toggleWearableEditPanel(BOOL visible, LLViewerWearable* wearable = NULL, BOOL disable_camera_switch = FALSE);
 
-	// <FS:Ansariel> Don't filter outfits list on keypress
-	//LLFilterEditor*			mFilterEditor;
-	LLSearchEditor*				mFilterEditor;
-	// </FS:Ansariel>
-	LLPanelOutfitsInventory* mPanelOutfitsInventory;
-	LLPanelOutfitEdit*		mOutfitEdit;
-	LLPanelEditWearable*	mEditWearable;
+    // <FS:Ansariel> Don't filter outfits list on keypress
+    //LLFilterEditor*           mFilterEditor;
+    LLSearchEditor*             mFilterEditor;
+    // </FS:Ansariel>
+    LLPanelOutfitsInventory* mPanelOutfitsInventory;
+    LLPanelOutfitEdit*      mOutfitEdit;
+    LLPanelEditWearable*    mEditWearable;
 
-	LLButton*					mOpenOutfitBtn;
-	LLButton*					mEditAppearanceBtn;
-	LLPanel*					mCurrOutfitPanel;
+    LLButton*                   mOpenOutfitBtn;
+    LLButton*                   mEditAppearanceBtn;
+    LLPanel*                    mCurrOutfitPanel;
 
-	LLTextBox*					mCurrentLookName;
-	LLTextBox*					mOutfitStatus;
+    LLTextBox*                  mCurrentLookName;
+    LLTextBox*                  mOutfitStatus;
 
-	// Search string for filtering landmarks and teleport
-	// history locations
-	std::string					mFilterSubString;
+    // Search string for filtering landmarks and teleport
+    // history locations
+    std::string                 mFilterSubString;
 
-	// Gets set to true when we're opened for the first time.
-	bool mOpened;
+    // Gets set to true when we're opened for the first time.
+    bool mOpened;
 
-	// <FS:Ansariel> Show avatar complexity in appearance floater
-	U32 mLastAvatarComplexity;
+    // <FS:Ansariel> Show avatar complexity in appearance floater
+    U32 mLastAvatarComplexity;
 };
 
 #endif //LL_LLSIDEPANELAPPEARANCE_H

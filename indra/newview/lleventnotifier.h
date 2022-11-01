@@ -37,36 +37,36 @@ class LLMessageSystem;
 class LLEventNotifier
 {
 public:
-	LLEventNotifier();
-	virtual ~LLEventNotifier();
+    LLEventNotifier();
+    virtual ~LLEventNotifier();
 
-	void update();	// Notify the user of the event if it's coming up
-	bool add(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName);
+    void update();  // Notify the user of the event if it's coming up
+    bool add(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName);
 // <FS:CR> FIRE-6310 - Legacy search - send more event info for legacy search to use
-	bool add(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName,
-			 const std::string &eventDesc, std::string &simName, U32 eventDuration, U32 eventFlags, U32 eventCover, LLVector3d eventGlobalPos);
+    bool add(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName,
+             const std::string &eventDesc, std::string &simName, U32 eventDuration, U32 eventFlags, U32 eventCover, LLVector3d eventGlobalPos);
 // </FS:CR>
-	void add(U32 eventId);
+    void add(U32 eventId);
 
-	
-	void load(const LLSD& event_options);	// In the format that it comes in from login
-	void remove(U32 event_id);
+    
+    void load(const LLSD& event_options);   // In the format that it comes in from login
+    void remove(U32 event_id);
 
-	BOOL hasNotification(const U32 event_id);
-	void serverPushRequest(U32 event_id, bool add);
+    BOOL hasNotification(const U32 event_id);
+    void serverPushRequest(U32 event_id, bool add);
 
-	typedef std::map<U32, LLEventNotification *> en_map;
-	bool  handleResponse(U32 eventId, const LLSD& notification, const LLSD& response);		
+    typedef std::map<U32, LLEventNotification *> en_map;
+    bool  handleResponse(U32 eventId, const LLSD& notification, const LLSD& response);      
 
-	static void processEventInfoReply(LLMessageSystem *msg, void **);	
-	
+    static void processEventInfoReply(LLMessageSystem *msg, void **);   
+    
 protected:
-	en_map	mEventNotifications;
-	LLFrameTimer	mNotificationTimer;
-	
+    en_map  mEventNotifications;
+    LLFrameTimer    mNotificationTimer;
+    
 // <FS:CR> FIRE-6310 - Legacy Search
 private:
-	bool isEventNotice;
+    bool isEventNotice;
 // </FS:CR>
 };
 
@@ -74,21 +74,21 @@ private:
 class LLEventNotification
 {
 public:
-	LLEventNotification(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName);
+    LLEventNotification(U32 eventId, F64 eventEpoch, const std::string& eventDateStr, const std::string &eventName);
 
 
-	U32					getEventID() const				{ return mEventID; }
-	const std::string	&getEventName() const			{ return mEventName; }
-	bool                isValid() const                 { return mEventID > 0 && mEventDateEpoch != 0 && mEventName.size() > 0; }
-	const F64		    &getEventDateEpoch() const		{ return mEventDateEpoch; }
-	const std::string   &getEventDateStr() const        { return mEventDateStr; }
-	
-	
+    U32                 getEventID() const              { return mEventID; }
+    const std::string   &getEventName() const           { return mEventName; }
+    bool                isValid() const                 { return mEventID > 0 && mEventDateEpoch != 0 && mEventName.size() > 0; }
+    const F64           &getEventDateEpoch() const      { return mEventDateEpoch; }
+    const std::string   &getEventDateStr() const        { return mEventDateStr; }
+    
+    
 protected:
-	U32			mEventID;			// EventID for this event
-	std::string	mEventName;
-	F64		    mEventDateEpoch;
-	std::string mEventDateStr;
+    U32         mEventID;           // EventID for this event
+    std::string mEventName;
+    F64         mEventDateEpoch;
+    std::string mEventDateStr;
 };
 
 extern LLEventNotifier gEventNotifier;

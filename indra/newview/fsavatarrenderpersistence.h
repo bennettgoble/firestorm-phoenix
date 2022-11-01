@@ -31,36 +31,36 @@
 #include "llvoavatar.h"
 
 class FSAvatarRenderPersistence
-	: public LLSingleton<FSAvatarRenderPersistence>
+    : public LLSingleton<FSAvatarRenderPersistence>
 {
-	LOG_CLASS(FSAvatarRenderPersistence);
+    LOG_CLASS(FSAvatarRenderPersistence);
 
 friend class FSPanelPreferenceBackup;
 
-	LLSINGLETON(FSAvatarRenderPersistence);
-	virtual ~FSAvatarRenderPersistence();
+    LLSINGLETON(FSAvatarRenderPersistence);
+    virtual ~FSAvatarRenderPersistence();
 
 public:
-	void init();
+    void init();
 
-	LLVOAvatar::VisualMuteSettings getAvatarRenderSettings(const LLUUID& avatar_id);
-	void setAvatarRenderSettings(const LLUUID& avatar_id, LLVOAvatar::VisualMuteSettings render_settings);
+    LLVOAvatar::VisualMuteSettings getAvatarRenderSettings(const LLUUID& avatar_id);
+    void setAvatarRenderSettings(const LLUUID& avatar_id, LLVOAvatar::VisualMuteSettings render_settings);
 
-	typedef std::map<LLUUID, LLVOAvatar::VisualMuteSettings> avatar_render_setting_t;
-	avatar_render_setting_t getAvatarRenderMap() const { return mAvatarRenderMap; }
+    typedef std::map<LLUUID, LLVOAvatar::VisualMuteSettings> avatar_render_setting_t;
+    avatar_render_setting_t getAvatarRenderMap() const { return mAvatarRenderMap; }
 
-	typedef boost::signals2::signal<void(const LLUUID& avatar_id, LLVOAvatar::VisualMuteSettings render_setting)> render_setting_changed_callback_t;
-	boost::signals2::connection setAvatarRenderSettingChangedCallback(const render_setting_changed_callback_t::slot_type& cb)
-	{
-		return mAvatarRenderSettingChangedCallback.connect(cb);
-	}
+    typedef boost::signals2::signal<void(const LLUUID& avatar_id, LLVOAvatar::VisualMuteSettings render_setting)> render_setting_changed_callback_t;
+    boost::signals2::connection setAvatarRenderSettingChangedCallback(const render_setting_changed_callback_t::slot_type& cb)
+    {
+        return mAvatarRenderSettingChangedCallback.connect(cb);
+    }
 
 private:
-	void loadAvatarRenderSettings();
-	void saveAvatarRenderSettings();
+    void loadAvatarRenderSettings();
+    void saveAvatarRenderSettings();
 
-	avatar_render_setting_t mAvatarRenderMap;
+    avatar_render_setting_t mAvatarRenderMap;
 
-	render_setting_changed_callback_t mAvatarRenderSettingChangedCallback;
+    render_setting_changed_callback_t mAvatarRenderSettingChangedCallback;
 };
 #endif // FS_AVATARRENDERPERSISTENCE_H

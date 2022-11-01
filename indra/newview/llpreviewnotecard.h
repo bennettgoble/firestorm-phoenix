@@ -48,80 +48,80 @@ class LLTextEditor;
 class LLPreviewNotecard : public LLPreview, public LLVOInventoryListener
 {
 public:
-	LLPreviewNotecard(const LLSD& key);
-	virtual ~LLPreviewNotecard();
-	
-	bool saveItem();
-	void setObjectID(const LLUUID& object_id) override;
+    LLPreviewNotecard(const LLSD& key);
+    virtual ~LLPreviewNotecard();
+    
+    bool saveItem();
+    void setObjectID(const LLUUID& object_id) override;
 
-	// llview
-	void draw() override;
+    // llview
+    void draw() override;
 // [SL:KB] - Patch: UI-FloaterSearchReplace | Checked: 2010-11-05 (Catznip-2.3.0a) | Added: Catznip-2.3.0a
-	virtual bool hasAccelerators() const override;
+    virtual bool hasAccelerators() const override;
 // [/SL:KB]
-	virtual BOOL handleKeyHere(KEY key, MASK mask) override;
-	virtual void setEnabled( BOOL enabled ) override;
+    virtual BOOL handleKeyHere(KEY key, MASK mask) override;
+    virtual void setEnabled( BOOL enabled ) override;
 
-	// llfloater
-	BOOL canClose() override;
+    // llfloater
+    BOOL canClose() override;
 
-	// llpanel
-	BOOL postBuild() override;
+    // llpanel
+    BOOL postBuild() override;
 
-	// reach into the text editor, and grab the drag item
-	const LLInventoryItem* getDragItem();
+    // reach into the text editor, and grab the drag item
+    const LLInventoryItem* getDragItem();
 
 // [SL:KB] - Patch: UI-FloaterSearchReplace | Checked: 2010-11-05 (Catznip-2.3.0a) | Added: Catznip-2.3.0a
-	LLTextEditor* getEditor();
+    LLTextEditor* getEditor();
 // [/SL:KB]
 
-	// return true if there is any embedded inventory.
-	bool hasEmbeddedInventory();
+    // return true if there is any embedded inventory.
+    bool hasEmbeddedInventory();
 
-	// After saving a notecard, the tcp based upload system will
-	// change the asset, therefore, we need to re-fetch it from the
-	// asset system. :(
-	void refreshFromInventory(const LLUUID& item_id = LLUUID::null);
+    // After saving a notecard, the tcp based upload system will
+    // change the asset, therefore, we need to re-fetch it from the
+    // asset system. :(
+    void refreshFromInventory(const LLUUID& item_id = LLUUID::null);
 
-	void syncExternal();
+    void syncExternal();
 
     void inventoryChanged(LLViewerObject* object,
         LLInventoryObject::object_list_t* inventory,
         S32 serial_num,
         void* user_data) override;
 
-	// <FS:Ansariel> FIRE-9039: Close notecard after choosing "Save" in close confirmation
-	void checkCloseAfterSave();
+    // <FS:Ansariel> FIRE-9039: Close notecard after choosing "Save" in close confirmation
+    void checkCloseAfterSave();
 
 protected:
 
-	void updateTitleButtons() override;
-	void loadAsset() override;
-	bool saveIfNeeded(LLInventoryItem* copyitem = NULL, bool sync = true);
+    void updateTitleButtons() override;
+    void loadAsset() override;
+    bool saveIfNeeded(LLInventoryItem* copyitem = NULL, bool sync = true);
 
-	void deleteNotecard();
+    void deleteNotecard();
 
-	static void onLoadComplete(const LLUUID& asset_uuid,
-							   LLAssetType::EType type,
-							   void* user_data, S32 status, LLExtStat ext_status);
+    static void onLoadComplete(const LLUUID& asset_uuid,
+                               LLAssetType::EType type,
+                               void* user_data, S32 status, LLExtStat ext_status);
 
-	static void onClickSave(void* data);
+    static void onClickSave(void* data);
 
-	static void onClickDelete(void* data);
+    static void onClickDelete(void* data);
 
-	static void onClickEdit(void* data);
+    static void onClickEdit(void* data);
 
-	static void onSaveComplete(const LLUUID& asset_uuid,
-							   void* user_data,
-							   S32 status, LLExtStat ext_status);
+    static void onSaveComplete(const LLUUID& asset_uuid,
+                               void* user_data,
+                               S32 status, LLExtStat ext_status);
 
-	bool handleSaveChangesDialog(const LLSD& notification, const LLSD& response);
-	bool handleConfirmDeleteDialog(const LLSD& notification, const LLSD& response);
+    bool handleSaveChangesDialog(const LLSD& notification, const LLSD& response);
+    bool handleConfirmDeleteDialog(const LLSD& notification, const LLSD& response);
 
     static void finishInventoryUpload(LLUUID itemId, LLUUID newAssetId, LLUUID newItemId);
     static void finishTaskUpload(LLUUID itemId, LLUUID newAssetId, LLUUID taskId);
-	// <FS:Ansariel> FIRE-13969: Search button
-	void onSearchButtonClicked();
+    // <FS:Ansariel> FIRE-13969: Search button
+    void onSearchButtonClicked();
 
     void openInExternalEditor();
     bool onExternalChange(const std::string& filename);
@@ -129,25 +129,25 @@ protected:
     bool writeToFile(const std::string& filename);
     std::string getTmpFileName();
 
-	// <FS:Ansariel> FIRE-29425: User-selectable font and size for notecards
-	boost::signals2::connection mFontNameChangedCallbackConnection;
-	boost::signals2::connection mFontSizeChangedCallbackConnection;
-	void onFontChanged();
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-29425: User-selectable font and size for notecards
+    boost::signals2::connection mFontNameChangedCallbackConnection;
+    boost::signals2::connection mFontSizeChangedCallbackConnection;
+    void onFontChanged();
+    // </FS:Ansariel>
 
 protected:
-	LLViewerTextEditor* mEditor;
-	LLButton* mSaveBtn;
+    LLViewerTextEditor* mEditor;
+    LLButton* mSaveBtn;
 
-	LLUUID mAssetID;
+    LLUUID mAssetID;
 
-	LLUUID mObjectID;
+    LLUUID mObjectID;
 
-	LLLiveLSLFile* mLiveFile;
+    LLLiveLSLFile* mLiveFile;
 
-	// <FS:Ansariel> FIRE-24306: Retain cursor position when saving notecards
-	S32 mCursorPos;
-	S32 mScrollPos;
+    // <FS:Ansariel> FIRE-24306: Retain cursor position when saving notecards
+    S32 mCursorPos;
+    S32 mScrollPos;
 };
 
 

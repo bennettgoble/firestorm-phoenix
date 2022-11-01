@@ -33,17 +33,17 @@
 class FSContactsFriendsMenu : public LLListContextMenu
 {
 public:
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 private:
-	bool enableContextMenuItem(const LLSD& userdata);
-	void offerTeleport();
-	void teleportToAvatar();
-	void onTrackAvatarMenuItemClick();
-	void addToContactSet();
-	void copyNameToClipboard(const LLUUID& id);
-	void copySLURLToClipboard(const LLUUID& id);
-	void selectOption(const LLSD& userdata);
-	bool checkOption(const LLSD& userdata);
+    bool enableContextMenuItem(const LLSD& userdata);
+    void offerTeleport();
+    void teleportToAvatar();
+    void onTrackAvatarMenuItemClick();
+    void addToContactSet();
+    void copyNameToClipboard(const LLUUID& id);
+    void copySLURLToClipboard(const LLUUID& id);
+    void selectOption(const LLSD& userdata);
+    bool checkOption(const LLSD& userdata);
 };
 
 extern FSContactsFriendsMenu gFSContactsFriendsMenu;

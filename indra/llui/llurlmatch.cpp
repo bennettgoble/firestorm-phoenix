@@ -29,41 +29,41 @@
 #include "llurlmatch.h"
 
 LLUrlMatch::LLUrlMatch() :
-	mStart(0),
-	mEnd(0),
-	mUrl(""),
-	mLabel(""),
-	mTooltip(""),
-	mIcon(""),
-	mMenuName(""),
-	mLocation(""),
-	mUnderlineOnHoverOnly(false),
-	mTrusted(false)
+    mStart(0),
+    mEnd(0),
+    mUrl(""),
+    mLabel(""),
+    mTooltip(""),
+    mIcon(""),
+    mMenuName(""),
+    mLocation(""),
+    mUnderlineOnHoverOnly(false),
+    mTrusted(false)
 {
 }
 
 void LLUrlMatch::setValues(U32 start, U32 end, const std::string &url, const std::string &label,
-						   const std::string& query, const std::string &tooltip,
-						   const std::string &icon, const LLStyle::Params& style,
-						   const std::string &menu, const std::string &location,
-						   // <FS:Ansariel> Store matched text
-						   const std::string& matched_text,
-						   const LLUUID& id, bool underline_on_hover_only, bool trusted)
+                           const std::string& query, const std::string &tooltip,
+                           const std::string &icon, const LLStyle::Params& style,
+                           const std::string &menu, const std::string &location,
+                           // <FS:Ansariel> Store matched text
+                           const std::string& matched_text,
+                           const LLUUID& id, bool underline_on_hover_only, bool trusted)
 {
-	mStart = start;
-	mEnd = end;
-	mUrl = url;
-	mLabel = label;
-	mQuery = query;
-	mTooltip = tooltip;
-	mIcon = icon;
-	mStyle = style;
-	mStyle.link_href = url;
-	mMenuName = menu;
-	mLocation = location;
-	mID = id;
-	mUnderlineOnHoverOnly = underline_on_hover_only;
-	mTrusted = trusted;
-	// <FS:Ansariel> Store matched text
-	mMatchedText = matched_text;
+    mStart = start;
+    mEnd = end;
+    mUrl = url;
+    mLabel = label;
+    mQuery = query;
+    mTooltip = tooltip;
+    mIcon = icon;
+    mStyle = style;
+    mStyle.link_href = url;
+    mMenuName = menu;
+    mLocation = location;
+    mID = id;
+    mUnderlineOnHoverOnly = underline_on_hover_only;
+    mTrusted = trusted;
+    // <FS:Ansariel> Store matched text
+    mMatchedText = matched_text;
 }

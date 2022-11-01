@@ -36,23 +36,23 @@
 class LLDir_Win32 : public LLDir
 {
 public:
-	LLDir_Win32();
-	virtual ~LLDir_Win32();
+    LLDir_Win32();
+    virtual ~LLDir_Win32();
 
-	/*virtual*/ void initAppDirs(const std::string &app_name,
-		const std::string& app_read_only_data_dir);
+    /*virtual*/ void initAppDirs(const std::string &app_name,
+        const std::string& app_read_only_data_dir);
 
-	/*virtual*/ std::string getCurPath();
-	/*virtual*/ U32 countFilesInDir(const std::string &dirname, const std::string &mask);
-	/*virtual*/ bool fileExists(const std::string &filename) const;
-	/*virtual*/ BOOL getNextFileInDir(const std::string &dirname, const std::string &mask, std::string &fname); //FS:LGG  for LGG's particle beam
-	/*virtual*/ std::string getLLPluginLauncher();
-	/*virtual*/ std::string getLLPluginFilename(std::string base_name);
+    /*virtual*/ std::string getCurPath();
+    /*virtual*/ U32 countFilesInDir(const std::string &dirname, const std::string &mask);
+    /*virtual*/ bool fileExists(const std::string &filename) const;
+    /*virtual*/ BOOL getNextFileInDir(const std::string &dirname, const std::string &mask, std::string &fname); //FS:LGG  for LGG's particle beam
+    /*virtual*/ std::string getLLPluginLauncher();
+    /*virtual*/ std::string getLLPluginFilename(std::string base_name);
 
 private:
     BOOL getNextFileInDir(const llutf16string &dirname, const std::string &mask, std::string &fname); //FS:LGG for LGG's particle beam
-	void* mDirSearch_h;
-	llutf16string mCurrentDir;
+    void* mDirSearch_h;
+    llutf16string mCurrentDir;
 };
 
 #endif // LL_LLDIR_WIN32_H

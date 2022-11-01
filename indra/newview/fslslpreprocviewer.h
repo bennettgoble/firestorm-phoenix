@@ -33,28 +33,28 @@
 class FSLSLPreProcViewer : public LLScriptEditor
 {
 public:
-	
-	struct Params : public LLInitParam::Block<Params, LLScriptEditor::Params>
-	{
-		Params()
-		{}
-	};
-	
-	virtual ~FSLSLPreProcViewer() {};
+    
+    struct Params : public LLInitParam::Block<Params, LLScriptEditor::Params>
+    {
+        Params()
+        {}
+    };
+    
+    virtual ~FSLSLPreProcViewer() {};
 
-	virtual BOOL	handleKeyHere(KEY key, MASK mask );
-	virtual BOOL	handleUnicodeCharHere(llwchar uni_char);
+    virtual BOOL    handleKeyHere(KEY key, MASK mask );
+    virtual BOOL    handleUnicodeCharHere(llwchar uni_char);
 
-	virtual BOOL	canCut() const { return false; }
-	virtual BOOL	canPaste() const { return false; }
-	virtual BOOL	canUndo() const { return false; }
-	virtual BOOL	canRedo() const { return false; }
-	virtual BOOL	canPastePrimary() const { return false; }
-	virtual BOOL	canDoDelete() const { return false; }
+    virtual BOOL    canCut() const { return false; }
+    virtual BOOL    canPaste() const { return false; }
+    virtual BOOL    canUndo() const { return false; }
+    virtual BOOL    canRedo() const { return false; }
+    virtual BOOL    canPastePrimary() const { return false; }
+    virtual BOOL    canDoDelete() const { return false; }
 
 protected:
-	friend class LLUICtrlFactory;
-	FSLSLPreProcViewer(const Params& p);
+    friend class LLUICtrlFactory;
+    FSLSLPreProcViewer(const Params& p);
 };
 
 #endif // FS_LSLPREPROCVIEWER_H

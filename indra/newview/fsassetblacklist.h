@@ -41,41 +41,41 @@ typedef boost::unordered_map<LLUUID, LLSD, FSUUIDHash> blacklist_data_t;
 
 class FSAssetBlacklist : public LLSingleton<FSAssetBlacklist>
 {
-	LLSINGLETON_EMPTY_CTOR(FSAssetBlacklist);
+    LLSINGLETON_EMPTY_CTOR(FSAssetBlacklist);
 
 public:
-	void init();
-	bool isBlacklisted(const LLUUID& id, LLAssetType::EType type);
-	void addNewItemToBlacklist(const LLUUID& id, const std::string& name, const std::string& region, LLAssetType::EType type, bool permanent = true, bool save = true);
-	void addNewItemToBlacklistData(const LLUUID& id, const LLSD& data, bool save = true);
-	void removeItemFromBlacklist(const LLUUID& id);
-	void removeItemsFromBlacklist(const uuid_vec_t& ids);
-	void saveBlacklist();
+    void init();
+    bool isBlacklisted(const LLUUID& id, LLAssetType::EType type);
+    void addNewItemToBlacklist(const LLUUID& id, const std::string& name, const std::string& region, LLAssetType::EType type, bool permanent = true, bool save = true);
+    void addNewItemToBlacklistData(const LLUUID& id, const LLSD& data, bool save = true);
+    void removeItemFromBlacklist(const LLUUID& id);
+    void removeItemsFromBlacklist(const uuid_vec_t& ids);
+    void saveBlacklist();
 
-	blacklist_data_t getBlacklistData() const { return mBlacklistData; };
+    blacklist_data_t getBlacklistData() const { return mBlacklistData; };
 
-	enum eBlacklistOperation
-	{
-		BLACKLIST_ADD,
-		BLACKLIST_REMOVE
-	};
+    enum eBlacklistOperation
+    {
+        BLACKLIST_ADD,
+        BLACKLIST_REMOVE
+    };
 
-	typedef boost::signals2::signal<void(const LLSD& data, eBlacklistOperation op)> blacklist_changed_callback_t;
-	boost::signals2::connection setBlacklistChangedCallback(const blacklist_changed_callback_t::slot_type& cb)
-	{
-		return mBlacklistChangedCallback.connect(cb);
-	}
+    typedef boost::signals2::signal<void(const LLSD& data, eBlacklistOperation op)> blacklist_changed_callback_t;
+    boost::signals2::connection setBlacklistChangedCallback(const blacklist_changed_callback_t::slot_type& cb)
+    {
+        return mBlacklistChangedCallback.connect(cb);
+    }
 
 private:
-	void loadBlacklist();
-	bool removeItem(const LLUUID& id);
-	bool addEntryToBlacklistMap(const LLUUID& id, LLAssetType::EType type);
-	
-	std::string				mBlacklistFileName;
-	blacklist_type_map_t	mBlacklistTypeContainer;
-	blacklist_data_t		mBlacklistData;
+    void loadBlacklist();
+    bool removeItem(const LLUUID& id);
+    bool addEntryToBlacklistMap(const LLUUID& id, LLAssetType::EType type);
+    
+    std::string             mBlacklistFileName;
+    blacklist_type_map_t    mBlacklistTypeContainer;
+    blacklist_data_t        mBlacklistData;
 
-	blacklist_changed_callback_t mBlacklistChangedCallback;
+    blacklist_changed_callback_t mBlacklistChangedCallback;
 };
 
 #endif // FS_ASSETBLACKLIST_H

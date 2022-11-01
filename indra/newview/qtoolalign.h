@@ -15,30 +15,30 @@ class LLToolSelectRect;
 
 class QToolAlign : public LLTool, public LLSingleton<QToolAlign>
 {
-	LLSINGLETON(QToolAlign);
-	virtual ~QToolAlign();
+    LLSINGLETON(QToolAlign);
+    virtual ~QToolAlign();
 
 public:
-	virtual void	handleSelect();
-	virtual void	handleDeselect();
-	virtual BOOL	handleMouseDown(S32 x, S32 y, MASK mask);
-	virtual BOOL	handleHover(S32 x, S32 y, MASK mask);
-	virtual void	render();
-	virtual BOOL	canAffectSelection();
+    virtual void    handleSelect();
+    virtual void    handleDeselect();
+    virtual BOOL    handleMouseDown(S32 x, S32 y, MASK mask);
+    virtual BOOL    handleHover(S32 x, S32 y, MASK mask);
+    virtual void    render();
+    virtual BOOL    canAffectSelection();
 
-	static void pickCallback(const LLPickInfo& pick_info);
+    static void pickCallback(const LLPickInfo& pick_info);
 
 private:
-	void			align();
-	void			computeManipulatorSize();
-	void			renderManipulators();
-	BOOL			findSelectedManipulator(S32 x, S32 y);
+    void            align();
+    void            computeManipulatorSize();
+    void            renderManipulators();
+    BOOL            findSelectedManipulator(S32 x, S32 y);
 
-	LLBBox			mBBox;
-	F32				mManipulatorSize;
-	S32				mHighlightedAxis;
-	F32				mHighlightedDirection;
-	BOOL			mForce;
+    LLBBox          mBBox;
+    F32             mManipulatorSize;
+    S32             mHighlightedAxis;
+    F32             mHighlightedDirection;
+    BOOL            mForce;
 };
 
 #endif // Q_QTOOLALIGN_H

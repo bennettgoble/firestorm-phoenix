@@ -35,18 +35,18 @@ class FSRadarListCtrl
 {
 public:
 
-	struct Params : public LLInitParam::Block<Params, FSScrollListCtrl::Params>
-	{
-		Params()
-		{}
-	};
+    struct Params : public LLInitParam::Block<Params, FSScrollListCtrl::Params>
+    {
+        Params()
+        {}
+    };
 
-	virtual ~FSRadarListCtrl() {}
-	/*virtual*/ BOOL handleRightMouseDown(S32 x, S32 y, MASK mask);
+    virtual ~FSRadarListCtrl() {}
+    /*virtual*/ BOOL handleRightMouseDown(S32 x, S32 y, MASK mask);
 
 protected:
-	friend class LLUICtrlFactory;
-	FSRadarListCtrl(const Params&);
+    friend class LLUICtrlFactory;
+    FSRadarListCtrl(const Params&);
 };
 
 #endif // FS_RADARLISTCTRL_H

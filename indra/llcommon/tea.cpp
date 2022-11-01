@@ -49,34 +49,34 @@ Tea::~Tea()
 
 void Tea::setCurrency(const std::string& currency)
 {
-	sGridCurrency = currency;
-	updateActiveCurrencySymbol();
+    sGridCurrency = currency;
+    updateActiveCurrencySymbol();
 }
 
 void Tea::setRegionCurrency(const std::string& currency)
 {
-	sRegionCurrency = currency;
-	updateActiveCurrencySymbol();
+    sRegionCurrency = currency;
+    updateActiveCurrencySymbol();
 }
 
 void Tea::updateActiveCurrencySymbol()
 {
-	if(!sRegionCurrency.empty())
-	{
-		sActiveCurrency = sRegionCurrency;
-	}
-	else
-	{
-		sActiveCurrency = sGridCurrency;
-	}
+    if(!sRegionCurrency.empty())
+    {
+        sActiveCurrency = sRegionCurrency;
+    }
+    else
+    {
+        sActiveCurrency = sGridCurrency;
+    }
 }
 
 std::string Tea::wrapCurrency(const std::string& to_substitute)
 {
-	return boost::algorithm::replace_all_copy(to_substitute, "L$",  sActiveCurrency);
+    return boost::algorithm::replace_all_copy(to_substitute, "L$",  sActiveCurrency);
 }
 
 void Tea::wrapCurrency(std::string& to_substitute)
 {
-	boost::algorithm::replace_all(to_substitute, "L$",  sActiveCurrency);
+    boost::algorithm::replace_all(to_substitute, "L$",  sActiveCurrency);
 }

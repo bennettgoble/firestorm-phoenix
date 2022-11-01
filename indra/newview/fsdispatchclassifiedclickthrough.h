@@ -39,23 +39,23 @@
 class FSDispatchClassifiedClickThrough : public LLDispatchHandler
 {
 public:
-	virtual bool operator()(
-		const LLDispatcher* dispatcher,
-		const std::string& key,
-		const LLUUID& invoice,
-		const sparam_t& strings)
-	{
-		if (strings.size() != 4) return false;
-		LLUUID classified_id(strings[0]);
-		S32 teleport_clicks = atoi(strings[1].c_str());
-		S32 map_clicks = atoi(strings[2].c_str());
-		S32 profile_clicks = atoi(strings[3].c_str());
+    virtual bool operator()(
+        const LLDispatcher* dispatcher,
+        const std::string& key,
+        const LLUUID& invoice,
+        const sparam_t& strings)
+    {
+        if (strings.size() != 4) return false;
+        LLUUID classified_id(strings[0]);
+        S32 teleport_clicks = atoi(strings[1].c_str());
+        S32 map_clicks = atoi(strings[2].c_str());
+        S32 profile_clicks = atoi(strings[3].c_str());
 
-		LLPanelProfileClassified::setClickThrough(
-			classified_id, teleport_clicks, map_clicks, profile_clicks, false);
+        LLPanelProfileClassified::setClickThrough(
+            classified_id, teleport_clicks, map_clicks, profile_clicks, false);
 
-		return true;
-	}
+        return true;
+    }
 };
 
 #endif // FS_DISPATCHCLASSIFIEDCLICKTHROUGH_H

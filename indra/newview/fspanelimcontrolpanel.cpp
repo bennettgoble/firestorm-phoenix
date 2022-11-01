@@ -36,8 +36,8 @@
 
 void FSPanelChatControlPanel::setSessionId(const LLUUID& session_id)
 {
-	//Method is called twice for AdHoc and Group chat. Second time when server init reply received
-	mSessionId = session_id;
+    //Method is called twice for AdHoc and Group chat. Second time when server init reply received
+    mSessionId = session_id;
 }
 
 FSPanelGroupControlPanel::FSPanelGroupControlPanel(const LLUUID& session_id):
@@ -47,38 +47,38 @@ mParticipantList(NULL)
 
 FSPanelGroupControlPanel::~FSPanelGroupControlPanel()
 {
-	delete mParticipantList;
-	mParticipantList = NULL;
+    delete mParticipantList;
+    mParticipantList = NULL;
 }
 
 // virtual
 void FSPanelGroupControlPanel::draw()
 {
-	// Need to resort the participant list if it's in sort by recent speaker order.
-	if (mParticipantList)
-	{
-		mParticipantList->update();
-	}
-	FSPanelChatControlPanel::draw();
+    // Need to resort the participant list if it's in sort by recent speaker order.
+    if (mParticipantList)
+    {
+        mParticipantList->update();
+    }
+    FSPanelChatControlPanel::draw();
 }
 
 void FSPanelGroupControlPanel::setSessionId(const LLUUID& session_id)
 {
-	FSPanelChatControlPanel::setSessionId(session_id);
+    FSPanelChatControlPanel::setSessionId(session_id);
 
-	mGroupID = session_id;
+    mGroupID = session_id;
 
-	// for group and Ad-hoc chat we need to include agent into list 
-	if(!mParticipantList)
-	{
-		LLSpeakerMgr* speaker_manager = LLIMModel::getInstance()->getSpeakerManager(session_id);
-		// <FS:Beq/> potential crash avoidance. getSpeakerManager can return NULL, the constructor does not check
-		if ( speaker_manager == nullptr ){ return;}
-		mParticipantList = new FSParticipantList(speaker_manager, getChild<LLAvatarList>("grp_speakers_list"), true,false);
-	}
+    // for group and Ad-hoc chat we need to include agent into list 
+    if(!mParticipantList)
+    {
+        LLSpeakerMgr* speaker_manager = LLIMModel::getInstance()->getSpeakerManager(session_id);
+        // <FS:Beq/> potential crash avoidance. getSpeakerManager can return NULL, the constructor does not check
+        if ( speaker_manager == nullptr ){ return;}
+        mParticipantList = new FSParticipantList(speaker_manager, getChild<LLAvatarList>("grp_speakers_list"), true,false);
+    }
 }
 
 FSPanelAdHocControlPanel::FSPanelAdHocControlPanel(const LLUUID& session_id)
-	: FSPanelGroupControlPanel(session_id)
+    : FSPanelGroupControlPanel(session_id)
 {
 }

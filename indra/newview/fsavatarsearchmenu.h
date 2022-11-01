@@ -33,13 +33,13 @@
 class FSAvatarSearchMenu : public LLListContextMenu
 {
 public:
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 private:
-	bool onContextMenuItemEnable(const LLSD& userdata);
-	bool onContextMenuItemCheck(const LLSD& userdata);
+    bool onContextMenuItemEnable(const LLSD& userdata);
+    bool onContextMenuItemCheck(const LLSD& userdata);
 
-	void offerTeleport();
-	void addToContactSet();
+    void offerTeleport();
+    void addToContactSet();
 };
 
 extern FSAvatarSearchMenu gFSAvatarSearchMenu;

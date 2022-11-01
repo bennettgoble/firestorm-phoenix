@@ -37,120 +37,120 @@ class LLAvatarName;
 
 class LLAvatarIconIDCache: public LLSingleton<LLAvatarIconIDCache>
 {
-	LLSINGLETON(LLAvatarIconIDCache);
+    LLSINGLETON(LLAvatarIconIDCache);
 
 public:
-	struct LLAvatarIconIDCacheItem
-	{
-		LLUUID icon_id;
-		LLDate cached_time;
+    struct LLAvatarIconIDCacheItem
+    {
+        LLUUID icon_id;
+        LLDate cached_time;
 
-		bool expired();
-	};
+        bool expired();
+    };
 
-	void				load	();
-	void				save	();
+    void                load    ();
+    void                save    ();
 
-	LLUUID*				get		(const LLUUID& id);
-	void				add		(const LLUUID& avatar_id,const LLUUID& icon_id);
+    LLUUID*             get     (const LLUUID& id);
+    void                add     (const LLUUID& avatar_id,const LLUUID& icon_id);
 
-	void				remove	(const LLUUID& id);
+    void                remove  (const LLUUID& id);
 protected:
-	
+    
 
-	std::string	mFilename;
-	std::map<LLUUID,LLAvatarIconIDCacheItem> mCache;//we cache only LLUID and time
+    std::string mFilename;
+    std::map<LLUUID,LLAvatarIconIDCacheItem> mCache;//we cache only LLUID and time
 };
 
 inline
 // <FS:Ansariel> FIRE-10607: Avatar icon controls show wrong picture when switching between SL main/beta grid
 //LLAvatarIconIDCache::LLAvatarIconIDCache()
-//	:	mFilename("avatar_icons_cache.txt")
+//  :   mFilename("avatar_icons_cache.txt")
 //{}
 LLAvatarIconIDCache::LLAvatarIconIDCache()
 {
-	const std::string grid_id_str = LLDir::getScrubbedFileName(LLGridManager::getInstance()->getGridId());
-	const std::string& grid_id_lower = utf8str_tolower(grid_id_str);
-	mFilename = "avatar_icons_cache." + grid_id_lower + ".txt";
+    const std::string grid_id_str = LLDir::getScrubbedFileName(LLGridManager::getInstance()->getGridId());
+    const std::string& grid_id_lower = utf8str_tolower(grid_id_str);
+    mFilename = "avatar_icons_cache." + grid_id_lower + ".txt";
 }
 // </FS:Ansariel>
 
 namespace LLAvatarIconCtrlEnums
 {
-	enum ESymbolPos
-	{
-		BOTTOM_LEFT,
-		BOTTOM_RIGHT,
-		TOP_LEFT,
-		TOP_RIGHT
-	};
+    enum ESymbolPos
+    {
+        BOTTOM_LEFT,
+        BOTTOM_RIGHT,
+        TOP_LEFT,
+        TOP_RIGHT
+    };
 }
 
 
 namespace LLInitParam
 {
-	template<>
-	struct TypeValues<LLAvatarIconCtrlEnums::ESymbolPos> : public TypeValuesHelper<LLAvatarIconCtrlEnums::ESymbolPos>
-	{
-		static void declareValues();
-	};
+    template<>
+    struct TypeValues<LLAvatarIconCtrlEnums::ESymbolPos> : public TypeValuesHelper<LLAvatarIconCtrlEnums::ESymbolPos>
+    {
+        static void declareValues();
+    };
 }
 
 class LLAvatarIconCtrl
 : public LLIconCtrl, public LLAvatarPropertiesObserver
 {
 public:
-	struct Params : public LLInitParam::Block<Params, LLIconCtrl::Params>
-	{
-		Optional<LLUUID>		avatar_id;
-		Optional<bool>			draw_tooltip;
-		Optional<std::string>	default_icon_name;
-		Optional<S32>			symbol_hpad,
-								symbol_vpad,
-								symbol_size;
-		Optional<LLAvatarIconCtrlEnums::ESymbolPos>	symbol_pos;
+    struct Params : public LLInitParam::Block<Params, LLIconCtrl::Params>
+    {
+        Optional<LLUUID>        avatar_id;
+        Optional<bool>          draw_tooltip;
+        Optional<std::string>   default_icon_name;
+        Optional<S32>           symbol_hpad,
+                                symbol_vpad,
+                                symbol_size;
+        Optional<LLAvatarIconCtrlEnums::ESymbolPos> symbol_pos;
 
-		Params();
-	};
-	
+        Params();
+    };
+    
 protected:
-	LLAvatarIconCtrl(const Params&);
-	friend class LLUICtrlFactory;
+    LLAvatarIconCtrl(const Params&);
+    friend class LLUICtrlFactory;
 
 public:
-	virtual ~LLAvatarIconCtrl();
+    virtual ~LLAvatarIconCtrl();
 
 // [SL:KB] - Checked: 2010-11-01 (RLVa-1.2.2a) | Added: RLVa-1.2.2a
-	/*virtual*/ BOOL handleToolTip(S32 x, S32 y, MASK mask);
+    /*virtual*/ BOOL handleToolTip(S32 x, S32 y, MASK mask);
 // [/SL:KB]
 
-	virtual void setValue(const LLSD& value);
+    virtual void setValue(const LLSD& value);
 
-	// LLAvatarPropertiesProcessor observer trigger
-	virtual void processProperties(void* data, EAvatarProcessorType type);
+    // LLAvatarPropertiesProcessor observer trigger
+    virtual void processProperties(void* data, EAvatarProcessorType type);
 
-	const LLUUID&		getAvatarId() const	{ return mAvatarId; }
-	const std::string&	getFullName() const { return mFullName; }
+    const LLUUID&       getAvatarId() const { return mAvatarId; }
+    const std::string&  getFullName() const { return mFullName; }
 
-	void setDrawTooltip(bool value) { mDrawTooltip = value;}
+    void setDrawTooltip(bool value) { mDrawTooltip = value;}
 
 protected:
-	LLUUID                      mAvatarId;
-	std::string                 mFullName;
-	bool                        mDrawTooltip;
-	std::string                 mDefaultIconName;
-	S32							mSymbolHpad,
-								mSymbolVpad,
-								mSymbolSize;
-	LLAvatarIconCtrlEnums::ESymbolPos	mSymbolPos;
+    LLUUID                      mAvatarId;
+    std::string                 mFullName;
+    bool                        mDrawTooltip;
+    std::string                 mDefaultIconName;
+    S32                         mSymbolHpad,
+                                mSymbolVpad,
+                                mSymbolSize;
+    LLAvatarIconCtrlEnums::ESymbolPos   mSymbolPos;
 
-	bool updateFromCache();
+    bool updateFromCache();
 
 private:
-	void fetchAvatarName();
-	void onAvatarNameCache(const LLUUID& agent_id, const LLAvatarName& av_name);
+    void fetchAvatarName();
+    void onAvatarNameCache(const LLUUID& agent_id, const LLAvatarName& av_name);
 
-	boost::signals2::connection mAvatarNameCacheConnection;
+    boost::signals2::connection mAvatarNameCacheConnection;
 };
 
 #endif  // LL_LLAVATARICONCTRL_H

@@ -37,47 +37,47 @@ const S32 MAX_AVATAR_PICKS = 10;
 class LLAgentPicksInfo::LLAgentPicksObserver : public LLAvatarPropertiesObserver
 {
 public:
-	LLAgentPicksObserver()
-	{
-		LLAvatarPropertiesProcessor::getInstance()->addObserver(gAgent.getID(), this);
-	}
+    LLAgentPicksObserver()
+    {
+        LLAvatarPropertiesProcessor::getInstance()->addObserver(gAgent.getID(), this);
+    }
 
-	~LLAgentPicksObserver()
-	{
-		if (LLAvatarPropertiesProcessor::instanceExists())
-			LLAvatarPropertiesProcessor::getInstance()->removeObserver(gAgent.getID(), this);
-	}
+    ~LLAgentPicksObserver()
+    {
+        if (LLAvatarPropertiesProcessor::instanceExists())
+            LLAvatarPropertiesProcessor::getInstance()->removeObserver(gAgent.getID(), this);
+    }
 
-	void sendAgentPicksRequest()
-	{
-		LLAvatarPropertiesProcessor::getInstance()->sendAvatarPicksRequest(gAgent.getID());
-	}
+    void sendAgentPicksRequest()
+    {
+        LLAvatarPropertiesProcessor::getInstance()->sendAvatarPicksRequest(gAgent.getID());
+    }
 
-	typedef boost::function<void(LLAvatarPicks*)> server_respond_callback_t;
+    typedef boost::function<void(LLAvatarPicks*)> server_respond_callback_t;
 
-	void setServerRespondCallback(const server_respond_callback_t& cb)
-	{
-		mServerRespondCallback = cb;
-	}
+    void setServerRespondCallback(const server_respond_callback_t& cb)
+    {
+        mServerRespondCallback = cb;
+    }
 
-	virtual void processProperties(void* data, EAvatarProcessorType type)
-	{
-		if(APT_PICKS == type)
-		{
-			LLAvatarPicks* picks = static_cast<LLAvatarPicks*>(data);
-			if(picks && gAgent.getID() == picks->target_id)
-			{
-				if(mServerRespondCallback)
-				{
-					mServerRespondCallback(picks);
-				}
-			}
-		}
-	}
+    virtual void processProperties(void* data, EAvatarProcessorType type)
+    {
+        if(APT_PICKS == type)
+        {
+            LLAvatarPicks* picks = static_cast<LLAvatarPicks*>(data);
+            if(picks && gAgent.getID() == picks->target_id)
+            {
+                if(mServerRespondCallback)
+                {
+                    mServerRespondCallback(picks);
+                }
+            }
+        }
+    }
 
 private:
 
-	server_respond_callback_t mServerRespondCallback;
+    server_respond_callback_t mServerRespondCallback;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -95,36 +95,36 @@ LLAgentPicksInfo::LLAgentPicksInfo()
 
 LLAgentPicksInfo::~LLAgentPicksInfo()
 {
-	delete mAgentPicksObserver;
+    delete mAgentPicksObserver;
 }
 
 void LLAgentPicksInfo::requestNumberOfPicks()
 {
-	if(!mAgentPicksObserver)
-	{
-		mAgentPicksObserver = new LLAgentPicksObserver();
+    if(!mAgentPicksObserver)
+    {
+        mAgentPicksObserver = new LLAgentPicksObserver();
 
-		mAgentPicksObserver->setServerRespondCallback(boost::bind(
-			&LLAgentPicksInfo::onServerRespond, this, _1));
-	}
+        mAgentPicksObserver->setServerRespondCallback(boost::bind(
+            &LLAgentPicksInfo::onServerRespond, this, _1));
+    }
 
-	mAgentPicksObserver->sendAgentPicksRequest();
+    mAgentPicksObserver->sendAgentPicksRequest();
 }
 
 bool LLAgentPicksInfo::isPickLimitReached()
 {
-	// <FS:Ansariel> Picks premium perks integration
-	//return getNumberOfPicks() >= getMaxNumberOfPicks();
-	return getNumberOfPicks() >= LLAgentBenefitsMgr::current().getPicksLimit();
+    // <FS:Ansariel> Picks premium perks integration
+    //return getNumberOfPicks() >= getMaxNumberOfPicks();
+    return getNumberOfPicks() >= LLAgentBenefitsMgr::current().getPicksLimit();
 }
 
 void LLAgentPicksInfo::onServerRespond(LLAvatarPicks* picks)
 {
-	if(!picks)
-	{
-		LL_ERRS() << "Unexpected value" << LL_ENDL;
-		return;
-	}
+    if(!picks)
+    {
+        LL_ERRS() << "Unexpected value" << LL_ENDL;
+        return;
+    }
 
-	setNumberOfPicks(picks->picks_list.size());
+    setNumberOfPicks(picks->picks_list.size());
 }

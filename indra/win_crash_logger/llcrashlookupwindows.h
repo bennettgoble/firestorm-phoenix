@@ -31,17 +31,17 @@
 class LLCrashLookupWindows : public LLCrashLookup
 {
 public:
-	LLCrashLookupWindows();
-	virtual ~LLCrashLookupWindows();
+    LLCrashLookupWindows();
+    virtual ~LLCrashLookupWindows();
 
 public:
-	/*virtual*/ bool initFromDump(const std::string& strDumpPath);
+    /*virtual*/ bool initFromDump(const std::string& strDumpPath);
 
 protected:
-	IDebugClient*	m_pDbgClient;
-	IDebugClient4*	m_pDbgClient4;
-	IDebugControl4*	m_pDbgControl;
-	IDebugSymbols2*	m_pDbgSymbols;
+    IDebugClient*   m_pDbgClient;
+    IDebugClient4*  m_pDbgClient4;
+    IDebugControl4* m_pDbgControl;
+    IDebugSymbols2* m_pDbgSymbols;
 };
 #else
 

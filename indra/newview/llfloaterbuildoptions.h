@@ -36,12 +36,12 @@
 
 
 class LLFloaterBuildOptions
-	:	public LLFloater
+    :   public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 private:
-	LLFloaterBuildOptions(const LLSD& key);
-	~LLFloaterBuildOptions();
+    LLFloaterBuildOptions(const LLSD& key);
+    ~LLFloaterBuildOptions();
 };
 
 #endif

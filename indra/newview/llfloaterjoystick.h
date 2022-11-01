@@ -39,75 +39,75 @@ class LLStatView;
 
 class LLFloaterJoystick : public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 
 public:
 
-	virtual BOOL postBuild();
-	virtual void refresh();
-	virtual void apply();	// Apply the changed values.
-	virtual void cancel();	// Cancel the changed values.
-	virtual void draw();
-	static  void setSNDefaults();
+    virtual BOOL postBuild();
+    virtual void refresh();
+    virtual void apply();   // Apply the changed values.
+    virtual void cancel();  // Cancel the changed values.
+    virtual void draw();
+    static  void setSNDefaults();
 
     void addDevice(std::string &name, LLSD& value);
 
 protected:
 
-	void refreshListOfDevices();
-	void onClose(bool app_quitting);
-	void onClickCloseBtn(bool app_quitting);
+    void refreshListOfDevices();
+    void onClose(bool app_quitting);
+    void onClickCloseBtn(bool app_quitting);
 
-	// <FS:Zi> FIRE-14344 - Add button preview and allow for more than 6 axes
-	void updateAxesAndButtons();
+    // <FS:Zi> FIRE-14344 - Add button preview and allow for more than 6 axes
+    void updateAxesAndButtons();
 private:
 
-	LLFloaterJoystick(const LLSD& data);
-	virtual ~LLFloaterJoystick();
+    LLFloaterJoystick(const LLSD& data);
+    virtual ~LLFloaterJoystick();
 
-	void initFromSettings();
-	
-	static void onCommitJoystickEnabled(LLUICtrl*, void*);
-	static void onClickRestoreSNDefaults(void*);
-	static void onClickCancel(void*);
-	static void onClickOK(void*);
+    void initFromSettings();
+    
+    static void onCommitJoystickEnabled(LLUICtrl*, void*);
+    static void onClickRestoreSNDefaults(void*);
+    static void onClickCancel(void*);
+    static void onClickOK(void*);
 
 private:
-	// Device prefs
-	bool mJoystickEnabled;
-	LLSD mJoystickId;
-	S32 mJoystickAxis[7];
-	bool m3DCursor;
-	bool mAutoLeveling;
-	bool mZoomDirect;
+    // Device prefs
+    bool mJoystickEnabled;
+    LLSD mJoystickId;
+    S32 mJoystickAxis[7];
+    bool m3DCursor;
+    bool mAutoLeveling;
+    bool mZoomDirect;
 
-	// Modes prefs
-	bool mAvatarEnabled;
-	bool mBuildEnabled;
-	bool mFlycamEnabled;
-	F32 mAvatarAxisScale[6];
-	F32 mBuildAxisScale[6];
-	F32 mFlycamAxisScale[7];
-	F32 mAvatarAxisDeadZone[6];
-	F32 mBuildAxisDeadZone[6];
-	F32 mFlycamAxisDeadZone[7];
-	F32 mAvatarFeathering;
-	F32 mBuildFeathering;
-	F32 mFlycamFeathering;
+    // Modes prefs
+    bool mAvatarEnabled;
+    bool mBuildEnabled;
+    bool mFlycamEnabled;
+    F32 mAvatarAxisScale[6];
+    F32 mBuildAxisScale[6];
+    F32 mFlycamAxisScale[7];
+    F32 mAvatarAxisDeadZone[6];
+    F32 mBuildAxisDeadZone[6];
+    F32 mFlycamAxisDeadZone[7];
+    F32 mAvatarFeathering;
+    F32 mBuildFeathering;
+    F32 mFlycamFeathering;
 
-	// Controls that can disable the flycam
-	LLCheckBoxCtrl	*mCheckFlycamEnabled;
-	LLComboBox		*mJoysticksCombo;
+    // Controls that can disable the flycam
+    LLCheckBoxCtrl  *mCheckFlycamEnabled;
+    LLComboBox      *mJoysticksCombo;
 
     bool mHasDeviceList;
 
-	// stats view 
-	// <FS:Zi> FIRE-14344 - Add button preview and allow for more than 6 axes
-	// LLStatBar* mAxisStatsBar[6];
-	LLStatBar** mAxisStatsBar;
-	LLIconCtrl** mButtonsLights;
-	LLStatView** mAxisViews;
-	// </FS:Zi>
+    // stats view 
+    // <FS:Zi> FIRE-14344 - Add button preview and allow for more than 6 axes
+    // LLStatBar* mAxisStatsBar[6];
+    LLStatBar** mAxisStatsBar;
+    LLIconCtrl** mButtonsLights;
+    LLStatView** mAxisViews;
+    // </FS:Zi>
 };
 
 #endif

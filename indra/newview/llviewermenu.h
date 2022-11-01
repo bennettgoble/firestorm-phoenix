@@ -188,38 +188,38 @@ void destroy_texture(const LLUUID& id);
 class LLViewerMenuHolderGL : public LLMenuHolderGL
 {
 public:
-	struct Params : public LLInitParam::Block<Params, LLMenuHolderGL::Params>
-	{};
+    struct Params : public LLInitParam::Block<Params, LLMenuHolderGL::Params>
+    {};
 
-	LLViewerMenuHolderGL(const Params& p);
+    LLViewerMenuHolderGL(const Params& p);
 
-	virtual BOOL hideMenus();
-	
-	void setParcelSelection(LLSafeHandle<LLParcelSelection> selection);
-	void setObjectSelection(LLSafeHandle<LLObjectSelection> selection);
+    virtual BOOL hideMenus();
+    
+    void setParcelSelection(LLSafeHandle<LLParcelSelection> selection);
+    void setObjectSelection(LLSafeHandle<LLObjectSelection> selection);
 
-	virtual const LLRect getMenuRect() const;
+    virtual const LLRect getMenuRect() const;
 
 protected:
-	LLSafeHandle<LLParcelSelection> mParcelSelection;
-	LLSafeHandle<LLObjectSelection> mObjectSelection;
+    LLSafeHandle<LLParcelSelection> mParcelSelection;
+    LLSafeHandle<LLObjectSelection> mObjectSelection;
 };
 
-extern LLMenuBarGL*		gMenuBarView;
-//extern LLView*			gMenuBarHolder;
-extern LLMenuGL*		gEditMenu;
-extern LLMenuGL*		gPopupMenuView;
-extern LLViewerMenuHolderGL*	gMenuHolder;
-extern LLMenuBarGL*		gLoginMenuBarView;
+extern LLMenuBarGL*     gMenuBarView;
+//extern LLView*            gMenuBarHolder;
+extern LLMenuGL*        gEditMenu;
+extern LLMenuGL*        gPopupMenuView;
+extern LLViewerMenuHolderGL*    gMenuHolder;
+extern LLMenuBarGL*     gLoginMenuBarView;
 
 // Context menus in 3D scene
-extern LLContextMenu		*gMenuAvatarSelf;
-extern LLContextMenu		*gMenuAvatarOther;
-extern LLContextMenu		*gMenuObject;
-extern LLContextMenu		*gMenuAttachmentSelf;
-extern LLContextMenu		*gMenuAttachmentOther;
-extern LLContextMenu		*gMenuLand;
-extern LLContextMenu		*gMenuMuteParticle;
+extern LLContextMenu        *gMenuAvatarSelf;
+extern LLContextMenu        *gMenuAvatarOther;
+extern LLContextMenu        *gMenuObject;
+extern LLContextMenu        *gMenuAttachmentSelf;
+extern LLContextMenu        *gMenuAttachmentOther;
+extern LLContextMenu        *gMenuLand;
+extern LLContextMenu        *gMenuMuteParticle;
 
 // Needed to build menus when attachment site list available
 extern LLMenuGL* gAttachSubMenu;
@@ -238,13 +238,13 @@ extern LLContextMenu* gDetachBodyPartPieMenus[9];
 
 // <FS:Zi> Pie Menu
 // Pie menus in 3D scene
-extern PieMenu			*gPieMenuAvatarSelf;
-extern PieMenu			*gPieMenuAvatarOther;
-extern PieMenu			*gPieMenuObject;
-extern PieMenu			*gPieMenuAttachmentSelf;
-extern PieMenu			*gPieMenuAttachmentOther;
-extern PieMenu			*gPieMenuLand;
-extern PieMenu			*gPieMenuMuteParticle;
+extern PieMenu          *gPieMenuAvatarSelf;
+extern PieMenu          *gPieMenuAvatarOther;
+extern PieMenu          *gPieMenuObject;
+extern PieMenu          *gPieMenuAttachmentSelf;
+extern PieMenu          *gPieMenuAttachmentOther;
+extern PieMenu          *gPieMenuLand;
+extern PieMenu          *gPieMenuMuteParticle;
 
 // Needed to build pie menus when attachment site list available
 extern PieMenu* gPieAttachScreenMenu;
@@ -256,9 +256,9 @@ extern PieMenu* gPieDetachBodyPartMenus[PIE_MAX_SLICES];
 // <FS:Zi> Pie Menu
 
 // <FS:Ansariel> FIRE-7893: Detach function on inspect self toast without function
-extern LLToggleableMenu	*gMenuInspectSelf;
-extern LLContextMenu	*gInspectSelfDetachScreenMenu;
-extern LLContextMenu	*gInspectSelfDetachMenu;
+extern LLToggleableMenu *gMenuInspectSelf;
+extern LLContextMenu    *gInspectSelfDetachScreenMenu;
+extern LLContextMenu    *gInspectSelfDetachMenu;
 // </FS:Ansariel>
 
 extern LLMenuItemCallGL* gAutorespondMenu;

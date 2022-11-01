@@ -36,28 +36,28 @@ class LLPanelGroupCreate;
 class FSFloaterGroup : public LLFloater
 {
 public:
-	FSFloaterGroup(const LLSD& seed);
-	/*virtual*/ ~FSFloaterGroup();
-	/*virtual*/ void onOpen(const LLSD& key);
+    FSFloaterGroup(const LLSD& seed);
+    /*virtual*/ ~FSFloaterGroup();
+    /*virtual*/ void onOpen(const LLSD& key);
 
-	BOOL postBuild();
+    BOOL postBuild();
 
-	void setGroup(const LLUUID& group_id);
+    void setGroup(const LLUUID& group_id);
 
-	void setGroupName(const std::string& group_name);
-	LLPanelGroup* getGroupPanel() const { return mGroupPanel; };
+    void setGroupName(const std::string& group_name);
+    LLPanelGroup* getGroupPanel() const { return mGroupPanel; };
 
-	static FSFloaterGroup* openGroupFloater(const LLUUID& group_id);
-	static FSFloaterGroup* openGroupFloater(const LLSD& params);
-	static void closeGroupFloater(const LLUUID& group_id);
-	static bool isFloaterVisible(const LLUUID& group_id);
-	static FSFloaterGroup* getInstance(const LLUUID& group_id);
-	static FSFloaterGroup* findInstance(const LLUUID& group_id);
+    static FSFloaterGroup* openGroupFloater(const LLUUID& group_id);
+    static FSFloaterGroup* openGroupFloater(const LLSD& params);
+    static void closeGroupFloater(const LLUUID& group_id);
+    static bool isFloaterVisible(const LLUUID& group_id);
+    static FSFloaterGroup* getInstance(const LLUUID& group_id);
+    static FSFloaterGroup* findInstance(const LLUUID& group_id);
 
 private:
-	LLPanelGroup*		mGroupPanel;
-	LLPanelGroupCreate*	mGroupCreatePanel;
-	bool				mIsCreateGroup;
+    LLPanelGroup*       mGroupPanel;
+    LLPanelGroupCreate* mGroupCreatePanel;
+    bool                mIsCreateGroup;
 };
 
 #endif // FS_FLOATERGROUP_H

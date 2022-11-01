@@ -97,7 +97,7 @@ S32 LLSkinningUtil::getMaxJointCount()
 
 U32 LLSkinningUtil::getMeshJointCount(const LLMeshSkinInfo *skin)
 {
-	return llmin((U32)getMaxJointCount(), (U32)skin->mJointNames.size());
+    return llmin((U32)getMaxJointCount(), (U32)skin->mJointNames.size());
 }
 
 void LLSkinningUtil::scrubInvalidJoints(LLVOAvatar *avatar, LLMeshSkinInfo* skin)
@@ -182,7 +182,7 @@ void LLSkinningUtil::initSkinningMatrixPalette(
 void LLSkinningUtil::checkSkinWeights(LLVector4a* weights, U32 num_vertices, const LLMeshSkinInfo* skin)
 {
 #if DEBUG_SKINNING
-	const S32 max_joints = skin->mJointNames.size();
+    const S32 max_joints = skin->mJointNames.size();
     for (U32 j=0; j<num_vertices; j++)
     {
         F32 *w = weights[j].getF32ptr();
@@ -215,7 +215,7 @@ void LLSkinningUtil::scrubSkinWeights(LLVector4a* weights, U32 num_vertices, con
             w[k] = i + f;
         }
     }
-	checkSkinWeights(weights, num_vertices, skin);
+    checkSkinWeights(weights, num_vertices, skin);
 }
 
 void LLSkinningUtil::getPerVertexSkinMatrix(
@@ -357,7 +357,7 @@ void LLSkinningUtil::updateRiggingInfo(const LLMeshSkinInfo* skin, LLVOAvatar *a
                     }
                     for (U32 k=0; k<4; ++k)
                     {
-						S32 joint_index = idx[k];
+                        S32 joint_index = idx[k];
                         if (wght[k] > 0.0f && num_joints > joint_index)
                         {
                             S32 joint_num = skin->mJointNums[joint_index];

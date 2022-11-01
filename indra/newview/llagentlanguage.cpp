@@ -31,26 +31,26 @@
 #include "llviewercontrol.h"
 #include "llviewerregion.h"
 // library includes
-#include "llui.h"					// getLanguage()
+#include "llui.h"                   // getLanguage()
 #include "httpcommon.h"
 
 // static
 void LLAgentLanguage::init()
 {
-	gSavedSettings.getControl("Language")->getSignal()->connect(boost::bind(&onChange));
-	gSavedSettings.getControl("InstallLanguage")->getSignal()->connect(boost::bind(&onChange));
-	gSavedSettings.getControl("SystemLanguage")->getSignal()->connect(boost::bind(&onChange));
-	gSavedSettings.getControl("LanguageIsPublic")->getSignal()->connect(boost::bind(&onChange));
-	gSavedSettings.getControl("LanguageIsPublic")->getSignal()->connect(boost::bind(&update)); // <FS:Ansariel> Make change instant
+    gSavedSettings.getControl("Language")->getSignal()->connect(boost::bind(&onChange));
+    gSavedSettings.getControl("InstallLanguage")->getSignal()->connect(boost::bind(&onChange));
+    gSavedSettings.getControl("SystemLanguage")->getSignal()->connect(boost::bind(&onChange));
+    gSavedSettings.getControl("LanguageIsPublic")->getSignal()->connect(boost::bind(&onChange));
+    gSavedSettings.getControl("LanguageIsPublic")->getSignal()->connect(boost::bind(&update)); // <FS:Ansariel> Make change instant
 }
 
 // static
 void LLAgentLanguage::onChange()
 {
-	// Clear inventory cache so that default names of inventory items
-	// appear retranslated (EXT-8308).
-	// <FS:AO> Purging the cache every language change is less desirable than having to manually cache clear once to retranslate inventory.
-	//gSavedSettings.setBOOL("PurgeCacheOnNextStartup", TRUE);
+    // Clear inventory cache so that default names of inventory items
+    // appear retranslated (EXT-8308).
+    // <FS:AO> Purging the cache every language change is less desirable than having to manually cache clear once to retranslate inventory.
+    //gSavedSettings.setBOOL("PurgeCacheOnNextStartup", TRUE);
 }
 
 // send language settings to the sim
@@ -59,14 +59,14 @@ bool LLAgentLanguage::update()
 {
     LLSD body;
 
-	// <FS:Ansariel> FIRE-16709: Bypass FSEnabledLanguages for llGetAgentLanguage
-	//std::string language = LLUI::getLanguage();
-	std::string language = LLUI::getInstance()->getUILanguage(true);
-	// </FS:Ansariel>
-		
-	body["language"] = language;
-	body["language_is_public"] = gSavedSettings.getBOOL("LanguageIsPublic");
-		
+    // <FS:Ansariel> FIRE-16709: Bypass FSEnabledLanguages for llGetAgentLanguage
+    //std::string language = LLUI::getLanguage();
+    std::string language = LLUI::getInstance()->getUILanguage(true);
+    // </FS:Ansariel>
+        
+    body["language"] = language;
+    body["language_is_public"] = gSavedSettings.getBOOL("LanguageIsPublic");
+        
     if (!gAgent.requestPostCapability("UpdateAgentLanguage", body))
     {
         LL_WARNS("Language") << "Language capability unavailable." << LL_ENDL;

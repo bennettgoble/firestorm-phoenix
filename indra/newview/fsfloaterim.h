@@ -41,7 +41,7 @@ class FSChatHistory;
 class FSFloaterIMTimer;
 class FSPanelChatControlPanel;
 class LLAvatarName;
-class LLButton;		// support sysinfo button -Zi
+class LLButton;     // support sysinfo button -Zi
 class LLChatEntry;
 class LLInventoryCategory;
 class LLInventoryItem;
@@ -59,245 +59,245 @@ typedef boost::signals2::signal<void(const LLUUID& session_id)> floater_showed_s
  */
 class FSFloaterIM : public LLTransientDockableFloater, LLVoiceClientStatusObserver, LLFriendObserver, LLEventTimer
 {
-	LOG_CLASS(FSFloaterIM);
+    LOG_CLASS(FSFloaterIM);
 public:
-	FSFloaterIM(const LLUUID& session_id);
+    FSFloaterIM(const LLUUID& session_id);
 
-	virtual ~FSFloaterIM();
-	
-	// LLView overrides
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void setVisible(BOOL visible);
-	/*virtual*/ BOOL getVisible();
-	/*virtual*/ void setMinimized(BOOL b);
+    virtual ~FSFloaterIM();
+    
+    // LLView overrides
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void setVisible(BOOL visible);
+    /*virtual*/ BOOL getVisible();
+    /*virtual*/ void setMinimized(BOOL b);
 
-	// LLFloater overrides
-	/*virtual*/ void onClose(bool app_quitting);
-	/*virtual*/ void setDocked(bool docked, bool pop_on_undock = true);
-	/*virtual*/ void onSnooze();
+    // LLFloater overrides
+    /*virtual*/ void onClose(bool app_quitting);
+    /*virtual*/ void setDocked(bool docked, bool pop_on_undock = true);
+    /*virtual*/ void onSnooze();
 
-	/*virtual*/ BOOL tick();
+    /*virtual*/ BOOL tick();
 
-	// Make IM conversion visible and update the message history
-	static FSFloaterIM* show(const LLUUID& session_id);
+    // Make IM conversion visible and update the message history
+    static FSFloaterIM* show(const LLUUID& session_id);
 
-	// Toggle panel specified by session_id
-	// Returns true iff panel became visible
-	static bool toggle(const LLUUID& session_id);
+    // Toggle panel specified by session_id
+    // Returns true iff panel became visible
+    static bool toggle(const LLUUID& session_id);
 
-	static FSFloaterIM* findInstance(const LLUUID& session_id);
+    static FSFloaterIM* findInstance(const LLUUID& session_id);
 
-	static FSFloaterIM* getInstance(const LLUUID& session_id);
+    static FSFloaterIM* getInstance(const LLUUID& session_id);
 
-	void sessionInitReplyReceived(const LLUUID& im_session_id);
+    void sessionInitReplyReceived(const LLUUID& im_session_id);
 
-	// get new messages from LLIMModel
-	void updateMessages();
-	void reloadMessages(bool clean_messages = false);
-	void sendMsgFromInputEditor(EChatType type);
-	void sendMsg(const std::string& msg);
+    // get new messages from LLIMModel
+    void updateMessages();
+    void reloadMessages(bool clean_messages = false);
+    void sendMsgFromInputEditor(EChatType type);
+    void sendMsg(const std::string& msg);
 
-	// callback for LLIMModel on new messages
-	// route to specific floater if it is visible
-	static void newIMCallback(const LLSD& data);
-	
-	//AO: Callbacks for voice handling formerly in llPanelImControlPanel
-	void onVoiceChannelStateChanged(const LLVoiceChannel::EState& old_state, const LLVoiceChannel::EState& new_state);
-	void onChange(EStatusType status, const std::string &channelURI, bool proximal);
-	void updateButtons(bool is_call_started);
-	void updateCallButton();
-	void changed(U32 mask);
-	// ## Zi: overridden to fix the IM focus bug - FIRE-3989 etc.
-	BOOL focusFirstItem(BOOL prefer_text_fields = FALSE, BOOL focus_flash = TRUE );
+    // callback for LLIMModel on new messages
+    // route to specific floater if it is visible
+    static void newIMCallback(const LLSD& data);
+    
+    //AO: Callbacks for voice handling formerly in llPanelImControlPanel
+    void onVoiceChannelStateChanged(const LLVoiceChannel::EState& old_state, const LLVoiceChannel::EState& new_state);
+    void onChange(EStatusType status, const std::string &channelURI, bool proximal);
+    void updateButtons(bool is_call_started);
+    void updateCallButton();
+    void changed(U32 mask);
+    // ## Zi: overridden to fix the IM focus bug - FIRE-3989 etc.
+    BOOL focusFirstItem(BOOL prefer_text_fields = FALSE, BOOL focus_flash = TRUE );
 
-	void onVisibilityChange(BOOL new_visibility);
-	void processIMTyping(const LLUUID& from_id, BOOL typing);
-	void processAgentListUpdates(const LLSD& body);
-	void processSessionUpdate(const LLSD& session_update);
+    void onVisibilityChange(BOOL new_visibility);
+    void processIMTyping(const LLUUID& from_id, BOOL typing);
+    void processAgentListUpdates(const LLSD& body);
+    void processSessionUpdate(const LLSD& session_update);
 
-	void updateChatHistoryStyle();
-	static void processChatHistoryStyleUpdate(const LLSD& newvalue);
-	
-	static void clearAllOpenHistories();	// <FS:CR> FIRE-11734
+    void updateChatHistoryStyle();
+    static void processChatHistoryStyleUpdate(const LLSD& newvalue);
+    
+    static void clearAllOpenHistories();    // <FS:CR> FIRE-11734
 
-	void onChatSearchButtonClicked();
+    void onChatSearchButtonClicked();
 
-	BOOL handleDragAndDrop(S32 x, S32 y, MASK mask,
-							   BOOL drop, EDragAndDropType cargo_type,
-							   void *cargo_data, EAcceptance *accept,
-							   std::string& tooltip_msg);
+    BOOL handleDragAndDrop(S32 x, S32 y, MASK mask,
+                               BOOL drop, EDragAndDropType cargo_type,
+                               void *cargo_data, EAcceptance *accept,
+                               std::string& tooltip_msg);
 
-	virtual BOOL handleKeyHere( KEY key, MASK mask );
+    virtual BOOL handleKeyHere( KEY key, MASK mask );
 
-	/**
-	 * Returns true if chat is displayed in multi tabbed floater
-	 *         false if chat is displayed in multiple windows
-	 */
-	static bool isChatMultiTab();
+    /**
+     * Returns true if chat is displayed in multi tabbed floater
+     *         false if chat is displayed in multiple windows
+     */
+    static bool isChatMultiTab();
 
-	void initIMSession(const LLUUID& session_id);
-	static void initIMFloater();
+    void initIMSession(const LLUUID& session_id);
+    static void initIMFloater();
 
-	//used as a callback on receiving new IM message
-	static void sRemoveTypingIndicator(const LLSD& data);
+    //used as a callback on receiving new IM message
+    static void sRemoveTypingIndicator(const LLSD& data);
 
-	static void onNewIMReceived(const LLUUID& session_id);
+    static void onNewIMReceived(const LLUUID& session_id);
 
-	virtual LLTransientFloaterMgr::ETransientGroup getGroup() { return LLTransientFloaterMgr::IM; }
-	
-	static boost::signals2::connection setIMFloaterShowedCallback(const floater_showed_signal_t::slot_type& cb);
-	static floater_showed_signal_t sIMFloaterShowedSignal;
+    virtual LLTransientFloaterMgr::ETransientGroup getGroup() { return LLTransientFloaterMgr::IM; }
+    
+    static boost::signals2::connection setIMFloaterShowedCallback(const floater_showed_signal_t::slot_type& cb);
+    static floater_showed_signal_t sIMFloaterShowedSignal;
 
-	S32 getLastChatMessageIndex() {return mLastMessageIndex;}
+    S32 getLastChatMessageIndex() {return mLastMessageIndex;}
 
-	LLVoiceChannel* getVoiceChannel() { return mVoiceChannel; }
+    LLVoiceChannel* getVoiceChannel() { return mVoiceChannel; }
 
-	void updateUnreadMessageNotification(S32 unread_messages);
+    void updateUnreadMessageNotification(S32 unread_messages);
 
-	void loadInitialInvitedIDs();
+    void loadInitialInvitedIDs();
 
-	bool isP2PChat() const { return mIsP2PChat; }
+    bool isP2PChat() const { return mIsP2PChat; }
 
-	void handleMinimized(bool minimized);
+    void handleMinimized(bool minimized);
 
-	void timedUpdate();
+    void timedUpdate();
 
 protected:
-	/* virtual */
-	void	onClickCloseBtn(bool app_quitting = false);
-	/*virtual*/ bool applyRectControl();
+    /* virtual */
+    void    onClickCloseBtn(bool app_quitting = false);
+    /*virtual*/ bool applyRectControl();
 
-	// support sysinfo button -Zi
-	void	onSysinfoButtonVisibilityChanged(const LLSD& yes);
-	LLButton* mSysinfoButton;
-	// support sysinfo button -Zi
+    // support sysinfo button -Zi
+    void    onSysinfoButtonVisibilityChanged(const LLSD& yes);
+    LLButton* mSysinfoButton;
+    // support sysinfo button -Zi
 
-	BOOL enableViewerVersionCallback(const LLSD& notification,const LLSD& response);		// <FS:Zi> Viewer version popup
-	void reshapeFloater(bool collapse);
-	void reshapeChatLayoutPanel();
+    BOOL enableViewerVersionCallback(const LLSD& notification,const LLSD& response);        // <FS:Zi> Viewer version popup
+    void reshapeFloater(bool collapse);
+    void reshapeChatLayoutPanel();
 private:
-	// process focus events to set a currently active session
-	/* virtual */ void onFocusLost();
-	/* virtual */ void onFocusReceived();
+    // process focus events to set a currently active session
+    /* virtual */ void onFocusLost();
+    /* virtual */ void onFocusReceived();
 
-	// Update the window title, input field help text, etc.
-	void updateSessionName(const std::string& ui_title, const std::string& ui_label);
-	
-	// For display name lookups for IM window titles
-	void onAvatarNameCache(const LLUUID& agent_id, const LLAvatarName& av_name);
-	void fetchAvatarName(LLUUID& agent_id);
-	
-	bool dropCallingCard(LLInventoryItem* item, bool drop);
-	bool dropCategory(LLInventoryCategory* category, bool drop);
-	bool dropPerson(LLUUID* person_id, bool drop);
+    // Update the window title, input field help text, etc.
+    void updateSessionName(const std::string& ui_title, const std::string& ui_label);
+    
+    // For display name lookups for IM window titles
+    void onAvatarNameCache(const LLUUID& agent_id, const LLAvatarName& av_name);
+    void fetchAvatarName(LLUUID& agent_id);
+    
+    bool dropCallingCard(LLInventoryItem* item, bool drop);
+    bool dropCategory(LLInventoryCategory* category, bool drop);
+    bool dropPerson(LLUUID* person_id, bool drop);
 
-	BOOL isInviteAllowed() const;
-	BOOL inviteToSession(const uuid_vec_t& agent_ids);
-	
-	void onInputEditorFocusReceived();
-	void onInputEditorFocusLost();
-	void onInputEditorKeystroke();
+    BOOL isInviteAllowed() const;
+    BOOL inviteToSession(const uuid_vec_t& agent_ids);
+    
+    void onInputEditorFocusReceived();
+    void onInputEditorFocusLost();
+    void onInputEditorKeystroke();
 
-	void doToSelected(const LLSD& userdata);
-	bool checkEnabled(const LLSD& userdata);
+    void doToSelected(const LLSD& userdata);
+    bool checkEnabled(const LLSD& userdata);
 
-	// support sysinfo button -Zi
-	void onSysinfoButtonClicked();
-	BOOL onSendSysinfo(const LLSD& notification,const LLSD& response);
-	// support sysinfo button -Zi
+    // support sysinfo button -Zi
+    void onSysinfoButtonClicked();
+    BOOL onSendSysinfo(const LLSD& notification,const LLSD& response);
+    // support sysinfo button -Zi
 
-	// connection to voice channel state change signal
-	boost::signals2::connection mVoiceChannelStateChangeConnection;
-	
-	void			setTyping(bool typing);
-	void			onSlide();
-	static void*	createPanelIMControl(void* userdata);
-	static void*	createPanelGroupControl(void* userdata);
-	static void* 	createPanelAdHocControl(void* userdata);
+    // connection to voice channel state change signal
+    boost::signals2::connection mVoiceChannelStateChangeConnection;
+    
+    void            setTyping(bool typing);
+    void            onSlide();
+    static void*    createPanelIMControl(void* userdata);
+    static void*    createPanelGroupControl(void* userdata);
+    static void*    createPanelAdHocControl(void* userdata);
 
-	// Add the "User is typing..." indicator.
-	void addTypingIndicator(const LLUUID& from_id);
+    // Add the "User is typing..." indicator.
+    void addTypingIndicator(const LLUUID& from_id);
 
-	// Remove the "User is typing..." indicator.
-	void removeTypingIndicator(const LLUUID& from_id = LLUUID::null);
+    // Remove the "User is typing..." indicator.
+    void removeTypingIndicator(const LLUUID& from_id = LLUUID::null);
 
-	static void closeHiddenIMToasts();
+    static void closeHiddenIMToasts();
 
-	static void confirmLeaveCallCallback(const LLSD& notification, const LLSD& response);
-	
-	void sendParticipantsAddedNotification(const uuid_vec_t& uuids);
+    static void confirmLeaveCallCallback(const LLSD& notification, const LLSD& response);
+    
+    void sendParticipantsAddedNotification(const uuid_vec_t& uuids);
 
-	void confirmSnooze();
-	void snoozeDurationCallback(const LLSD& notification, const LLSD& response);
-	void snooze(S32 duration = -1);
+    void confirmSnooze();
+    void snoozeDurationCallback(const LLSD& notification, const LLSD& response);
+    void snooze(S32 duration = -1);
 
-	void onAddButtonClicked();
-	bool canAddSelectedToChat(const uuid_vec_t& uuids);
-	void addSessionParticipants(const uuid_vec_t& uuids);
-	void addP2PSessionParticipants(const LLSD& notification, const LLSD& response, const uuid_vec_t& uuids);
+    void onAddButtonClicked();
+    bool canAddSelectedToChat(const uuid_vec_t& uuids);
+    void addSessionParticipants(const uuid_vec_t& uuids);
+    void addP2PSessionParticipants(const LLSD& notification, const LLSD& response, const uuid_vec_t& uuids);
 
-	void	onChatOptionsContextMenuItemClicked(const LLSD& userdata);
-	bool	onChatOptionsCheckContextMenuItem(const LLSD& userdata);
-	bool	onChatOptionsVisibleContextMenuItem(const LLSD& userdata);
-	bool	onChatOptionsEnableContextMenuItem(const LLSD& userdata);
+    void    onChatOptionsContextMenuItemClicked(const LLSD& userdata);
+    bool    onChatOptionsCheckContextMenuItem(const LLSD& userdata);
+    bool    onChatOptionsVisibleContextMenuItem(const LLSD& userdata);
+    bool    onChatOptionsEnableContextMenuItem(const LLSD& userdata);
 
-	FSPanelChatControlPanel* mControlPanel;
-	LLUUID mSessionID;
-	S32 mLastMessageIndex;
-	S32 mPendingMessages;
+    FSPanelChatControlPanel* mControlPanel;
+    LLUUID mSessionID;
+    S32 mLastMessageIndex;
+    S32 mPendingMessages;
 
-	EInstantMessage mDialog;
-	LLUUID mOtherParticipantUUID;
-	FSChatHistory* mChatHistory;
-	LLChatEntry* mInputEditor;
-	LLLayoutPanel* mChatLayoutPanel;
-	LLLayoutStack* mInputPanels;
-	LLLayoutPanel* mUnreadMessagesNotificationPanel;
-	LLTextBox* mUnreadMessagesNotificationTextBox;
-	// bool mPositioned;		// dead code -Zi
+    EInstantMessage mDialog;
+    LLUUID mOtherParticipantUUID;
+    FSChatHistory* mChatHistory;
+    LLChatEntry* mInputEditor;
+    LLLayoutPanel* mChatLayoutPanel;
+    LLLayoutStack* mInputPanels;
+    LLLayoutPanel* mUnreadMessagesNotificationPanel;
+    LLTextBox* mUnreadMessagesNotificationTextBox;
+    // bool mPositioned;        // dead code -Zi
 
-	std::string mSavedTitle;
-	LLUIString mTypingStart;
-	bool mMeTyping;
-	bool mOtherTyping;
-	bool mShouldSendTypingState;
-	LLFrameTimer mTypingTimer;
-	LLFrameTimer mTypingTimeoutTimer;
-	LLFrameTimer mMeTypingTimer;
-	LLFrameTimer mOtherTypingTimer;
-	LLFrameTimer mRefreshNameTimer;
+    std::string mSavedTitle;
+    LLUIString mTypingStart;
+    bool mMeTyping;
+    bool mOtherTyping;
+    bool mShouldSendTypingState;
+    LLFrameTimer mTypingTimer;
+    LLFrameTimer mTypingTimeoutTimer;
+    LLFrameTimer mMeTypingTimer;
+    LLFrameTimer mOtherTypingTimer;
+    LLFrameTimer mRefreshNameTimer;
 
-	bool mSessionInitialized;
-	LLSD mQueuedMsgsForInit;
+    bool mSessionInitialized;
+    LLSD mQueuedMsgsForInit;
 
-	bool mIsP2PChat;
+    bool mIsP2PChat;
 
-	LLVoiceChannel* mVoiceChannel;
-	
-	S32 mInputEditorPad;
-	S32 mChatLayoutPanelHeight;
-	S32 mFloaterHeight;
+    LLVoiceChannel* mVoiceChannel;
+    
+    S32 mInputEditorPad;
+    S32 mChatLayoutPanelHeight;
+    S32 mFloaterHeight;
 
-	uuid_vec_t mInvitedParticipants;
-	uuid_vec_t mPendingParticipants;
+    uuid_vec_t mInvitedParticipants;
+    uuid_vec_t mPendingParticipants;
 
-	boost::signals2::connection mAvatarNameCacheConnection;
+    boost::signals2::connection mAvatarNameCacheConnection;
 
-	bool mApplyRect;
+    bool mApplyRect;
 
-	FSFloaterIMTimer*	mIMFloaterTimer;
+    FSFloaterIMTimer*   mIMFloaterTimer;
 };
 
 class FSFloaterIMTimer : public LLEventTimer
 {
 public:
-	typedef boost::function<void()> callback_t;
+    typedef boost::function<void()> callback_t;
 
-	FSFloaterIMTimer(callback_t callback);
-	/*virtual*/ BOOL tick();
+    FSFloaterIMTimer(callback_t callback);
+    /*virtual*/ BOOL tick();
 
 private:
-	callback_t mCallback;
+    callback_t mCallback;
 };
 
 #endif  // FS_FLOATERIM_H

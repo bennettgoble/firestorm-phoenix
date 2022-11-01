@@ -38,81 +38,81 @@ class LLAvatarName;
 class FSScrollListCtrl;
 
 class FSPanelBlockList
-	:	public LLPanel, public LLMuteListObserver
+    :   public LLPanel, public LLMuteListObserver
 {
-	friend class FSBlockListMenu;
+    friend class FSBlockListMenu;
 
 public:
-	FSPanelBlockList();
-	~FSPanelBlockList();
+    FSPanelBlockList();
+    ~FSPanelBlockList();
 
-	virtual BOOL postBuild();
-	virtual void onOpen(const LLSD& key);
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const { return true; }
-	
-	void selectBlocked(const LLUUID& id);
+    virtual BOOL postBuild();
+    virtual void onOpen(const LLSD& key);
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const { return true; }
+    
+    void selectBlocked(const LLUUID& id);
 
-	/**
-	 *	Shows current Panel in side tray and select passed blocked item.
-	 * 
-	 *	@param idToSelect - LLUUID of blocked Resident or Object to be selected. 
-	 *			If it is LLUUID::null, nothing will be selected.
-	 */
-	static void showPanelAndSelect(const LLUUID& idToSelect = LLUUID::null);
+    /**
+     *  Shows current Panel in side tray and select passed blocked item.
+     * 
+     *  @param idToSelect - LLUUID of blocked Resident or Object to be selected. 
+     *          If it is LLUUID::null, nothing will be selected.
+     */
+    static void showPanelAndSelect(const LLUUID& idToSelect = LLUUID::null);
 
-	// LLMuteListObserver callback interface implementation.
-	/* virtual */ void onChange() {	refreshBlockedList();}
-	
+    // LLMuteListObserver callback interface implementation.
+    /* virtual */ void onChange() { refreshBlockedList();}
+    
 private:
-	typedef enum e_sort_oder
-	{
-		E_SORT_BY_NAME_ASC = 0,
-		E_SORT_BY_TYPE_ASC = 1,
-		E_SORT_BY_NAME_DESC = 2,
-		E_SORT_BY_TYPE_DESC = 3
-	} ESortOrder;
+    typedef enum e_sort_oder
+    {
+        E_SORT_BY_NAME_ASC = 0,
+        E_SORT_BY_TYPE_ASC = 1,
+        E_SORT_BY_NAME_DESC = 2,
+        E_SORT_BY_TYPE_DESC = 3
+    } ESortOrder;
 
-	
-	typedef enum e_column_names
-	{
-		COL_NAME = 0,
-		COL_TYPENAME,
-		COL_TYPE,
-		COL_UUID
-	} EColumnNames;
+    
+    typedef enum e_column_names
+    {
+        COL_NAME = 0,
+        COL_TYPENAME,
+        COL_TYPE,
+        COL_UUID
+    } EColumnNames;
 
 
-	void refreshBlockedList();
-	void updateButtons();
-	void removePicker();
-	void onSortChanged();
+    void refreshBlockedList();
+    void updateButtons();
+    void removePicker();
+    void onSortChanged();
 
-	// UI callbacks
-	void removeMutes();
-	void blockResidentByName();
-	void blockObjectByName();
-	void showProfile();
-	void toggleMute(U32 flags);
+    // UI callbacks
+    void removeMutes();
+    void blockResidentByName();
+    void blockObjectByName();
+    void showProfile();
+    void toggleMute(U32 flags);
 
-	void onSelectionChanged();
-	void onFilterEdit(std::string search_string);
+    void onSelectionChanged();
+    void onFilterEdit(std::string search_string);
 
-	// List commnads
-	void onCustomAction(const LLSD& userdata);
-	bool isActionChecked(const LLSD& userdata);
-	bool isActionEnabled(const LLSD& userdata);
-	bool isActionVisible(const LLSD& userdata);
+    // List commnads
+    void onCustomAction(const LLSD& userdata);
+    bool isActionChecked(const LLSD& userdata);
+    bool isActionEnabled(const LLSD& userdata);
+    bool isActionVisible(const LLSD& userdata);
 
-	void callbackBlockPicked(const uuid_vec_t& ids, const std::vector<LLAvatarName> names);
-	void callbackBlockByName(const std::string& text);
+    void callbackBlockPicked(const uuid_vec_t& ids, const std::vector<LLAvatarName> names);
+    void callbackBlockByName(const std::string& text);
 
 private:
-	FSScrollListCtrl* mBlockedList;
-	LLHandle<LLFloater> mAvatarPicker;
-	LLHandle<LLFloater> mObjectPicker;
-	std::string mFilterSubString;
-	std::string mFilterSubStringOrig;
+    FSScrollListCtrl* mBlockedList;
+    LLHandle<LLFloater> mAvatarPicker;
+    LLHandle<LLFloater> mObjectPicker;
+    std::string mFilterSubString;
+    std::string mFilterSubStringOrig;
 };
 
 #endif // FS_PANELBLOCKLIST_H

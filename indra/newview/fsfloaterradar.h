@@ -36,18 +36,18 @@ class LLButton;
 class LLFilterEditor;
 
 class FSFloaterRadar 
-	: public LLFloater
+    : public LLFloater
 {
-	LOG_CLASS(FSFloaterRadar);
+    LOG_CLASS(FSFloaterRadar);
 public:
-	FSFloaterRadar(const LLSD &);
-	virtual ~FSFloaterRadar();
+    FSFloaterRadar(const LLSD &);
+    virtual ~FSFloaterRadar();
 
-	/*virtual*/ BOOL 	postBuild();
-	/*virtual*/ void	onOpen(const LLSD& key);
+    /*virtual*/ BOOL    postBuild();
+    /*virtual*/ void    onOpen(const LLSD& key);
 
 private:
-	FSPanelRadar*			mRadarPanel;
+    FSPanelRadar*           mRadarPanel;
 };
 
 #endif // FS_FLOATERRADAR_H

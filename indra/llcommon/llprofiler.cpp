@@ -27,6 +27,6 @@
 #include "llprofiler.h"
 namespace LLProfiler
 {
-	bool	active{false};
+    bool    active{false};
 
 }

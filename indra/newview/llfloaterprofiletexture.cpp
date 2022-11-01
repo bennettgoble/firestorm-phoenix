@@ -73,13 +73,13 @@ BOOL LLFloaterProfileTexture::postBuild()
     // <FS:Ansariel> Add refresh function
     getChild<LLButton>("btn_refresh")->setCommitCallback([this](LLUICtrl*, void*) { refreshTexture(); }, nullptr);
 
-	return TRUE;
+    return TRUE;
 }
 
 // virtual
 void LLFloaterProfileTexture::reshape(S32 width, S32 height, BOOL called_from_parent)
 {
-	LLFloater::reshape(width, height, called_from_parent);
+    LLFloater::reshape(width, height, called_from_parent);
 }
 
 // It takes a while until we get height and width information.

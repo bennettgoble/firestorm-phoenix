@@ -38,35 +38,35 @@ class LLPluginClassMedia;
 class LLStreamingAudio_MediaPlugins : public LLStreamingAudioInterface
 {
  public:
-	LLStreamingAudio_MediaPlugins();
-	/*virtual*/ ~LLStreamingAudio_MediaPlugins();
+    LLStreamingAudio_MediaPlugins();
+    /*virtual*/ ~LLStreamingAudio_MediaPlugins();
 
-	/*virtual*/ void start(const std::string& url);
-	/*virtual*/ void stop();
-	/*virtual*/ void pause(int pause);
-	/*virtual*/ void update();
-	/*virtual*/ int isPlaying();
-	/*virtual*/ void setGain(F32 vol);
-	/*virtual*/ F32 getGain();
-	/*virtual*/ std::string getURL();
+    /*virtual*/ void start(const std::string& url);
+    /*virtual*/ void stop();
+    /*virtual*/ void pause(int pause);
+    /*virtual*/ void update();
+    /*virtual*/ int isPlaying();
+    /*virtual*/ void setGain(F32 vol);
+    /*virtual*/ F32 getGain();
+    /*virtual*/ std::string getURL();
 
-	// <FS:ND> For FS metadata extraction
-	virtual bool getNewMetadata(LLSD& metadata);
-	// </FS:ND>
+    // <FS:ND> For FS metadata extraction
+    virtual bool getNewMetadata(LLSD& metadata);
+    // </FS:ND>
 
 private:
-	LLPluginClassMedia* initializeMedia(const std::string& media_type);
+    LLPluginClassMedia* initializeMedia(const std::string& media_type);
 
-	LLPluginClassMedia *mMediaPlugin;
+    LLPluginClassMedia *mMediaPlugin;
 
-	std::string mURL;
+    std::string mURL;
 
-	// <FS:ND> stream metadata from plugin
-	std::string mArtist;
-	std::string mTitle;
-	// </FS:ND>
+    // <FS:ND> stream metadata from plugin
+    std::string mArtist;
+    std::string mTitle;
+    // </FS:ND>
 
-	F32 mGain;
+    F32 mGain;
 };
 
 

@@ -36,30 +36,30 @@ FSAreaSearchMenu gFSAreaSearchMenu;
 
 LLContextMenu* FSAreaSearchMenu::createMenu()
 {
-	LLUICtrl::CommitCallbackRegistry::ScopedRegistrar registrar;
-	LLUICtrl::EnableCallbackRegistry::ScopedRegistrar enable_registrar;
+    LLUICtrl::CommitCallbackRegistry::ScopedRegistrar registrar;
+    LLUICtrl::EnableCallbackRegistry::ScopedRegistrar enable_registrar;
 
-	registrar.add("AreaSearch.Action", boost::bind(&FSAreaSearchMenu::onContextMenuItemClick, this, _2));
-	enable_registrar.add("AreaSearch.Enable", boost::bind(&FSAreaSearchMenu::onContextMenuItemEnable, this, _2));
+    registrar.add("AreaSearch.Action", boost::bind(&FSAreaSearchMenu::onContextMenuItemClick, this, _2));
+    enable_registrar.add("AreaSearch.Enable", boost::bind(&FSAreaSearchMenu::onContextMenuItemEnable, this, _2));
 
-	return createFromFile("menu_fs_area_search.xml");
+    return createFromFile("menu_fs_area_search.xml");
 }
 
 void FSAreaSearchMenu::onContextMenuItemClick(const LLSD& userdata)
 {
-	FSAreaSearch* search = LLFloaterReg::findTypedInstance<FSAreaSearch>("area_search");
-	if (search && search->getPanelList())
-	{
-		search->getPanelList()->onContextMenuItemClick(userdata);
-	}
+    FSAreaSearch* search = LLFloaterReg::findTypedInstance<FSAreaSearch>("area_search");
+    if (search && search->getPanelList())
+    {
+        search->getPanelList()->onContextMenuItemClick(userdata);
+    }
 }
 
 bool FSAreaSearchMenu::onContextMenuItemEnable(const LLSD& userdata)
 {
-	FSAreaSearch* search = LLFloaterReg::findTypedInstance<FSAreaSearch>("area_search");
-	if (search && search->getPanelList())
-	{
-		return search->getPanelList()->onContextMenuItemEnable(userdata);
-	}
-	return false;
+    FSAreaSearch* search = LLFloaterReg::findTypedInstance<FSAreaSearch>("area_search");
+    if (search && search->getPanelList())
+    {
+        return search->getPanelList()->onContextMenuItemEnable(userdata);
+    }
+    return false;
 }

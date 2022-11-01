@@ -168,7 +168,7 @@ BOOL FSFloaterPerformance::postBuild()
     if(!FSPerfStats::tunables.userAutoTuneEnabled)
     {
         if (gSavedDrawDistance)
-	    {
+        {
             gSavedSettings.setF32("FSAutoTuneRenderFarClipTarget", gSavedDrawDistance);
         }
         else 
@@ -190,22 +190,22 @@ void FSFloaterPerformance::resetMaxArtSlider()
 
 void FSFloaterPerformance::savePreset()
 {
-	LLFloaterReg::showInstance("save_pref_preset", "graphic" );
+    LLFloaterReg::showInstance("save_pref_preset", "graphic" );
 }
 
 void FSFloaterPerformance::loadPreset()
 {
-	LLFloaterReg::showInstance("load_pref_preset", "graphic");
+    LLFloaterReg::showInstance("load_pref_preset", "graphic");
     resetMaxArtSlider();
 }
 
 void FSFloaterPerformance::setHardwareDefaults()
 {
-	LLFeatureManager::getInstance()->applyRecommendedSettings();
-	// reset indirects before refresh because we may have changed what they control
-	LLAvatarComplexityControls::setIndirectControls(); 
-	gSavedSettings.setString("PresetGraphicActive", "");
-	LLPresetsManager::getInstance()->triggerChangeSignal();
+    LLFeatureManager::getInstance()->applyRecommendedSettings();
+    // reset indirects before refresh because we may have changed what they control
+    LLAvatarComplexityControls::setIndirectControls(); 
+    gSavedSettings.setString("PresetGraphicActive", "");
+    LLPresetsManager::getInstance()->triggerChangeSignal();
     resetMaxArtSlider();
 }
 
@@ -808,9 +808,9 @@ void FSFloaterPerformance::detachItem(const LLUUID& item_id)
 
 void FSFloaterPerformance::onChangeQuality(const LLSD& data)
 {
-	U32 level = (U32)(data.asReal());
-	LLFeatureManager::getInstance()->setGraphicsLevel(level, true);
-	refresh();
+    U32 level = (U32)(data.asReal());
+    LLFeatureManager::getInstance()->setGraphicsLevel(level, true);
+    refresh();
 }
 
 void FSFloaterPerformance::onClickHideAvatars()
@@ -1096,7 +1096,7 @@ void FSFloaterPerformance::onExtendedAction(const LLSD& userdata, const LLUUID& 
         // *TODO: Re-enable joystick flycam if we disabled it earlier...  Have to find some form of callback as re-enabling at this point causes the camera motion to not happen. ~Cron
         //if (fly_cam_status)
         //{
-        //	LLViewerJoystick::getInstance()->toggleFlycam();
+        //  LLViewerJoystick::getInstance()->toggleFlycam();
         //}
     }
 }

@@ -95,8 +95,8 @@ private:
 
     S32 mNearbyMaxComplexity;
 
-    boost::signals2::connection	mComplexityChangedSignal;
-    boost::signals2::connection	mMaxARTChangedSignal;
+    boost::signals2::connection mComplexityChangedSignal;
+    boost::signals2::connection mMaxARTChangedSignal;
 };
 
 #endif // FS_FLOATERPERFORMANCE_H

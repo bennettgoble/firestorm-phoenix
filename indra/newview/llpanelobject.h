@@ -48,29 +48,29 @@ class LLUUID;
 class LLPanelObject : public LLPanel
 {
 public:
-	LLPanelObject();
-	virtual ~LLPanelObject();
+    LLPanelObject();
+    virtual ~LLPanelObject();
 
-	virtual BOOL	postBuild();
-	virtual void	draw();
-	virtual void 	clearCtrls();
+    virtual BOOL    postBuild();
+    virtual void    draw();
+    virtual void    clearCtrls();
 
-	void			changePrecision(S32 decimal_precision);	// <FS:CR> Adjustable decimal precision
-	void 			updateLimits(BOOL attachment);// <AW: opensim-limits>
-	void			refresh();
+    void            changePrecision(S32 decimal_precision); // <FS:CR> Adjustable decimal precision
+    void            updateLimits(BOOL attachment);// <AW: opensim-limits>
+    void            refresh();
 
-	static bool		precommitValidate(const LLSD& data);
-	
-	static void		onCommitLock(LLUICtrl *ctrl, void *data);
-	static void 	onCommitPosition(		LLUICtrl* ctrl, void* userdata);
-	static void 	onCommitScale(			LLUICtrl* ctrl, void* userdata);
-	static void 	onCommitRotation(		LLUICtrl* ctrl, void* userdata);
-	static void 	onCommitTemporary(		LLUICtrl* ctrl, void* userdata);
-	static void 	onCommitPhantom(		LLUICtrl* ctrl, void* userdata);
-	static void 	onCommitPhysics(		LLUICtrl* ctrl, void* userdata);
-	//<FS:Beq> FIRE-21445 - Display specific LOD
-	void			onCommitLOD();
-	//</FS:Beq>
+    static bool     precommitValidate(const LLSD& data);
+    
+    static void     onCommitLock(LLUICtrl *ctrl, void *data);
+    static void     onCommitPosition(       LLUICtrl* ctrl, void* userdata);
+    static void     onCommitScale(          LLUICtrl* ctrl, void* userdata);
+    static void     onCommitRotation(       LLUICtrl* ctrl, void* userdata);
+    static void     onCommitTemporary(      LLUICtrl* ctrl, void* userdata);
+    static void     onCommitPhantom(        LLUICtrl* ctrl, void* userdata);
+    static void     onCommitPhysics(        LLUICtrl* ctrl, void* userdata);
+    //<FS:Beq> FIRE-21445 - Display specific LOD
+    void            onCommitLOD();
+    //</FS:Beq>
 
     void            onCopyPos();
     void            onPastePos();
@@ -86,14 +86,14 @@ public:
     void            onPasteRotClip();
     // </FS>
 
-	static void 	onCommitParametric(LLUICtrl* ctrl, void* userdata);
+    static void     onCommitParametric(LLUICtrl* ctrl, void* userdata);
 
 
-	void     		onCommitSculpt(const LLSD& data);
-	void     		onCancelSculpt(const LLSD& data);
-	void     		onSelectSculpt(const LLSD& data);
-	BOOL     		onDropSculpt(LLInventoryItem* item);
-	static void     onCommitSculptType(    LLUICtrl *ctrl, void* userdata);
+    void            onCommitSculpt(const LLSD& data);
+    void            onCancelSculpt(const LLSD& data);
+    void            onSelectSculpt(const LLSD& data);
+    BOOL            onDropSculpt(LLInventoryItem* item);
+    static void     onCommitSculptType(    LLUICtrl *ctrl, void* userdata);
 
     // <FS> Extended copy & paste buttons
     //void            menuDoToSelected(const LLSD& userdata);
@@ -101,100 +101,100 @@ public:
     // </FS>
 
 protected:
-	void			getState();
-	//<FS:Beq> FIRE-21445 + Mesh Info in object panel
-	void			deactivateStandardFields();
-	void			activateMeshFields(LLViewerObject * objectp);
-	void			setLODDistValues(LLTextBox * tb, F32 factor, F32 dmid, F32 dlow, F32 dlowest);
-	void			deactivateMeshFields();
-	//</FS:Beq>
-	void			sendRotation(BOOL btn_down);
-	void			sendScale(BOOL btn_down);
-	void			sendPosition(BOOL btn_down);
-	void			sendIsPhysical();
-	void			sendIsTemporary();
-	void			sendIsPhantom();
+    void            getState();
+    //<FS:Beq> FIRE-21445 + Mesh Info in object panel
+    void            deactivateStandardFields();
+    void            activateMeshFields(LLViewerObject * objectp);
+    void            setLODDistValues(LLTextBox * tb, F32 factor, F32 dmid, F32 dlow, F32 dlowest);
+    void            deactivateMeshFields();
+    //</FS:Beq>
+    void            sendRotation(BOOL btn_down);
+    void            sendScale(BOOL btn_down);
+    void            sendPosition(BOOL btn_down);
+    void            sendIsPhysical();
+    void            sendIsTemporary();
+    void            sendIsPhantom();
 
-	void            sendSculpt();
-	
-	void 			getVolumeParams(LLVolumeParams& volume_params);
-	
+    void            sendSculpt();
+    
+    void            getVolumeParams(LLVolumeParams& volume_params);
+    
 protected:
-	S32				mComboMaterialItemCount;
+    S32             mComboMaterialItemCount;
 
-	LLComboBox*		mComboMaterial;
-	
-	// Per-object options
-	LLComboBox*		mComboBaseType;
+    LLComboBox*     mComboMaterial;
+    
+    // Per-object options
+    LLComboBox*     mComboBaseType;
 
-	//LLMenuButton*	mMenuClipboardParams; // <FS> Extended copy & paste buttons
+    //LLMenuButton* mMenuClipboardParams; // <FS> Extended copy & paste buttons
 
-	LLComboBox*		mComboLOD;
+    LLComboBox*     mComboLOD;
 
-	LLTextBox*		mLabelCut;
-	LLSpinCtrl*		mSpinCutBegin;
-	LLSpinCtrl*		mSpinCutEnd;
+    LLTextBox*      mLabelCut;
+    LLSpinCtrl*     mSpinCutBegin;
+    LLSpinCtrl*     mSpinCutEnd;
 // <AW: opensim-limits>
-	F32			mRegionMaxHeight;
+    F32         mRegionMaxHeight;
 
-	F32			mMinScale;
-	F32			mMaxScale;
+    F32         mMinScale;
+    F32         mMaxScale;
 
-	F32			mMaxHollowSize;
+    F32         mMaxHollowSize;
 // </AW: opensim-limits>
-	LLTextBox*		mLabelHollow;
-	LLSpinCtrl*		mSpinHollow;
+    LLTextBox*      mLabelHollow;
+    LLSpinCtrl*     mSpinHollow;
 
-	F32			mMinHoleSize;// <AW: opensim-limits>
-	LLTextBox*		mLabelHoleType;
-	LLComboBox*		mComboHoleType;
+    F32         mMinHoleSize;// <AW: opensim-limits>
+    LLTextBox*      mLabelHoleType;
+    LLComboBox*     mComboHoleType;
 
-	LLTextBox*		mLabelTwist;
-	LLSpinCtrl*		mSpinTwist;
-	LLSpinCtrl*		mSpinTwistBegin;
+    LLTextBox*      mLabelTwist;
+    LLSpinCtrl*     mSpinTwist;
+    LLSpinCtrl*     mSpinTwistBegin;
 
-	LLSpinCtrl*		mSpinScaleX;
-	LLSpinCtrl*		mSpinScaleY;
-	
-	LLTextBox*		mLabelSkew;
-	LLSpinCtrl*		mSpinSkew;
+    LLSpinCtrl*     mSpinScaleX;
+    LLSpinCtrl*     mSpinScaleY;
+    
+    LLTextBox*      mLabelSkew;
+    LLSpinCtrl*     mSpinSkew;
 
-	LLTextBox*		mLabelShear;
-	LLSpinCtrl*		mSpinShearX;
-	LLSpinCtrl*		mSpinShearY;
+    LLTextBox*      mLabelShear;
+    LLSpinCtrl*     mSpinShearX;
+    LLSpinCtrl*     mSpinShearY;
 
-	// Advanced Path
-	LLSpinCtrl*		mCtrlPathBegin;
-	LLSpinCtrl*		mCtrlPathEnd;
+    // Advanced Path
+    LLSpinCtrl*     mCtrlPathBegin;
+    LLSpinCtrl*     mCtrlPathEnd;
 
-	LLTextBox*		mLabelTaper;
-	LLSpinCtrl*		mSpinTaperX;
-	LLSpinCtrl*		mSpinTaperY;
+    LLTextBox*      mLabelTaper;
+    LLSpinCtrl*     mSpinTaperX;
+    LLSpinCtrl*     mSpinTaperY;
 
-	LLTextBox*		mLabelRadiusOffset;
-	LLSpinCtrl*		mSpinRadiusOffset;
+    LLTextBox*      mLabelRadiusOffset;
+    LLSpinCtrl*     mSpinRadiusOffset;
 
-	LLTextBox*		mLabelRevolutions;
-	LLSpinCtrl*		mSpinRevolutions;
+    LLTextBox*      mLabelRevolutions;
+    LLSpinCtrl*     mSpinRevolutions;
 
-	//LLMenuButton*   mMenuClipboardPos; // <FS> Extended copy & paste buttons
-	LLTextBox*		mLabelPosition;
-	LLSpinCtrl*		mCtrlPosX;
-	LLSpinCtrl*		mCtrlPosY;
-	LLSpinCtrl*		mCtrlPosZ;
+    //LLMenuButton*   mMenuClipboardPos; // <FS> Extended copy & paste buttons
+    LLTextBox*      mLabelPosition;
+    LLSpinCtrl*     mCtrlPosX;
+    LLSpinCtrl*     mCtrlPosY;
+    LLSpinCtrl*     mCtrlPosZ;
 
-	//LLMenuButton*   mMenuClipboardSize; // <FS> Extended copy & paste buttons
-	LLTextBox*		mLabelSize;
-	LLSpinCtrl*		mCtrlScaleX;
-	LLSpinCtrl*		mCtrlScaleY;
-	LLSpinCtrl*		mCtrlScaleZ;
-	BOOL			mSizeChanged;
+    //LLMenuButton*   mMenuClipboardSize; // <FS> Extended copy & paste buttons
+    LLTextBox*      mLabelSize;
+    LLSpinCtrl*     mCtrlScaleX;
+    LLSpinCtrl*     mCtrlScaleY;
+    LLSpinCtrl*     mCtrlScaleZ;
+    BOOL            mSizeChanged;
 
-	//LLMenuButton*   mMenuClipboardRot; // <FS> Extended copy & paste buttons
-	LLTextBox*		mLabelRotation;
-	LLSpinCtrl*		mCtrlRotX;
-	LLSpinCtrl*		mCtrlRotY;
-	LLSpinCtrl*		mCtrlRotZ;
+    //LLMenuButton*   mMenuClipboardRot; // <FS> Extended copy & paste buttons
+    LLTextBox*      mLabelRotation;
+    LLSpinCtrl*     mCtrlRotX;
+    LLSpinCtrl*     mCtrlRotY;
+    LLSpinCtrl*     mCtrlRotZ;
 
     LLButton        *mBtnCopyPos;
     LLButton        *mBtnPastePos;
@@ -211,25 +211,25 @@ protected:
     LLButton        *mBtnPasteRotClip;
     // </FS>
 
-	LLCheckBoxCtrl	*mCheckLock;
-	LLCheckBoxCtrl	*mCheckPhysics;
-	LLCheckBoxCtrl	*mCheckTemporary;
-	LLCheckBoxCtrl	*mCheckPhantom;
+    LLCheckBoxCtrl  *mCheckLock;
+    LLCheckBoxCtrl  *mCheckPhysics;
+    LLCheckBoxCtrl  *mCheckTemporary;
+    LLCheckBoxCtrl  *mCheckPhantom;
 
-	LLTextureCtrl   *mCtrlSculptTexture;
-	LLTextBox       *mLabelSculptType;
-	LLComboBox      *mCtrlSculptType;
-	LLCheckBoxCtrl  *mCtrlSculptMirror;
-	LLCheckBoxCtrl  *mCtrlSculptInvert;
+    LLTextureCtrl   *mCtrlSculptTexture;
+    LLTextBox       *mLabelSculptType;
+    LLComboBox      *mCtrlSculptType;
+    LLCheckBoxCtrl  *mCtrlSculptMirror;
+    LLCheckBoxCtrl  *mCtrlSculptInvert;
 
-	LLVector3		mCurEulerDegrees;		// to avoid sending rotation when not changed
-	BOOL			mIsPhysical;			// to avoid sending "physical" when not changed
-	BOOL			mIsTemporary;			// to avoid sending "temporary" when not changed
-	BOOL			mIsPhantom;				// to avoid sending "phantom" when not changed
-	S32				mSelectedType;			// So we know what selected type we last were
+    LLVector3       mCurEulerDegrees;       // to avoid sending rotation when not changed
+    BOOL            mIsPhysical;            // to avoid sending "physical" when not changed
+    BOOL            mIsTemporary;           // to avoid sending "temporary" when not changed
+    BOOL            mIsPhantom;             // to avoid sending "phantom" when not changed
+    S32             mSelectedType;          // So we know what selected type we last were
 
-	LLUUID          mSculptTextureRevert;   // so we can revert the sculpt texture on cancel
-	U8              mSculptTypeRevert;      // so we can revert the sculpt type on cancel
+    LLUUID          mSculptTextureRevert;   // so we can revert the sculpt texture on cancel
+    U8              mSculptTypeRevert;      // so we can revert the sculpt type on cancel
 
     LLVector3       mClipboardPos;
     LLVector3           mClipboardSize;
@@ -240,8 +240,8 @@ protected:
     bool            mHasClipboardSize;
     bool            mHasClipboardRot;
 
-	LLPointer<LLViewerObject> mObject;
-	LLPointer<LLViewerObject> mRootObject;
+    LLPointer<LLViewerObject> mObject;
+    LLPointer<LLViewerObject> mRootObject;
 };
 
 #endif

@@ -44,17 +44,17 @@
 class GrowlNotifierWin : public GrowlNotifier
 {
 public:
-	GrowlNotifierWin();
-	virtual ~GrowlNotifierWin();
+    GrowlNotifierWin();
+    virtual ~GrowlNotifierWin();
 
-	void showNotification(const std::string& notification_title, const std::string& notification_message, const std::string& notification_type);
-	bool isUsable();
-	void registerApplication(const std::string& application, const std::set<std::string>& notificationTypes);
+    void showNotification(const std::string& notification_title, const std::string& notification_message, const std::string& notification_type);
+    bool isUsable();
+    void registerApplication(const std::string& application, const std::set<std::string>& notificationTypes);
 
 private:
-	std::string mApplicationName;
+    std::string mApplicationName;
 #ifdef HAS_GROWL
-	Growl* mGrowlImpl;
+    Growl* mGrowlImpl;
 #endif
 };
 

@@ -31,16 +31,16 @@
 #include "llfloater.h"
 
 class FSFloaterVolumeControls
-:	public LLFloater
+:   public LLFloater
 {
 public:
-	FSFloaterVolumeControls(const LLSD& key);
-	BOOL postBuild();
+    FSFloaterVolumeControls(const LLSD& key);
+    BOOL postBuild();
 
 private:
-	~FSFloaterVolumeControls();
-	
-	/*virtual*/ void onVisibilityChange(BOOL new_visibility);
+    ~FSFloaterVolumeControls();
+    
+    /*virtual*/ void onVisibilityChange(BOOL new_visibility);
 };
 
 #endif // FS_FLOATERVOLUMECONTROLS_H

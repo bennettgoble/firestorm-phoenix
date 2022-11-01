@@ -33,22 +33,22 @@
 class FSBlockListMenu : public LLListContextMenu
 {
 public:
-	FSBlockListMenu()
-		: LLListContextMenu(),
-		mSpawningCtrl(NULL)
-	{ }
-	virtual ~FSBlockListMenu() { };
+    FSBlockListMenu()
+        : LLListContextMenu(),
+        mSpawningCtrl(NULL)
+    { }
+    virtual ~FSBlockListMenu() { };
 
-	/*virtual*/ LLContextMenu* createMenu();
-	/*virtual*/ void show(LLView* spawning_view, const uuid_vec_t& uuids, S32 x, S32 y);
+    /*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ void show(LLView* spawning_view, const uuid_vec_t& uuids, S32 x, S32 y);
 
 private:
-	void onContextMenuItemClick(const LLSD& userdata);
-	bool onContextMenuItemCheck(const LLSD& userdata);
-	bool onContextMenuItemEnable(const LLSD& userdata);
-	bool onContextMenuItemVisible(const LLSD& userdata);
+    void onContextMenuItemClick(const LLSD& userdata);
+    bool onContextMenuItemCheck(const LLSD& userdata);
+    bool onContextMenuItemEnable(const LLSD& userdata);
+    bool onContextMenuItemVisible(const LLSD& userdata);
 
-	LLView* mSpawningCtrl;
+    LLView* mSpawningCtrl;
 };
 
 extern FSBlockListMenu gFSBlockListMenu;

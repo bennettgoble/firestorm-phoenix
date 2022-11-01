@@ -35,46 +35,46 @@
 // </FS:CR>
 #include "llpanel.h"
 #include "llparcelselection.h"
-#include "lluifwd.h"	// widget pointer types
+#include "lluifwd.h"    // widget pointer types
 
 class LLPanelLandAudio
-	:	public LLPanel
+    :   public LLPanel
 {
 public:
-	LLPanelLandAudio(LLSafeHandle<LLParcelSelection>& parcelp);
-	/*virtual*/ ~LLPanelLandAudio();
-	/*virtual*/ BOOL postBuild();
-	void refresh();
+    LLPanelLandAudio(LLSafeHandle<LLParcelSelection>& parcelp);
+    /*virtual*/ ~LLPanelLandAudio();
+    /*virtual*/ BOOL postBuild();
+    void refresh();
 
 private:
-	static void onCommitAny(LLUICtrl* ctrl, void *userdata);
+    static void onCommitAny(LLUICtrl* ctrl, void *userdata);
 // <FS:CR> FIRE-593 - Add/remove streams from the list
-	void onBtnStreamAdd();
-	void onBtnStreamDelete();
-	void onBtnCopyToClipboard();
+    void onBtnStreamAdd();
+    void onBtnStreamDelete();
+    void onBtnCopyToClipboard();
 // </FS:CR>
 
 private:
-	LLCheckBoxCtrl* mCheckSoundLocal;
-	LLCheckBoxCtrl* mCheckParcelEnableVoice;
-	LLCheckBoxCtrl* mCheckEstateDisabledVoice;
-	LLCheckBoxCtrl* mCheckParcelVoiceLocal;
+    LLCheckBoxCtrl* mCheckSoundLocal;
+    LLCheckBoxCtrl* mCheckParcelEnableVoice;
+    LLCheckBoxCtrl* mCheckEstateDisabledVoice;
+    LLCheckBoxCtrl* mCheckParcelVoiceLocal;
 // <FS:CR> FIRE-593 - Use a combobox, also add buttons so we can add/remove items from it.
-	//LLLineEditor*	mMusicURLEdit;
-	LLComboBox*	mMusicURLEdit;
-	LLButton* mBtnStreamAdd;
-	LLButton* mBtnStreamDelete;
-	LLButton* mBtnStreamCopyToClipboard;
+    //LLLineEditor* mMusicURLEdit;
+    LLComboBox* mMusicURLEdit;
+    LLButton* mBtnStreamAdd;
+    LLButton* mBtnStreamDelete;
+    LLButton* mBtnStreamCopyToClipboard;
 // </FS:CR>
-	LLCheckBoxCtrl* mCheckAVSoundAny;
-	LLCheckBoxCtrl* mCheckAVSoundGroup;
+    LLCheckBoxCtrl* mCheckAVSoundAny;
+    LLCheckBoxCtrl* mCheckAVSoundGroup;
     LLCheckBoxCtrl* mCheckObscureMOAP;
 
-	LLSafeHandle<LLParcelSelection>&	mParcel;
+    LLSafeHandle<LLParcelSelection>&    mParcel;
 
-	// <FS:Testy> FIRE-29157 - Remove invalid URLs that were rejected by the server
-	std::string mLastSetURL;
-	// </FS:Testy>
+    // <FS:Testy> FIRE-29157 - Remove invalid URLs that were rejected by the server
+    std::string mLastSetURL;
+    // </FS:Testy>
 };
 
 #endif

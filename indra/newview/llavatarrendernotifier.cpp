@@ -114,20 +114,20 @@ void LLAvatarRenderNotifier::displayNotification(bool show_over_limit)
 {
     mAgentComplexity = mLatestAgentComplexity;
     mShowOverLimitAgents = show_over_limit;
-	static LLCachedControl<U32> expire_delay(gSavedSettings, "ShowMyComplexityChanges", 20);
+    static LLCachedControl<U32> expire_delay(gSavedSettings, "ShowMyComplexityChanges", 20);
 
-	LLDate expire_date(LLDate::now().secondsSinceEpoch() + expire_delay);
-	LLSD args;
-	// <FS:Ansariel> FIRE-19958: Add digit group separators to avatar complexity notification
-	//args["AGENT_COMPLEXITY"] = LLSD::Integer(mLatestAgentComplexity);
-	{
-		LLLocale locale("");
-		std::string complexity_string;
-		LLResMgr::getInstance()->getIntegerString(complexity_string, mLatestAgentComplexity);
-		args["AGENT_COMPLEXITY"] = complexity_string;
-	}
-	// </FS:Ansariel>
-	std::string notification_name;
+    LLDate expire_date(LLDate::now().secondsSinceEpoch() + expire_delay);
+    LLSD args;
+    // <FS:Ansariel> FIRE-19958: Add digit group separators to avatar complexity notification
+    //args["AGENT_COMPLEXITY"] = LLSD::Integer(mLatestAgentComplexity);
+    {
+        LLLocale locale("");
+        std::string complexity_string;
+        LLResMgr::getInstance()->getIntegerString(complexity_string, mLatestAgentComplexity);
+        args["AGENT_COMPLEXITY"] = complexity_string;
+    }
+    // </FS:Ansariel>
+    std::string notification_name;
     if (mShowOverLimitAgents)
     {
         notification_name = "AgentComplexityWithVisibility";
@@ -137,19 +137,19 @@ void LLAvatarRenderNotifier::displayNotification(bool show_over_limit)
         mAgentsCount = mLatestAgentsCount;
         mOverLimitAgents = mLatestOverLimitAgents;
         mOverLimitPct = mLatestOverLimitPct;
-	}
-	else
-	{
+    }
+    else
+    {
         // no change in visibility, just update complexity
         notification_name = "AgentComplexity";
-	}
+    }
 
-	if (mNotificationPtr != NULL && mNotificationPtr->getName() != notification_name)
-	{
-		// since unique tag works only for same notification,
-		// old notification needs to be canceled manually
-		LLNotifications::instance().cancel(mNotificationPtr);
-	}
+    if (mNotificationPtr != NULL && mNotificationPtr->getName() != notification_name)
+    {
+        // since unique tag works only for same notification,
+        // old notification needs to be canceled manually
+        LLNotifications::instance().cancel(mNotificationPtr);
+    }
 
     // log unconditionally
     LL_DEBUGS("AvatarRenderInfo") << notification_name << " " << args << LL_ENDL;
@@ -167,21 +167,21 @@ void LLAvatarRenderNotifier::displayNotification(bool show_over_limit)
 
 bool LLAvatarRenderNotifier::isNotificationVisible()
 {
-	return mNotificationPtr != NULL && mNotificationPtr->isActive();
+    return mNotificationPtr != NULL && mNotificationPtr->isActive();
 }
 
 void LLAvatarRenderNotifier::updateNotificationRegion(U32 agentcount, U32 overLimit)
 {
-	if (agentcount == 0)
-	{
-		// Data not ready
-		return;
-	}
+    if (agentcount == 0)
+    {
+        // Data not ready
+        return;
+    }
 
-	// save current values for later use
-	mLatestAgentsCount = agentcount > overLimit ? agentcount - 1 : agentcount; // subtract self
-	mLatestOverLimitAgents = overLimit;
-	mLatestOverLimitPct = mLatestAgentsCount != 0 ? ((F32)overLimit / (F32)mLatestAgentsCount) * 100.0 : 0;
+    // save current values for later use
+    mLatestAgentsCount = agentcount > overLimit ? agentcount - 1 : agentcount; // subtract self
+    mLatestOverLimitAgents = overLimit;
+    mLatestOverLimitPct = mLatestAgentsCount != 0 ? ((F32)overLimit / (F32)mLatestAgentsCount) * 100.0 : 0;
 
     if (mAgentsCount == mLatestAgentsCount
         && mOverLimitAgents == mLatestOverLimitAgents)

@@ -57,10 +57,10 @@ namespace FSPerfStats
 
     Tunables tunables;
 
-    std::atomic<int> 	StatsRecorder::writeBuffer{0};
-    bool 	            StatsRecorder::collectionEnabled{true};
+    std::atomic<int>    StatsRecorder::writeBuffer{0};
+    bool                StatsRecorder::collectionEnabled{true};
     LLUUID              StatsRecorder::focusAv{LLUUID::null};
-	std::array<StatsRecorder::StatsTypeMatrix,2>  StatsRecorder::statsDoubleBuffer{ {} };
+    std::array<StatsRecorder::StatsTypeMatrix,2>  StatsRecorder::statsDoubleBuffer{ {} };
     std::array<StatsRecorder::StatsSummaryArray,2> StatsRecorder::max{ {} };
     std::array<StatsRecorder::StatsSummaryArray,2> StatsRecorder::sum{ {} };
 
@@ -88,15 +88,15 @@ namespace FSPerfStats
     void Tunables::updateRenderCostLimitFromSettings()
     {
         assert_main_thread();
-	    const auto newval = gSavedSettings.getF32("FSRenderAvatarMaxART");
-	    if(newval < log10(FSPerfStats::ART_UNLIMITED_NANOS/1000))
-	    {
-    		FSPerfStats::renderAvatarMaxART_ns = pow(10,newval)*1000;
-    	}
-    	else
-    	{
-		    FSPerfStats::renderAvatarMaxART_ns = 0;
-	    };        
+        const auto newval = gSavedSettings.getF32("FSRenderAvatarMaxART");
+        if(newval < log10(FSPerfStats::ART_UNLIMITED_NANOS/1000))
+        {
+            FSPerfStats::renderAvatarMaxART_ns = pow(10,newval)*1000;
+        }
+        else
+        {
+            FSPerfStats::renderAvatarMaxART_ns = 0;
+        };        
     }
 
     // static 
@@ -301,11 +301,11 @@ namespace FSPerfStats
     {
         const auto our_pos = gAgentCamera.getCameraPositionGlobal();
 
-       	std::vector<LLVector3d> positions;
-	    uuid_vec_t avatar_ids;
+        std::vector<LLVector3d> positions;
+        uuid_vec_t avatar_ids;
         LLWorld::getInstance()->getAvatars(&avatar_ids, &positions, our_pos, distance);
         return positions.size();
-	}
+    }
 
     // static
     void StatsRecorder::updateAvatarParams()

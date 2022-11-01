@@ -39,73 +39,73 @@ class LLViewerTexture;
 class LLTextBox;
 
 class LLProgressView : 
-	public LLPanel,
-	public LLViewerMediaObserver
+    public LLPanel,
+    public LLViewerMediaObserver
 
 {
-	LOG_CLASS(LLProgressView);
+    LOG_CLASS(LLProgressView);
 
 public:
-	LLProgressView();
-	virtual ~LLProgressView();
-	
-	BOOL postBuild();
+    LLProgressView();
+    virtual ~LLProgressView();
+    
+    BOOL postBuild();
 
-	/*virtual*/ void draw();
-	void drawStartTexture(F32 alpha);
-	void drawLogos(F32 alpha);
+    /*virtual*/ void draw();
+    void drawStartTexture(F32 alpha);
+    void drawLogos(F32 alpha);
 
-	/*virtual*/ BOOL handleHover(S32 x, S32 y, MASK mask);
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ void setVisible(BOOL visible);
+    /*virtual*/ BOOL handleHover(S32 x, S32 y, MASK mask);
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ void setVisible(BOOL visible);
 
-	// inherited from LLViewerMediaObserver
-	/*virtual*/ void handleMediaEvent(LLPluginClassMedia* self, EMediaEvent event);
+    // inherited from LLViewerMediaObserver
+    /*virtual*/ void handleMediaEvent(LLPluginClassMedia* self, EMediaEvent event);
 
-	void setText(const std::string& text);
-	void setPercent(const F32 percent);
+    void setText(const std::string& text);
+    void setPercent(const F32 percent);
 
-	// Set it to NULL when you want to eliminate the message.
-	void setMessage(const std::string& msg);
-	
-	// turns on (under certain circumstances) the into video after login
-	void revealIntroPanel();
+    // Set it to NULL when you want to eliminate the message.
+    void setMessage(const std::string& msg);
+    
+    // turns on (under certain circumstances) the into video after login
+    void revealIntroPanel();
 
-	void fade(BOOL in);		// ## Zi: Fade teleport screens
+    void fade(BOOL in);     // ## Zi: Fade teleport screens
 
-	void setStartupComplete();
+    void setStartupComplete();
 
-	// we have to preload local textures to make sure they won't be grey
-	void initTextures(S32 location_id, bool is_in_production);
-	void releaseTextures();
+    // we have to preload local textures to make sure they won't be grey
+    void initTextures(S32 location_id, bool is_in_production);
+    void releaseTextures();
 
-	void setCancelButtonVisible(BOOL b, const std::string& label);
+    void setCancelButtonVisible(BOOL b, const std::string& label);
 
-	static void onCancelButtonClicked( void* );
-	static void onClickMessage(void*);
-	bool onAlertModal(const LLSD& sd);
+    static void onCancelButtonClicked( void* );
+    static void onClickMessage(void*);
+    bool onAlertModal(const LLSD& sd);
 
 protected:
-	LLProgressBar* mProgressBar;
-	LLTextBox* mProgressText;
-	LLTextBox* mMessageText;
-	LLMediaCtrl* mMediaCtrl;
-	F32 mPercentDone;
-	std::string mMessage;
-	LLButton*	mCancelBtn;
-	LLFrameTimer mFadeToWorldTimer;
-	LLFrameTimer mFadeFromLoginTimer;
-	LLRect mOutlineRect;
-	bool mMouseDownInActiveArea;
-	bool mStartupComplete;
+    LLProgressBar* mProgressBar;
+    LLTextBox* mProgressText;
+    LLTextBox* mMessageText;
+    LLMediaCtrl* mMediaCtrl;
+    F32 mPercentDone;
+    std::string mMessage;
+    LLButton*   mCancelBtn;
+    LLFrameTimer mFadeToWorldTimer;
+    LLFrameTimer mFadeFromLoginTimer;
+    LLRect mOutlineRect;
+    bool mMouseDownInActiveArea;
+    bool mStartupComplete;
 
-	// The LLEventStream mUpdateEvents depends upon this class being a singleton
-	// to avoid pump name conflicts.
-	static LLProgressView* sInstance;
-	LLEventStream mUpdateEvents; 
+    // The LLEventStream mUpdateEvents depends upon this class being a singleton
+    // to avoid pump name conflicts.
+    static LLProgressView* sInstance;
+    LLEventStream mUpdateEvents; 
 
-	bool handleUpdate(const LLSD& event_data);
-	static void onIdle(void* user_data);
+    bool handleUpdate(const LLSD& event_data);
+    static void onIdle(void* user_data);
     void loadLogo(const std::string &path, const U8 image_codec, const LLRect &pos_rect, const LLRectf &clip_rect, const LLRectf &offset_rect);
     // logos have unusual location and need to be preloaded to not appear grey, then deleted
     void initLogos();
@@ -128,24 +128,24 @@ private:
 };
 
 class LLProgressViewMini : 
-	public LLPanel
+    public LLPanel
 {
-	public:
-		LLProgressViewMini();
+    public:
+        LLProgressViewMini();
 
-		BOOL postBuild();
-		void setText(const std::string& text);
-		void setPercent(const F32 percent);
-		void setCancelButtonVisible(BOOL b, const std::string& label);
+        BOOL postBuild();
+        void setText(const std::string& text);
+        void setPercent(const F32 percent);
+        void setCancelButtonVisible(BOOL b, const std::string& label);
 
-		static void onCancelButtonClicked(void* dummy);
+        static void onCancelButtonClicked(void* dummy);
 
-	protected:
-		static LLProgressViewMini* sInstance;
+    protected:
+        static LLProgressViewMini* sInstance;
 
-		LLProgressBar* mProgressBar;
-		LLButton* mCancelBtn;
-		LLTextBox* mProgressText;
+        LLProgressBar* mProgressBar;
+        LLButton* mCancelBtn;
+        LLTextBox* mProgressText;
 };
 
 #endif // LL_LLPROGRESSVIEW_H

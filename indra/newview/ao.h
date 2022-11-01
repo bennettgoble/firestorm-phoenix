@@ -41,119 +41,119 @@ class LLSpinCtrl;
 class LLTextBox;
 
 class FloaterAO
-:	public LLTransientDockableFloater,
-	public LLEventTimer
+:   public LLTransientDockableFloater,
+    public LLEventTimer
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 
-	private:
-		FloaterAO(const LLSD& key);
-		~FloaterAO();
+    private:
+        FloaterAO(const LLSD& key);
+        ~FloaterAO();
 
-	public:
-		/*virtual*/ BOOL postBuild();
-		virtual void onOpen(const LLSD& key);
-		virtual void onClose(bool app_quitting);
-		void updateList();
-		void updateSetParameters();
-		void updateAnimationList();
+    public:
+        /*virtual*/ BOOL postBuild();
+        virtual void onOpen(const LLSD& key);
+        virtual void onClose(bool app_quitting);
+        void updateList();
+        void updateSetParameters();
+        void updateAnimationList();
 
-		BOOL handleDragAndDrop(S32 x, S32 y, MASK mask, BOOL drop, EDragAndDropType cargo_type, void* cargo_data,
-								  EAcceptance* accept, std::string& tooltip_msg);
+        BOOL handleDragAndDrop(S32 x, S32 y, MASK mask, BOOL drop, EDragAndDropType cargo_type, void* cargo_data,
+                                  EAcceptance* accept, std::string& tooltip_msg);
 
-	protected:
-		LLScrollListItem* addAnimation(const std::string& name);
+    protected:
+        LLScrollListItem* addAnimation(const std::string& name);
 
-		void onSelectSet();
-		void onSelectSetSmall();
-		void onRenameSet();
-		void onSelectState();
-		void onChangeAnimationSelection();
-		void onClickReload();
-		void onClickAdd();
-		void onClickRemove();
-		void onClickActivate();
-		void onCheckDefault();
-		void onCheckOverrideSits();
-		void onCheckOverrideSitsSmall();
-		void onCheckSmart();
-		void onCheckDisableStands();
-		void onClickMoveUp();
-		void onClickMoveDown();
-		void onClickTrash();
-		void onCheckCycle();
-		void onCheckRandomize();
-		void onChangeCycleTime();
-		void onClickPrevious();
-		void onClickNext();
+        void onSelectSet();
+        void onSelectSetSmall();
+        void onRenameSet();
+        void onSelectState();
+        void onChangeAnimationSelection();
+        void onClickReload();
+        void onClickAdd();
+        void onClickRemove();
+        void onClickActivate();
+        void onCheckDefault();
+        void onCheckOverrideSits();
+        void onCheckOverrideSitsSmall();
+        void onCheckSmart();
+        void onCheckDisableStands();
+        void onClickMoveUp();
+        void onClickMoveDown();
+        void onClickTrash();
+        void onCheckCycle();
+        void onCheckRandomize();
+        void onChangeCycleTime();
+        void onClickPrevious();
+        void onClickNext();
 
-		void onClickMore();
-		void onClickLess();
+        void onClickMore();
+        void onClickLess();
 
-		void onAnimationChanged(const LLUUID& animation);
+        void onAnimationChanged(const LLUUID& animation);
 
-		void reloading(bool reload);
+        void reloading(bool reload);
 
-		void updateSmart();
-		void updateCycleParameters();
+        void updateSmart();
+        void updateCycleParameters();
 
-		void enableSetControls(BOOL enable);
-		void enableStateControls(BOOL enable);
+        void enableSetControls(BOOL enable);
+        void enableStateControls(BOOL enable);
 
-		bool newSetCallback(const LLSD& notification, const LLSD& response);
-		bool removeSetCallback(const LLSD& notification, const LLSD& response);
+        bool newSetCallback(const LLSD& notification, const LLSD& response);
+        bool removeSetCallback(const LLSD& notification, const LLSD& response);
 
-		virtual BOOL tick();
+        virtual BOOL tick();
 
-		std::vector<AOSet*> mSetList;
-		AOSet* mSelectedSet;
-		AOSet::AOState* mSelectedState;
+        std::vector<AOSet*> mSetList;
+        AOSet* mSelectedSet;
+        AOSet::AOState* mSelectedState;
 
-		LLPanel* mReloadCoverPanel;
+        LLPanel* mReloadCoverPanel;
 
-		// Full interface
+        // Full interface
 
-		LLPanel* mMainInterfacePanel;
+        LLPanel* mMainInterfacePanel;
 
-		LLComboBox* mSetSelector;
-		LLButton* mActivateSetButton;
-		LLButton* mAddButton;
-		LLButton* mRemoveButton;
-		LLCheckBoxCtrl* mDefaultCheckBox;
-		LLCheckBoxCtrl* mOverrideSitsCheckBox;
-		LLCheckBoxCtrl* mSmartCheckBox;
-		LLCheckBoxCtrl* mDisableMouselookCheckBox;
+        LLComboBox* mSetSelector;
+        LLButton* mActivateSetButton;
+        LLButton* mAddButton;
+        LLButton* mRemoveButton;
+        LLCheckBoxCtrl* mDefaultCheckBox;
+        LLCheckBoxCtrl* mOverrideSitsCheckBox;
+        LLCheckBoxCtrl* mSmartCheckBox;
+        LLCheckBoxCtrl* mDisableMouselookCheckBox;
 
-		LLComboBox* mStateSelector;
-		LLScrollListCtrl* mAnimationList;
-		LLScrollListItem* mCurrentBoldItem;
-		LLButton* mMoveUpButton;
-		LLButton* mMoveDownButton;
-		LLButton* mTrashButton;
-		LLCheckBoxCtrl* mCycleCheckBox;
-		LLCheckBoxCtrl* mRandomizeCheckBox;
-		LLTextBox* mCycleTimeTextLabel;
-		LLSpinCtrl* mCycleTimeSpinner;
+        LLComboBox* mStateSelector;
+        LLScrollListCtrl* mAnimationList;
+        LLScrollListItem* mCurrentBoldItem;
+        LLButton* mMoveUpButton;
+        LLButton* mMoveDownButton;
+        LLButton* mTrashButton;
+        LLCheckBoxCtrl* mCycleCheckBox;
+        LLCheckBoxCtrl* mRandomizeCheckBox;
+        LLTextBox* mCycleTimeTextLabel;
+        LLSpinCtrl* mCycleTimeSpinner;
 
-		LLButton* mReloadButton;
+        LLButton* mReloadButton;
 
-		LLButton* mPreviousButton;
-		LLButton* mNextButton;
-		LLButton* mLessButton;
+        LLButton* mPreviousButton;
+        LLButton* mNextButton;
+        LLButton* mLessButton;
 
-		// Small interface
+        // Small interface
 
-		LLPanel* mSmallInterfacePanel;
+        LLPanel* mSmallInterfacePanel;
 
-		LLComboBox* mSetSelectorSmall;
-		LLButton* mMoreButton;
-		LLButton* mPreviousButtonSmall;
-		LLButton* mNextButtonSmall;
-		LLCheckBoxCtrl* mOverrideSitsCheckBoxSmall;
+        LLComboBox* mSetSelectorSmall;
+        LLButton* mMoreButton;
+        LLButton* mPreviousButtonSmall;
+        LLButton* mNextButtonSmall;
+        LLCheckBoxCtrl* mOverrideSitsCheckBoxSmall;
 
-		bool mCanDragAndDrop;
-		bool mImportRunning;
-		bool mMore;
+        bool mCanDragAndDrop;
+        bool mImportRunning;
+        bool mMore;
 };
 
 #endif // AO_H

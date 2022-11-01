@@ -37,32 +37,32 @@ class LLScrollListCtrl;
 class FSFloaterProtectedFolders : public LLFloater
 {
 public:
-	FSFloaterProtectedFolders(const LLSD& key);
-	virtual ~FSFloaterProtectedFolders();
+    FSFloaterProtectedFolders(const LLSD& key);
+    virtual ~FSFloaterProtectedFolders();
 
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& info);
-	/*virtual*/ void draw();
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const { return true; }
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& info);
+    /*virtual*/ void draw();
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const { return true; }
 
 private:
-	void updateList();
+    void updateList();
 
-	void handleRemove();
-	void onFilterEdit(const std::string& search_string);
-	void onDoubleClick();
+    void handleRemove();
+    void onFilterEdit(const std::string& search_string);
+    void onDoubleClick();
 
-	bool mInitialized;
+    bool mInitialized;
 
-	std::string mFilterSubString;
-	std::string mFilterSubStringOrig;
+    std::string mFilterSubString;
+    std::string mFilterSubStringOrig;
 
-	boost::signals2::connection mProtectedCategoriesChangedCallbackConnection;
+    boost::signals2::connection mProtectedCategoriesChangedCallbackConnection;
 
-	LLScrollListCtrl*	mFolderList;
-	LLButton*			mRemoveFolderBtn;
-	LLFilterEditor*		mFilterEditor;
+    LLScrollListCtrl*   mFolderList;
+    LLButton*           mRemoveFolderBtn;
+    LLFilterEditor*     mFilterEditor;
 };
 
 #endif // FS_FLOATERPROTECTEDFOLDERS_H

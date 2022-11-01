@@ -33,50 +33,50 @@
 class LLScriptEditor : public LLTextEditor
 {
 public:
-	
-	struct Params : public LLInitParam::Block<Params, LLTextEditor::Params>
-	{
-		Optional<bool>		show_line_numbers;
-		
-		Params();
-	};
-	
-	virtual ~LLScriptEditor() {};
-	
-	// LLView override
-	virtual void	draw();
+    
+    struct Params : public LLInitParam::Block<Params, LLTextEditor::Params>
+    {
+        Optional<bool>      show_line_numbers;
+        
+        Params();
+    };
+    
+    virtual ~LLScriptEditor() {};
+    
+    // LLView override
+    virtual void    draw();
 
-	// <FS> Improved Home-key behavior
-	// LLTextBase override
-	virtual void	startOfLine();
-	
-	void	initKeywords();
-	void	loadKeywords();
-	/* virtual */ void	clearSegments();
-	LLKeywords::keyword_iterator_t keywordsBegin()	{ return mKeywords.begin(); }
-	LLKeywords::keyword_iterator_t keywordsEnd()	{ return mKeywords.end(); }
-	
-	// <FS:Ansariel> Re-add legacy format support
-	void	loadKeywords(const std::string& filename,
-						 const std::vector<std::string>& funcs,
-						 const std::vector<std::string>& tooltips,
-						 const LLColor3& func_color);
-	// </FS:Ansariel>
+    // <FS> Improved Home-key behavior
+    // LLTextBase override
+    virtual void    startOfLine();
+    
+    void    initKeywords();
+    void    loadKeywords();
+    /* virtual */ void  clearSegments();
+    LLKeywords::keyword_iterator_t keywordsBegin()  { return mKeywords.begin(); }
+    LLKeywords::keyword_iterator_t keywordsEnd()    { return mKeywords.end(); }
+    
+    // <FS:Ansariel> Re-add legacy format support
+    void    loadKeywords(const std::string& filename,
+                         const std::vector<std::string>& funcs,
+                         const std::vector<std::string>& tooltips,
+                         const LLColor3& func_color);
+    // </FS:Ansariel>
 
 protected:
-	friend class LLUICtrlFactory;
-	LLScriptEditor(const Params& p);
-	
+    friend class LLUICtrlFactory;
+    LLScriptEditor(const Params& p);
+    
 private:
-	void	drawLineNumbers();
-	/* virtual */ void	updateSegments();
-	/* virtual */ void	drawSelectionBackground();
-	// <FS:Ansariel> Doesn't exist
-	//void	loadKeywords(const std::string& filename_keywords,
-	//					 const std::string& filename_colors);
-	
-	LLKeywords	mKeywords;
-	bool		mShowLineNumbers;
+    void    drawLineNumbers();
+    /* virtual */ void  updateSegments();
+    /* virtual */ void  drawSelectionBackground();
+    // <FS:Ansariel> Doesn't exist
+    //void  loadKeywords(const std::string& filename_keywords,
+    //                   const std::string& filename_colors);
+    
+    LLKeywords  mKeywords;
+    bool        mShowLineNumbers;
 };
 
 #endif // LL_SCRIPTEDITOR_H

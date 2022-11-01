@@ -32,21 +32,21 @@
 class LLKeyboardHeadless : public LLKeyboard
 {
 public:
-	LLKeyboardHeadless();
-	/*virtual*/ ~LLKeyboardHeadless() {};
+    LLKeyboardHeadless();
+    /*virtual*/ ~LLKeyboardHeadless() {};
 
 #ifndef LL_SDL2
-	/*virtual*/ BOOL	handleKeyUp(const U16 key, MASK mask) { return FALSE; }
-	/*virtual*/ BOOL	handleKeyDown(const U16 key, MASK mask) { return FALSE; }
+    /*virtual*/ BOOL    handleKeyUp(const U16 key, MASK mask) { return FALSE; }
+    /*virtual*/ BOOL    handleKeyDown(const U16 key, MASK mask) { return FALSE; }
 #else
-    /*virtual*/ BOOL	handleKeyUp(const U32 key, MASK mask) { return FALSE; }
-    /*virtual*/ BOOL	handleKeyDown(const U32 key, MASK mask) { return FALSE; }
+    /*virtual*/ BOOL    handleKeyUp(const U32 key, MASK mask) { return FALSE; }
+    /*virtual*/ BOOL    handleKeyDown(const U32 key, MASK mask) { return FALSE; }
 #endif
-	/*virtual*/ void	resetMaskKeys();
-	/*virtual*/ MASK	currentMask(BOOL for_mouse_event);
-	/*virtual*/ void	scanKeyboard();
+    /*virtual*/ void    resetMaskKeys();
+    /*virtual*/ MASK    currentMask(BOOL for_mouse_event);
+    /*virtual*/ void    scanKeyboard();
 #ifdef LL_DARWIN
-	/*virtual*/ void	handleModifier(MASK mask);
+    /*virtual*/ void    handleModifier(MASK mask);
 #endif
 };
 

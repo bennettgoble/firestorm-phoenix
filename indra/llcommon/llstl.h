@@ -44,11 +44,11 @@
 template <typename T>
 struct compare_pointer_contents
 {
-	typedef const T* Tptr;
-	bool operator()(const Tptr& a, const Tptr& b) const
-	{
-		return *a < *b;
-	}
+    typedef const T* Tptr;
+    bool operator()(const Tptr& a, const Tptr& b) const
+    {
+        return *a < *b;
+    }
 };
 
 // DeletePointer is a simple helper for deleting all pointers in a container.
@@ -61,122 +61,122 @@ struct compare_pointer_contents
 
 struct DeletePointer
 {
-	template<typename T> void operator()(T* ptr) const
-	{
-		delete ptr;
-	}
+    template<typename T> void operator()(T* ptr) const
+    {
+        delete ptr;
+    }
 };
 struct DeletePointerArray
 {
-	template<typename T> void operator()(T* ptr) const
-	{
-		delete[] ptr;
-	}
+    template<typename T> void operator()(T* ptr) const
+    {
+        delete[] ptr;
+    }
 };
 
 // DeletePairedPointer is a simple helper for deleting all pointers in a map.
 // The general form is:
 //
 //  std::for_each(somemap.begin(), somemap.end(), DeletePairedPointer());
-//  somemap.clear();		// Don't leave dangling pointers around
+//  somemap.clear();        // Don't leave dangling pointers around
 
 struct DeletePairedPointer
 {
-	template<typename T> void operator()(T &ptr) const
-	{
-		delete ptr.second;
-		ptr.second = NULL;
-	}
+    template<typename T> void operator()(T &ptr) const
+    {
+        delete ptr.second;
+        ptr.second = NULL;
+    }
 };
 struct DeletePairedPointerArray
 {
-	template<typename T> void operator()(T &ptr) const
-	{
-		delete[] ptr.second;
-		ptr.second = NULL;
-	}
+    template<typename T> void operator()(T &ptr) const
+    {
+        delete[] ptr.second;
+        ptr.second = NULL;
+    }
 };
 
 
 template<typename T, typename ALLOC>
 void delete_and_clear(std::list<T*, ALLOC>& list)
 {
-	std::for_each(list.begin(), list.end(), DeletePointer());
-	list.clear();
+    std::for_each(list.begin(), list.end(), DeletePointer());
+    list.clear();
 }
 
 template<typename T, typename ALLOC>
 void delete_and_clear(std::vector<T*, ALLOC>& vector)
 {
-	std::for_each(vector.begin(), vector.end(), DeletePointer());
-	vector.clear();
+    std::for_each(vector.begin(), vector.end(), DeletePointer());
+    vector.clear();
 }
 
 template<typename T, typename COMPARE, typename ALLOC>
 void delete_and_clear(std::set<T*, COMPARE, ALLOC>& set)
 {
-	std::for_each(set.begin(), set.end(), DeletePointer());
-	set.clear();
+    std::for_each(set.begin(), set.end(), DeletePointer());
+    set.clear();
 }
 
 template<typename K, typename V, typename COMPARE, typename ALLOC>
 void delete_and_clear(std::map<K, V*, COMPARE, ALLOC>& map)
 {
-	std::for_each(map.begin(), map.end(), DeletePairedPointer());
-	map.clear();
+    std::for_each(map.begin(), map.end(), DeletePairedPointer());
+    map.clear();
 }
 
 template<typename T>
 void delete_and_clear(T*& ptr)
 {
-	delete ptr;
-	ptr = NULL;
+    delete ptr;
+    ptr = NULL;
 }
 
 
 template<typename T>
 void delete_and_clear_array(T*& ptr)
 {
-	delete[] ptr;
-	ptr = NULL;
+    delete[] ptr;
+    ptr = NULL;
 }
 
 // Simple function to help with finding pointers in maps.
 // For example:
-// 	typedef  map_t;
+//  typedef  map_t;
 //  std::map<int, const char*> foo;
-//	foo[18] = "there";
-//	foo[2] = "hello";
-// 	const char* bar = get_ptr_in_map(foo, 2); // bar -> "hello"
+//  foo[18] = "there";
+//  foo[2] = "hello";
+//  const char* bar = get_ptr_in_map(foo, 2); // bar -> "hello"
 //  const char* baz = get_ptr_in_map(foo, 3); // baz == NULL
 template <typename K, typename T>
 inline T* get_ptr_in_map(const std::map<K,T*>& inmap, const K& key)
 {
-	// Typedef here avoids warnings because of new c++ naming rules.
-	typedef typename std::map<K,T*>::const_iterator map_iter;
-	map_iter iter = inmap.find(key);
-	if(iter == inmap.end())
-	{
-		return NULL;
-	}
-	else
-	{
-		return iter->second;
-	}
+    // Typedef here avoids warnings because of new c++ naming rules.
+    typedef typename std::map<K,T*>::const_iterator map_iter;
+    map_iter iter = inmap.find(key);
+    if(iter == inmap.end())
+    {
+        return NULL;
+    }
+    else
+    {
+        return iter->second;
+    }
 };
 
 // helper function which returns true if key is in inmap.
 template <typename K, typename T>
 inline bool is_in_map(const std::map<K,T>& inmap, const K& key)
 {
-	if(inmap.find(key) == inmap.end())
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+    if(inmap.find(key) == inmap.end())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 // Similar to get_ptr_in_map, but for any type with a valid T(0) constructor.
@@ -186,17 +186,17 @@ inline bool is_in_map(const std::map<K,T>& inmap, const K& key)
 template <typename K, typename T>
 inline T get_if_there(const std::map<K,T>& inmap, const K& key, T default_value)
 {
-	// Typedef here avoids warnings because of new c++ naming rules.
-	typedef typename std::map<K,T>::const_iterator map_iter;
-	map_iter iter = inmap.find(key);
-	if(iter == inmap.end())
-	{
-		return default_value;
-	}
-	else
-	{
-		return iter->second;
-	}
+    // Typedef here avoids warnings because of new c++ naming rules.
+    typedef typename std::map<K,T>::const_iterator map_iter;
+    map_iter iter = inmap.find(key);
+    if(iter == inmap.end())
+    {
+        return default_value;
+    }
+    else
+    {
+        return iter->second;
+    }
 };
 
 // Useful for replacing the removeObj() functionality of LLDynamicArray
@@ -211,22 +211,22 @@ inline T get_if_there(const std::map<K,T>& inmap, const K& key, T default_value)
 template <typename T>
 inline typename std::vector<T>::iterator vector_replace_with_last(std::vector<T>& invec, typename std::vector<T>::iterator iter)
 {
-	typename std::vector<T>::iterator last = invec.end(); --last;
-	if (iter == invec.end())
-	{
-		return iter;
-	}
-	else if (iter == last)
-	{
-		invec.pop_back();
-		return invec.end();
-	}
-	else
-	{
-		*iter = *last;
-		invec.pop_back();
-		return iter;
-	}
+    typename std::vector<T>::iterator last = invec.end(); --last;
+    if (iter == invec.end())
+    {
+        return iter;
+    }
+    else if (iter == last)
+    {
+        invec.pop_back();
+        return invec.end();
+    }
+    else
+    {
+        *iter = *last;
+        invec.pop_back();
+        return iter;
+    }
 };
 
 // Example:
@@ -234,55 +234,55 @@ inline typename std::vector<T>::iterator vector_replace_with_last(std::vector<T>
 template <typename T>
 inline bool vector_replace_with_last(std::vector<T>& invec, const T& val)
 {
-	typename std::vector<T>::iterator iter = std::find(invec.begin(), invec.end(), val);
-	if (iter != invec.end())
-	{
-		typename std::vector<T>::iterator last = invec.end(); --last;
-		*iter = *last;
-		invec.pop_back();
-		return true;
-	}
-	return false;
+    typename std::vector<T>::iterator iter = std::find(invec.begin(), invec.end(), val);
+    if (iter != invec.end())
+    {
+        typename std::vector<T>::iterator last = invec.end(); --last;
+        *iter = *last;
+        invec.pop_back();
+        return true;
+    }
+    return false;
 }
 
 // Append N elements to the vector and return a pointer to the first new element.
 template <typename T>
 inline T* vector_append(std::vector<T>& invec, S32 N)
 {
-	U32 sz = invec.size();
-	invec.resize(sz+N);
-	return &(invec[sz]);
+    U32 sz = invec.size();
+    invec.resize(sz+N);
+    return &(invec[sz]);
 }
 
 // call function f to n members starting at first. similar to std::for_each
 template <class InputIter, class Size, class Function>
 Function ll_for_n(InputIter first, Size n, Function f)
 {
-	for ( ; n > 0; --n, ++first)
-		f(*first);
-	return f;
+    for ( ; n > 0; --n, ++first)
+        f(*first);
+    return f;
 }
 
 // copy first to result n times, incrementing each as we go
 template <class InputIter, class Size, class OutputIter>
 OutputIter ll_copy_n(InputIter first, Size n, OutputIter result)
 {
-	for ( ; n > 0; --n, ++result, ++first)
-		*result = *first;
-	return result;
+    for ( ; n > 0; --n, ++result, ++first)
+        *result = *first;
+    return result;
 }
 
 // set  *result = op(*f) for n elements of f
 template <class InputIter, class OutputIter, class Size, class UnaryOp>
 OutputIter ll_transform_n(
-	InputIter first,
-	Size n,
-	OutputIter result,
-	UnaryOp op)
+    InputIter first,
+    Size n,
+    OutputIter result,
+    UnaryOp op)
 {
-	for ( ; n > 0; --n, ++result, ++first)
-		*result = op(*first);
-	return result;
+    for ( ; n > 0; --n, ++result, ++first)
+        *result = op(*first);
+    return result;
 }
 
 
@@ -315,23 +315,23 @@ bool before(const std::type_info* lhs, const std::type_info* rhs)
  */
 namespace std
 {
-	template <>
-	struct less<const std::type_info*>
-	{
-		bool operator()(const std::type_info* lhs, const std::type_info* rhs) const
-		{
-			return before(lhs, rhs);
-		}
-	};
+    template <>
+    struct less<const std::type_info*>
+    {
+        bool operator()(const std::type_info* lhs, const std::type_info* rhs) const
+        {
+            return before(lhs, rhs);
+        }
+    };
 
-	template <>
-	struct less<std::type_info*>
-	{
-		bool operator()(std::type_info* lhs, std::type_info* rhs) const
-		{
-			return before(lhs, rhs);
-		}
-	};
+    template <>
+    struct less<std::type_info*>
+    {
+        bool operator()(std::type_info* lhs, std::type_info* rhs) const
+        {
+            return before(lhs, rhs);
+        }
+    };
 } // std
 
 

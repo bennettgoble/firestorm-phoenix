@@ -32,30 +32,30 @@ class LLSLURL;
 class LLAgentUI
 {
 public:
-	enum ELocationFormat
-	{
-		LOCATION_FORMAT_NORMAL,			// Parcel
-		LOCATION_FORMAT_NORMAL_COORDS,	// Parcel (x, y, z)
-		LOCATION_FORMAT_LANDMARK,		// Parcel, Region
-		LOCATION_FORMAT_NO_MATURITY,	// Parcel, Region (x, y, z)
-		LOCATION_FORMAT_NO_COORDS,		// Parcel, Region - Maturity
-		LOCATION_FORMAT_FULL,			// Parcel, Region (x, y, z) - Maturity
-		LOCATION_FORMAT_V1,				// <FS:Ansariel> V1 mode for status bar: Region (x, y, z) - Maturity - Parcel
-		LOCATION_FORMAT_V1_NO_COORDS	// <FS:Ansariel> V1 mode for status bar: Region - Maturity - Parcel
-	};
+    enum ELocationFormat
+    {
+        LOCATION_FORMAT_NORMAL,         // Parcel
+        LOCATION_FORMAT_NORMAL_COORDS,  // Parcel (x, y, z)
+        LOCATION_FORMAT_LANDMARK,       // Parcel, Region
+        LOCATION_FORMAT_NO_MATURITY,    // Parcel, Region (x, y, z)
+        LOCATION_FORMAT_NO_COORDS,      // Parcel, Region - Maturity
+        LOCATION_FORMAT_FULL,           // Parcel, Region (x, y, z) - Maturity
+        LOCATION_FORMAT_V1,             // <FS:Ansariel> V1 mode for status bar: Region (x, y, z) - Maturity - Parcel
+        LOCATION_FORMAT_V1_NO_COORDS    // <FS:Ansariel> V1 mode for status bar: Region - Maturity - Parcel
+    };
 
-	static void buildFullname(std::string &name);
+    static void buildFullname(std::string &name);
 
-	static void buildSLURL(LLSLURL& slurl, const bool escaped = true);
-	//build location string using the current position of gAgent.
-	static BOOL buildLocationString(std::string& str, ELocationFormat fmt = LOCATION_FORMAT_LANDMARK);
-	//build location string using a region position of the avatar. 
-	static BOOL buildLocationString(std::string& str, ELocationFormat fmt,const LLVector3& agent_pos_region);
-	/**
-	 * @brief Check whether  the agent is in neighborhood of the pole  Within same region
-	 * @return true if the agent is in neighborhood.
-	 */
-	static BOOL checkAgentDistance(const LLVector3& local_pole, F32 radius);
+    static void buildSLURL(LLSLURL& slurl, const bool escaped = true);
+    //build location string using the current position of gAgent.
+    static BOOL buildLocationString(std::string& str, ELocationFormat fmt = LOCATION_FORMAT_LANDMARK);
+    //build location string using a region position of the avatar. 
+    static BOOL buildLocationString(std::string& str, ELocationFormat fmt,const LLVector3& agent_pos_region);
+    /**
+     * @brief Check whether  the agent is in neighborhood of the pole  Within same region
+     * @return true if the agent is in neighborhood.
+     */
+    static BOOL checkAgentDistance(const LLVector3& local_pole, F32 radius);
 };
 
 #endif //LLAGENTUI_H

@@ -37,7 +37,7 @@ class VolumeCatcherImpl
 
 VolumeCatcher::VolumeCatcher()
 {
-	pimpl = NULL;
+    pimpl = NULL;
 }
 
 VolumeCatcher::~VolumeCatcher()

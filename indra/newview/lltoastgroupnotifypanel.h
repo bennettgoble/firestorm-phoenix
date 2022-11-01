@@ -41,29 +41,29 @@ class LLButton;
  * Replaces class LLGroupNotifyBox.
  */
 class LLToastGroupNotifyPanel
-:	public LLToastPanel
+:   public LLToastPanel
 {
 public:
-	void close();
+    void close();
 
-	F32 getCurrentTransparency();
-	// Non-transient messages.  You can specify non-default button
-	// layouts (like one for script dialogs) by passing various
-	// numbers in for "layout".
-	LLToastGroupNotifyPanel(const LLNotificationPtr& notification);
+    F32 getCurrentTransparency();
+    // Non-transient messages.  You can specify non-default button
+    // layouts (like one for script dialogs) by passing various
+    // numbers in for "layout".
+    LLToastGroupNotifyPanel(const LLNotificationPtr& notification);
 
-	/*virtual*/ ~LLToastGroupNotifyPanel();
+    /*virtual*/ ~LLToastGroupNotifyPanel();
 protected:
-	void onClickOk();
-	void onClickGroupNotices();
-	void onClickAttachment();
+    void onClickOk();
+    void onClickGroupNotices();
+    void onClickAttachment();
 private:
-	static bool isAttachmentOpenable(LLAssetType::EType);
+    static bool isAttachmentOpenable(LLAssetType::EType);
 
-	static const S32 DEFAULT_MESSAGE_MAX_LINE_COUNT;
+    static const S32 DEFAULT_MESSAGE_MAX_LINE_COUNT;
 
-	LLUUID mGroupID;
-	LLOfferInfo* mInventoryOffer;
+    LLUUID mGroupID;
+    LLOfferInfo* mInventoryOffer;
 };
 
 // This view contains the stack of notification windows.

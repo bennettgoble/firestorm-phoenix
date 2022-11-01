@@ -191,14 +191,14 @@ private:
 #if 0
 struct LLScriptQueueData
 {
-	LLUUID mQueueID;
-	LLUUID mTaskId;
-	LLPointer<LLInventoryItem> mItem;
-	LLHost mHost;
-	LLUUID mExperienceId;
-	std::string mExperiencename;
-	LLScriptQueueData(const LLUUID& q_id, const LLUUID& task_id, LLInventoryItem* item) :
-		mQueueID(q_id), mTaskId(task_id), mItem(new LLInventoryItem(item)) {}
+    LLUUID mQueueID;
+    LLUUID mTaskId;
+    LLPointer<LLInventoryItem> mItem;
+    LLHost mHost;
+    LLUUID mExperienceId;
+    std::string mExperiencename;
+    LLScriptQueueData(const LLUUID& q_id, const LLUUID& task_id, LLInventoryItem* item) :
+        mQueueID(q_id), mTaskId(task_id), mItem(new LLInventoryItem(item)) {}
 
 };
 #endif
@@ -210,11 +210,11 @@ struct LLScriptQueueData
 
 // Default constructor
 LLFloaterScriptQueue::LLFloaterScriptQueue(const LLSD& key) :
-	LLFloater(key),
-	mDone(false),
-	mMono(false)
+    LLFloater(key),
+    mDone(false),
+    mMono(false)
 {
-	
+    
 }
 
 // Destroys the object
@@ -224,17 +224,17 @@ LLFloaterScriptQueue::~LLFloaterScriptQueue()
 
 BOOL LLFloaterScriptQueue::postBuild()
 {
-	childSetAction("close",onCloseBtn,this);
-	getChildView("close")->setEnabled(FALSE);
-	setVisible(true);
-	return TRUE;
+    childSetAction("close",onCloseBtn,this);
+    getChildView("close")->setEnabled(FALSE);
+    setVisible(true);
+    return TRUE;
 }
 
 // static
 void LLFloaterScriptQueue::onCloseBtn(void* user_data)
 {
-	LLFloaterScriptQueue* self = (LLFloaterScriptQueue*)user_data;
-	self->closeFloater();
+    LLFloaterScriptQueue* self = (LLFloaterScriptQueue*)user_data;
+    self->closeFloater();
 }
 
 void LLFloaterScriptQueue::addObject(const LLUUID& id, std::string name)
@@ -245,42 +245,42 @@ void LLFloaterScriptQueue::addObject(const LLUUID& id, std::string name)
 
 BOOL LLFloaterScriptQueue::start()
 {
-	LLNotificationsUtil::add("ConfirmScriptModify", LLSD(), LLSD(), boost::bind(&LLFloaterScriptQueue::onScriptModifyConfirmation, this, _1, _2));
-	return true;
-	/*
-	//LL_INFOS() << "LLFloaterCompileQueue::start()" << LL_ENDL;
-	std::string buffer;
+    LLNotificationsUtil::add("ConfirmScriptModify", LLSD(), LLSD(), boost::bind(&LLFloaterScriptQueue::onScriptModifyConfirmation, this, _1, _2));
+    return true;
+    /*
+    //LL_INFOS() << "LLFloaterCompileQueue::start()" << LL_ENDL;
+    std::string buffer;
 
-	LLStringUtil::format_map_t args;
-	args["[START]"] = mStartString;
-	args["[COUNT]"] = llformat ("%d", mObjectList.size());
-	buffer = getString ("Starting", args);
-	
-	getChild<LLScrollListCtrl>("queue output")->addSimpleElement(buffer);
+    LLStringUtil::format_map_t args;
+    args["[START]"] = mStartString;
+    args["[COUNT]"] = llformat ("%d", mObjectList.size());
+    buffer = getString ("Starting", args);
+    
+    getChild<LLScrollListCtrl>("queue output")->addSimpleElement(buffer);
 
-	return startQueue();*/
+    return startQueue();*/
 }
 
 bool LLFloaterScriptQueue::onScriptModifyConfirmation(const LLSD& notification, const LLSD& response)
 {
-	S32 option = LLNotificationsUtil::getSelectedOption(notification, response);
-	if (option != 0)// canceled
-	{
-		return true;
-	}
-	std::string buffer;
+    S32 option = LLNotificationsUtil::getSelectedOption(notification, response);
+    if (option != 0)// canceled
+    {
+        return true;
+    }
+    std::string buffer;
 
-	LLStringUtil::format_map_t args;
-	args["[START]"] = mStartString;
-	args["[COUNT]"] = llformat ("%d", mObjectList.size());
-	buffer = getString ("Starting", args);
-	
-	// <FS:Ansariel> Improve log output
-	//getChild<LLScrollListCtrl>("queue output")->addSimpleElement(buffer, ADD_BOTTOM);
-	addStringMessage(buffer);
-	// </FS:Ansariel>
+    LLStringUtil::format_map_t args;
+    args["[START]"] = mStartString;
+    args["[COUNT]"] = llformat ("%d", mObjectList.size());
+    buffer = getString ("Starting", args);
+    
+    // <FS:Ansariel> Improve log output
+    //getChild<LLScrollListCtrl>("queue output")->addSimpleElement(buffer, ADD_BOTTOM);
+    addStringMessage(buffer);
+    // </FS:Ansariel>
 
-	return startQueue();
+    return startQueue();
 }
 
 void LLFloaterScriptQueue::addProcessingMessage(const std::string &message, const LLSD &args)
@@ -310,7 +310,7 @@ void LLFloaterScriptQueue::addStringMessage(const std::string &message)
 
 BOOL LLFloaterScriptQueue::isDone() const
 {
-	return (mCurrentObjectID.isNull() && (mObjectList.size() == 0));
+    return (mCurrentObjectID.isNull() && (mObjectList.size() == 0));
 }
 
 ///----------------------------------------------------------------------------
@@ -320,36 +320,36 @@ LLFloaterCompileQueue::LLFloaterCompileQueue(const LLSD& key)
   : LLFloaterScriptQueue(key)
   , mLSLProc(NULL) // <FS:Ansariel> [LSL PreProc]
 {
-	setTitle(LLTrans::getString("CompileQueueTitle"));
-	setStartString(LLTrans::getString("CompileQueueStart"));
-														 															 
-	
-	// <FS:KC> [LSL PreProc]
-	static LLCachedControl<bool> _NACL_LSLPreprocessor(gSavedSettings, "_NACL_LSLPreprocessor");
-	if(_NACL_LSLPreprocessor)
-	{
-		mLSLProc = new FSLSLPreprocessor();
-	}
-	// </FS:KC>
+    setTitle(LLTrans::getString("CompileQueueTitle"));
+    setStartString(LLTrans::getString("CompileQueueStart"));
+                                                                                                                     
+    
+    // <FS:KC> [LSL PreProc]
+    static LLCachedControl<bool> _NACL_LSLPreprocessor(gSavedSettings, "_NACL_LSLPreprocessor");
+    if(_NACL_LSLPreprocessor)
+    {
+        mLSLProc = new FSLSLPreprocessor();
+    }
+    // </FS:KC>
 }
 
 LLFloaterCompileQueue::~LLFloaterCompileQueue()
 { 
-	// <FS:Ansariel> [LSL PreProc]
-	delete mLSLProc;
+    // <FS:Ansariel> [LSL PreProc]
+    delete mLSLProc;
 }
 
 void LLFloaterCompileQueue::experienceIdsReceived( const LLSD& content )
 {
-	for(LLSD::array_const_iterator it  = content.beginArray(); it != content.endArray(); ++it)
-	{
-		mExperienceIds.insert(it->asUUID());
-	}
+    for(LLSD::array_const_iterator it  = content.beginArray(); it != content.endArray(); ++it)
+    {
+        mExperienceIds.insert(it->asUUID());
+    }
 }
 
 BOOL LLFloaterCompileQueue::hasExperience( const LLUUID& id ) const
 {
-	return mExperienceIds.find(id) != mExperienceIds.end();
+    return mExperienceIds.find(id) != mExperienceIds.end();
 }
 
 // //Attempt to record this asset ID.  If it can not be inserted into the set 
@@ -709,8 +709,8 @@ bool LLFloaterCompileQueue::startQueue()
 LLFloaterResetQueue::LLFloaterResetQueue(const LLSD& key)
   : LLFloaterScriptQueue(key)
 {
-	setTitle(LLTrans::getString("ResetQueueTitle"));
-	setStartString(LLTrans::getString("ResetQueueStart"));
+    setTitle(LLTrans::getString("ResetQueueTitle"));
+    setStartString(LLTrans::getString("ResetQueueStart"));
 }
 
 LLFloaterResetQueue::~LLFloaterResetQueue()
@@ -766,8 +766,8 @@ bool LLFloaterResetQueue::startQueue()
 LLFloaterRunQueue::LLFloaterRunQueue(const LLSD& key)
   : LLFloaterScriptQueue(key)
 {
-	setTitle(LLTrans::getString("RunQueueTitle"));
-	setStartString(LLTrans::getString("RunQueueStart"));
+    setTitle(LLTrans::getString("RunQueueTitle"));
+    setStartString(LLTrans::getString("RunQueueStart"));
 }
 
 LLFloaterRunQueue::~LLFloaterRunQueue()
@@ -823,8 +823,8 @@ bool LLFloaterRunQueue::startQueue()
 LLFloaterNotRunQueue::LLFloaterNotRunQueue(const LLSD& key)
   : LLFloaterScriptQueue(key)
 {
-	setTitle(LLTrans::getString("NotRunQueueTitle"));
-	setStartString(LLTrans::getString("NotRunQueueStart"));
+    setTitle(LLTrans::getString("NotRunQueueTitle"));
+    setStartString(LLTrans::getString("NotRunQueueStart"));
 }
 
 LLFloaterNotRunQueue::~LLFloaterNotRunQueue()
@@ -1050,13 +1050,13 @@ void LLFloaterScriptQueue::objectScriptProcessingQueueCoro(std::string action, L
 class LLScriptAssetUploadWithId: public LLScriptAssetUpload
 {
 public:
-	LLScriptAssetUploadWithId(	LLUUID taskId, LLUUID itemId, TargetType_t targetType, 
-		bool isRunning, std::string scriptName, LLUUID queueId, LLUUID exerienceId, std::string buffer, taskUploadFinish_f finish )
-		:  LLScriptAssetUpload( taskId, itemId, targetType,  isRunning, exerienceId, buffer, finish),
-		mScriptName(scriptName),
+    LLScriptAssetUploadWithId(  LLUUID taskId, LLUUID itemId, TargetType_t targetType, 
+        bool isRunning, std::string scriptName, LLUUID queueId, LLUUID exerienceId, std::string buffer, taskUploadFinish_f finish )
+        :  LLScriptAssetUpload( taskId, itemId, targetType,  isRunning, exerienceId, buffer, finish),
+        mScriptName(scriptName),
         mQueueId(queueId)
-	{
-	}
+    {
+    }
 
     virtual LLSD prepareUpload()
     {
@@ -1116,66 +1116,66 @@ void LLFloaterCompileQueue::finishLSLUpload(LLUUID itemId, LLUUID taskId, LLUUID
 // static
 void LLFloaterCompileQueue::scriptPreprocComplete(const LLUUID& asset_id, LLScriptQueueData* data, LLAssetType::EType type, const std::string& script_text)
 {
-	LL_INFOS() << "LLFloaterCompileQueue::scriptPreprocComplete()" << LL_ENDL;
-	if (!data)
-	{
-		return;
-	}
-	LLFloaterCompileQueue* queue = LLFloaterReg::findTypedInstance<LLFloaterCompileQueue>("compile_queue", data->mQueueID);
-	
-	if (queue)
-	{
-		std::string filename;
-		std::string uuid_str;
-		asset_id.toString(uuid_str);
-		filename = gDirUtilp->getExpandedFilename(LL_PATH_CACHE,uuid_str) + llformat(".%s",LLAssetType::lookup(type));
-		
-		const bool is_running = true;
-		LLViewerObject* object = gObjectList.findObject(data->mTaskId);
-		if (object)
-		{
-			std::string scriptName = data->mItem->getName();
-			std::string url = object->getRegion()->getCapability("UpdateScriptTask");
-			if (!url.empty())
-			{
-				queue->addProcessingMessage("CompileQueuePreprocessingComplete", LLSD().with("SCRIPT", scriptName));
+    LL_INFOS() << "LLFloaterCompileQueue::scriptPreprocComplete()" << LL_ENDL;
+    if (!data)
+    {
+        return;
+    }
+    LLFloaterCompileQueue* queue = LLFloaterReg::findTypedInstance<LLFloaterCompileQueue>("compile_queue", data->mQueueID);
+    
+    if (queue)
+    {
+        std::string filename;
+        std::string uuid_str;
+        asset_id.toString(uuid_str);
+        filename = gDirUtilp->getExpandedFilename(LL_PATH_CACHE,uuid_str) + llformat(".%s",LLAssetType::lookup(type));
+        
+        const bool is_running = true;
+        LLViewerObject* object = gObjectList.findObject(data->mTaskId);
+        if (object)
+        {
+            std::string scriptName = data->mItem->getName();
+            std::string url = object->getRegion()->getCapability("UpdateScriptTask");
+            if (!url.empty())
+            {
+                queue->addProcessingMessage("CompileQueuePreprocessingComplete", LLSD().with("SCRIPT", scriptName));
 
-				LLBufferedAssetUploadInfo::taskUploadFinish_f proc = boost::bind(&LLFloaterCompileQueue::finishLSLUpload, _1, _2, _3, _4, 
-					scriptName, data->mQueueID);
+                LLBufferedAssetUploadInfo::taskUploadFinish_f proc = boost::bind(&LLFloaterCompileQueue::finishLSLUpload, _1, _2, _3, _4, 
+                    scriptName, data->mQueueID);
 
-				LLResourceUploadInfo::ptr_t uploadInfo( new LLScriptAssetUploadWithId(
-					data->mTaskId,
-					data->mItem->getUUID(),
-					(queue->mMono) ? LLScriptAssetUpload::MONO : LLScriptAssetUpload::LSL2,
-					is_running,
-					scriptName,
-					data->mQueueID,
-					data->mExperienceId,
-					script_text,
-					proc));
+                LLResourceUploadInfo::ptr_t uploadInfo( new LLScriptAssetUploadWithId(
+                    data->mTaskId,
+                    data->mItem->getUUID(),
+                    (queue->mMono) ? LLScriptAssetUpload::MONO : LLScriptAssetUpload::LSL2,
+                    is_running,
+                    scriptName,
+                    data->mQueueID,
+                    data->mExperienceId,
+                    script_text,
+                    proc));
 
-				LLViewerAssetUpload::EnqueueInventoryUpload(url, uploadInfo);
-			}
-			else
-			{
-				queue->addStringMessage(LLTrans::getString("CompileQueueServiceUnavailable"));
-			}
-		}
-	}
-	delete data;
+                LLViewerAssetUpload::EnqueueInventoryUpload(url, uploadInfo);
+            }
+            else
+            {
+                queue->addStringMessage(LLTrans::getString("CompileQueueServiceUnavailable"));
+            }
+        }
+    }
+    delete data;
 }
 
 // static
 void LLFloaterCompileQueue::scriptLogMessage(LLScriptQueueData* data, std::string message)
 {
-	if (!data)
-	{
-		return;
-	}
-	LLFloaterCompileQueue* queue = LLFloaterReg::findTypedInstance<LLFloaterCompileQueue>("compile_queue", data->mQueueID);
-	if (queue)
-	{
-		queue->addStringMessage(message);
-	}
+    if (!data)
+    {
+        return;
+    }
+    LLFloaterCompileQueue* queue = LLFloaterReg::findTypedInstance<LLFloaterCompileQueue>("compile_queue", data->mQueueID);
+    if (queue)
+    {
+        queue->addStringMessage(message);
+    }
 }
 // </FS:KC>

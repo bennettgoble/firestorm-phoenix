@@ -29,7 +29,7 @@
 #define ANIMATIONEXPLORER_H
 
 #include "llfloater.h"
-#include "llfloaterbvhpreview.h"	// for LLPreviewAnimation
+#include "llfloaterbvhpreview.h"    // for LLPreviewAnimation
 #include "llsingleton.h"
 
 // --------------------------------------------------------------------------
@@ -41,23 +41,23 @@
 class AnimationExplorer;
 
 class RecentAnimationList
-:	public LLSingleton<RecentAnimationList>
+:   public LLSingleton<RecentAnimationList>
 {
-	LLSINGLETON(RecentAnimationList);
-	~RecentAnimationList();
+    LLSINGLETON(RecentAnimationList);
+    ~RecentAnimationList();
 
 public:
-	struct AnimationEntry
-	{
-		LLUUID animationID;		// asset ID of the animation
-		LLUUID playedBy;		// object/agent who played this animation
-		F64 time;				// time in seconds since viewer start when the animation started
-	};
+    struct AnimationEntry
+    {
+        LLUUID animationID;     // asset ID of the animation
+        LLUUID playedBy;        // object/agent who played this animation
+        F64 time;               // time in seconds since viewer start when the animation started
+    };
 
-	std::deque<AnimationEntry> mAnimationList;
+    std::deque<AnimationEntry> mAnimationList;
 
-	void addAnimation(const LLUUID& id, const LLUUID& playedBy);		// called in llviewermessage.cpp
-	void requestList(AnimationExplorer* explorer);					// request animation list
+    void addAnimation(const LLUUID& id, const LLUUID& playedBy);        // called in llviewermessage.cpp
+    void requestList(AnimationExplorer* explorer);                  // request animation list
 };
 
 // --------------------------------------------------------------------------
@@ -73,62 +73,62 @@ class LLScrollListCtrl;
 class LLView;
 
 class AnimationExplorer
-:	public LLFloater
+:   public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 
-	private:
-		AnimationExplorer(const LLSD& key);
-		~AnimationExplorer();
+    private:
+        AnimationExplorer(const LLSD& key);
+        ~AnimationExplorer();
 
-	public:
-		/*virtual*/ BOOL postBuild();
-		void addAnimation(const LLUUID& id, const LLUUID& playedBy, F64 time);	// called from RecentAnimationList
+    public:
+        /*virtual*/ BOOL postBuild();
+        void addAnimation(const LLUUID& id, const LLUUID& playedBy, F64 time);  // called from RecentAnimationList
 
-		// copied from llfloaterbvhpreview.h
-		BOOL handleMouseDown(S32 x, S32 y, MASK mask);
-		BOOL handleMouseUp(S32 x, S32 y, MASK mask);
-		BOOL handleHover(S32 x, S32 y, MASK mask);
-		BOOL handleScrollWheel(S32 x, S32 y, S32 clicks); 
-		void onMouseCaptureLost();
+        // copied from llfloaterbvhpreview.h
+        BOOL handleMouseDown(S32 x, S32 y, MASK mask);
+        BOOL handleMouseUp(S32 x, S32 y, MASK mask);
+        BOOL handleHover(S32 x, S32 y, MASK mask);
+        BOOL handleScrollWheel(S32 x, S32 y, S32 clicks); 
+        void onMouseCaptureLost();
 
-		void requestNameCallback(LLMessageSystem* msg);		// object name query callback
+        void requestNameCallback(LLMessageSystem* msg);     // object name query callback
 
-	protected:
-		void onAvatarNameCallback(const LLUUID& id, const LLAvatarName& av_name);
-		void updateListEntry(const LLUUID& id, const std::string& name);
+    protected:
+        void onAvatarNameCallback(const LLUUID& id, const LLAvatarName& av_name);
+        void updateListEntry(const LLUUID& id, const std::string& name);
 
-		LLScrollListCtrl* mAnimationScrollList;
-		LLButton* mStopButton;
-		LLButton* mRevokeButton;
-		LLButton* mStopAndRevokeButton;
-		LLCheckBoxCtrl* mNoOwnedAnimationsCheckBox;
+        LLScrollListCtrl* mAnimationScrollList;
+        LLButton* mStopButton;
+        LLButton* mRevokeButton;
+        LLButton* mStopAndRevokeButton;
+        LLCheckBoxCtrl* mNoOwnedAnimationsCheckBox;
 
-		LLView* mPreviewCtrl;	// dummy control on the floater where the avatar preview should go
-		LLPointer<LLPreviewAnimation> mAnimationPreview;	// actual avatar preview
+        LLView* mPreviewCtrl;   // dummy control on the floater where the avatar preview should go
+        LLPointer<LLPreviewAnimation> mAnimationPreview;    // actual avatar preview
 
-		S32 mLastMouseX;
-		S32 mLastMouseY;
+        S32 mLastMouseX;
+        S32 mLastMouseY;
 
-		LLUUID mCurrentAnimationID;		// currently selected animation's asset ID
-		LLUUID mCurrentObject;			// object ID that played the currently selected animation
+        LLUUID mCurrentAnimationID;     // currently selected animation's asset ID
+        LLUUID mCurrentObject;          // object ID that played the currently selected animation
 
-		std::vector<LLUUID> mRequestedIDs;			// list of object IDs we requested named for
-		std::map<LLUUID, std::string> mKnownIDs;		// known list of names for object IDs
+        std::vector<LLUUID> mRequestedIDs;          // list of object IDs we requested named for
+        std::map<LLUUID, std::string> mKnownIDs;        // known list of names for object IDs
 
-		typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
-		avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
+        typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
+        avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
 
-		void draw();
-		void update();								// request list update from RecentAnimationList
-		void updateList(F64 current_timestamp);		// update times and playing status in animation list
-		void startMotion(const LLUUID& motionID);
+        void draw();
+        void update();                              // request list update from RecentAnimationList
+        void updateList(F64 current_timestamp);     // update times and playing status in animation list
+        void startMotion(const LLUUID& motionID);
 
-		void onSelectAnimation();
-		void onStopPressed();
-		void onRevokePressed();
-		void onStopAndRevokePressed();
-		void onOwnedCheckToggled();
+        void onSelectAnimation();
+        void onStopPressed();
+        void onRevokePressed();
+        void onStopAndRevokePressed();
+        void onOwnedCheckToggled();
 };
 
 #endif // ANIMATIONEXPLORER_H

@@ -476,7 +476,7 @@ void inventory_offer_handler(LLOfferInfo* info)
 
 // Callback for name resolution of a god/estate message
 static void god_message_name_cb(const LLAvatarName& av_name, LLChat chat, std::string message)
-{	
+{   
     LLSD args;
     args["NAME"] = av_name.getCompleteName();
     args["MESSAGE"] = message;
@@ -650,9 +650,9 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
     std::string name = agentName;
 
     // NaCl - Antispam Registry
-    if (dialog != IM_TYPING_START && dialog != IM_TYPING_STOP &&											// Typing notifications
-        !(dialog == IM_NOTHING_SPECIAL && offline == IM_OFFLINE && from_id.notNull() && to_id.notNull()) &&	// Saved offline IMs
-        !(dialog == IM_FROM_TASK && offline == IM_OFFLINE)													// Saved offline IMs from objects
+    if (dialog != IM_TYPING_START && dialog != IM_TYPING_STOP &&                                            // Typing notifications
+        !(dialog == IM_NOTHING_SPECIAL && offline == IM_OFFLINE && from_id.notNull() && to_id.notNull()) && // Saved offline IMs
+        !(dialog == IM_FROM_TASK && offline == IM_OFFLINE)                                                  // Saved offline IMs from objects
         )
     {
         if (NACLAntiSpamRegistry::instance().checkQueue(ANTISPAM_QUEUE_IM, from_id, ANTISPAM_SOURCE_AGENT))
@@ -692,7 +692,7 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
     BOOL is_friend = (LLAvatarTracker::instance().getBuddyInfo(from_id) == NULL) ? false : true;
     static LLCachedControl<bool> accept_im_from_only_friend(gSavedPerAccountSettings, "VoiceCallsFriendsOnly");
     //BOOL is_linden = chat.mSourceType != CHAT_SOURCE_OBJECT &&
-    //		LLMuteList::getInstance()->isLinden(name); <:FS:TM> Bear compie fix - is_linden not referenced
+    //      LLMuteList::getInstance()->isLinden(name); <:FS:TM> Bear compie fix - is_linden not referenced
 
     // <FS:PP> FIRE-10500: Autoresponse for (Away)
     static LLCachedControl<bool> FSSendAwayAvatarResponse(gSavedPerAccountSettings, "FSSendAwayAvatarResponse");
@@ -753,7 +753,7 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
             LLPostponedNotification::add<LLPostponedIMSystemTipNotification>(params, from_id, false);
             break;
 
-        case IM_NOTHING_SPECIAL:	// p2p IM
+        case IM_NOTHING_SPECIAL:    // p2p IM
             // Don't show dialog, just do IM
             if (!gAgent.isGodlike()
                 && gAgent.getRegion()->isPrelude()
@@ -883,10 +883,10 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
                 // <FS:Ansariel> Old "do not disturb" message behavior: only send once if session not open
                 //if (!gIMMgr->isDNDMessageSend(session_id))
                 //{
-                //	// return a standard "do not disturb" message, but only do it to online IM
-                //	// (i.e. not other auto responses and not store-and-forward IM)
-                //	send_do_not_disturb_message(msg, from_id, session_id);
-                //	gIMMgr->setDNDMessageSent(session_id, true);
+                //  // return a standard "do not disturb" message, but only do it to online IM
+                //  // (i.e. not other auto responses and not store-and-forward IM)
+                //  send_do_not_disturb_message(msg, from_id, session_id);
+                //  gIMMgr->setDNDMessageSent(session_id, true);
                 //}
                 // </FS:Ansariel>
 
@@ -1365,8 +1365,8 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
             {
                 struct offer_agent_bucket_t
                 {
-                    S8		asset_type;
-                    LLUUID	object_id;
+                    S8      asset_type;
+                    LLUUID  object_id;
                 }*bucketp;
 
                 if (sizeof(offer_agent_bucket_t) != binary_bucket_size)
@@ -1652,7 +1652,7 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
         }
         break;
 
-        case IM_SESSION_SEND:		// ad-hoc or group IMs
+        case IM_SESSION_SEND:       // ad-hoc or group IMs
 
             // Only show messages if we have a session open (which
             // should happen after you get an "invitation"
@@ -1784,7 +1784,7 @@ void LLIMProcessing::processNewMessage(LLUUID from_id,
             // <FS:PP> FIRE-1245: Option to block/reject teleport offers
             //else if (gSavedPerAccountSettings.getBOOL("VoiceCallsFriendsOnly") && (LLAvatarTracker::instance().getBuddyInfo(from_id) == NULL))
             //{
-            //	return;
+            //  return;
             //}
             else if ( (is_rejecting_tp_offers && (!FSDontRejectTeleportOffersFromFriends || (FSDontRejectTeleportOffersFromFriends && !is_friend))) && (!fRlvAutoAccept) )
             {

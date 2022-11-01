@@ -32,10 +32,10 @@
 
 namespace FSChatOptionsMenu
 {
-	void onMenuItemClick(const LLSD& userdata, LLUICtrl* source);
-	bool onMenuItemEnable(const LLSD& userdata, LLUICtrl* source);
-	bool onMenuItemVisible(const LLSD& userdata, LLUICtrl* source);
-	bool onMenuItemCheck(const LLSD& userdata, LLUICtrl* source);
+    void onMenuItemClick(const LLSD& userdata, LLUICtrl* source);
+    bool onMenuItemEnable(const LLSD& userdata, LLUICtrl* source);
+    bool onMenuItemVisible(const LLSD& userdata, LLUICtrl* source);
+    bool onMenuItemCheck(const LLSD& userdata, LLUICtrl* source);
 };
 
 #endif // FS_CHATOPTIONSMENU_H

@@ -71,8 +71,8 @@ public:
         if( mNormalID.notNull() || mSpecularID.notNull() ) //|| mDiffuseAlphaMode != DIFFUSE_ALPHA_MODE_BLEND)
         {
             return false;
-	    }
-	    return true;
+        }
+        return true;
     }
 
     const LLUUID&   getNormalID() const;

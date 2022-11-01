@@ -29,8 +29,8 @@
 #include "fsfloaterradar.h"
 
 FSFloaterRadar::FSFloaterRadar(const LLSD& key)
-	:	LLFloater(key),
-		mRadarPanel(NULL)
+    :   LLFloater(key),
+        mRadarPanel(NULL)
 {
 }
 
@@ -40,21 +40,21 @@ FSFloaterRadar::~FSFloaterRadar()
 
 BOOL FSFloaterRadar::postBuild()
 {
-	mRadarPanel = findChild<FSPanelRadar>("panel_radar");
-	if (!mRadarPanel)
-	{
-		return FALSE;
-	}
-	mRadarPanel->setVisibleCheckFunction(boost::bind(&FSFloaterRadar::getVisible, this));
+    mRadarPanel = findChild<FSPanelRadar>("panel_radar");
+    if (!mRadarPanel)
+    {
+        return FALSE;
+    }
+    mRadarPanel->setVisibleCheckFunction(boost::bind(&FSFloaterRadar::getVisible, this));
 
-	return TRUE;
+    return TRUE;
 }
 
 // virtual
 void FSFloaterRadar::onOpen(const LLSD& key)
 {
-	// Fill radar with most recent data so we don't have a blank window until next radar update
-	mRadarPanel->requestUpdate();
-	LLFloater::onOpen(key);
+    // Fill radar with most recent data so we don't have a blank window until next radar update
+    mRadarPanel->requestUpdate();
+    LLFloater::onOpen(key);
 }
 

@@ -64,42 +64,42 @@ static const LLOutfitTabNameComparator OUTFIT_TAB_NAME_COMPARATOR;
 /*virtual*/
 bool LLOutfitTabNameComparator::compare(const LLAccordionCtrlTab* tab1, const LLAccordionCtrlTab* tab2) const
 {
-	std::string name1 = tab1->getTitle();
-	std::string name2 = tab2->getTitle();
+    std::string name1 = tab1->getTitle();
+    std::string name2 = tab2->getTitle();
 
     return (LLStringUtil::compareDict(name1, name2) < 0);
 }
 
 struct outfit_accordion_tab_params : public LLInitParam::Block<outfit_accordion_tab_params, LLAccordionCtrlTab::Params>
 {
-	Mandatory<LLWearableItemsList::Params> wearable_list;
+    Mandatory<LLWearableItemsList::Params> wearable_list;
 
-	outfit_accordion_tab_params()
-	:	wearable_list("wearable_items_list")
-	{}
+    outfit_accordion_tab_params()
+    :   wearable_list("wearable_items_list")
+    {}
 };
 
 const outfit_accordion_tab_params& get_accordion_tab_params()
 {
-	static outfit_accordion_tab_params tab_params;
-	static bool initialized = false;
-	if (!initialized)
-	{
-		initialized = true;
+    static outfit_accordion_tab_params tab_params;
+    static bool initialized = false;
+    if (!initialized)
+    {
+        initialized = true;
 
-		LLXMLNodePtr xmlNode;
-		if (LLUICtrlFactory::getLayeredXMLNode("outfit_accordion_tab.xml", xmlNode))
-		{
-			LLXUIParser parser;
-			parser.readXUI(xmlNode, tab_params, "outfit_accordion_tab.xml");
-		}
-		else
-		{
-			LL_WARNS() << "Failed to read xml of Outfit's Accordion Tab from outfit_accordion_tab.xml" << LL_ENDL;
-		}
-	}
+        LLXMLNodePtr xmlNode;
+        if (LLUICtrlFactory::getLayeredXMLNode("outfit_accordion_tab.xml", xmlNode))
+        {
+            LLXUIParser parser;
+            parser.readXUI(xmlNode, tab_params, "outfit_accordion_tab.xml");
+        }
+        else
+        {
+            LL_WARNS() << "Failed to read xml of Outfit's Accordion Tab from outfit_accordion_tab.xml" << LL_ENDL;
+        }
+    }
 
-	return tab_params;
+    return tab_params;
 }
 
 
@@ -108,8 +108,8 @@ static LLPanelInjector<LLOutfitsList> t_outfits_list("outfits_list");
 LLOutfitsList::LLOutfitsList()
     :   LLOutfitListBase()
     ,   mAccordion(NULL)
-	,	mListCommands(NULL)
-	,	mItemSelected(false)
+    ,   mListCommands(NULL)
+    ,   mItemSelected(false)
 {
 }
 
@@ -119,8 +119,8 @@ LLOutfitsList::~LLOutfitsList()
 
 BOOL LLOutfitsList::postBuild()
 {
-	mAccordion = getChild<LLAccordionCtrl>("outfits_accordion");
-	mAccordion->setComparator(&OUTFIT_TAB_NAME_COMPARATOR);
+    mAccordion = getChild<LLAccordionCtrl>("outfits_accordion");
+    mAccordion->setComparator(&OUTFIT_TAB_NAME_COMPARATOR);
 
     return LLOutfitListBase::postBuild();
 }
@@ -137,11 +137,11 @@ void LLOutfitsList::onOpen(const LLSD& info)
 
     LLOutfitListBase::onOpen(info);
 
-	LLAccordionCtrlTab* selected_tab = mAccordion->getSelectedTab();
-	if (!selected_tab) return;
+    LLAccordionCtrlTab* selected_tab = mAccordion->getSelectedTab();
+    if (!selected_tab) return;
 
-	// Pass focus to the selected outfit tab.
-	selected_tab->showAndFocusHeader();
+    // Pass focus to the selected outfit tab.
+    selected_tab->showAndFocusHeader();
 }
 
 
@@ -234,27 +234,27 @@ void LLOutfitsList::updateRemovedCategory(LLUUID cat_id)
     outfits_map_t::iterator outfits_iter = mOutfitsMap.find(cat_id);
     if (outfits_iter != mOutfitsMap.end())
     {
-    	const LLUUID& outfit_id = outfits_iter->first;
-    	LLAccordionCtrlTab* tab = outfits_iter->second;
+        const LLUUID& outfit_id = outfits_iter->first;
+        LLAccordionCtrlTab* tab = outfits_iter->second;
 
-    	// An outfit is removed from the list. Do the following:
-    	// 1. Remove outfit category from observer to stop monitoring its changes.
-    	mCategoriesObserver->removeCategory(outfit_id);
+        // An outfit is removed from the list. Do the following:
+        // 1. Remove outfit category from observer to stop monitoring its changes.
+        mCategoriesObserver->removeCategory(outfit_id);
 
-    	// 2. Remove the outfit from selection.
-    	deselectOutfit(outfit_id);
+        // 2. Remove the outfit from selection.
+        deselectOutfit(outfit_id);
 
-    	// 3. Remove category UUID to accordion tab mapping.
-    	mOutfitsMap.erase(outfits_iter);
+        // 3. Remove category UUID to accordion tab mapping.
+        mOutfitsMap.erase(outfits_iter);
 
-    	// 4. Remove outfit tab from accordion.
-    	mAccordion->removeCollapsibleCtrl(tab);
+        // 4. Remove outfit tab from accordion.
+        mAccordion->removeCollapsibleCtrl(tab);
 
-    	// kill removed tab
-    	if (tab != NULL)
-    	{
-    		tab->die();
-    	}
+        // kill removed tab
+        if (tab != NULL)
+        {
+            tab->die();
+        }
     }
 }
 
@@ -262,52 +262,52 @@ void LLOutfitsList::updateRemovedCategory(LLUUID cat_id)
 //virtual
 void LLOutfitsList::arrange()
 {
-	if (mAccordion)
-	{
-		mAccordion->arrange();
-	}
+    if (mAccordion)
+    {
+        mAccordion->arrange();
+    }
 }
 // </FS:Ansariel>
 
 // <FS:Ansariel> FIRE-22484: Double-click wear in outfits list
 void LLOutfitsList::onDoubleClick(LLWearableItemsList* list)
 {
-	if (!list)
-	{
-		return;
-	}
+    if (!list)
+    {
+        return;
+    }
 
-	LLUUID selected_item_id = list->getSelectedUUID();
-	if (selected_item_id.notNull())
-	{
-		uuid_vec_t ids;
-		ids.push_back(selected_item_id);
-		LLViewerInventoryItem* item = gInventory.getItem(selected_item_id);
+    LLUUID selected_item_id = list->getSelectedUUID();
+    if (selected_item_id.notNull())
+    {
+        uuid_vec_t ids;
+        ids.push_back(selected_item_id);
+        LLViewerInventoryItem* item = gInventory.getItem(selected_item_id);
 
-		if (get_is_item_worn(selected_item_id))
-		{
-			if ((item->getType() == LLAssetType::AT_CLOTHING && (!RlvActions::isRlvEnabled() || gRlvWearableLocks.canRemove(item))) ||
-			    ((item->getType() == LLAssetType::AT_OBJECT) && (!RlvActions::isRlvEnabled() || gRlvAttachmentLocks.canDetach(item))))
-			{
-				LLAppearanceMgr::instance().removeItemsFromAvatar(ids);
-			}
-		}
-		else
-		{
-			if (item->getType() == LLAssetType::AT_BODYPART && (!RlvActions::isRlvEnabled() || (gRlvWearableLocks.canWear(item) & RLV_WEAR_REPLACE) == RLV_WEAR_REPLACE))
-			{
-				wear_multiple(ids, true);
-			}
-			else if (item->getType() == LLAssetType::AT_CLOTHING && LLAppearanceMgr::instance().canAddWearables(ids) && (!RlvActions::isRlvEnabled() || (gRlvWearableLocks.canWear(item) & RLV_WEAR_ADD) == RLV_WEAR_ADD))
-			{
-				wear_multiple(ids, false);
-			}
-			else if (item->getType() == LLAssetType::AT_OBJECT && LLAppearanceMgr::instance().canAddWearables(ids) && (!RlvActions::isRlvEnabled() || (gRlvAttachmentLocks.canAttach(item) & RLV_WEAR_ADD) == RLV_WEAR_ADD))
-			{
-				wear_multiple(ids, false);
-			}
-		}
-	}
+        if (get_is_item_worn(selected_item_id))
+        {
+            if ((item->getType() == LLAssetType::AT_CLOTHING && (!RlvActions::isRlvEnabled() || gRlvWearableLocks.canRemove(item))) ||
+                ((item->getType() == LLAssetType::AT_OBJECT) && (!RlvActions::isRlvEnabled() || gRlvAttachmentLocks.canDetach(item))))
+            {
+                LLAppearanceMgr::instance().removeItemsFromAvatar(ids);
+            }
+        }
+        else
+        {
+            if (item->getType() == LLAssetType::AT_BODYPART && (!RlvActions::isRlvEnabled() || (gRlvWearableLocks.canWear(item) & RLV_WEAR_REPLACE) == RLV_WEAR_REPLACE))
+            {
+                wear_multiple(ids, true);
+            }
+            else if (item->getType() == LLAssetType::AT_CLOTHING && LLAppearanceMgr::instance().canAddWearables(ids) && (!RlvActions::isRlvEnabled() || (gRlvWearableLocks.canWear(item) & RLV_WEAR_ADD) == RLV_WEAR_ADD))
+            {
+                wear_multiple(ids, false);
+            }
+            else if (item->getType() == LLAssetType::AT_OBJECT && LLAppearanceMgr::instance().canAddWearables(ids) && (!RlvActions::isRlvEnabled() || (gRlvAttachmentLocks.canAttach(item) & RLV_WEAR_ADD) == RLV_WEAR_ADD))
+            {
+                wear_multiple(ids, false);
+            }
+        }
+    }
 }
 // </FS:Ansariel>
 
@@ -320,178 +320,178 @@ void LLOutfitsList::onHighlightBaseOutfit(LLUUID base_id, LLUUID prev_id)
         mOutfitsMap[prev_id]->setTitleColor(LLUIColorTable::instance().getColor("AccordionHeaderTextColor"));
     }
     if (mOutfitsMap[base_id])
-	{
-		mOutfitsMap[base_id]->setTitleFontStyle("BOLD");
-		mOutfitsMap[base_id]->setTitleColor(LLUIColorTable::instance().getColor("SelectedOutfitTextColor"));
-	}
+    {
+        mOutfitsMap[base_id]->setTitleFontStyle("BOLD");
+        mOutfitsMap[base_id]->setTitleColor(LLUIColorTable::instance().getColor("SelectedOutfitTextColor"));
+    }
 }
 
 void LLOutfitsList::onListSelectionChange(LLUICtrl* ctrl)
 {
-	LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(ctrl);
-	if (!list) return;
+    LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(ctrl);
+    if (!list) return;
 
-	LLViewerInventoryItem *item = gInventory.getItem(list->getSelectedUUID());
-	if (!item) return;
+    LLViewerInventoryItem *item = gInventory.getItem(list->getSelectedUUID());
+    if (!item) return;
 
-	ChangeOutfitSelection(list, item->getParentUUID());
+    ChangeOutfitSelection(list, item->getParentUUID());
 }
 
 void LLOutfitListBase::performAction(std::string action)
 {
-	if (mSelectedOutfitUUID.isNull()) return;
+    if (mSelectedOutfitUUID.isNull()) return;
 
-	LLViewerInventoryCategory* cat = gInventory.getCategory(mSelectedOutfitUUID);
-	if (!cat) return;
+    LLViewerInventoryCategory* cat = gInventory.getCategory(mSelectedOutfitUUID);
+    if (!cat) return;
 
-	if ("replaceoutfit" == action)
-	{
-		LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, FALSE );
-	}
-	if ("replaceitems" == action)
-	{
-		LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, TRUE );
-	}
-	else if ("addtooutfit" == action)
-	{
-		LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, TRUE );
-	}
-	else if ("rename_outfit" == action)
-	{
-		LLAppearanceMgr::instance().renameOutfit(mSelectedOutfitUUID);
-	}
+    if ("replaceoutfit" == action)
+    {
+        LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, FALSE );
+    }
+    if ("replaceitems" == action)
+    {
+        LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, TRUE );
+    }
+    else if ("addtooutfit" == action)
+    {
+        LLAppearanceMgr::instance().wearInventoryCategory( cat, FALSE, TRUE );
+    }
+    else if ("rename_outfit" == action)
+    {
+        LLAppearanceMgr::instance().renameOutfit(mSelectedOutfitUUID);
+    }
 }
 
 void LLOutfitsList::onSetSelectedOutfitByUUID(const LLUUID& outfit_uuid)
 {
-	for (outfits_map_t::iterator iter = mOutfitsMap.begin();
-			iter != mOutfitsMap.end();
-			++iter)
-	{
-		if (outfit_uuid == iter->first)
-		{
-			LLAccordionCtrlTab* tab = iter->second;
-			if (!tab) continue;
+    for (outfits_map_t::iterator iter = mOutfitsMap.begin();
+            iter != mOutfitsMap.end();
+            ++iter)
+    {
+        if (outfit_uuid == iter->first)
+        {
+            LLAccordionCtrlTab* tab = iter->second;
+            if (!tab) continue;
 
-			LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
-			if (!list) continue;
+            LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
+            if (!list) continue;
 
-			tab->setFocus(TRUE);
-			ChangeOutfitSelection(list, outfit_uuid);
+            tab->setFocus(TRUE);
+            ChangeOutfitSelection(list, outfit_uuid);
 
-			tab->changeOpenClose(false);
-		}
-	}
+            tab->changeOpenClose(false);
+        }
+    }
 }
 
 // virtual
 void LLOutfitsList::setFilterSubString(const std::string& string)
 {
-	applyFilter(string);
+    applyFilter(string);
 
-	sFilterSubString = string;
+    sFilterSubString = string;
 }
 
 // virtual
 bool LLOutfitListBase::isActionEnabled(const LLSD& userdata)
 {
-	if (mSelectedOutfitUUID.isNull()) return false;
+    if (mSelectedOutfitUUID.isNull()) return false;
 
-	const std::string command_name = userdata.asString();
-	if (command_name == "delete")
-	{
+    const std::string command_name = userdata.asString();
+    if (command_name == "delete")
+    {
         return !hasItemSelected() && LLAppearanceMgr::instance().getCanRemoveOutfit(mSelectedOutfitUUID);
-	}
-	if (command_name == "rename")
-	{
-		return get_is_category_renameable(&gInventory, mSelectedOutfitUUID);
-	}
-	if (command_name == "save_outfit")
-	{
-		bool outfit_locked = LLAppearanceMgr::getInstance()->isOutfitLocked();
-		bool outfit_dirty = LLAppearanceMgr::getInstance()->isOutfitDirty();
-		// allow save only if outfit isn't locked and is dirty
-		return !outfit_locked && outfit_dirty;
-	}
-	if (command_name == "wear")
-	{
-		if (gAgentWearables.isCOFChangeInProgress())
-		{
-			return false;
-		}
+    }
+    if (command_name == "rename")
+    {
+        return get_is_category_renameable(&gInventory, mSelectedOutfitUUID);
+    }
+    if (command_name == "save_outfit")
+    {
+        bool outfit_locked = LLAppearanceMgr::getInstance()->isOutfitLocked();
+        bool outfit_dirty = LLAppearanceMgr::getInstance()->isOutfitDirty();
+        // allow save only if outfit isn't locked and is dirty
+        return !outfit_locked && outfit_dirty;
+    }
+    if (command_name == "wear")
+    {
+        if (gAgentWearables.isCOFChangeInProgress())
+        {
+            return false;
+        }
 
-		if (hasItemSelected())
-		{
-			return canWearSelected();
-		}
+        if (hasItemSelected())
+        {
+            return canWearSelected();
+        }
 
-		// outfit selected
-		return LLAppearanceMgr::instance().getCanReplaceCOF(mSelectedOutfitUUID);
-	}
-	if (command_name == "take_off")
-	{
-		// Enable "Take Off" if any of selected items can be taken off
-		// or the selected outfit contains items that can be taken off.
-		return ( hasItemSelected() && canTakeOffSelected() )
-				|| ( !hasItemSelected() && LLAppearanceMgr::getCanRemoveFromCOF(mSelectedOutfitUUID) );
-	}
+        // outfit selected
+        return LLAppearanceMgr::instance().getCanReplaceCOF(mSelectedOutfitUUID);
+    }
+    if (command_name == "take_off")
+    {
+        // Enable "Take Off" if any of selected items can be taken off
+        // or the selected outfit contains items that can be taken off.
+        return ( hasItemSelected() && canTakeOffSelected() )
+                || ( !hasItemSelected() && LLAppearanceMgr::getCanRemoveFromCOF(mSelectedOutfitUUID) );
+    }
 
-	if (command_name == "wear_add")
-	{
-		// *TODO: do we ever get here?
-		return LLAppearanceMgr::getCanAddToCOF(mSelectedOutfitUUID);
-	}
+    if (command_name == "wear_add")
+    {
+        // *TODO: do we ever get here?
+        return LLAppearanceMgr::getCanAddToCOF(mSelectedOutfitUUID);
+    }
 
-	return false;
+    return false;
 }
 
 void LLOutfitsList::getSelectedItemsUUIDs(uuid_vec_t& selected_uuids) const
 {
-	// Collect selected items from all selected lists.
-	for (wearables_lists_map_t::const_iterator iter = mSelectedListsMap.begin();
-			iter != mSelectedListsMap.end();
-			++iter)
-	{
-		uuid_vec_t uuids;
-		(*iter).second->getSelectedUUIDs(uuids);
+    // Collect selected items from all selected lists.
+    for (wearables_lists_map_t::const_iterator iter = mSelectedListsMap.begin();
+            iter != mSelectedListsMap.end();
+            ++iter)
+    {
+        uuid_vec_t uuids;
+        (*iter).second->getSelectedUUIDs(uuids);
 
-		S32 prev_size = selected_uuids.size();
-		selected_uuids.resize(prev_size + uuids.size());
-		std::copy(uuids.begin(), uuids.end(), selected_uuids.begin() + prev_size);
-	}
+        S32 prev_size = selected_uuids.size();
+        selected_uuids.resize(prev_size + uuids.size());
+        std::copy(uuids.begin(), uuids.end(), selected_uuids.begin() + prev_size);
+    }
 }
 
 void LLOutfitsList::onCollapseAllFolders()
 {
-	for (outfits_map_t::iterator iter = mOutfitsMap.begin();
-			iter != mOutfitsMap.end();
-			++iter)
-	{
-		LLAccordionCtrlTab*	tab = iter->second;
-		if(tab && tab->isExpanded())
-		{
-			tab->changeOpenClose(true);
-		}
-	}
+    for (outfits_map_t::iterator iter = mOutfitsMap.begin();
+            iter != mOutfitsMap.end();
+            ++iter)
+    {
+        LLAccordionCtrlTab* tab = iter->second;
+        if(tab && tab->isExpanded())
+        {
+            tab->changeOpenClose(true);
+        }
+    }
 }
 
 void LLOutfitsList::onExpandAllFolders()
 {
-	for (outfits_map_t::iterator iter = mOutfitsMap.begin();
-			iter != mOutfitsMap.end();
-			++iter)
-	{
-		LLAccordionCtrlTab*	tab = iter->second;
-		if(tab && !tab->isExpanded())
-		{
-			tab->changeOpenClose(false);
-		}
-	}
+    for (outfits_map_t::iterator iter = mOutfitsMap.begin();
+            iter != mOutfitsMap.end();
+            ++iter)
+    {
+        LLAccordionCtrlTab* tab = iter->second;
+        if(tab && !tab->isExpanded())
+        {
+            tab->changeOpenClose(false);
+        }
+    }
 }
 
 bool LLOutfitsList::hasItemSelected()
 {
-	return mItemSelected;
+    return mItemSelected;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -501,305 +501,305 @@ bool LLOutfitsList::hasItemSelected()
 void LLOutfitsList::updateChangedCategoryName(LLViewerInventoryCategory *cat, std::string name)
 {
     outfits_map_t::iterator outfits_iter = mOutfitsMap.find(cat->getUUID());
-	if (outfits_iter != mOutfitsMap.end())
-	{
-		// Update tab name with the new category name.
-		LLAccordionCtrlTab* tab = outfits_iter->second;
-		if (tab)
-		{
-			tab->setName(name);
-			tab->setTitle(name);
-		}
-	}
+    if (outfits_iter != mOutfitsMap.end())
+    {
+        // Update tab name with the new category name.
+        LLAccordionCtrlTab* tab = outfits_iter->second;
+        if (tab)
+        {
+            tab->setName(name);
+            tab->setTitle(name);
+        }
+    }
 }
 
 void LLOutfitsList::resetItemSelection(LLWearableItemsList* list, const LLUUID& category_id)
 {
-	list->resetSelection();
-	mItemSelected = false;
-	signalSelectionOutfitUUID(category_id);
+    list->resetSelection();
+    mItemSelected = false;
+    signalSelectionOutfitUUID(category_id);
 }
 
 void LLOutfitsList::onChangeOutfitSelection(LLWearableItemsList* list, const LLUUID& category_id)
 {
-	MASK mask = gKeyboard->currentMask(TRUE);
+    MASK mask = gKeyboard->currentMask(TRUE);
 
-	// Reset selection in all previously selected tabs except for the current
-	// if new selection is started.
-	if (list && !(mask & MASK_CONTROL))
-	{
-		for (wearables_lists_map_t::iterator iter = mSelectedListsMap.begin();
-				iter != mSelectedListsMap.end();
-				++iter)
-		{
-			LLWearableItemsList* selected_list = (*iter).second;
-			if (selected_list != list)
-			{
-				selected_list->resetSelection();
-			}
-		}
+    // Reset selection in all previously selected tabs except for the current
+    // if new selection is started.
+    if (list && !(mask & MASK_CONTROL))
+    {
+        for (wearables_lists_map_t::iterator iter = mSelectedListsMap.begin();
+                iter != mSelectedListsMap.end();
+                ++iter)
+        {
+            LLWearableItemsList* selected_list = (*iter).second;
+            if (selected_list != list)
+            {
+                selected_list->resetSelection();
+            }
+        }
 
-		// Clear current selection.
-		mSelectedListsMap.clear();
-	}
+        // Clear current selection.
+        mSelectedListsMap.clear();
+    }
 
-	mItemSelected = list && (list->getSelectedItem() != NULL);
+    mItemSelected = list && (list->getSelectedItem() != NULL);
 
-	mSelectedListsMap.insert(wearables_lists_map_value_t(category_id, list));
+    mSelectedListsMap.insert(wearables_lists_map_value_t(category_id, list));
 }
 
 void LLOutfitsList::deselectOutfit(const LLUUID& category_id)
 {
-	// Remove selected lists map entry.
-	mSelectedListsMap.erase(category_id);
+    // Remove selected lists map entry.
+    mSelectedListsMap.erase(category_id);
     
     LLOutfitListBase::deselectOutfit(category_id);
 }
 
 void LLOutfitsList::restoreOutfitSelection(LLAccordionCtrlTab* tab, const LLUUID& category_id)
 {
-	// Try restoring outfit selection after filtering.
-	if (mAccordion->getSelectedTab() == tab)
-	{
-		signalSelectionOutfitUUID(category_id);
-	}
+    // Try restoring outfit selection after filtering.
+    if (mAccordion->getSelectedTab() == tab)
+    {
+        signalSelectionOutfitUUID(category_id);
+    }
 }
 
 void LLOutfitsList::onFilteredWearableItemsListRefresh(LLUICtrl* ctrl)
 {
-	if (!ctrl || sFilterSubString.empty())
-		return;
+    if (!ctrl || sFilterSubString.empty())
+        return;
 
-	for (outfits_map_t::iterator
-			 iter = mOutfitsMap.begin(),
-			 iter_end = mOutfitsMap.end();
-		 iter != iter_end; ++iter)
-	{
-		LLAccordionCtrlTab* tab = iter->second;
-		if (!tab) continue;
+    for (outfits_map_t::iterator
+             iter = mOutfitsMap.begin(),
+             iter_end = mOutfitsMap.end();
+         iter != iter_end; ++iter)
+    {
+        LLAccordionCtrlTab* tab = iter->second;
+        if (!tab) continue;
 
-		LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
-		if (list != ctrl) continue;
+        LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
+        if (list != ctrl) continue;
 
-		applyFilterToTab(iter->first, tab, sFilterSubString);
-	}
+        applyFilterToTab(iter->first, tab, sFilterSubString);
+    }
 }
 
 void LLOutfitsList::applyFilter(const std::string& new_filter_substring)
 {
-	mAccordion->setFilterSubString(new_filter_substring);
+    mAccordion->setFilterSubString(new_filter_substring);
 
-	for (outfits_map_t::iterator
-			 iter = mOutfitsMap.begin(),
-			 iter_end = mOutfitsMap.end();
-		 iter != iter_end; ++iter)
-	{
-		LLAccordionCtrlTab* tab = iter->second;
-		if (!tab) continue;
+    for (outfits_map_t::iterator
+             iter = mOutfitsMap.begin(),
+             iter_end = mOutfitsMap.end();
+         iter != iter_end; ++iter)
+    {
+        LLAccordionCtrlTab* tab = iter->second;
+        if (!tab) continue;
 
-		bool more_restrictive = sFilterSubString.size() < new_filter_substring.size() && !new_filter_substring.substr(0, sFilterSubString.size()).compare(sFilterSubString);
+        bool more_restrictive = sFilterSubString.size() < new_filter_substring.size() && !new_filter_substring.substr(0, sFilterSubString.size()).compare(sFilterSubString);
 
-		// Restore tab visibility in case of less restrictive filter
-		// to compare it with updated string if it was previously hidden.
-		if (!more_restrictive)
-		{
-			tab->setVisible(TRUE);
-		}
+        // Restore tab visibility in case of less restrictive filter
+        // to compare it with updated string if it was previously hidden.
+        if (!more_restrictive)
+        {
+            tab->setVisible(TRUE);
+        }
 
-		LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
-		if (list)
-		{
-			list->setFilterSubString(new_filter_substring);
-		}
+        LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
+        if (list)
+        {
+            list->setFilterSubString(new_filter_substring);
+        }
 
-		if(sFilterSubString.empty() && !new_filter_substring.empty())
-		{
-			//store accordion tab state when filter is not empty
-			tab->notifyChildren(LLSD().with("action","store_state"));
-		}
+        if(sFilterSubString.empty() && !new_filter_substring.empty())
+        {
+            //store accordion tab state when filter is not empty
+            tab->notifyChildren(LLSD().with("action","store_state"));
+        }
 
-		if (!new_filter_substring.empty())
-		{
-			applyFilterToTab(iter->first, tab, new_filter_substring);
-		}
-		else
-		{
-			// restore tab title when filter is empty
-			tab->setTitle(tab->getTitle());
+        if (!new_filter_substring.empty())
+        {
+            applyFilterToTab(iter->first, tab, new_filter_substring);
+        }
+        else
+        {
+            // restore tab title when filter is empty
+            tab->setTitle(tab->getTitle());
 
-			//restore accordion state after all those accodrion tab manipulations
-			tab->notifyChildren(LLSD().with("action","restore_state"));
+            //restore accordion state after all those accodrion tab manipulations
+            tab->notifyChildren(LLSD().with("action","restore_state"));
 
-			// Try restoring the tab selection.
-			restoreOutfitSelection(tab, iter->first);
-		}
-	}
+            // Try restoring the tab selection.
+            restoreOutfitSelection(tab, iter->first);
+        }
+    }
 
-	mAccordion->arrange();
+    mAccordion->arrange();
 }
 
 void LLOutfitsList::applyFilterToTab(
-	const LLUUID&		category_id,
-	LLAccordionCtrlTab*	tab,
-	const std::string&	filter_substring)
+    const LLUUID&       category_id,
+    LLAccordionCtrlTab* tab,
+    const std::string&  filter_substring)
 {
-	if (!tab) return;
-	LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
-	if (!list) return;
+    if (!tab) return;
+    LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
+    if (!list) return;
 
-	std::string title = tab->getTitle();
-	LLStringUtil::toUpper(title);
+    std::string title = tab->getTitle();
+    LLStringUtil::toUpper(title);
 
-	std::string cur_filter = filter_substring;
-	LLStringUtil::toUpper(cur_filter);
+    std::string cur_filter = filter_substring;
+    LLStringUtil::toUpper(cur_filter);
 
-	tab->setTitle(tab->getTitle(), cur_filter);
+    tab->setTitle(tab->getTitle(), cur_filter);
 
-	if (std::string::npos == title.find(cur_filter))
-	{
-		// hide tab if its title doesn't pass filter
-		// and it has no visible items
-		tab->setVisible(list->hasMatchedItems());
+    if (std::string::npos == title.find(cur_filter))
+    {
+        // hide tab if its title doesn't pass filter
+        // and it has no visible items
+        tab->setVisible(list->hasMatchedItems());
 
-		// remove title highlighting because it might
-		// have been previously highlighted by less restrictive filter
-		tab->setTitle(tab->getTitle());
+        // remove title highlighting because it might
+        // have been previously highlighted by less restrictive filter
+        tab->setTitle(tab->getTitle());
 
-		// Remove the tab from selection.
-		deselectOutfit(category_id);
-	}
-	else
-	{
-		// Try restoring the tab selection.
-		restoreOutfitSelection(tab, category_id);
-	}
+        // Remove the tab from selection.
+        deselectOutfit(category_id);
+    }
+    else
+    {
+        // Try restoring the tab selection.
+        restoreOutfitSelection(tab, category_id);
+    }
 
-	if (tab->getVisible())
-	{
-		// Open tab if it has passed the filter.
-		tab->setDisplayChildren(true);
-	}
-	else
-	{
-		// Set force refresh flag to refresh not visible list
-		// when some changes occur in it.
-		list->setForceRefresh(true);
-	}
+    if (tab->getVisible())
+    {
+        // Open tab if it has passed the filter.
+        tab->setDisplayChildren(true);
+    }
+    else
+    {
+        // Set force refresh flag to refresh not visible list
+        // when some changes occur in it.
+        list->setForceRefresh(true);
+    }
 }
 
 bool LLOutfitsList::canWearSelected()
 {
-	if (!isAgentAvatarValid())
-	{
-		return false;
-	}
+    if (!isAgentAvatarValid())
+    {
+        return false;
+    }
 
-	uuid_vec_t selected_items;
-	getSelectedItemsUUIDs(selected_items);
-	S32 nonreplacable_objects = 0;
+    uuid_vec_t selected_items;
+    getSelectedItemsUUIDs(selected_items);
+    S32 nonreplacable_objects = 0;
 
-	for (uuid_vec_t::const_iterator it = selected_items.begin(); it != selected_items.end(); ++it)
-	{
-		const LLUUID& id = *it;
+    for (uuid_vec_t::const_iterator it = selected_items.begin(); it != selected_items.end(); ++it)
+    {
+        const LLUUID& id = *it;
 
-		// Check whether the item is worn.
-		if (!get_can_item_be_worn(id))
-		{
-			return false;
-		}
+        // Check whether the item is worn.
+        if (!get_can_item_be_worn(id))
+        {
+            return false;
+        }
 
-		const LLViewerInventoryItem* item = gInventory.getItem(id);
-		if (!item)
-		{
-			return false;
-		}
+        const LLViewerInventoryItem* item = gInventory.getItem(id);
+        if (!item)
+        {
+            return false;
+        }
 
-		if (item->getType() == LLAssetType::AT_OBJECT)
-		{
-			nonreplacable_objects++;
-		}
-	}
+        if (item->getType() == LLAssetType::AT_OBJECT)
+        {
+            nonreplacable_objects++;
+        }
+    }
 
-	// All selected items can be worn. But do we have enough space for them?
-	return nonreplacable_objects == 0 || gAgentAvatarp->canAttachMoreObjects(nonreplacable_objects);
+    // All selected items can be worn. But do we have enough space for them?
+    return nonreplacable_objects == 0 || gAgentAvatarp->canAttachMoreObjects(nonreplacable_objects);
 }
 
 void LLOutfitsList::wearSelectedItems()
 {
-	uuid_vec_t selected_uuids;
-	getSelectedItemsUUIDs(selected_uuids);
+    uuid_vec_t selected_uuids;
+    getSelectedItemsUUIDs(selected_uuids);
 
-	if(selected_uuids.empty())
-	{
-		return;
-	}
+    if(selected_uuids.empty())
+    {
+        return;
+    }
 
-	wear_multiple(selected_uuids, false);
+    wear_multiple(selected_uuids, false);
 }
 
 void LLOutfitsList::onWearableItemsListRightClick(LLUICtrl* ctrl, S32 x, S32 y)
 {
-	LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(ctrl);
-	if (!list) return;
+    LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(ctrl);
+    if (!list) return;
 
-	uuid_vec_t selected_uuids;
+    uuid_vec_t selected_uuids;
 
-	getSelectedItemsUUIDs(selected_uuids);
+    getSelectedItemsUUIDs(selected_uuids);
 
-	LLWearableItemsList::ContextMenu::instance().show(list, selected_uuids, x, y);
+    LLWearableItemsList::ContextMenu::instance().show(list, selected_uuids, x, y);
 }
 
 void LLOutfitsList::onCOFChanged()
 {
-	LLInventoryModel::cat_array_t cat_array;
-	LLInventoryModel::item_array_t item_array;
+    LLInventoryModel::cat_array_t cat_array;
+    LLInventoryModel::item_array_t item_array;
 
-	// Collect current COF items
-	gInventory.collectDescendents(
-		LLAppearanceMgr::instance().getCOF(),
-		cat_array,
-		item_array,
-		LLInventoryModel::EXCLUDE_TRASH);
+    // Collect current COF items
+    gInventory.collectDescendents(
+        LLAppearanceMgr::instance().getCOF(),
+        cat_array,
+        item_array,
+        LLInventoryModel::EXCLUDE_TRASH);
 
-	uuid_vec_t vnew;
-	uuid_vec_t vadded;
-	uuid_vec_t vremoved;
+    uuid_vec_t vnew;
+    uuid_vec_t vadded;
+    uuid_vec_t vremoved;
 
-	// From gInventory we get the UUIDs of links that are currently in COF.
-	// These links UUIDs are not the same UUIDs that we have in each wearable items list.
-	// So we collect base items' UUIDs to find them or links that point to them in wearable
-	// items lists and update their worn state there.
-	for (LLInventoryModel::item_array_t::const_iterator iter = item_array.begin();
-		iter != item_array.end();
-		++iter)
-	{
-		vnew.push_back((*iter)->getLinkedUUID());
-	}
+    // From gInventory we get the UUIDs of links that are currently in COF.
+    // These links UUIDs are not the same UUIDs that we have in each wearable items list.
+    // So we collect base items' UUIDs to find them or links that point to them in wearable
+    // items lists and update their worn state there.
+    for (LLInventoryModel::item_array_t::const_iterator iter = item_array.begin();
+        iter != item_array.end();
+        ++iter)
+    {
+        vnew.push_back((*iter)->getLinkedUUID());
+    }
 
-	// We need to update only items that were added or removed from COF.
-	LLCommonUtils::computeDifference(vnew, mCOFLinkedItems, vadded, vremoved);
+    // We need to update only items that were added or removed from COF.
+    LLCommonUtils::computeDifference(vnew, mCOFLinkedItems, vadded, vremoved);
 
-	// Store the ids of items currently linked from COF.
-	mCOFLinkedItems = vnew;
+    // Store the ids of items currently linked from COF.
+    mCOFLinkedItems = vnew;
 
-	for (outfits_map_t::iterator iter = mOutfitsMap.begin();
-			iter != mOutfitsMap.end();
-			++iter)
-	{
-		LLAccordionCtrlTab* tab = iter->second;
-		if (!tab) continue;
+    for (outfits_map_t::iterator iter = mOutfitsMap.begin();
+            iter != mOutfitsMap.end();
+            ++iter)
+    {
+        LLAccordionCtrlTab* tab = iter->second;
+        if (!tab) continue;
 
-		LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
-		if (!list) continue;
+        LLWearableItemsList* list = dynamic_cast<LLWearableItemsList*>(tab->getAccordionView());
+        if (!list) continue;
 
-		// Append removed ids to added ids because we should update all of them.
-		vadded.reserve(vadded.size() + vremoved.size());
-		vadded.insert(vadded.end(), vremoved.begin(), vremoved.end());
+        // Append removed ids to added ids because we should update all of them.
+        vadded.reserve(vadded.size() + vremoved.size());
+        vadded.insert(vadded.end(), vremoved.begin(), vremoved.end());
 
-		// Every list updates the labels of changed items  or
-		// the links that point to these items.
-		list->updateChangedItems(vadded);
-	}
+        // Every list updates the labels of changed items  or
+        // the links that point to these items.
+        list->updateChangedItems(vadded);
+    }
 }
 
 void LLOutfitsList::getCurrentCategories(uuid_vec_t& vcur)
@@ -845,16 +845,16 @@ LLOutfitListGearMenuBase* LLOutfitsList::createGearMenu()
 
 bool is_tab_header_clicked(LLAccordionCtrlTab* tab, S32 y)
 {
-	if(!tab || !tab->getHeaderVisible()) return false;
+    if(!tab || !tab->getHeaderVisible()) return false;
 
-	S32 header_bottom = tab->getLocalRect().getHeight() - tab->getHeaderHeight();
-	return y >= header_bottom;
+    S32 header_bottom = tab->getLocalRect().getHeight() - tab->getHeaderHeight();
+    return y >= header_bottom;
 }
 
 LLOutfitListBase::LLOutfitListBase()
     :   LLPanelAppearanceTab()
     ,   mIsInitialized(false)
-	,	mAvatarComplexityLabel(NULL) // <FS:Ansariel> Show avatar complexity in appearance floater
+    ,   mAvatarComplexityLabel(NULL) // <FS:Ansariel> Show avatar complexity in appearance floater
 {
     mCategoriesObserver = new LLInventoryCategoriesObserver();
     mOutfitMenu = new LLOutfitContextMenu(this);
@@ -920,31 +920,31 @@ void LLOutfitListBase::refreshList(const LLUUID& category_id)
     LLInventoryModel::item_array_t item_array;
 
     // Collect all sub-categories of a given category.
-	// <FS:ND> FIRE-6958/VWR-2862; Make sure to only collect folders of type FT_OUTFIT
+    // <FS:ND> FIRE-6958/VWR-2862; Make sure to only collect folders of type FT_OUTFIT
 
-	class ndOutfitsCollector: public LLIsType
-	{
-	public:
-		ndOutfitsCollector()
-			: LLIsType( LLAssetType::AT_CATEGORY )
-		{ }
+    class ndOutfitsCollector: public LLIsType
+    {
+    public:
+        ndOutfitsCollector()
+            : LLIsType( LLAssetType::AT_CATEGORY )
+        { }
 
-		virtual bool operator()(LLInventoryCategory* cat, LLInventoryItem* item)
-		{
-			if( !LLIsType::operator()( cat, item ) )
-				return false;
+        virtual bool operator()(LLInventoryCategory* cat, LLInventoryItem* item)
+        {
+            if( !LLIsType::operator()( cat, item ) )
+                return false;
 
-			if( cat && LLFolderType::FT_OUTFIT == cat->getPreferredType() )
-				return true;
+            if( cat && LLFolderType::FT_OUTFIT == cat->getPreferredType() )
+                return true;
 
-			return false;
-		}
-	};
+            return false;
+        }
+    };
 
-	//	LLIsType is_category(LLAssetType::AT_CATEGORY);
-	ndOutfitsCollector is_category;
+    //  LLIsType is_category(LLAssetType::AT_CATEGORY);
+    ndOutfitsCollector is_category;
 
-	// </FS:ND>
+    // </FS:ND>
     gInventory.collectDescendentsIf(
         category_id,
         cat_array,
@@ -958,26 +958,26 @@ void LLOutfitListBase::refreshList(const LLUUID& category_id)
     // Create added and removed items vectors.
     computeDifference(cat_array, vadded, vremoved);
     
-	// <FS:ND> FIRE-6958/VWR-2862; Handle large amounts of outfits, write a least a warning into the logs.
-	if( vadded.size() > 128 )
-		LL_WARNS() << "Large amount of outfits found: " << vadded.size() << " this may cause hangs and disconnects" << LL_ENDL;
+    // <FS:ND> FIRE-6958/VWR-2862; Handle large amounts of outfits, write a least a warning into the logs.
+    if( vadded.size() > 128 )
+        LL_WARNS() << "Large amount of outfits found: " << vadded.size() << " this may cause hangs and disconnects" << LL_ENDL;
 
-	U32 nCap = gSavedSettings.getU32( "FSDisplaySavedOutfitsCap" );
-	if( nCap && nCap < vadded.size() )
-	{
-		vadded.resize( nCap );
-		LL_WARNS() << "Capped outfits to " << nCap << " due to debug setting FSDisplaySavedOutfitsCap" << LL_ENDL;
-	}
-	// </FS:ND>
+    U32 nCap = gSavedSettings.getU32( "FSDisplaySavedOutfitsCap" );
+    if( nCap && nCap < vadded.size() )
+    {
+        vadded.resize( nCap );
+        LL_WARNS() << "Capped outfits to " << nCap << " due to debug setting FSDisplaySavedOutfitsCap" << LL_ENDL;
+    }
+    // </FS:ND>
 
-	// <FS:Ansariel> FIRE-12939: Add outfit count to outfits list
-	{
-		std::string count_string;
-		LLLocale locale("");
-		LLResMgr::getInstance()->getIntegerString(count_string, (S32)cat_array.size());
-		getChild<LLTextBox>("OutfitcountText")->setTextArg("COUNT", count_string);
-	}
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-12939: Add outfit count to outfits list
+    {
+        std::string count_string;
+        LLLocale locale("");
+        LLResMgr::getInstance()->getIntegerString(count_string, (S32)cat_array.size());
+        getChild<LLTextBox>("OutfitcountText")->setTextArg("COUNT", count_string);
+    }
+    // </FS:Ansariel>
 
     // Handle added tabs.
     for (uuid_vec_t::const_iterator iter = vadded.begin();
@@ -1062,16 +1062,16 @@ void LLOutfitListBase::highlightBaseOutfit()
 
 void LLOutfitListBase::removeSelected()
 {
-	// <FS:Ansariel> FIRE-15888: Include outfit name in delete outfit confirmation dialog
-	LLViewerInventoryCategory* cat = gInventory.getCategory(mSelectedOutfitUUID);
-	if (cat)
-	{
-		LLSD args;
-		args["NAME"] = cat->getName();
-		LLNotificationsUtil::add("DeleteOutfitsWithName", args, LLSD(), boost::bind(&LLOutfitsList::onOutfitsRemovalConfirmation, this, _1, _2));
-	}
-	else
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-15888: Include outfit name in delete outfit confirmation dialog
+    LLViewerInventoryCategory* cat = gInventory.getCategory(mSelectedOutfitUUID);
+    if (cat)
+    {
+        LLSD args;
+        args["NAME"] = cat->getName();
+        LLNotificationsUtil::add("DeleteOutfitsWithName", args, LLSD(), boost::bind(&LLOutfitsList::onOutfitsRemovalConfirmation, this, _1, _2));
+    }
+    else
+    // </FS:Ansariel>
     LLNotificationsUtil::add("DeleteOutfits", LLSD(), LLSD(), boost::bind(&LLOutfitListBase::onOutfitsRemovalConfirmation, this, _1, _2));
 }
 
@@ -1117,8 +1117,8 @@ BOOL LLOutfitListBase::postBuild()
 {
     mGearMenu = createGearMenu();
 
-	// <FS:Ansariel> Show avatar complexity in appearance floater
-	mAvatarComplexityLabel = getChild<LLTextBox>("avatar_complexity_label");
+    // <FS:Ansariel> Show avatar complexity in appearance floater
+    mAvatarComplexityLabel = getChild<LLTextBox>("avatar_complexity_label");
 
     LLMenuButton* menu_gear_btn = getChild<LLMenuButton>("options_gear_btn");
 
@@ -1150,11 +1150,11 @@ void LLOutfitListBase::deselectOutfit(const LLUUID& category_id)
 // <FS:Ansariel> Show avatar complexity in appearance floater
 void LLOutfitListBase::updateAvatarComplexity(U32 complexity)
 {
-	std::string complexity_string;
-	LLLocale locale("");
-	LLResMgr::getInstance()->getIntegerString(complexity_string, complexity);
+    std::string complexity_string;
+    LLLocale locale("");
+    LLResMgr::getInstance()->getIntegerString(complexity_string, complexity);
 
-	mAvatarComplexityLabel->setTextArg("[WEIGHT]", complexity_string);
+    mAvatarComplexityLabel->setTextArg("[WEIGHT]", complexity_string);
 }
 // </FS:Ansariel>
 
@@ -1376,7 +1376,7 @@ bool LLOutfitListGearMenuBase::onEnable(LLSD::String param)
 
 bool LLOutfitListGearMenuBase::onVisible(LLSD::String param)
 {
-	getMenu()->getChild<LLUICtrl>("upload_photo")->setLabelArg("[UPLOAD_COST]", std::to_string(LLAgentBenefitsMgr::current().getTextureUploadCost()));
+    getMenu()->getChild<LLUICtrl>("upload_photo")->setLabelArg("[UPLOAD_COST]", std::to_string(LLAgentBenefitsMgr::current().getTextureUploadCost()));
     const LLUUID& selected_outfit_id = getSelectedOutfitID();
     if (selected_outfit_id.isNull()) // no selection or invalid outfit selected
     {

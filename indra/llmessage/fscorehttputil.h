@@ -32,18 +32,18 @@
 
 namespace FSCoreHttpUtil
 {
-	typedef boost::function<void(const LLSD &)> completionCallback_t;
+    typedef boost::function<void(const LLSD &)> completionCallback_t;
 
-	void callbackHttpPostRaw(const std::string &url, std::string postData, completionCallback_t success = NULL, completionCallback_t failure = NULL,
-							 LLCore::HttpHeaders::ptr_t aHeader = LLCore::HttpHeaders::ptr_t(), LLCore::HttpOptions::ptr_t options = LLCore::HttpOptions::ptr_t());
-	void callbackHttpGetRaw(const std::string &url, completionCallback_t success = NULL, completionCallback_t failure = NULL,
-							LLCore::HttpHeaders::ptr_t aHeader = LLCore::HttpHeaders::ptr_t(), LLCore::HttpOptions::ptr_t options = LLCore::HttpOptions::ptr_t());
-	void callbackHttpGet(const std::string &url, const time_t& last_modified, completionCallback_t success, completionCallback_t failure);
+    void callbackHttpPostRaw(const std::string &url, std::string postData, completionCallback_t success = NULL, completionCallback_t failure = NULL,
+                             LLCore::HttpHeaders::ptr_t aHeader = LLCore::HttpHeaders::ptr_t(), LLCore::HttpOptions::ptr_t options = LLCore::HttpOptions::ptr_t());
+    void callbackHttpGetRaw(const std::string &url, completionCallback_t success = NULL, completionCallback_t failure = NULL,
+                            LLCore::HttpHeaders::ptr_t aHeader = LLCore::HttpHeaders::ptr_t(), LLCore::HttpOptions::ptr_t options = LLCore::HttpOptions::ptr_t());
+    void callbackHttpGet(const std::string &url, const time_t& last_modified, completionCallback_t success, completionCallback_t failure);
 
-	void trivialGetCoroRaw(std::string url, LLCore::HttpRequest::policy_t policyId, LLCore::HttpHeaders::ptr_t aHeader, LLCore::HttpOptions::ptr_t options, completionCallback_t success, completionCallback_t failure);
-	void trivialPostCoroRaw(std::string url, LLCore::HttpRequest::policy_t policyId, LLCore::BufferArray::ptr_t postData, LLCore::HttpHeaders::ptr_t aHeader, LLCore::HttpOptions::ptr_t options,
-							completionCallback_t success, completionCallback_t failure);
-	void trivialGetCoro(std::string url, time_t last_modified, completionCallback_t success, completionCallback_t failure);
+    void trivialGetCoroRaw(std::string url, LLCore::HttpRequest::policy_t policyId, LLCore::HttpHeaders::ptr_t aHeader, LLCore::HttpOptions::ptr_t options, completionCallback_t success, completionCallback_t failure);
+    void trivialPostCoroRaw(std::string url, LLCore::HttpRequest::policy_t policyId, LLCore::BufferArray::ptr_t postData, LLCore::HttpHeaders::ptr_t aHeader, LLCore::HttpOptions::ptr_t options,
+                            completionCallback_t success, completionCallback_t failure);
+    void trivialGetCoro(std::string url, time_t last_modified, completionCallback_t success, completionCallback_t failure);
 }
 
 #endif // FS_COREHTTPUTIL_H

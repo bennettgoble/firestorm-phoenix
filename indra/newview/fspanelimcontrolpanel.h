@@ -34,48 +34,48 @@
 class FSParticipantList;
 
 class FSPanelChatControlPanel 
-	: public LLPanel
+    : public LLPanel
 {
 public:
-	FSPanelChatControlPanel() :
-		mSessionId(LLUUID()) {};
-	~FSPanelChatControlPanel() { }
+    FSPanelChatControlPanel() :
+        mSessionId(LLUUID()) {};
+    ~FSPanelChatControlPanel() { }
 
-	virtual void setSessionId(const LLUUID& session_id);
-	const LLUUID& getSessionId() { return mSessionId; }
+    virtual void setSessionId(const LLUUID& session_id);
+    const LLUUID& getSessionId() { return mSessionId; }
 
 private:
-	LLUUID mSessionId;
+    LLUUID mSessionId;
 };
 
 
 class FSPanelIMControlPanel : public FSPanelChatControlPanel
 {
 public:
-	FSPanelIMControlPanel() { }
-	~FSPanelIMControlPanel() { }
+    FSPanelIMControlPanel() { }
+    ~FSPanelIMControlPanel() { }
 };
 
 
 class FSPanelGroupControlPanel : public FSPanelChatControlPanel
 {
 public:
-	FSPanelGroupControlPanel(const LLUUID& session_id);
-	~FSPanelGroupControlPanel();
+    FSPanelGroupControlPanel(const LLUUID& session_id);
+    ~FSPanelGroupControlPanel();
 
-	void setSessionId(const LLUUID& session_id);
-	/*virtual*/ void draw();
+    void setSessionId(const LLUUID& session_id);
+    /*virtual*/ void draw();
 
 protected:
-	LLUUID mGroupID;
+    LLUUID mGroupID;
 
-	FSParticipantList* mParticipantList;
+    FSParticipantList* mParticipantList;
 };
 
 class FSPanelAdHocControlPanel : public FSPanelGroupControlPanel
 {
 public:
-	FSPanelAdHocControlPanel(const LLUUID& session_id);
+    FSPanelAdHocControlPanel(const LLUUID& session_id);
 };
 
 #endif // FS_PANELIMCONTROLPANEL_H

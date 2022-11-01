@@ -34,47 +34,47 @@ class LLParcel;
 
 class LLParcelSelection : public LLRefCount
 {
-	friend class LLViewerParcelMgr;
-	friend class LLSafeHandle<LLParcelSelection>;
+    friend class LLViewerParcelMgr;
+    friend class LLSafeHandle<LLParcelSelection>;
 
 protected:
-	~LLParcelSelection();
+    ~LLParcelSelection();
 
 public:
-	LLParcelSelection(LLParcel* parcel);
-	LLParcelSelection();
+    LLParcelSelection(LLParcel* parcel);
+    LLParcelSelection();
 
-	// this can return NULL at any time, as parcel selection
-	// might have been invalidated.
+    // this can return NULL at any time, as parcel selection
+    // might have been invalidated.
 // [RLVa:KB] - Checked: 2012-02-09 (RLVa-1.4.5) | Modified: RLVa-1.4.5
-	LLParcel* getParcel() const { return mParcel; }
+    LLParcel* getParcel() const { return mParcel; }
 // [/RLVa:KB]
-//	LLParcel* getParcel() { return mParcel; }
+//  LLParcel* getParcel() { return mParcel; }
 
-	// Return the number of grid units that are owned by you within
-	// the selection (computed by server).
-	S32 getSelfCount() const { return mSelectedSelfCount; }
+    // Return the number of grid units that are owned by you within
+    // the selection (computed by server).
+    S32 getSelfCount() const { return mSelectedSelfCount; }
 
-	// Returns area that will actually be claimed in meters squared.
-	S32		getClaimableArea() const;
-	bool	hasOthersSelected() const;
+    // Returns area that will actually be claimed in meters squared.
+    S32     getClaimableArea() const;
+    bool    hasOthersSelected() const;
 
-	// Does the selection have multiple land owners in it?
-	BOOL	getMultipleOwners() const;
+    // Does the selection have multiple land owners in it?
+    BOOL    getMultipleOwners() const;
 
-	// Is the entire parcel selected, or just a part?
-	BOOL	getWholeParcelSelected() const;
-
-private:
-	void setParcel(LLParcel* parcel) { mParcel = parcel; }
+    // Is the entire parcel selected, or just a part?
+    BOOL    getWholeParcelSelected() const;
 
 private:
-	LLParcel*	mParcel;
-	BOOL		mSelectedMultipleOwners;
-	BOOL		mWholeParcelSelected;
-	S32			mSelectedSelfCount;
-	S32			mSelectedOtherCount;
-	S32			mSelectedPublicCount;
+    void setParcel(LLParcel* parcel) { mParcel = parcel; }
+
+private:
+    LLParcel*   mParcel;
+    BOOL        mSelectedMultipleOwners;
+    BOOL        mWholeParcelSelected;
+    S32         mSelectedSelfCount;
+    S32         mSelectedOtherCount;
+    S32         mSelectedPublicCount;
 };
 
 typedef LLSafeHandle<LLParcelSelection> LLParcelSelectionHandle;

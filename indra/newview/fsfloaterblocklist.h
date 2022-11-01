@@ -33,14 +33,14 @@
 class FSFloaterBlocklist : public LLFloater
 {
 public:
-	FSFloaterBlocklist(const LLSD& seed);
-	/*virtual*/ ~FSFloaterBlocklist();
-	/*virtual*/ void onOpen(const LLSD& key);
+    FSFloaterBlocklist(const LLSD& seed);
+    /*virtual*/ ~FSFloaterBlocklist();
+    /*virtual*/ void onOpen(const LLSD& key);
 
-	BOOL postBuild();
+    BOOL postBuild();
 
 private:
-	LLPanel* mBlockedListPanel;
+    LLPanel* mBlockedListPanel;
 };
 
 #endif // FS_FLOATERBLOCKLIST_H

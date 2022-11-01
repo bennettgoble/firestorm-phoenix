@@ -38,38 +38,38 @@ class LLTextBox;
 class LLFloaterMap : public LLFloater
 {
 public:
-	LLFloaterMap(const LLSD& key);
-	static LLFloaterMap* getInstance();
-	virtual ~LLFloaterMap();
-	
-	/*virtual*/ BOOL 	postBuild();
-	/*virtual*/ BOOL	handleDoubleClick( S32 x, S32 y, MASK mask );
-	/*virtual*/ void	reshape(S32 width, S32 height, BOOL called_from_parent = TRUE);
-	/*virtual*/ void	draw();
+    LLFloaterMap(const LLSD& key);
+    static LLFloaterMap* getInstance();
+    virtual ~LLFloaterMap();
+    
+    /*virtual*/ BOOL    postBuild();
+    /*virtual*/ BOOL    handleDoubleClick( S32 x, S32 y, MASK mask );
+    /*virtual*/ void    reshape(S32 width, S32 height, BOOL called_from_parent = TRUE);
+    /*virtual*/ void    draw();
 
-	// <FS:Ansariel> FIRE-1825: Minimap floater background transparency
-	/*virtual*/ F32 getCurrentTransparency();
+    // <FS:Ansariel> FIRE-1825: Minimap floater background transparency
+    /*virtual*/ F32 getCurrentTransparency();
 
 private:
-	void setDirectionPos( LLTextBox* text_box, F32 rotation );
-	void updateMinorDirections();
+    void setDirectionPos( LLTextBox* text_box, F32 rotation );
+    void updateMinorDirections();
 
-	// <FS:Ansariel> Remove titlebar
-	void setMinimized( BOOL );
-	void stretchMiniMap(S32 width,S32 height);
-	// </FS:Ansariel>
+    // <FS:Ansariel> Remove titlebar
+    void setMinimized( BOOL );
+    void stretchMiniMap(S32 width,S32 height);
+    // </FS:Ansariel>
 
-	LLTextBox*		mTextBoxEast;
-	LLTextBox*		mTextBoxNorth;
-	LLTextBox*		mTextBoxWest;
-	LLTextBox*		mTextBoxSouth;
+    LLTextBox*      mTextBoxEast;
+    LLTextBox*      mTextBoxNorth;
+    LLTextBox*      mTextBoxWest;
+    LLTextBox*      mTextBoxSouth;
 
-	LLTextBox*		mTextBoxSouthEast;
-	LLTextBox*		mTextBoxNorthEast;
-	LLTextBox*		mTextBoxNorthWest;
-	LLTextBox*		mTextBoxSouthWest;
-	
-	LLNetMap*		mMap;
+    LLTextBox*      mTextBoxSouthEast;
+    LLTextBox*      mTextBoxNorthEast;
+    LLTextBox*      mTextBoxNorthWest;
+    LLTextBox*      mTextBoxSouthWest;
+    
+    LLNetMap*       mMap;
 };
 
 #endif  // LL_LLFLOATERMAP_H

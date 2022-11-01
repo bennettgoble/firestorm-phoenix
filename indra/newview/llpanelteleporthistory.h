@@ -41,12 +41,12 @@ class LLFlatListView;
 
 class LLTeleportHistoryPanel : public LLPanelPlacesTab
 {
-	// <FS:Ansariel> FIRE-816: Separate teleport history floater
-	friend class FSFloaterTeleportHistory;
+    // <FS:Ansariel> FIRE-816: Separate teleport history floater
+    friend class FSFloaterTeleportHistory;
 
 public:
-	LLTeleportHistoryPanel();
-	virtual ~LLTeleportHistoryPanel();
+    LLTeleportHistoryPanel();
+    virtual ~LLTeleportHistoryPanel();
 
     BOOL postBuild() override;
     void draw() override;
@@ -66,67 +66,67 @@ public:
 
     bool handleDragAndDropToTrash(BOOL drop, EDragAndDropType cargo_type, void* cargo_data, EAcceptance* accept) override { return false; }
 
-	// <FS:Ansariel> Separate search filter for standalone TP history
-	void setIsStandAlone(bool standalone) { mIsStandAlone = standalone; }
-	std::string getFilterString() { return mFilterString; }
-	// </FS:Ansariel>
+    // <FS:Ansariel> Separate search filter for standalone TP history
+    void setIsStandAlone(bool standalone) { mIsStandAlone = standalone; }
+    std::string getFilterString() { return mFilterString; }
+    // </FS:Ansariel>
 
 private:
 
-	void onDoubleClickItem();
-	void onReturnKeyPressed();
-	void onAccordionTabRightClick(LLView *view, S32 x, S32 y, MASK mask);
-	void onAccordionTabOpen(LLAccordionCtrlTab *tab);
-	void onAccordionTabClose(LLAccordionCtrlTab *tab);
-	void onExpandAllFolders();
-	void onCollapseAllFolders();
+    void onDoubleClickItem();
+    void onReturnKeyPressed();
+    void onAccordionTabRightClick(LLView *view, S32 x, S32 y, MASK mask);
+    void onAccordionTabOpen(LLAccordionCtrlTab *tab);
+    void onAccordionTabClose(LLAccordionCtrlTab *tab);
+    void onExpandAllFolders();
+    void onCollapseAllFolders();
 // <FS:Beq> [timezone support for teleport history]
-	void onTimeZoneChecked(const LLSD& userdata);
-	bool isTimeZoneChecked(const LLSD& userdata);
+    void onTimeZoneChecked(const LLSD& userdata);
+    bool isTimeZoneChecked(const LLSD& userdata);
 // </FS:Beq>
-	void onClearTeleportHistory();
-	bool onClearTeleportHistoryDialog(const LLSD& notification, const LLSD& response);
+    void onClearTeleportHistory();
+    bool onClearTeleportHistoryDialog(const LLSD& notification, const LLSD& response);
 
-	void refresh() override;
-	void getNextTab(const LLDate& item_date, S32& curr_tab, LLDate& tab_date);
-	void onTeleportHistoryChange(S32 removed_index);
-	void replaceItem(S32 removed_index);
-	void showTeleportHistory();
-	void handleItemSelect(LLFlatListView* );
-	LLFlatListView* getFlatListViewFromTab(LLAccordionCtrlTab *);
-	static void gotSLURLCallback(const std::string& slurl);
-	void onGearMenuAction(const LLSD& userdata);
-	bool isActionEnabled(const LLSD& userdata) const;
+    void refresh() override;
+    void getNextTab(const LLDate& item_date, S32& curr_tab, LLDate& tab_date);
+    void onTeleportHistoryChange(S32 removed_index);
+    void replaceItem(S32 removed_index);
+    void showTeleportHistory();
+    void handleItemSelect(LLFlatListView* );
+    LLFlatListView* getFlatListViewFromTab(LLAccordionCtrlTab *);
+    static void gotSLURLCallback(const std::string& slurl);
+    void onGearMenuAction(const LLSD& userdata);
+    bool isActionEnabled(const LLSD& userdata) const;
 
-	void setAccordionCollapsedByUser(LLUICtrl* acc_tab, bool collapsed);
-	bool isAccordionCollapsedByUser(LLUICtrl* acc_tab);
-	void onAccordionExpand(LLUICtrl* ctrl, const LLSD& param);
+    void setAccordionCollapsedByUser(LLUICtrl* acc_tab, bool collapsed);
+    bool isAccordionCollapsedByUser(LLUICtrl* acc_tab);
+    void onAccordionExpand(LLUICtrl* ctrl, const LLSD& param);
 
-	static void confirmTeleport(S32 hist_idx);
-	static bool onTeleportConfirmation(const LLSD& notification, const LLSD& response, S32 hist_idx);
+    static void confirmTeleport(S32 hist_idx);
+    static bool onTeleportConfirmation(const LLSD& notification, const LLSD& response, S32 hist_idx);
 
-	LLTeleportHistoryStorage*	mTeleportHistory;
-	LLAccordionCtrl*		mHistoryAccordion;
+    LLTeleportHistoryStorage*   mTeleportHistory;
+    LLAccordionCtrl*        mHistoryAccordion;
 
-	LLFlatListView*			mLastSelectedFlatlList;
-	S32				mLastSelectedItemIndex;
-	bool				mDirty;
-	S32				mCurrentItem;
+    LLFlatListView*         mLastSelectedFlatlList;
+    S32             mLastSelectedItemIndex;
+    bool                mDirty;
+    S32             mCurrentItem;
 
-	typedef std::vector<LLAccordionCtrlTab*> item_containers_t;
-	item_containers_t mItemContainers;
+    typedef std::vector<LLAccordionCtrlTab*> item_containers_t;
+    item_containers_t mItemContainers;
 
-	LLContextMenu*			mAccordionTabMenu;
+    LLContextMenu*          mAccordionTabMenu;
 
-    LLToggleableMenu*			mGearItemMenu;
-    LLToggleableMenu*			mSortingMenu;
+    LLToggleableMenu*           mGearItemMenu;
+    LLToggleableMenu*           mSortingMenu;
 
-	boost::signals2::connection mTeleportHistoryChangedConnection;
+    boost::signals2::connection mTeleportHistoryChangedConnection;
 
-	// </FS:Ansariel> Separate search filter for standalone TP history
-	bool		mIsStandAlone;
-	std::string	mFilterString;
-	// </FS:Ansariel>
+    // </FS:Ansariel> Separate search filter for standalone TP history
+    bool        mIsStandAlone;
+    std::string mFilterString;
+    // </FS:Ansariel>
 };
 
 

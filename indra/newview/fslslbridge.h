@@ -42,168 +42,168 @@ const std::string FS_BRIDGE_ATTACHMENT_POINT_NAME = "Center 2";
 
 class FSLSLBridge : public LLSingleton<FSLSLBridge>, public LLVOInventoryListener
 {
-	friend class FSLSLBridgeScriptCallback;
-	friend class FSLSLBridgeRezCallback;
-	friend class FSLSLBridgeInventoryObserver;
-	friend class FSLSLBridgeInventoryPreCreationCleanupObserver;
-	friend class FSLSLBridgeCleanupTimer;
-	friend class FSLSLBridgeReAttachTimer;
-	friend class FSLSLBridgeStartCreationTimer;
+    friend class FSLSLBridgeScriptCallback;
+    friend class FSLSLBridgeRezCallback;
+    friend class FSLSLBridgeInventoryObserver;
+    friend class FSLSLBridgeInventoryPreCreationCleanupObserver;
+    friend class FSLSLBridgeCleanupTimer;
+    friend class FSLSLBridgeReAttachTimer;
+    friend class FSLSLBridgeStartCreationTimer;
 
-	LLSINGLETON(FSLSLBridge);
-	~FSLSLBridge();
+    LLSINGLETON(FSLSLBridge);
+    ~FSLSLBridge();
 
 public:
-	enum TimerResult
-	{
-		START_CREATION_FINISHED,
-		CLEANUP_FINISHED,
-		REATTACH_FINISHED,
-		SCRIPT_UPLOAD_FINISHED,
-		NO_TIMER
-	};
+    enum TimerResult
+    {
+        START_CREATION_FINISHED,
+        CLEANUP_FINISHED,
+        REATTACH_FINISHED,
+        SCRIPT_UPLOAD_FINISHED,
+        NO_TIMER
+    };
 
-	typedef std::function<void(const LLSD &)> Callback_t;
+    typedef std::function<void(const LLSD &)> Callback_t;
 
-	bool lslToViewer(const std::string& message, const LLUUID& fromID, const LLUUID& ownerID);
-	bool viewerToLSL(const std::string& message, Callback_t = nullptr);
+    bool lslToViewer(const std::string& message, const LLUUID& fromID, const LLUUID& ownerID);
+    bool viewerToLSL(const std::string& message, Callback_t = nullptr);
 
-	bool updateBoolSettingValue(const std::string& msgVal);
-	bool updateBoolSettingValue(const std::string& msgVal, bool contentVal);
-	void updateIntegrations();
-	
-	void initBridge();
-	void recreateBridge();
-	void processAttach(LLViewerObject* object, const LLViewerJointAttachment* attachment);
-	void processDetach(LLViewerObject* object, const LLViewerJointAttachment* attachment);
+    bool updateBoolSettingValue(const std::string& msgVal);
+    bool updateBoolSettingValue(const std::string& msgVal, bool contentVal);
+    void updateIntegrations();
+    
+    void initBridge();
+    void recreateBridge();
+    void processAttach(LLViewerObject* object, const LLViewerJointAttachment* attachment);
+    void processDetach(LLViewerObject* object, const LLViewerJointAttachment* attachment);
 
-	bool getBridgeCreating() { return mBridgeCreating; };
-	void setBridgeCreating(bool status) { mBridgeCreating = status; };
+    bool getBridgeCreating() { return mBridgeCreating; };
+    void setBridgeCreating(bool status) { mBridgeCreating = status; };
 
-	void setBridge(LLViewerInventoryItem* item) { mpBridge = item; };
-	LLViewerInventoryItem* getBridge() { return mpBridge; };
-	bool canUseBridge();
-	bool isBridgeValid() const { return nullptr != mpBridge; }
+    void setBridge(LLViewerInventoryItem* item) { mpBridge = item; };
+    LLViewerInventoryItem* getBridge() { return mpBridge; };
+    bool canUseBridge();
+    bool isBridgeValid() const { return nullptr != mpBridge; }
 
-	void checkBridgeScriptName();
-	std::string currentFullName() { return mCurrentFullName; }
+    void checkBridgeScriptName();
+    std::string currentFullName() { return mCurrentFullName; }
 
-	LLUUID getBridgeFolder() { return mBridgeFolderID; }
-	LLUUID getAttachedID() { return mBridgeUUID; }
+    LLUUID getBridgeFolder() { return mBridgeFolderID; }
+    LLUUID getAttachedID() { return mBridgeUUID; }
 
-	bool canDetach(const LLUUID& item_id);
+    bool canDetach(const LLUUID& item_id);
 
-	static void onIdle(void* userdata);
-	void setTimerResult(TimerResult result);
+    static void onIdle(void* userdata);
+    void setTimerResult(TimerResult result);
 
-	// from LLVOInventoryListener
-	virtual void inventoryChanged(LLViewerObject* object,
-								LLInventoryObject::object_list_t* inventory,
-								S32 serial_num,
-								void* user_data);
+    // from LLVOInventoryListener
+    virtual void inventoryChanged(LLViewerObject* object,
+                                LLInventoryObject::object_list_t* inventory,
+                                S32 serial_num,
+                                void* user_data);
 
 private:
-	std::string				mCurrentURL;
-	bool					mBridgeCreating;
-	bool					mAllowDetach;
-	bool					mFinishCreation;
+    std::string             mCurrentURL;
+    bool                    mBridgeCreating;
+    bool                    mAllowDetach;
+    bool                    mFinishCreation;
 
-	LLViewerInventoryItem*	mpBridge;
-	std::string				mCurrentFullName;
-	LLUUID					mScriptItemID;	//internal script ID
-	LLUUID					mBridgeFolderID;
-	LLUUID					mBridgeContainerFolderID;
-	LLUUID					mBridgeUUID;
-	LLUUID					mReattachBridgeUUID; // used when re-attachming the bridge after creation
+    LLViewerInventoryItem*  mpBridge;
+    std::string             mCurrentFullName;
+    LLUUID                  mScriptItemID;  //internal script ID
+    LLUUID                  mBridgeFolderID;
+    LLUUID                  mBridgeContainerFolderID;
+    LLUUID                  mBridgeUUID;
+    LLUUID                  mReattachBridgeUUID; // used when re-attachming the bridge after creation
 
-	bool					mIsFirstCallDone; //initialization conversation
+    bool                    mIsFirstCallDone; //initialization conversation
 
-	uuid_vec_t				mAllowedDetachables;
+    uuid_vec_t              mAllowedDetachables;
 
-	TimerResult				mTimerResult;
+    TimerResult             mTimerResult;
 
 protected:
-	LLViewerInventoryItem* findInvObject(const std::string& obj_name, const LLUUID& catID);
-	LLUUID findFSCategory();
-	LLUUID findFSBridgeContainerCategory();
+    LLViewerInventoryItem* findInvObject(const std::string& obj_name, const LLUUID& catID);
+    LLUUID findFSCategory();
+    LLUUID findFSBridgeContainerCategory();
 
-	bool isItemAttached(const LLUUID& iID);
-	void createNewBridge();
-	void create_script_inner();
-	void cleanUpBridgeFolder();
-	void cleanUpBridgeFolder(const std::string& nameToCleanUp);
-	void setupBridgePrim(LLViewerObject* object);
-	void cleanUpBridge();
-	void startCreation();
-	void finishBridge();
-	void cleanUpOldVersions();
-	void detachOtherBridges();
-	void configureBridgePrim(LLViewerObject* object);
-	void cleanUpPreCreation();
-	void finishCleanUpPreCreation();
+    bool isItemAttached(const LLUUID& iID);
+    void createNewBridge();
+    void create_script_inner();
+    void cleanUpBridgeFolder();
+    void cleanUpBridgeFolder(const std::string& nameToCleanUp);
+    void setupBridgePrim(LLViewerObject* object);
+    void cleanUpBridge();
+    void startCreation();
+    void finishBridge();
+    void cleanUpOldVersions();
+    void detachOtherBridges();
+    void configureBridgePrim(LLViewerObject* object);
+    void cleanUpPreCreation();
+    void finishCleanUpPreCreation();
 };
 
 
 class FSLSLBridgeRezCallback : public LLInventoryCallback
 {
 public:
-	FSLSLBridgeRezCallback() {}
-	void fire(const LLUUID& inv_item);
+    FSLSLBridgeRezCallback() {}
+    void fire(const LLUUID& inv_item);
 
 protected:
-	~FSLSLBridgeRezCallback() {}
+    ~FSLSLBridgeRezCallback() {}
 };
 
 class FSLSLBridgeScriptCallback : public LLInventoryCallback
 {
 public:
-	FSLSLBridgeScriptCallback() {}
-	void fire(const LLUUID& inv_item);
-	std::string prepUploadFile(std::string& aBuffer);
+    FSLSLBridgeScriptCallback() {}
+    void fire(const LLUUID& inv_item);
+    std::string prepUploadFile(std::string& aBuffer);
 
 protected:
-	~FSLSLBridgeScriptCallback() {}
+    ~FSLSLBridgeScriptCallback() {}
 };
 
 class FSLSLBridgeInventoryObserver : public LLInventoryFetchDescendentsObserver
 {
 public:
-	FSLSLBridgeInventoryObserver(const LLUUID& cat_id = LLUUID::null):LLInventoryFetchDescendentsObserver(cat_id) {}
-	FSLSLBridgeInventoryObserver(const uuid_vec_t& cat_ids):LLInventoryFetchDescendentsObserver(cat_ids) {}
-	/*virtual*/ void done() { gInventory.removeObserver(this); FSLSLBridge::instance().startCreation(); delete this; }
+    FSLSLBridgeInventoryObserver(const LLUUID& cat_id = LLUUID::null):LLInventoryFetchDescendentsObserver(cat_id) {}
+    FSLSLBridgeInventoryObserver(const uuid_vec_t& cat_ids):LLInventoryFetchDescendentsObserver(cat_ids) {}
+    /*virtual*/ void done() { gInventory.removeObserver(this); FSLSLBridge::instance().startCreation(); delete this; }
 
 protected:
-	~FSLSLBridgeInventoryObserver() {}
+    ~FSLSLBridgeInventoryObserver() {}
 };
 
 class FSLSLBridgeInventoryPreCreationCleanupObserver : public LLInventoryFetchDescendentsObserver
 {
 public:
-	FSLSLBridgeInventoryPreCreationCleanupObserver(const LLUUID& cat_id = LLUUID::null):LLInventoryFetchDescendentsObserver(cat_id) {}
-	/*virtual*/ void done() { gInventory.removeObserver(this); FSLSLBridge::instance().cleanUpPreCreation(); delete this; }
+    FSLSLBridgeInventoryPreCreationCleanupObserver(const LLUUID& cat_id = LLUUID::null):LLInventoryFetchDescendentsObserver(cat_id) {}
+    /*virtual*/ void done() { gInventory.removeObserver(this); FSLSLBridge::instance().cleanUpPreCreation(); delete this; }
 
 protected:
-	~FSLSLBridgeInventoryPreCreationCleanupObserver() {}
+    ~FSLSLBridgeInventoryPreCreationCleanupObserver() {}
 };
 
 class FSLSLBridgeCleanupTimer : public LLEventTimer
 {
 public:
-	FSLSLBridgeCleanupTimer() : LLEventTimer(12.f) {}
-	BOOL tick();
+    FSLSLBridgeCleanupTimer() : LLEventTimer(12.f) {}
+    BOOL tick();
 };
 
 class FSLSLBridgeReAttachTimer : public LLEventTimer
 {
 public:
-	FSLSLBridgeReAttachTimer() : LLEventTimer(5.f) {}
-	BOOL tick();
+    FSLSLBridgeReAttachTimer() : LLEventTimer(5.f) {}
+    BOOL tick();
 };
 
 class FSLSLBridgeStartCreationTimer : public LLEventTimer
 {
 public:
-	FSLSLBridgeStartCreationTimer() : LLEventTimer(5.f) {}
-	BOOL tick();
+    FSLSLBridgeStartCreationTimer() : LLEventTimer(5.f) {}
+    BOOL tick();
 };
 #endif // FS_LSLBRIDGE_H

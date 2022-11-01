@@ -37,66 +37,66 @@ class LLChatMsgBox;
 
 typedef enum e_show_item_header
 {
-	CHATITEMHEADER_SHOW_ONLY_NAME = 0,
-	CHATITEMHEADER_SHOW_ONLY_ICON = 1,
-	CHATITEMHEADER_SHOW_BOTH
+    CHATITEMHEADER_SHOW_ONLY_NAME = 0,
+    CHATITEMHEADER_SHOW_ONLY_ICON = 1,
+    CHATITEMHEADER_SHOW_BOTH
 } EShowItemHeader;
 
 class LLFloaterIMNearbyChatToastPanel : public LLPanel
 {
 protected:
         LLFloaterIMNearbyChatToastPanel()
-		: 
-	mIsDirty(false),
+        : 
+    mIsDirty(false),
 // [RLVa:KB] - Checked: 2010-04-200 (RLVa-1.2.0f) | Added: RLVa-1.2.0f
-	mShowIconTooltip(true),
+    mShowIconTooltip(true),
 // [/RLVa:KB]
-	mSourceType(CHAT_SOURCE_OBJECT)
-	{};
+    mSourceType(CHAT_SOURCE_OBJECT)
+    {};
 public:
-	~LLFloaterIMNearbyChatToastPanel(){}
-	
-	static LLFloaterIMNearbyChatToastPanel* createInstance();
+    ~LLFloaterIMNearbyChatToastPanel(){}
+    
+    static LLFloaterIMNearbyChatToastPanel* createInstance();
 
-	const LLUUID& getFromID() const { return mFromID;}
-	const std::string& getFromName() const { return mFromName; }
-	
-	//void	addText		(const std::string& message ,  const LLStyle::Params& input_params = LLStyle::Params());
-	//void	setMessage	(const LLChat& msg);
-	void	snapToMessageHeight	();
+    const LLUUID& getFromID() const { return mFromID;}
+    const std::string& getFromName() const { return mFromName; }
+    
+    //void  addText     (const std::string& message ,  const LLStyle::Params& input_params = LLStyle::Params());
+    //void  setMessage  (const LLChat& msg);
+    void    snapToMessageHeight ();
 
-	bool	canAddText	();
+    bool    canAddText  ();
 
-	void	onMouseLeave	(S32 x, S32 y, MASK mask);
-	void	onMouseEnter	(S32 x, S32 y, MASK mask);
-	BOOL	handleMouseDown	(S32 x, S32 y, MASK mask);
-	BOOL	handleMouseUp	(S32 x, S32 y, MASK mask);
+    void    onMouseLeave    (S32 x, S32 y, MASK mask);
+    void    onMouseEnter    (S32 x, S32 y, MASK mask);
+    BOOL    handleMouseDown (S32 x, S32 y, MASK mask);
+    BOOL    handleMouseUp   (S32 x, S32 y, MASK mask);
 
-	virtual BOOL postBuild();
+    virtual BOOL postBuild();
 
-	void	reshape		(S32 width, S32 height, BOOL called_from_parent = TRUE);
+    void    reshape     (S32 width, S32 height, BOOL called_from_parent = TRUE);
 
-	void	setHeaderVisibility(EShowItemHeader e);
-	BOOL	handleRightMouseDown(S32 x, S32 y, MASK mask);
+    void    setHeaderVisibility(EShowItemHeader e);
+    BOOL    handleRightMouseDown(S32 x, S32 y, MASK mask);
 
-	virtual void init(LLSD& data);
-	virtual void addMessage(LLSD& data);
+    virtual void init(LLSD& data);
+    virtual void addMessage(LLSD& data);
 
-	virtual void draw();
+    virtual void draw();
 
-	//*TODO REMOVE, why a dup of getFromID?
-	const LLUUID&	messageID() const { return mFromID;}
+    //*TODO REMOVE, why a dup of getFromID?
+    const LLUUID&   messageID() const { return mFromID;}
 private:
-	LLUUID			mFromID;	// agent id or object id
-	std::string		mFromName;
-	EChatSourceType	mSourceType;
-	LLChatMsgBox* 	mMsgText;
-	
+    LLUUID          mFromID;    // agent id or object id
+    std::string     mFromName;
+    EChatSourceType mSourceType;
+    LLChatMsgBox*   mMsgText;
+    
 
 
-	bool mIsDirty;
+    bool mIsDirty;
 // [RLVa:KB] - Checked: 2010-04-200 (RLVa-1.2.0f) | Added: RLVa-1.2.0f
-	bool mShowIconTooltip;
+    bool mShowIconTooltip;
 // [/RLVa:KB]
 };
 

@@ -26,8 +26,8 @@
 
 std::string LLCrashLookup::getModuleVersionString() const
 {
-	std::string strVersion = llformat("%d.%d.%d.%d", 
-		(U32)(m_nModuleVersion >> 48), (U32)((m_nModuleVersion >> 32) & 0xFFFF), 
-		(U32)((m_nModuleVersion >> 16) & 0xFFFF), (U32)(m_nModuleVersion & 0xFFFF));
-	return strVersion;
+    std::string strVersion = llformat("%d.%d.%d.%d", 
+        (U32)(m_nModuleVersion >> 48), (U32)((m_nModuleVersion >> 32) & 0xFFFF), 
+        (U32)((m_nModuleVersion >> 16) & 0xFFFF), (U32)(m_nModuleVersion & 0xFFFF));
+    return strVersion;
 }

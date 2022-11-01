@@ -39,27 +39,27 @@ class PeopleContextMenu : public LLListContextMenu
 {
 public:
 // [RLVa:KB] - Checked: RLVa-1.5.0
-	PeopleContextMenu() : m_fRlvCheck(false) {}
+    PeopleContextMenu() : m_fRlvCheck(false) {}
 // [/RLVa:KB]
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 
 protected:
-	virtual void buildContextMenu(class LLMenuGL& menu, U32 flags);
+    virtual void buildContextMenu(class LLMenuGL& menu, U32 flags);
 
 private:
-	bool enableContextMenuItem(const LLSD& userdata);
-	bool checkContextMenuItem(const LLSD& userdata);
-	bool enableFreezeEject(const LLSD& userdata);
-	void offerTeleport();
-	void eject();
-	void startConference();
-	void requestTeleport();
+    bool enableContextMenuItem(const LLSD& userdata);
+    bool checkContextMenuItem(const LLSD& userdata);
+    bool enableFreezeEject(const LLSD& userdata);
+    void offerTeleport();
+    void eject();
+    void startConference();
+    void requestTeleport();
 
-	// <FS:Ansariel> Add to contact set
-	void addToContactSet();
+    // <FS:Ansariel> Add to contact set
+    void addToContactSet();
 // [RLVa:KB] - Checked: RLVa-1.5.0
 protected:
-	bool m_fRlvCheck;
+    bool m_fRlvCheck;
 // [/RLVa:KB]
 };
 
@@ -70,10 +70,10 @@ class NearbyPeopleContextMenu : public PeopleContextMenu
 {
 // [RLVa:KB] - Checked: RLVa-1.5.0
 public:
-	NearbyPeopleContextMenu() : PeopleContextMenu() { m_fRlvCheck = true; }
+    NearbyPeopleContextMenu() : PeopleContextMenu() { m_fRlvCheck = true; }
 // [/RLVa:KB]
 protected:
-	/*virtual*/ void buildContextMenu(class LLMenuGL& menu, U32 flags);
+    /*virtual*/ void buildContextMenu(class LLMenuGL& menu, U32 flags);
 };
 
 extern PeopleContextMenu gPeopleContextMenu;

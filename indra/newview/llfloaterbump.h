@@ -39,63 +39,63 @@ class FSScrollListCtrl;
 class LLFloaterBump 
 : public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 protected:
-	void add(LLScrollListCtrl* list, LLMeanCollisionData *mcd);
-	void onScrollListRightClicked(LLUICtrl* ctrl, S32 x, S32 y);
+    void add(LLScrollListCtrl* list, LLMeanCollisionData *mcd);
+    void onScrollListRightClicked(LLUICtrl* ctrl, S32 x, S32 y);
 
 public:
-	/*virtual*/	BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& key);
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& key);
 
-	// <FS:Ansariel> Instant bump list floater update
-	/*virtual*/ void draw();
-	void setDirty() { mDirty = true; }
-	
-	static LLFloaterBump* getInstance();
+    // <FS:Ansariel> Instant bump list floater update
+    /*virtual*/ void draw();
+    void setDirty() { mDirty = true; }
+    
+    static LLFloaterBump* getInstance();
 
-	// <FS:Ansariel> Instant bump list floater update
-	//void populateCollisionList();
+    // <FS:Ansariel> Instant bump list floater update
+    //void populateCollisionList();
 
-	void startIM();
-	void startCall();
-	void reportAbuse();
-	void showProfile();
-	void addFriend();
-	void inviteToGroup();
-	bool enableAddFriend();
-	void muteAvatar();
-	void payAvatar();
-	void zoomInAvatar();
-	bool enableMute();
+    void startIM();
+    void startCall();
+    void reportAbuse();
+    void showProfile();
+    void addFriend();
+    void inviteToGroup();
+    bool enableAddFriend();
+    void muteAvatar();
+    void payAvatar();
+    void zoomInAvatar();
+    bool enableMute();
 
 private:
-	
-	LLFloaterBump(const LLSD& key);
-	virtual ~LLFloaterBump();
+    
+    LLFloaterBump(const LLSD& key);
+    virtual ~LLFloaterBump();
 
-	// <FS:Ansariel> Improved bump list
-	//LLScrollListCtrl* mList;
-	//LLMenuGL* mPopupMenu;
-	//LLUUID mItemUUID;
+    // <FS:Ansariel> Improved bump list
+    //LLScrollListCtrl* mList;
+    //LLMenuGL* mPopupMenu;
+    //LLUUID mItemUUID;
 
-	//typedef std::map<LLUUID, std::string> uuid_map_t;
-	//uuid_map_t mNames;
-	FSScrollListCtrl* mList;
+    //typedef std::map<LLUUID, std::string> uuid_map_t;
+    //uuid_map_t mNames;
+    FSScrollListCtrl* mList;
 
-	void updateList();
-	bool mDirty;
-	// </FS:Ansariel>
+    void updateList();
+    bool mDirty;
+    // </FS:Ansariel>
 };
 
 // <FS:Ansariel> FIRE-13888: Add copy function to bumps list
 class FSBumpListMenu : public LLListContextMenu
 {
 public:
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 private:
-	void onContextMenuItemClick(const LLSD& userdata);
-	bool onContextMenuItemEnable(const LLSD& userdata);
+    void onContextMenuItemClick(const LLSD& userdata);
+    bool onContextMenuItemEnable(const LLSD& userdata);
 };
 
 extern FSBumpListMenu gFSBumpListMenu;

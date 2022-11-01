@@ -39,72 +39,72 @@ class LLInventoryCategoriesObserver;
 class FSWearableFavoritesItemsList : public LLWearableItemsList
 {
 public:
-	struct Params : public LLInitParam::Block<Params, LLWearableItemsList::Params>
-	{
-		Params()
-		{}
-	};
+    struct Params : public LLInitParam::Block<Params, LLWearableItemsList::Params>
+    {
+        Params()
+        {}
+    };
 
-	virtual ~FSWearableFavoritesItemsList() {}
+    virtual ~FSWearableFavoritesItemsList() {}
 
-	/* virtual */ BOOL	handleDragAndDrop(S32 x, S32 y, MASK mask, BOOL drop,
-								   EDragAndDropType cargo_type,
-								   void* cargo_data,
-								   EAcceptance* accept,
-								   std::string& tooltip_msg);
+    /* virtual */ BOOL  handleDragAndDrop(S32 x, S32 y, MASK mask, BOOL drop,
+                                   EDragAndDropType cargo_type,
+                                   void* cargo_data,
+                                   EAcceptance* accept,
+                                   std::string& tooltip_msg);
 
-	typedef boost::signals2::signal<void(const LLUUID& id)> item_dad_callback_t;
-	boost::signals2::connection setDADCallback(const item_dad_callback_t::slot_type& cb)
-	{
-		return mDADSignal.connect(cb);
-	}
+    typedef boost::signals2::signal<void(const LLUUID& id)> item_dad_callback_t;
+    boost::signals2::connection setDADCallback(const item_dad_callback_t::slot_type& cb)
+    {
+        return mDADSignal.connect(cb);
+    }
 
 protected:
-	friend class LLUICtrlFactory;
-	FSWearableFavoritesItemsList(const Params&);
+    friend class LLUICtrlFactory;
+    FSWearableFavoritesItemsList(const Params&);
 
-	item_dad_callback_t mDADSignal;
+    item_dad_callback_t mDADSignal;
 };
 
 class FSFloaterWearableFavorites : public LLFloater
 {
 public:
-	FSFloaterWearableFavorites(const LLSD& key);
-	virtual ~FSFloaterWearableFavorites();
+    FSFloaterWearableFavorites(const LLSD& key);
+    virtual ~FSFloaterWearableFavorites();
 
-	/*virtual*/ BOOL postBuild();
-	/*virtual*/ void onOpen(const LLSD& info);
-	/*virtual*/ void draw();
-	/*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
-	/*virtual*/ bool hasAccelerators() const { return true; }
+    /*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& info);
+    /*virtual*/ void draw();
+    /*virtual*/ BOOL handleKeyHere(KEY key, MASK mask);
+    /*virtual*/ bool hasAccelerators() const { return true; }
 
-	static void initCategory();
-	static LLUUID getFavoritesFolder();
+    static void initCategory();
+    static LLUUID getFavoritesFolder();
 
 private:
-	void updateList(const LLUUID& folder_id);
+    void updateList(const LLUUID& folder_id);
 
-	void onItemDAD(const LLUUID& item_id);
-	void handleRemove();
-	void onFilterEdit(const std::string& search_string);
-	void onDoubleClick();
+    void onItemDAD(const LLUUID& item_id);
+    void handleRemove();
+    void onFilterEdit(const std::string& search_string);
+    void onDoubleClick();
 
-	void onOptionsMenuItemClicked(const LLSD& userdata);
-	bool onOptionsMenuItemChecked(const LLSD& userdata);
+    void onOptionsMenuItemClicked(const LLSD& userdata);
+    bool onOptionsMenuItemChecked(const LLSD& userdata);
 
-	bool mInitialized;
+    bool mInitialized;
 
-	boost::signals2::connection mDADCallbackConnection;
+    boost::signals2::connection mDADCallbackConnection;
 
-	LLInventoryCategoriesObserver*	mCategoriesObserver;
+    LLInventoryCategoriesObserver*  mCategoriesObserver;
 
-	FSWearableFavoritesItemsList*	mItemsList;
-	LLButton*						mRemoveItemBtn;
-	LLFilterEditor*					mFilterEditor;
-	LLMenuButton*					mOptionsButton;
-	LLHandle<LLView>				mOptionsMenuHandle;
+    FSWearableFavoritesItemsList*   mItemsList;
+    LLButton*                       mRemoveItemBtn;
+    LLFilterEditor*                 mFilterEditor;
+    LLMenuButton*                   mOptionsButton;
+    LLHandle<LLView>                mOptionsMenuHandle;
 
-	static LLUUID sFolderID;
+    static LLUUID sFolderID;
 };
 
 #endif // FS_FLOATERWEARABLEFAVORITES_H

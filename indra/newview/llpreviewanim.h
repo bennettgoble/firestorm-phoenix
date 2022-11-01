@@ -37,23 +37,23 @@ class LLPreviewAnim : public LLPreview
 {
 public:
 
-	LLPreviewAnim(const LLSD& key);
-	BOOL postBuild() override;
-	void onClose(bool app_quitting) override;
-	void draw() override;
-	void refreshFromItem() override;
+    LLPreviewAnim(const LLSD& key);
+    BOOL postBuild() override;
+    void onClose(bool app_quitting) override;
+    void draw() override;
+    void refreshFromItem() override;
 
-	void cleanup(); // cleanup 'playing' state
-	void play(const LLSD& param);
-	// <FS:Ansariel> Improved animation preview
-	//void showAdvanced();
+    void cleanup(); // cleanup 'playing' state
+    void play(const LLSD& param);
+    // <FS:Ansariel> Improved animation preview
+    //void showAdvanced();
 
 protected:
-	
-	LLUUID	mItemID; // Not an item id, but a playing asset id
-	bool	mDidStart;
-	// <FS:Ansariel> Improved animation preview
-	//LLTextBox* pAdvancedStatsTextBox;
+    
+    LLUUID  mItemID; // Not an item id, but a playing asset id
+    bool    mDidStart;
+    // <FS:Ansariel> Improved animation preview
+    //LLTextBox* pAdvancedStatsTextBox;
 };
 
 #endif  // LL_LLPREVIEWANIM_H

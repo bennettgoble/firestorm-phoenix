@@ -35,114 +35,114 @@
 //
 
 LLBadgeOwner::LLBadgeOwner(LLHandle< LLView > viewHandle)
-	: mHasBadgeHolderParent(false),
-	mBadge(NULL),
-	mBadgeOwnerView(viewHandle)
+    : mHasBadgeHolderParent(false),
+    mBadge(NULL),
+    mBadgeOwnerView(viewHandle)
 {
 }
 
 void LLBadgeOwner::initBadgeParams(const LLBadge::Params& p)
 {
-	if (!p.equals(LLUICtrlFactory::getDefaultParams<LLBadge>()))
-	{
-		mBadge = createBadge(p);
-		mHasBadgeHolderParent = false;
+    if (!p.equals(LLUICtrlFactory::getDefaultParams<LLBadge>()))
+    {
+        mBadge = createBadge(p);
+        mHasBadgeHolderParent = false;
 
-		LLView * owner_view = mBadgeOwnerView.get();
-		if (owner_view)
-		{
-			mBadge->addToView(owner_view);
-		}
-	}
+        LLView * owner_view = mBadgeOwnerView.get();
+        if (owner_view)
+        {
+            mBadge->addToView(owner_view);
+        }
+    }
 }
 
 void LLBadgeOwner::reshapeBadge(const LLRect& new_rect)
 {
-	if (mBadge)
-	{
-		mBadge->setShape(new_rect);
-	}
+    if (mBadge)
+    {
+        mBadge->setShape(new_rect);
+    }
 }
 
 // <FS:Ansariel> Re-add setBadgeLabel
 void LLBadgeOwner::setBadgeLabel(const LLStringExplicit& label)
 {
-	if (mBadge == NULL)
-	{
-		mBadge = createBadge(LLUICtrlFactory::getDefaultParams<LLBadge>());
+    if (mBadge == NULL)
+    {
+        mBadge = createBadge(LLUICtrlFactory::getDefaultParams<LLBadge>());
 
-		addBadgeToParentHolder();
-	}
+        addBadgeToParentHolder();
+    }
 
-	if (mBadge)
-	{
-		mBadge->setLabel(label);
+    if (mBadge)
+    {
+        mBadge->setLabel(label);
 
-		//
-		// Push the badge to the front so it renders on top
-		//
+        //
+        // Push the badge to the front so it renders on top
+        //
 
-		LLView * parent = mBadge->getParent();
+        LLView * parent = mBadge->getParent();
 
-		if (parent)
-		{
-			parent->sendChildToFront(mBadge);
-		}
-	}
+        if (parent)
+        {
+            parent->sendChildToFront(mBadge);
+        }
+    }
 }
 // </FS:Ansariel>
 
 void LLBadgeOwner::setBadgeVisibility(bool visible)
 {
-	if (mBadge)
-	{
-		mBadge->setVisible(visible);
-	}
+    if (mBadge)
+    {
+        mBadge->setVisible(visible);
+    }
 }
 
 void LLBadgeOwner::setDrawBadgeAtTop(bool draw_at_top)
 {
-	if (mBadge)
-	{
-		mBadge->setDrawAtParentTop(draw_at_top);
-	}
+    if (mBadge)
+    {
+        mBadge->setDrawAtParentTop(draw_at_top);
+    }
 }
 
 void LLBadgeOwner::addBadgeToParentHolder()
 {
-	LLView * owner_view = mBadgeOwnerView.get();
-	
-	if (mBadge && owner_view)
-	{
-		LLBadgeHolder * badge_holder = NULL;
+    LLView * owner_view = mBadgeOwnerView.get();
+    
+    if (mBadge && owner_view)
+    {
+        LLBadgeHolder * badge_holder = NULL;
 
-		// Find the appropriate holder for the badge
-		LLView * parent = owner_view->getParent();
+        // Find the appropriate holder for the badge
+        LLView * parent = owner_view->getParent();
 
-		while (parent)
-		{
-			LLBadgeHolder * badge_holder_panel = dynamic_cast<LLBadgeHolder *>(parent);
+        while (parent)
+        {
+            LLBadgeHolder * badge_holder_panel = dynamic_cast<LLBadgeHolder *>(parent);
 
-			if (badge_holder_panel && badge_holder_panel->acceptsBadge())
-			{
-				badge_holder = badge_holder_panel;
-				break;
-			}
+            if (badge_holder_panel && badge_holder_panel->acceptsBadge())
+            {
+                badge_holder = badge_holder_panel;
+                break;
+            }
 
-			parent = parent->getParent();
-		}
+            parent = parent->getParent();
+        }
 
-		if (badge_holder)
-		{
-			mHasBadgeHolderParent = badge_holder->addBadge(mBadge);
-		}
-	}
+        if (badge_holder)
+        {
+            mHasBadgeHolderParent = badge_holder->addBadge(mBadge);
+        }
+    }
 }
 
 LLBadge* LLBadgeOwner::createBadge(const LLBadge::Params& p)
 {
-	LLBadge::Params badge_params(p);
-	badge_params.owner = mBadgeOwnerView;
+    LLBadge::Params badge_params(p);
+    badge_params.owner = mBadgeOwnerView;
 
-	return LLUICtrlFactory::create<LLBadge>(badge_params);
+    return LLUICtrlFactory::create<LLBadge>(badge_params);
 }

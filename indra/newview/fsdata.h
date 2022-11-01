@@ -34,99 +34,99 @@
 
 class FSData : public LLSingleton<FSData>
 {
-	LOG_CLASS(FSData);
+    LOG_CLASS(FSData);
 
-	LLSINGLETON(FSData);
-	virtual ~FSData();
+    LLSINGLETON(FSData);
+    virtual ~FSData();
 
 public:
-	void startDownload();
-	void downloadAgents();
-	void processResponder(const LLSD& content, const std::string& url, bool save_to_file, const LLDate& last_modified);
-	void addAgents();
+    void startDownload();
+    void downloadAgents();
+    void processResponder(const LLSD& content, const std::string& url, bool save_to_file, const LLDate& last_modified);
+    void addAgents();
 
-	LLSD resolveClientTag(const LLUUID& id, bool new_system, const LLColor4& new_system_color);
+    LLSD resolveClientTag(const LLUUID& id, bool new_system, const LLColor4& new_system_color);
 
-	enum flags_t
-	{
-		SUPPORT		= (1 << 0), //0x01 1
-		DEVELOPER	= (1 << 1), //0x02 2
-		QA			= (1 << 2), //0x04 4
-		CHAT_COLOR	= (1 << 3), //0x08 8
-		NO_SUPPORT	= (1 << 4), //0x10 16
-		NO_USE		= (1 << 5), //0x20 32
-		NO_SPAM		= (1 << 6), //0x40 64
-		GATEWAY		= (1 << 7), //0x80 128
-	};
+    enum flags_t
+    {
+        SUPPORT     = (1 << 0), //0x01 1
+        DEVELOPER   = (1 << 1), //0x02 2
+        QA          = (1 << 2), //0x04 4
+        CHAT_COLOR  = (1 << 3), //0x08 8
+        NO_SUPPORT  = (1 << 4), //0x10 16
+        NO_USE      = (1 << 5), //0x20 32
+        NO_SPAM     = (1 << 6), //0x40 64
+        GATEWAY     = (1 << 7), //0x80 128
+    };
 
-	std::set<LLUUID> mSupportGroup;
-	std::set<LLUUID> mTestingGroup;
+    std::set<LLUUID> mSupportGroup;
+    std::set<LLUUID> mTestingGroup;
 
-	bool isDeveloper(const LLUUID& avatar_id);
-	bool isSupport(const LLUUID& avatar_id);
-	bool isQA(const LLUUID& avatar_id);
-	bool isFirestormGroup(const LLUUID& id);
-	bool isSupportGroup(const LLUUID& id);
-	bool isTestingGroup(const LLUUID& id);
+    bool isDeveloper(const LLUUID& avatar_id);
+    bool isSupport(const LLUUID& avatar_id);
+    bool isQA(const LLUUID& avatar_id);
+    bool isFirestormGroup(const LLUUID& id);
+    bool isSupportGroup(const LLUUID& id);
+    bool isTestingGroup(const LLUUID& id);
 
-	// returns -1 if agent is not found.
-	S32 getAgentFlags(const LLUUID& avatar_id);
+    // returns -1 if agent is not found.
+    S32 getAgentFlags(const LLUUID& avatar_id);
 
-	LLSD allowedLogin();
+    LLSD allowedLogin();
 
-	bool enableLegacySearch() {return mLegacySearch;}
+    bool enableLegacySearch() {return mLegacySearch;}
 
-	std::string processRequestForInfo(const LLUUID& requester, const std::string& message, const std::string& name, const LLUUID& sessionid);
-	static LLSD getSystemInfo();
-	static void callbackReqInfo(const LLSD &notification, const LLSD &response);
+    std::string processRequestForInfo(const LLUUID& requester, const std::string& message, const std::string& name, const LLUUID& sessionid);
+    static LLSD getSystemInfo();
+    static void callbackReqInfo(const LLSD &notification, const LLSD &response);
 
-	std::string getOpenSimMOTD() { return mOpenSimMOTD; }
-	void selectNextMOTD();
+    std::string getOpenSimMOTD() { return mOpenSimMOTD; }
+    void selectNextMOTD();
 
-	bool getFSDataDone() { return mFSDataDone; }
-	bool getAgentsDone() { return mAgentsDone; }
+    bool getFSDataDone() { return mFSDataDone; }
+    bool getAgentsDone() { return mAgentsDone; }
 
-	bool isAgentFlag(const LLUUID& agent_id, FSData::flags_t flag);
+    bool isAgentFlag(const LLUUID& agent_id, FSData::flags_t flag);
 
 private:
-	static void sendInfo(const LLUUID& destination, const LLUUID& sessionid, const std::string& my_name, EInstantMessage dialog);
-	void processAssets(const LLSD& assets);
-	void processAgents(const LLSD& data);
-	void saveLLSD(const LLSD& data, const std::string& filename, const LLDate& last_modified);
-	bool loadFromFile(LLSD& data, std::string filename);
-	void processData(const LLSD& fs_data);
-	void processClientTags(const LLSD& tags);
-	void updateClientTagsLocal();
-	void onNameCache(const LLUUID& av_id, const LLAvatarName& av_name);
+    static void sendInfo(const LLUUID& destination, const LLUUID& sessionid, const std::string& my_name, EInstantMessage dialog);
+    void processAssets(const LLSD& assets);
+    void processAgents(const LLSD& data);
+    void saveLLSD(const LLSD& data, const std::string& filename, const LLDate& last_modified);
+    bool loadFromFile(LLSD& data, std::string filename);
+    void processData(const LLSD& fs_data);
+    void processClientTags(const LLSD& tags);
+    void updateClientTagsLocal();
+    void onNameCache(const LLUUID& av_id, const LLAvatarName& av_name);
 
-	std::map<LLUUID, S32> mSupportAgents;
-	std::map<std::string, LLSD> mBlockedVersions;
+    std::map<LLUUID, S32> mSupportAgents;
+    std::map<std::string, LLSD> mBlockedVersions;
 
-	LLSD mHeaders;
-	LLSD mLegacyClientList;
-	LLSD mRandomMOTDs;
+    LLSD mHeaders;
+    LLSD mLegacyClientList;
+    LLSD mRandomMOTDs;
 
-	std::string mFSdataFilename;
-	std::string mFSdataDefaultsFilename;
-	std::string mFSdataDefaultsUrl;
-	std::string mAgentsFilename;
-	std::string mAssetsFilename;
-	std::string mClientTagsFilename;
+    std::string mFSdataFilename;
+    std::string mFSdataDefaultsFilename;
+    std::string mFSdataDefaultsUrl;
+    std::string mAgentsFilename;
+    std::string mAssetsFilename;
+    std::string mClientTagsFilename;
 
-	std::string mBaseURL;
-	std::string mFSDataURL;
-	std::string mAgentsURL;
-	std::string mAssetsURL;
-	
-	std::string mSecondLifeMOTD;
-	std::string mOpenSimMOTD;
+    std::string mBaseURL;
+    std::string mFSDataURL;
+    std::string mAgentsURL;
+    std::string mAssetsURL;
+    
+    std::string mSecondLifeMOTD;
+    std::string mOpenSimMOTD;
 
-	bool mLegacySearch;
-	bool mFSDataDone;
-	bool mAgentsDone;
+    bool mLegacySearch;
+    bool mFSDataDone;
+    bool mAgentsDone;
 
-	typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
-	avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
+    typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
+    avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
 };
 
 #endif // FS_DATA_H

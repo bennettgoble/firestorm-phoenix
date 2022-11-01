@@ -35,13 +35,13 @@
 class StreamTitleDisplay : LLEventTimer
 {
 public:
-	StreamTitleDisplay();
-	~StreamTitleDisplay() { }
+    StreamTitleDisplay();
+    ~StreamTitleDisplay() { }
 private:
-	BOOL tick();
-	void checkMetadata();
-	void sendStreamTitleToChat(const std::string& Title);
-	LLSD mMetadata;
+    BOOL tick();
+    void checkMetadata();
+    void sendStreamTitleToChat(const std::string& Title);
+    LLSD mMetadata;
 };
 
 #endif // STREAMTITLEDISPLAY_H

@@ -35,73 +35,73 @@ FSBlockListMenu gFSBlockListMenu;
 
 LLContextMenu* FSBlockListMenu::createMenu()
 {
-	LLUICtrl::CommitCallbackRegistry::ScopedRegistrar registrar;
-	LLUICtrl::EnableCallbackRegistry::ScopedRegistrar enable_registrar;
+    LLUICtrl::CommitCallbackRegistry::ScopedRegistrar registrar;
+    LLUICtrl::EnableCallbackRegistry::ScopedRegistrar enable_registrar;
 
-	registrar.add("Block.Action",			boost::bind(&FSBlockListMenu::onContextMenuItemClick,  this, _2));
-	enable_registrar.add("Block.Check",		boost::bind(&FSBlockListMenu::onContextMenuItemCheck, this, _2));
-	enable_registrar.add("Block.Enable",	boost::bind(&FSBlockListMenu::onContextMenuItemEnable, this, _2));
-	enable_registrar.add("Block.Visible",	boost::bind(&FSBlockListMenu::onContextMenuItemVisible, this, _2));
+    registrar.add("Block.Action",           boost::bind(&FSBlockListMenu::onContextMenuItemClick,  this, _2));
+    enable_registrar.add("Block.Check",     boost::bind(&FSBlockListMenu::onContextMenuItemCheck, this, _2));
+    enable_registrar.add("Block.Enable",    boost::bind(&FSBlockListMenu::onContextMenuItemEnable, this, _2));
+    enable_registrar.add("Block.Visible",   boost::bind(&FSBlockListMenu::onContextMenuItemVisible, this, _2));
 
-	return createFromFile("menu_fs_block_list.xml");
+    return createFromFile("menu_fs_block_list.xml");
 }
 
 void FSBlockListMenu::show(LLView* spawning_view, const uuid_vec_t& uuids, S32 x, S32 y)
 {
-	mSpawningCtrl = spawning_view;
-	LLListContextMenu::show(spawning_view, uuids, x, y);
+    mSpawningCtrl = spawning_view;
+    LLListContextMenu::show(spawning_view, uuids, x, y);
 }
 
 void FSBlockListMenu::onContextMenuItemClick(const LLSD& userdata)
 {
-	if (mSpawningCtrl)
-	{
-		FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
-		if (blocklist)
-		{
-			blocklist->onCustomAction(userdata);
-		}
-	}
+    if (mSpawningCtrl)
+    {
+        FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
+        if (blocklist)
+        {
+            blocklist->onCustomAction(userdata);
+        }
+    }
 }
 
 bool FSBlockListMenu::onContextMenuItemCheck(const LLSD& userdata)
 {
-	if (mSpawningCtrl)
-	{
-		FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
-		if (blocklist)
-		{
-			return blocklist->isActionChecked(userdata);
-		}
-	}
+    if (mSpawningCtrl)
+    {
+        FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
+        if (blocklist)
+        {
+            return blocklist->isActionChecked(userdata);
+        }
+    }
 
-	return false;
+    return false;
 }
 
 bool FSBlockListMenu::onContextMenuItemEnable(const LLSD& userdata)
 {
-	if (mSpawningCtrl)
-	{
-		FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
-		if (blocklist)
-		{
-			return blocklist->isActionEnabled(userdata);
-		}
-	}
+    if (mSpawningCtrl)
+    {
+        FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
+        if (blocklist)
+        {
+            return blocklist->isActionEnabled(userdata);
+        }
+    }
 
-	return false;
+    return false;
 }
 
 bool FSBlockListMenu::onContextMenuItemVisible(const LLSD& userdata)
 {
-	if (mSpawningCtrl)
-	{
-		FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
-		if (blocklist)
-		{
-			return blocklist->isActionVisible(userdata);
-		}
-	}
+    if (mSpawningCtrl)
+    {
+        FSPanelBlockList* blocklist = mSpawningCtrl->getParentByType<FSPanelBlockList>();
+        if (blocklist)
+        {
+            return blocklist->isActionVisible(userdata);
+        }
+    }
 
-	return false;
+    return false;
 }

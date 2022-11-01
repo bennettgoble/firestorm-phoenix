@@ -39,115 +39,115 @@ class LLViewerObject;
 
 class LLLocalBitmap
 {
-	public: /* main */
-		LLLocalBitmap(std::string filename);
-		~LLLocalBitmap();
+    public: /* main */
+        LLLocalBitmap(std::string filename);
+        ~LLLocalBitmap();
 
-	public: /* accessors */
-		std::string	getFilename();
-		std::string	getShortName();
-		LLUUID		getTrackingID();
-		LLUUID		getWorldID();
-		bool		getValid();
+    public: /* accessors */
+        std::string getFilename();
+        std::string getShortName();
+        LLUUID      getTrackingID();
+        LLUUID      getWorldID();
+        bool        getValid();
 
-	public: /* self update public section */
-		enum EUpdateType
-		{
-			UT_FIRSTUSE,
-			UT_REGUPDATE
-		};
+    public: /* self update public section */
+        enum EUpdateType
+        {
+            UT_FIRSTUSE,
+            UT_REGUPDATE
+        };
 
-		bool updateSelf(EUpdateType = UT_REGUPDATE);
+        bool updateSelf(EUpdateType = UT_REGUPDATE);
 
-	private: /* self update private section */
-		bool decodeBitmap(LLPointer<LLImageRaw> raw);
-		void replaceIDs(LLUUID old_id, LLUUID new_id);
-		std::vector<LLViewerObject*> prepUpdateObjects(LLUUID old_id, U32 channel);
-		void updateUserPrims(LLUUID old_id, LLUUID new_id, U32 channel);
-		void updateUserVolumes(LLUUID old_id, LLUUID new_id, U32 channel);
-		void updateUserLayers(LLUUID old_id, LLUUID new_id, LLWearableType::EType type);
-		LLAvatarAppearanceDefines::ETextureIndex getTexIndex(LLWearableType::EType type, LLAvatarAppearanceDefines::EBakedTextureIndex baked_texind);
+    private: /* self update private section */
+        bool decodeBitmap(LLPointer<LLImageRaw> raw);
+        void replaceIDs(LLUUID old_id, LLUUID new_id);
+        std::vector<LLViewerObject*> prepUpdateObjects(LLUUID old_id, U32 channel);
+        void updateUserPrims(LLUUID old_id, LLUUID new_id, U32 channel);
+        void updateUserVolumes(LLUUID old_id, LLUUID new_id, U32 channel);
+        void updateUserLayers(LLUUID old_id, LLUUID new_id, LLWearableType::EType type);
+        LLAvatarAppearanceDefines::ETextureIndex getTexIndex(LLWearableType::EType type, LLAvatarAppearanceDefines::EBakedTextureIndex baked_texind);
 
-	private: /* private enums */
-		enum ELinkStatus
-		{
-			LS_ON,
-			LS_BROKEN,
-		};
+    private: /* private enums */
+        enum ELinkStatus
+        {
+            LS_ON,
+            LS_BROKEN,
+        };
 
-		enum EExtension
-		{
-			ET_IMG_BMP,
-			ET_IMG_TGA,
-			ET_IMG_JPG,
-			ET_IMG_PNG
-		};
+        enum EExtension
+        {
+            ET_IMG_BMP,
+            ET_IMG_TGA,
+            ET_IMG_JPG,
+            ET_IMG_PNG
+        };
 
-	private: /* members */
-		std::string mFilename;
-		std::string mShortName;
-		LLUUID      mTrackingID;
-		LLUUID      mWorldID;
-		bool        mValid;
-		LLSD        mLastModified;
-		EExtension  mExtension;
-		ELinkStatus mLinkStatus;
-		S32         mUpdateRetries;
+    private: /* members */
+        std::string mFilename;
+        std::string mShortName;
+        LLUUID      mTrackingID;
+        LLUUID      mWorldID;
+        bool        mValid;
+        LLSD        mLastModified;
+        EExtension  mExtension;
+        ELinkStatus mLinkStatus;
+        S32         mUpdateRetries;
 
 };
 
 class LLLocalBitmapTimer : public LLEventTimer
 {
-	public:
-		LLLocalBitmapTimer();
-		~LLLocalBitmapTimer();
+    public:
+        LLLocalBitmapTimer();
+        ~LLLocalBitmapTimer();
 
-	public:
-		void startTimer();
-		void stopTimer();
-		bool isRunning();
-		BOOL tick();
+    public:
+        void startTimer();
+        void stopTimer();
+        bool isRunning();
+        BOOL tick();
 
 };
 
 class LLLocalBitmapMgr : public LLSingleton<LLLocalBitmapMgr>
 {
-	LLSINGLETON(LLLocalBitmapMgr);
-	~LLLocalBitmapMgr();
+    LLSINGLETON(LLLocalBitmapMgr);
+    ~LLLocalBitmapMgr();
 public:
-	// <FS:Ansariel> Threaded filepickers
-	//bool         addUnit();
-	void         addUnit();
-	// </FS:Ansariel>
+    // <FS:Ansariel> Threaded filepickers
+    //bool         addUnit();
+    void         addUnit();
+    // </FS:Ansariel>
     LLUUID       addUnit(const std::string &filename);
-	void         delUnit(LLUUID tracking_id);
-	bool 		checkTextureDimensions(std::string filename);
+    void         delUnit(LLUUID tracking_id);
+    bool        checkTextureDimensions(std::string filename);
 
-	LLUUID       getWorldID(LLUUID tracking_id);
+    LLUUID       getWorldID(LLUUID tracking_id);
     bool         isLocal(LLUUID world_id);
-	std::string  getFilename(LLUUID tracking_id);
+    std::string  getFilename(LLUUID tracking_id);
     
-	void         feedScrollList(LLScrollListCtrl* ctrl);
-	void         doUpdates();
-	void         setNeedsRebake();
-	void         doRebake();
-	
-	// <FS:Ansariel> Threaded filepickers
-	void         filePickerCallback(const std::vector<std::string>& filenames);
-	boost::signals2::connection setBitmapsAddedCallback(const boost::signals2::signal<void ()>::slot_type& cb)
-	{
-		return mBitmapsAddedSignal.connect(cb);
-	}
-	// </FS:Ansariel>
-		
+    void         feedScrollList(LLScrollListCtrl* ctrl);
+    void         doUpdates();
+    void         setNeedsRebake();
+    void         doRebake();
+    
+    // <FS:Ansariel> Threaded filepickers
+    void         filePickerCallback(const std::vector<std::string>& filenames);
+    boost::signals2::connection setBitmapsAddedCallback(const boost::signals2::signal<void ()>::slot_type& cb)
+    {
+        return mBitmapsAddedSignal.connect(cb);
+    }
+    // </FS:Ansariel>
+        
 private:
-	std::list<LLLocalBitmap*>    mBitmapList;
-	LLLocalBitmapTimer           mTimer;
-	bool                         mNeedsRebake;
-	typedef std::list<LLLocalBitmap*>::iterator local_list_iter;
+    std::list<LLLocalBitmap*>    mBitmapList;
+    LLLocalBitmapTimer           mTimer;
+    bool                         mNeedsRebake;
+    typedef std::list<LLLocalBitmap*>::iterator local_list_iter;
 
-	// <FS:Ansariel> Threaded filepickers
-	boost::signals2::signal<void ()> mBitmapsAddedSignal;
+    // <FS:Ansariel> Threaded filepickers
+    boost::signals2::signal<void ()> mBitmapsAddedSignal;
 };
 
 #endif

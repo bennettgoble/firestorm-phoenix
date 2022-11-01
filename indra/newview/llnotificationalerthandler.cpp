@@ -46,18 +46,18 @@ using namespace LLNotificationsUI;
 
 //--------------------------------------------------------------------------
 LLAlertHandler::LLAlertHandler(const std::string& name, const std::string& notification_type, bool is_modal) 
-:	LLSystemNotificationHandler(name, notification_type),
-	mIsModal(is_modal)
+:   LLSystemNotificationHandler(name, notification_type),
+    mIsModal(is_modal)
 {
-	LLScreenChannelBase::Params p;
-	p.id = LLUUID(gSavedSettings.getString("AlertChannelUUID"));
-	p.display_toasts_always = true;
-	p.toast_align = NA_CENTRE;
-	p.channel_align = CA_CENTRE;
+    LLScreenChannelBase::Params p;
+    p.id = LLUUID(gSavedSettings.getString("AlertChannelUUID"));
+    p.display_toasts_always = true;
+    p.toast_align = NA_CENTRE;
+    p.channel_align = CA_CENTRE;
 
-	// Getting a Channel for our notifications
-	mChannel = LLChannelManager::getInstance()->getChannel(p)->getHandle();
-	mChannel.get()->setCanStoreToasts(false);
+    // Getting a Channel for our notifications
+    mChannel = LLChannelManager::getInstance()->getChannel(p)->getHandle();
+    mChannel.get()->setCanStoreToasts(false);
 }
 
 //--------------------------------------------------------------------------
@@ -68,99 +68,99 @@ LLAlertHandler::~LLAlertHandler()
 //--------------------------------------------------------------------------
 void LLAlertHandler::initChannel()
 {
-	S32 channel_right_bound = gViewerWindow->getWorldViewRectScaled().getWidth() / 2;
-	mChannel.get()->init(channel_right_bound, channel_right_bound);
+    S32 channel_right_bound = gViewerWindow->getWorldViewRectScaled().getWidth() / 2;
+    mChannel.get()->init(channel_right_bound, channel_right_bound);
 }
 
 //--------------------------------------------------------------------------
 bool LLAlertHandler::processNotification(const LLNotificationPtr& notification, bool should_log)
 {
-	if(mChannel.isDead())
-	{
-		return false;
-	}
+    if(mChannel.isDead())
+    {
+        return false;
+    }
 
-	// arrange a channel on a screen
-	if(!mChannel.get()->getVisible())
-	{
-		initChannel();
-	}
+    // arrange a channel on a screen
+    if(!mChannel.get()->getVisible())
+    {
+        initChannel();
+    }
 
-	if (notification->canLogToIM() && notification->hasFormElements())
-	{
-		const std::string name = LLHandlerUtil::getSubstitutionName(notification);
+    if (notification->canLogToIM() && notification->hasFormElements())
+    {
+        const std::string name = LLHandlerUtil::getSubstitutionName(notification);
 
-		LLUUID from_id = notification->getPayload()["from_id"];
+        LLUUID from_id = notification->getPayload()["from_id"];
 
 // [RLVa:KB] - Checked: 2013-05-09 (RLVa-1.4.9)
-		// Don't spawn an IM session for non-chat related events:
-		//   - LLHandlerUtil::logToIMP2P() below will still be called with to_file_only == false
-		//   - LLHandlerUtil::logToIM() will eventually be called as a result and without an open IM session it will log the
-		//     same message as it would for an open session whereas to_file_only == true would take a different code path
-		if (RlvActions::canStartIM(from_id))
-		{
+        // Don't spawn an IM session for non-chat related events:
+        //   - LLHandlerUtil::logToIMP2P() below will still be called with to_file_only == false
+        //   - LLHandlerUtil::logToIM() will eventually be called as a result and without an open IM session it will log the
+        //     same message as it would for an open session whereas to_file_only == true would take a different code path
+        if (RlvActions::canStartIM(from_id))
+        {
 // [/RLVa:KB]
-			// firstly create session...
-			LLHandlerUtil::spawnIMSession(name, from_id);
+            // firstly create session...
+            LLHandlerUtil::spawnIMSession(name, from_id);
 // [RLVa:KB] - Checked: 2013-05-09 (RLVa-1.4.9)
-		}
+        }
 // [/RLVa:KB]
 
-		// ...then log message to have IM Well notified about new message
-		LLHandlerUtil::logToIMP2P(notification);
-	}
+        // ...then log message to have IM Well notified about new message
+        LLHandlerUtil::logToIMP2P(notification);
+    }
 
-	LLToastAlertPanel* alert_dialog = new LLToastAlertPanel(notification, mIsModal);
-	LLToast::Params p;
-	p.notif_id = notification->getID();
-	p.notification = notification;
-	p.panel = dynamic_cast<LLToastPanel*>(alert_dialog);
-	p.enable_hide_btn = false;
-	p.can_fade = false;
-	p.is_modal = mIsModal;
-	p.on_delete_toast = boost::bind(&LLAlertHandler::onDeleteToast, this, _1);
+    LLToastAlertPanel* alert_dialog = new LLToastAlertPanel(notification, mIsModal);
+    LLToast::Params p;
+    p.notif_id = notification->getID();
+    p.notification = notification;
+    p.panel = dynamic_cast<LLToastPanel*>(alert_dialog);
+    p.enable_hide_btn = false;
+    p.can_fade = false;
+    p.is_modal = mIsModal;
+    p.on_delete_toast = boost::bind(&LLAlertHandler::onDeleteToast, this, _1);
 
-	// Show alert in middle of progress view (during teleport) (EXT-1093)
-	LLProgressView* progress = gViewerWindow->getProgressView();
-	LLRect rc = progress && progress->getVisible() ? progress->getRect() : gViewerWindow->getWorldViewRectScaled();
-	mChannel.get()->updatePositionAndSize(rc);
+    // Show alert in middle of progress view (during teleport) (EXT-1093)
+    LLProgressView* progress = gViewerWindow->getProgressView();
+    LLRect rc = progress && progress->getVisible() ? progress->getRect() : gViewerWindow->getWorldViewRectScaled();
+    mChannel.get()->updatePositionAndSize(rc);
 
-	LLScreenChannel* channel = dynamic_cast<LLScreenChannel*>(mChannel.get());
-	if(channel)
-		channel->addToast(p);
-	
-	return false;
+    LLScreenChannel* channel = dynamic_cast<LLScreenChannel*>(mChannel.get());
+    if(channel)
+        channel->addToast(p);
+    
+    return false;
 }
 
 void LLAlertHandler::onChange( LLNotificationPtr notification )
 {
-	LLToastAlertPanel* alert_dialog = new LLToastAlertPanel(notification, mIsModal);
-	LLScreenChannel* channel = dynamic_cast<LLScreenChannel*>(mChannel.get());
-	if(channel)
-		channel->modifyToastByNotificationID(notification->getID(), (LLToastPanel*)alert_dialog);
+    LLToastAlertPanel* alert_dialog = new LLToastAlertPanel(notification, mIsModal);
+    LLScreenChannel* channel = dynamic_cast<LLScreenChannel*>(mChannel.get());
+    if(channel)
+        channel->modifyToastByNotificationID(notification->getID(), (LLToastPanel*)alert_dialog);
 }
 
 //--------------------------------------------------------------------------
 LLViewerAlertHandler::LLViewerAlertHandler(const std::string& name, const std::string& notification_type)
-	: LLSystemNotificationHandler(name, notification_type)
+    : LLSystemNotificationHandler(name, notification_type)
 {
 }
 
 bool LLViewerAlertHandler::processNotification(const LLNotificationPtr& p, bool should_log)
 {
-	if (gHeadlessClient)
-	{
-		LL_INFOS("LLViewerAlertHandler") << "Alert: " << p->getName() << LL_ENDL;
-	}
+    if (gHeadlessClient)
+    {
+        LL_INFOS("LLViewerAlertHandler") << "Alert: " << p->getName() << LL_ENDL;
+    }
 
-	// If we're in mouselook, the mouse is hidden and so the user can't click 
-	// the dialog buttons.  In that case, change to First Person instead.
-	if( gAgentCamera.cameraMouselook() )
-	{
-		gAgentCamera.changeCameraToDefault();
-	}
+    // If we're in mouselook, the mouse is hidden and so the user can't click 
+    // the dialog buttons.  In that case, change to First Person instead.
+    if( gAgentCamera.cameraMouselook() )
+    {
+        gAgentCamera.changeCameraToDefault();
+    }
 
-	return false;
+    return false;
 }
 
 

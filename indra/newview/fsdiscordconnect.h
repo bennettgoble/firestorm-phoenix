@@ -14,7 +14,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -36,58 +36,58 @@ class LLEventPump;
 
 class FSDiscordConnect : public LLSingleton<FSDiscordConnect>
 {
-	LLSINGLETON(FSDiscordConnect);
-	LOG_CLASS(FSDiscordConnect);
+    LLSINGLETON(FSDiscordConnect);
+    LOG_CLASS(FSDiscordConnect);
 public:
-	enum EConnectionState
-	{
-		DISCORD_NOT_CONNECTED = 0,
-		DISCORD_CONNECTION_IN_PROGRESS = 1,
-		DISCORD_CONNECTED = 2,
-		DISCORD_CONNECTION_FAILED = 3,
-		DISCORD_DISCONNECTING = 4
-	};
+    enum EConnectionState
+    {
+        DISCORD_NOT_CONNECTED = 0,
+        DISCORD_CONNECTION_IN_PROGRESS = 1,
+        DISCORD_CONNECTED = 2,
+        DISCORD_CONNECTION_FAILED = 3,
+        DISCORD_DISCONNECTING = 4
+    };
 
-	~FSDiscordConnect();
+    ~FSDiscordConnect();
 
-	void connectToDiscord();																				// Initiate the complete Discord connection. Please use checkConnectionToDiscord() in normal use.
-	void disconnectFromDiscord();																			// Disconnect from the Discord service.
-	void checkConnectionToDiscord(bool auto_connect = false);												// Check if connected to the Discord service. If not, call connectToDiscord().
-	
-	void storeInfo(const LLSD& info);
-	const LLSD& getInfo() const;
-	void clearInfo();
-	
-	void setConnectionState(EConnectionState connection_state);
-	void setConnected(bool connected);
-	bool isConnected() { return mConnected; }
-	EConnectionState getConnectionState() { return mConnectionState; }
+    void connectToDiscord();                                                                                // Initiate the complete Discord connection. Please use checkConnectionToDiscord() in normal use.
+    void disconnectFromDiscord();                                                                           // Disconnect from the Discord service.
+    void checkConnectionToDiscord(bool auto_connect = false);                                               // Check if connected to the Discord service. If not, call connectToDiscord().
+    
+    void storeInfo(const LLSD& info);
+    const LLSD& getInfo() const;
+    void clearInfo();
+    
+    void setConnectionState(EConnectionState connection_state);
+    void setConnected(bool connected);
+    bool isConnected() { return mConnected; }
+    EConnectionState getConnectionState() { return mConnectionState; }
 
-	void updateRichPresence();
+    void updateRichPresence();
 
-	bool Tick(const LLSD&);
+    bool Tick(const LLSD&);
 
 private:
 
-	EConnectionState mConnectionState;
-	bool mConnected;
-	LLSD mInfo;
-	bool mRefreshInfo;
-	
-	static boost::scoped_ptr<LLEventPump> sStateWatcher;
-	static boost::scoped_ptr<LLEventPump> sInfoWatcher;
-	static boost::scoped_ptr<LLEventPump> sContentWatcher;
+    EConnectionState mConnectionState;
+    bool mConnected;
+    LLSD mInfo;
+    bool mRefreshInfo;
+    
+    static boost::scoped_ptr<LLEventPump> sStateWatcher;
+    static boost::scoped_ptr<LLEventPump> sInfoWatcher;
+    static boost::scoped_ptr<LLEventPump> sContentWatcher;
 
-	void discordConnectCoro();
-	void discordDisconnectCoro();
-	void discordConnectedCoro(bool autoConnect);
+    void discordConnectCoro();
+    void discordDisconnectCoro();
+    void discordConnectedCoro(bool autoConnect);
 
-	bool checkMarkerFile();
-	void setMarkerFile();
-	void clearMarkerFile();
+    bool checkMarkerFile();
+    void setMarkerFile();
+    void clearMarkerFile();
 
-	std::string mMarkerFilename;
-	time_t mConnectTime;
+    std::string mMarkerFilename;
+    time_t mConnectTime;
 };
 
 #endif // FS_FSDISCORDCONNECT_H

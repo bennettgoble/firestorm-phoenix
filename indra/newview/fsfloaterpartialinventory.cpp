@@ -34,7 +34,7 @@
 //=========================================================================
 FSFloaterPartialInventory::FSFloaterPartialInventory(const LLSD& key) : LLFloater(key)
 {
-	mRootFolderId = key["start_folder_id"].asUUID();
+    mRootFolderId = key["start_folder_id"].asUUID();
 }
 
 FSFloaterPartialInventory::~FSFloaterPartialInventory()
@@ -43,27 +43,27 @@ FSFloaterPartialInventory::~FSFloaterPartialInventory()
 
 BOOL FSFloaterPartialInventory::postBuild()
 {
-	LLInventoryPanel::Params params;
-	params.start_folder.id(mRootFolderId);
-	params.follows.flags(FOLLOWS_ALL);
-	params.layout("topleft");
-	params.name("inv_panel");
-	mInventoryList = LLUICtrlFactory::create<LLInventoryPanel>(params);
+    LLInventoryPanel::Params params;
+    params.start_folder.id(mRootFolderId);
+    params.follows.flags(FOLLOWS_ALL);
+    params.layout("topleft");
+    params.name("inv_panel");
+    mInventoryList = LLUICtrlFactory::create<LLInventoryPanel>(params);
 
-	auto wrapper_panel = getChild<LLPanel>("pnl_inv_wrap");
-	wrapper_panel->addChild(mInventoryList);
-	mInventoryList->reshape(wrapper_panel->getRect().getWidth(), wrapper_panel->getRect().getHeight());
-	mInventoryList->setOrigin(0, 0);
+    auto wrapper_panel = getChild<LLPanel>("pnl_inv_wrap");
+    wrapper_panel->addChild(mInventoryList);
+    mInventoryList->reshape(wrapper_panel->getRect().getWidth(), wrapper_panel->getRect().getHeight());
+    mInventoryList->setOrigin(0, 0);
 
-	mFilterEdit = getChild<LLFilterEditor>("flt_search");
-	mFilterEdit->setCommitCallback([this](LLUICtrl*, const LLSD& param){ mInventoryList->setFilterSubString(param.asString()); });
+    mFilterEdit = getChild<LLFilterEditor>("flt_search");
+    mFilterEdit->setCommitCallback([this](LLUICtrl*, const LLSD& param){ mInventoryList->setFilterSubString(param.asString()); });
 
-	return TRUE;
+    return TRUE;
 }
 
 void FSFloaterPartialInventory::onOpen(const LLSD& key)
 {
-	LLStringUtil::format_map_t args;
-	args["FOLDERNAME"] = key["start_folder_name"].asString();
-	setTitle(getString("title", args));
+    LLStringUtil::format_map_t args;
+    args["FOLDERNAME"] = key["start_folder_name"].asString();
+    setTitle(getString("title", args));
 }

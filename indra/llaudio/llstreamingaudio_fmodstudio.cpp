@@ -49,7 +49,7 @@ public:
     bool stopStream(); // Returns true if the stream was successfully stopped.
     bool ready();
 
-    const std::string& getURL() 	{ return mInternetStreamURL; }
+    const std::string& getURL()     { return mInternetStreamURL; }
 
     FMOD_RESULT getOpenState(FMOD_OPENSTATE& openstate, unsigned int* percentbuffered = NULL, bool* starving = NULL, bool* diskbusy = NULL);
 protected:
@@ -77,8 +77,8 @@ mWasAlreadyPlaying(false)
 {
     // Number of milliseconds of audio to buffer for the audio card.
     // Must be larger than the usual Second Life frame stutter time.
-    const U32 buffer_seconds = 10;		//sec
-    const U32 estimated_bitrate = 128;	//kbit/sec
+    const U32 buffer_seconds = 10;      //sec
+    const U32 estimated_bitrate = 128;  //kbit/sec
     Check_FMOD_Error(mSystem->setStreamBufferSize(estimated_bitrate * buffer_seconds * 128/*bytes/kbit*/, FMOD_TIMEUNIT_RAWBYTES), "FMOD::System::setStreamBufferSize");
 
     Check_FMOD_Error(system->createChannelGroup("stream", &mStreamGroup), "FMOD::System::createChannelGroup");
@@ -99,8 +99,8 @@ void LLStreamingAudio_FMODSTUDIO::start(const std::string& url)
 {
     //if (!mInited)
     //{
-    //	LL_WARNS() << "startInternetStream before audio initialized" << LL_ENDL;
-    //	return;
+    //  LL_WARNS() << "startInternetStream before audio initialized" << LL_ENDL;
+    //  return;
     //}
 
     // "stop" stream but don't clear url, etc. in case url == mInternetStreamURL
@@ -405,7 +405,7 @@ void LLStreamingAudio_FMODSTUDIO::setGain(F32 vol)
 
     if (mFMODInternetStreamChannelp)
     {
-        vol = llclamp(vol * vol, 0.f, 1.f);	//should vol be squared here?
+        vol = llclamp(vol * vol, 0.f, 1.f); //should vol be squared here?
 
         Check_FMOD_Error(mFMODInternetStreamChannelp->setVolume(vol), "FMOD::Channel::setVolume");
     }
@@ -471,7 +471,7 @@ FMOD::Channel *LLAudioStreamManagerFMODSTUDIO::startStream()
     }
 
     if (mStreamChannel)
-        return mStreamChannel;	//Already have a channel for this stream.
+        return mStreamChannel;  //Already have a channel for this stream.
 
     Check_FMOD_Error(mSystem->playSound(mInternetStream, mChannelGroup, true, &mStreamChannel), "FMOD::System::playSound");
     return mStreamChannel;

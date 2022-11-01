@@ -31,27 +31,27 @@
 static LLDefaultChildRegistry::Register<FSLSLPreProcViewer> r("fs_lsl_preproc_viewer");
 
 FSLSLPreProcViewer::FSLSLPreProcViewer(const Params& p)
-:	LLScriptEditor(p)
+:   LLScriptEditor(p)
 {
 }
 
 BOOL FSLSLPreProcViewer::handleKeyHere(KEY key, MASK mask )
 {
-	// Normal key handling
-	BOOL handled = handleNavigationKey( key, mask )
-					|| handleSelectionKey(key, mask)
-					|| handleControlKey(key, mask);
+    // Normal key handling
+    BOOL handled = handleNavigationKey( key, mask )
+                    || handleSelectionKey(key, mask)
+                    || handleControlKey(key, mask);
 
-	if (handled)
-	{
-		resetCursorBlink();
-		needsScroll();
-	}
+    if (handled)
+    {
+        resetCursorBlink();
+        needsScroll();
+    }
 
-	return handled;
+    return handled;
 }
 
 BOOL FSLSLPreProcViewer::handleUnicodeCharHere(llwchar uni_char)
 {
-	return FALSE;
+    return FALSE;
 }

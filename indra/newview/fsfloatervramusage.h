@@ -36,26 +36,26 @@ class LLVertexBuffer;
 class FSFloaterVRAMUsage : public LLFloater, public nd::selection::PropertiesListener
 {
 public:
-	FSFloaterVRAMUsage(const LLSD& seed);
-	/*virtual*/ ~FSFloaterVRAMUsage();
-	/*virtual*/ void onOpen(const LLSD& key);
+    FSFloaterVRAMUsage(const LLSD& seed);
+    /*virtual*/ ~FSFloaterVRAMUsage();
+    /*virtual*/ void onOpen(const LLSD& key);
 
-	BOOL postBuild();
+    BOOL postBuild();
 
-	virtual void onProperties( LLSelectNode const * );
+    virtual void onProperties( LLSelectNode const * );
 
-	void onIdle();
+    void onIdle();
 
 private:
-	void doRefresh();
+    void doRefresh();
 
-	void addObjectToList( LLViewerObject*, std::string const& );
-	void calcFaceSize( LLFace *aFace, S32 &aW, S32 &aH );
-	S32 calcVBOEntrySize( LLVertexBuffer *aVBO );
-	U32 calcTexturSize( LLViewerObject*, std::ostream * = 0 );
+    void addObjectToList( LLViewerObject*, std::string const& );
+    void calcFaceSize( LLFace *aFace, S32 &aW, S32 &aH );
+    S32 calcVBOEntrySize( LLVertexBuffer *aVBO );
+    U32 calcTexturSize( LLViewerObject*, std::ostream * = 0 );
 
-	struct ImplData;
-	ImplData *mData;
+    struct ImplData;
+    ImplData *mData;
 };
 
 #endif // FS_FLOATERBLOCKLIST_H

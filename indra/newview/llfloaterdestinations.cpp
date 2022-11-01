@@ -41,45 +41,45 @@
 #include "llweb.h"
 
 LLFloaterDestinations::LLFloaterDestinations(const LLSD& key)
-	:	LLFloater(key),
-	mDestinationGuideUrlChangedSignal() // <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
+    :   LLFloater(key),
+    mDestinationGuideUrlChangedSignal() // <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
 {
 }
 
 LLFloaterDestinations::~LLFloaterDestinations()
 {
-	// <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
-	if (mDestinationGuideUrlChangedSignal.connected())
-	{
-		mDestinationGuideUrlChangedSignal.disconnect();
-	}
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
+    if (mDestinationGuideUrlChangedSignal.connected())
+    {
+        mDestinationGuideUrlChangedSignal.disconnect();
+    }
+    // </FS:Ansariel>
 }
 
 BOOL LLFloaterDestinations::postBuild()
 {
-	enableResizeCtrls(true, true, false);
-	return TRUE;
+    enableResizeCtrls(true, true, false);
+    return TRUE;
 }
 
 // <FS:Ansariel> FIRE-16833: Destination guide does not change between OpenSim grids
 void LLFloaterDestinations::onOpen(const LLSD& key)
 {
-	// Connect during onOpen instead of ctor because LLFloaterDestinations instance
-	// gets created before we can safely create a LFSimFeatureHandler instance!
-	// Assuming we receive the destination guide URL via login response and it
-	// is the same URL being sent by region caps so we will be good for the initial
-	// region the avatar logs into as well.
-	if (!mDestinationGuideUrlChangedSignal.connected())
-	{
-		mDestinationGuideUrlChangedSignal = LFSimFeatureHandler::instance().setDestinationGuideCallback(boost::bind(&LLFloaterDestinations::handleUrlChanged, this, _1));
-	}
+    // Connect during onOpen instead of ctor because LLFloaterDestinations instance
+    // gets created before we can safely create a LFSimFeatureHandler instance!
+    // Assuming we receive the destination guide URL via login response and it
+    // is the same URL being sent by region caps so we will be good for the initial
+    // region the avatar logs into as well.
+    if (!mDestinationGuideUrlChangedSignal.connected())
+    {
+        mDestinationGuideUrlChangedSignal = LFSimFeatureHandler::instance().setDestinationGuideCallback(boost::bind(&LLFloaterDestinations::handleUrlChanged, this, _1));
+    }
 
-	handleUrlChanged(LFSimFeatureHandler::instance().destinationGuideURL());
+    handleUrlChanged(LFSimFeatureHandler::instance().destinationGuideURL());
 }
 
 void LLFloaterDestinations::handleUrlChanged(const std::string& url)
 {
-	getChild<LLMediaCtrl>("destination_guide_contents")->navigateTo(LLWeb::expandURLSubstitutions(url, LLSD()), HTTP_CONTENT_TEXT_HTML);
+    getChild<LLMediaCtrl>("destination_guide_contents")->navigateTo(LLWeb::expandURLSubstitutions(url, LLSD()), HTTP_CONTENT_TEXT_HTML);
 }
 // </FS:Ansariel>

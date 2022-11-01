@@ -36,19 +36,19 @@ class LLButton;
 class FloaterMediaLists : public LLFloater
 {
 public:
-	FloaterMediaLists(const LLSD& key);
-	BOOL postBuild();
-	static bool handleAddDomainCallback(const LLSD& notification, const LLSD& response);
+    FloaterMediaLists(const LLSD& key);
+    BOOL postBuild();
+    static bool handleAddDomainCallback(const LLSD& notification, const LLSD& response);
 
 private:
-	~FloaterMediaLists() {};
-	
-	void onWhitelistAdd();
-	void onWhitelistRemove();
-	void onBlacklistAdd();
-	void onBlacklistRemove();
-	
-	LLScrollListCtrl*	mWhitelistSLC;
-	LLScrollListCtrl*	mBlacklistSLC;
+    ~FloaterMediaLists() {};
+    
+    void onWhitelistAdd();
+    void onWhitelistRemove();
+    void onBlacklistAdd();
+    void onBlacklistRemove();
+    
+    LLScrollListCtrl*   mWhitelistSLC;
+    LLScrollListCtrl*   mBlacklistSLC;
 };
 #endif

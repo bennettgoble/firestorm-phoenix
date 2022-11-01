@@ -25,23 +25,23 @@
 
 class LLFloaterScriptRecover : public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 private:
-	LLFloaterScriptRecover(const LLSD& sdKey);
+    LLFloaterScriptRecover(const LLSD& sdKey);
 
-	/*
-	 * LLFloater overrides
-	 */
+    /*
+     * LLFloater overrides
+     */
 public:
-	/*virtual*/ void onOpen(const LLSD& sdKey);
-	/*virtual*/ BOOL postBuild();
+    /*virtual*/ void onOpen(const LLSD& sdKey);
+    /*virtual*/ BOOL postBuild();
 
-	/*
-	 * Member functions
-	 */
+    /*
+     * Member functions
+     */
 protected:
-	void onBtnCancel();
-	void onBtnRecover();
+    void onBtnCancel();
+    void onBtnRecover();
 };
 
 // ============================================================================
@@ -50,23 +50,23 @@ protected:
 
 class LLScriptRecoverQueue
 {
-	friend class LLCreateRecoverScriptCallback;
-	friend class LLFloaterScriptRecover;
+    friend class LLCreateRecoverScriptCallback;
+    friend class LLFloaterScriptRecover;
 protected:
-	LLScriptRecoverQueue(const LLSD& sdFiles);
+    LLScriptRecoverQueue(const LLSD& sdFiles);
 
 public:
-	static void recoverIfNeeded();
+    static void recoverIfNeeded();
 
 protected:
-	bool recoverNext();
+    bool recoverNext();
 
-	void onCreateScript(const LLUUID& idItem);
-	void onSavedScript(LLUUID itemId, LLUUID newAssetId, LLUUID newItemId, LLSD response);
+    void onCreateScript(const LLUUID& idItem);
+    void onSavedScript(LLUUID itemId, LLUUID newAssetId, LLUUID newItemId, LLSD response);
 
 protected:
-	typedef std::map<std::string, LLSD> filename_queue_t;
-	filename_queue_t m_FileQueue;
+    typedef std::map<std::string, LLSD> filename_queue_t;
+    filename_queue_t m_FileQueue;
 };
 
 // ============================================================================

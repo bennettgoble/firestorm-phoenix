@@ -36,27 +36,27 @@ class LLCommandLineParser;
 class LLAppViewerLinux : public LLAppViewer
 {
 public:
-	LLAppViewerLinux();
-	virtual ~LLAppViewerLinux();
+    LLAppViewerLinux();
+    virtual ~LLAppViewerLinux();
 
-	//
-	// Main application logic
-	//
-	virtual bool init();			// Override to do application initialization
-	std::string generateSerialNumber();
-	bool setupSLURLHandler();
+    //
+    // Main application logic
+    //
+    virtual bool init();            // Override to do application initialization
+    std::string generateSerialNumber();
+    bool setupSLURLHandler();
 
 protected:
-	virtual bool beingDebugged();
-	
-	virtual bool restoreErrorTrap();
-	virtual void initCrashReporting(bool reportFreeze);
+    virtual bool beingDebugged();
+    
+    virtual bool restoreErrorTrap();
+    virtual void initCrashReporting(bool reportFreeze);
 
-	virtual void initLoggingAndGetLastDuration();
-	virtual bool initParseCommandLine(LLCommandLineParser& clp);
+    virtual void initLoggingAndGetLastDuration();
+    virtual bool initParseCommandLine(LLCommandLineParser& clp);
 
-	virtual bool initSLURLHandler();
-	virtual bool sendURLToOtherInstance(const std::string& url);
+    virtual bool initSLURLHandler();
+    virtual bool sendURLToOtherInstance(const std::string& url);
 };
 
 #endif // LL_LLAPPVIEWERLINUX_H

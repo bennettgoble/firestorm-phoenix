@@ -40,8 +40,8 @@ typedef std::vector<int> segment_lengths;
 typedef std::vector<int> segment_standouts;
 
 struct attributedStringInfo {
-	segment_lengths seg_lengths;
-	segment_standouts seg_standouts;
+    segment_lengths seg_lengths;
+    segment_standouts seg_standouts;
 };
 
 // This will actually hold an NSCursor*, but that type is only available in objective C.
@@ -100,7 +100,7 @@ void hideNSCursorTillMove(bool hide);
 void requestUserAttention();
 long showAlert(std::string title, std::string text, int type);
 void setResizeMode(bool oldresize, void* glview);
-void setTitleCocoa(NSWindowRef window, const std::string &title);	// <FS:CR> Set Window title
+void setTitleCocoa(NSWindowRef window, const std::string &title);   // <FS:CR> Set Window title
 
 NSWindowRef createNSWindow(int x, int y, int width, int height);
 

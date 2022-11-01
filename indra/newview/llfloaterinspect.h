@@ -44,64 +44,64 @@ class LLMenuButton; // <FS:Ansariel> FIRE-22292: Configurable columns
 
 class LLFloaterInspect : public LLFloater
 {
-	friend class LLFloaterReg;
+    friend class LLFloaterReg;
 public:
 
-//	static void show(void* ignored = NULL);
-	void onOpen(const LLSD& key);
-	virtual BOOL postBuild();
-	void dirty();
-	LLUUID getSelectedUUID();
-	virtual void draw();
-	virtual void refresh();
-//	static BOOL isVisible();
-	virtual void onFocusReceived();
-	void onClickCreatorProfile();
-	void onClickOwnerProfile();
-	void onSelectObject();
-	// PoundLife - Improved Object Inspect
-	U64 mStatsMemoryTotal;
-	// PoundLife - End
-	LLScrollListCtrl* mObjectList;
+//  static void show(void* ignored = NULL);
+    void onOpen(const LLSD& key);
+    virtual BOOL postBuild();
+    void dirty();
+    LLUUID getSelectedUUID();
+    virtual void draw();
+    virtual void refresh();
+//  static BOOL isVisible();
+    virtual void onFocusReceived();
+    void onClickCreatorProfile();
+    void onClickOwnerProfile();
+    void onSelectObject();
+    // PoundLife - Improved Object Inspect
+    U64 mStatsMemoryTotal;
+    // PoundLife - End
+    LLScrollListCtrl* mObjectList;
 protected:
-	// protected members
-	void setDirty() { mDirty = TRUE; }
-	bool mDirty;
+    // protected members
+    void setDirty() { mDirty = TRUE; }
+    bool mDirty;
 
 // [RLVa:KB] - Checked: RLVa-2.0.1
-	const LLSelectNode* getSelectedNode() /*const*/;
+    const LLSelectNode* getSelectedNode() /*const*/;
 // [/RLVa:KB]
 
 private:
-	// PoundLife - Improved Object Inspect
-	void getObjectTextureMemory(LLViewerObject* object, U32& object_texture_memory, U32& object_vram_memory);
-	void calculateTextureMemory(LLViewerTexture* texture, uuid_vec_t& object_texture_list, U32& object_texture_memory, U32& object_vram_memory);
-	uuid_vec_t mTextureList;
-	U32 mTextureMemory;
-	U32 mTextureVRAMMemory;
-	// PoundLife - End
-	void onGetOwnerNameCallback();
-	void onGetCreatorNameCallback();
-	
-	LLFloaterInspect(const LLSD& key);
-	virtual ~LLFloaterInspect(void);
+    // PoundLife - Improved Object Inspect
+    void getObjectTextureMemory(LLViewerObject* object, U32& object_texture_memory, U32& object_vram_memory);
+    void calculateTextureMemory(LLViewerTexture* texture, uuid_vec_t& object_texture_list, U32& object_texture_memory, U32& object_vram_memory);
+    uuid_vec_t mTextureList;
+    U32 mTextureMemory;
+    U32 mTextureVRAMMemory;
+    // PoundLife - End
+    void onGetOwnerNameCallback();
+    void onGetCreatorNameCallback();
+    
+    LLFloaterInspect(const LLSD& key);
+    virtual ~LLFloaterInspect(void);
 
-	LLSafeHandle<LLObjectSelection> mObjectSelection;
-	boost::signals2::connection mOwnerNameCacheConnection;
-	boost::signals2::connection mCreatorNameCacheConnection;
+    LLSafeHandle<LLObjectSelection> mObjectSelection;
+    boost::signals2::connection mOwnerNameCacheConnection;
+    boost::signals2::connection mCreatorNameCacheConnection;
 
-	// <FS:Ansariel> FIRE-22292: Configurable columns
-	void						onColumnDisplayModeChanged();
-	void						onColumnVisibilityChecked(const LLSD& userdata);
-	bool						onEnableColumnVisibilityChecked(const LLSD& userdata);
+    // <FS:Ansariel> FIRE-22292: Configurable columns
+    void                        onColumnDisplayModeChanged();
+    void                        onColumnVisibilityChecked(const LLSD& userdata);
+    bool                        onEnableColumnVisibilityChecked(const LLSD& userdata);
 
-	LLMenuButton*				mOptionsButton;
-	LLHandle<LLView>			mOptionsMenuHandle;
+    LLMenuButton*               mOptionsButton;
+    LLHandle<LLView>            mOptionsMenuHandle;
 
-	std::map<std::string, U32>	mColumnBits;
-	S32							mLastResizeDelta;
-	boost::signals2::connection	mFSInspectColumnConfigConnection;
-	// </FS:Ansariel>
+    std::map<std::string, U32>  mColumnBits;
+    S32                         mLastResizeDelta;
+    boost::signals2::connection mFSInspectColumnConfigConnection;
+    // </FS:Ansariel>
 };
 
 #endif //LL_LLFLOATERINSPECT_H

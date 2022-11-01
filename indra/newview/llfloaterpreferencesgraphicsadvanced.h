@@ -54,11 +54,11 @@ public:
     void onAdvancedAtmosphericsEnable();
     LOG_CLASS(LLFloaterPreferenceGraphicsAdvanced);
 
-protected:	
-    void		onBtnOK(const LLSD& userdata);
-    void		onBtnCancel(const LLSD& userdata);
+protected:  
+    void        onBtnOK(const LLSD& userdata);
+    void        onBtnCancel(const LLSD& userdata);
 
-    boost::signals2::connection	mComplexityChangedSignal;
+    boost::signals2::connection mComplexityChangedSignal;
 };
 
 #endif //LLFLOATERPREFERENCEGRAPHICSADVANCED_H

@@ -42,125 +42,125 @@ class LLFloaterBvhPreview;
 class LLPreviewAnimation : public LLViewerDynamicTexture
 {
 protected:
-	virtual ~LLPreviewAnimation();
+    virtual ~LLPreviewAnimation();
 
 public:
-	LLPreviewAnimation(S32 width, S32 height);	
+    LLPreviewAnimation(S32 width, S32 height);  
 
-	/*virtual*/ S8 getType() const ;
+    /*virtual*/ S8 getType() const ;
 
-	BOOL	render();
-	void	requestUpdate();
-	void	rotate(F32 yaw_radians, F32 pitch_radians);
-	void	zoom(F32 zoom_delta);
-	void	setZoom(F32 zoom_amt);
-	void	pan(F32 right, F32 up);
-	virtual BOOL needsUpdate() { return mNeedsUpdate; }
+    BOOL    render();
+    void    requestUpdate();
+    void    rotate(F32 yaw_radians, F32 pitch_radians);
+    void    zoom(F32 zoom_delta);
+    void    setZoom(F32 zoom_amt);
+    void    pan(F32 right, F32 up);
+    virtual BOOL needsUpdate() { return mNeedsUpdate; }
 
-	LLVOAvatar* getDummyAvatar() { return mDummyAvatar; }
-	// <FS> Preview on own avatar
-	LLVOAvatar* getPreviewAvatar(LLFloaterBvhPreview* floaterp);
+    LLVOAvatar* getDummyAvatar() { return mDummyAvatar; }
+    // <FS> Preview on own avatar
+    LLVOAvatar* getPreviewAvatar(LLFloaterBvhPreview* floaterp);
 
 protected:
-	BOOL				mNeedsUpdate;
-	F32					mCameraDistance;
-	F32					mCameraYaw;
-	F32					mCameraPitch;
-	F32					mCameraZoom;
-	LLVector3			mCameraOffset;
-	LLVector3			mCameraRelPos;
-	LLPointer<LLVOAvatar>			mDummyAvatar;
+    BOOL                mNeedsUpdate;
+    F32                 mCameraDistance;
+    F32                 mCameraYaw;
+    F32                 mCameraPitch;
+    F32                 mCameraZoom;
+    LLVector3           mCameraOffset;
+    LLVector3           mCameraRelPos;
+    LLPointer<LLVOAvatar>           mDummyAvatar;
 };
 
 class LLFloaterBvhPreview : public LLFloaterNameDesc
 {
-	// <FS> Preview on own avatar
-	friend class LLPreviewAnimation;
+    // <FS> Preview on own avatar
+    friend class LLPreviewAnimation;
 
 public:
-	LLFloaterBvhPreview(const std::string& filename);
-	virtual ~LLFloaterBvhPreview();
-	
-	BOOL postBuild();
+    LLFloaterBvhPreview(const std::string& filename);
+    virtual ~LLFloaterBvhPreview();
+    
+    BOOL postBuild();
 
-	BOOL handleMouseDown(S32 x, S32 y, MASK mask);
-	BOOL handleMouseUp(S32 x, S32 y, MASK mask);
-	BOOL handleHover(S32 x, S32 y, MASK mask);
-	BOOL handleScrollWheel(S32 x, S32 y, S32 clicks); 
-	void onMouseCaptureLost();
+    BOOL handleMouseDown(S32 x, S32 y, MASK mask);
+    BOOL handleMouseUp(S32 x, S32 y, MASK mask);
+    BOOL handleHover(S32 x, S32 y, MASK mask);
+    BOOL handleScrollWheel(S32 x, S32 y, S32 clicks); 
+    void onMouseCaptureLost();
 
-	void refresh();
+    void refresh();
 
-	void onBtnPlay();
-	void onBtnPause();	
-	void onBtnStop();
-	void onSliderMove();
-	void onCommitBaseAnim();
-	void onCommitLoop();
-	void onCommitLoopIn();
-	void onCommitLoopOut();
-	bool validateLoopIn(const LLSD& data);
-	bool validateLoopOut(const LLSD& data);
-	void onCommitName();
-	void onCommitHandPose();
-	void onCommitEmote();
-	void onCommitPriority();
-	void onCommitEaseIn();
-	void onCommitEaseOut();
-	bool validateEaseIn(const LLSD& data);
-	bool validateEaseOut(const LLSD& data);
-	static void	onBtnOK(void*);
-	// <FS> Reload animation from disk
-	static void	onBtnReload(void*);
-	static void onSaveComplete(const LLUUID& asset_uuid,
-									   LLAssetType::EType type,
-									   void* user_data,
-									   S32 status, LLExtStat ext_status);
-	// <FS:Sei> FIRE-17277: Allow entering Loop In/Loop Out as frames
-	void onCommitLoopInFrames();
-	void onCommitLoopOutFrames();
-	bool validateLoopInFrames(const LLSD& data);
-	bool validateLoopOutFrames(const LLSD& data);
-	// </FS:Sei>
+    void onBtnPlay();
+    void onBtnPause();  
+    void onBtnStop();
+    void onSliderMove();
+    void onCommitBaseAnim();
+    void onCommitLoop();
+    void onCommitLoopIn();
+    void onCommitLoopOut();
+    bool validateLoopIn(const LLSD& data);
+    bool validateLoopOut(const LLSD& data);
+    void onCommitName();
+    void onCommitHandPose();
+    void onCommitEmote();
+    void onCommitPriority();
+    void onCommitEaseIn();
+    void onCommitEaseOut();
+    bool validateEaseIn(const LLSD& data);
+    bool validateEaseOut(const LLSD& data);
+    static void onBtnOK(void*);
+    // <FS> Reload animation from disk
+    static void onBtnReload(void*);
+    static void onSaveComplete(const LLUUID& asset_uuid,
+                                       LLAssetType::EType type,
+                                       void* user_data,
+                                       S32 status, LLExtStat ext_status);
+    // <FS:Sei> FIRE-17277: Allow entering Loop In/Loop Out as frames
+    void onCommitLoopInFrames();
+    void onCommitLoopOutFrames();
+    bool validateLoopInFrames(const LLSD& data);
+    bool validateLoopOutFrames(const LLSD& data);
+    // </FS:Sei>
 private:
-	void setAnimCallbacks() ;
+    void setAnimCallbacks() ;
     std::map <std::string, std::string> getJointAliases();
 
-	// <FS> Reload animation from disk
-	BOOL loadBVH();
-	void unloadMotion();
-	// </FS>
+    // <FS> Reload animation from disk
+    BOOL loadBVH();
+    void unloadMotion();
+    // </FS>
 
 protected:
-	void			draw();
-	void			resetMotion();
+    void            draw();
+    void            resetMotion();
 
-	LLPointer< LLPreviewAnimation > mAnimPreview;
-	S32					mLastMouseX;
-	S32					mLastMouseY;
-	LLButton*			mPlayButton;
-	LLButton*			mPauseButton;	
-	LLButton*			mStopButton;
-	LLRect				mPreviewRect;
-	LLRectf				mPreviewImageRect;
-	LLAssetID			mMotionID;
-	LLTransactionID		mTransactionID;
-	LLAnimPauseRequest	mPauseRequest;
+    LLPointer< LLPreviewAnimation > mAnimPreview;
+    S32                 mLastMouseX;
+    S32                 mLastMouseY;
+    LLButton*           mPlayButton;
+    LLButton*           mPauseButton;   
+    LLButton*           mStopButton;
+    LLRect              mPreviewRect;
+    LLRectf             mPreviewImageRect;
+    LLAssetID           mMotionID;
+    LLTransactionID     mTransactionID;
+    LLAnimPauseRequest  mPauseRequest;
 
-	std::map<std::string, LLUUID>	mIDList;
+    std::map<std::string, LLUUID>   mIDList;
 
-	// <FS> Preview on own avatar
-	bool				mUseOwnAvatar;
-	static S32			sOwnAvatarInstanceCount;
+    // <FS> Preview on own avatar
+    bool                mUseOwnAvatar;
+    static S32          sOwnAvatarInstanceCount;
 
-	// <FS:Ansariel> FIRE-2083: Slider in upload animation floater doesn't work
-	LLFrameTimer		mTimer;
+    // <FS:Ansariel> FIRE-2083: Slider in upload animation floater doesn't work
+    LLFrameTimer        mTimer;
 
-	// <FS:Sei> FIRE-17277: Allow entering Loop In/Loop Out as frames
-	S32					mNumFrames;
+    // <FS:Sei> FIRE-17277: Allow entering Loop In/Loop Out as frames
+    S32                 mNumFrames;
 
-	// <FS:Zi> FIRE-32315: Animation preview sometimes fails when FS AO is enabled
-	bool				mAOEnabled;
+    // <FS:Zi> FIRE-32315: Animation preview sometimes fails when FS AO is enabled
+    bool                mAOEnabled;
 };
 
 #endif  // LL_LLFLOATERBVHPREVIEW_H

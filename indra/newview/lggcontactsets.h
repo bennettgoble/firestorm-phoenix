@@ -28,11 +28,11 @@
 
 typedef enum e_lgg_cs
 {
-	LGG_CS_CHAT,
-	LGG_CS_IM,
-	LGG_CS_TAG,
-	LGG_CS_RADAR,
-	LGG_CS_MINIMAP
+    LGG_CS_CHAT,
+    LGG_CS_IM,
+    LGG_CS_TAG,
+    LGG_CS_RADAR,
+    LGG_CS_MINIMAP
 } ELGGCSType;
 
 const std::string CS_SET_ALL_SETS = "All Sets";
@@ -44,129 +44,129 @@ const std::string CS_PSEUDONYM = "--- ---";
 
 class LGGContactSets : public LLSingleton<LGGContactSets>
 {
-	LOG_CLASS(LGGContactSets);
+    LOG_CLASS(LGGContactSets);
 
-	LLSINGLETON(LGGContactSets);
-	~LGGContactSets();
+    LLSINGLETON(LGGContactSets);
+    ~LGGContactSets();
 
 public:
-	typedef std::vector<std::string> string_vec_t;
-	typedef boost::unordered_set<LLUUID, FSUUIDHash> uuid_set_t;
+    typedef std::vector<std::string> string_vec_t;
+    typedef boost::unordered_set<LLUUID, FSUUIDHash> uuid_set_t;
 
-	void loadFromDisk();
+    void loadFromDisk();
 
-	void setSetColor(std::string_view set_name, const LLColor4& color);
-	LLColor4 getSetColor(std::string_view set_name);
-	LLColor4 getFriendColor(const LLUUID& friend_id, std::string_view ignored_set_name = "");
-	LLColor4 colorize(const LLUUID& uuid, const LLColor4& cur_color, ELGGCSType type);
+    void setSetColor(std::string_view set_name, const LLColor4& color);
+    LLColor4 getSetColor(std::string_view set_name);
+    LLColor4 getFriendColor(const LLUUID& friend_id, std::string_view ignored_set_name = "");
+    LLColor4 colorize(const LLUUID& uuid, const LLColor4& cur_color, ELGGCSType type);
 
-	void setDefaultColor(const LLColor4& default_color) { mDefaultColor = default_color; };
-	LLColor4 getDefaultColor() { return mDefaultColor; };
+    void setDefaultColor(const LLColor4& default_color) { mDefaultColor = default_color; };
+    LLColor4 getDefaultColor() { return mDefaultColor; };
 
-	std::string getPseudonym(const LLUUID& friend_id);
-	bool hasPseudonym(const LLUUID& friend_id);
-	bool hasPseudonym(uuid_vec_t ids);
-	void clearPseudonym(const LLUUID& friend_id, bool save_changes = true);
+    std::string getPseudonym(const LLUUID& friend_id);
+    bool hasPseudonym(const LLUUID& friend_id);
+    bool hasPseudonym(uuid_vec_t ids);
+    void clearPseudonym(const LLUUID& friend_id, bool save_changes = true);
 
-	void removeDisplayName(const LLUUID& friend_id);
-	bool hasDisplayNameRemoved(const LLUUID& friend_id);
-	bool hasDisplayNameRemoved(uuid_vec_t ids);
+    void removeDisplayName(const LLUUID& friend_id);
+    bool hasDisplayNameRemoved(const LLUUID& friend_id);
+    bool hasDisplayNameRemoved(uuid_vec_t ids);
 
-	bool checkCustomName(const LLUUID& id, bool& dn_removed, std::string& pseudonym);
+    bool checkCustomName(const LLUUID& id, bool& dn_removed, std::string& pseudonym);
 
-	string_vec_t getFriendSets(const LLUUID& friend_id);
-	string_vec_t getAllContactSets();
+    string_vec_t getFriendSets(const LLUUID& friend_id);
+    string_vec_t getAllContactSets();
 
-	void addToSet(const uuid_vec_t&, std::string_view set_name);
-	void removeFriendFromSet(const LLUUID& friend_id, std::string_view set_name, bool save_changes = true);
-	void removeFriendFromAllSets(const LLUUID& friend_id, bool save_changes = true);
-	bool isFriendInSet(const LLUUID& friend_id, std::string_view set_name);
-	bool hasFriendColorThatShouldShow(const LLUUID& friend_id, ELGGCSType type);
-	bool hasFriendColorThatShouldShow(const LLUUID& friend_id, ELGGCSType type, LLColor4& color);
+    void addToSet(const uuid_vec_t&, std::string_view set_name);
+    void removeFriendFromSet(const LLUUID& friend_id, std::string_view set_name, bool save_changes = true);
+    void removeFriendFromAllSets(const LLUUID& friend_id, bool save_changes = true);
+    bool isFriendInSet(const LLUUID& friend_id, std::string_view set_name);
+    bool hasFriendColorThatShouldShow(const LLUUID& friend_id, ELGGCSType type);
+    bool hasFriendColorThatShouldShow(const LLUUID& friend_id, ELGGCSType type, LLColor4& color);
 
-	void addSet(std::string_view set_name);
-	bool renameSet(std::string_view set_name, std::string_view new_set_name);
-	void removeSet(std::string_view set_name);
-	bool isValidSet(std::string_view set_name);
+    void addSet(std::string_view set_name);
+    bool renameSet(std::string_view set_name, std::string_view new_set_name);
+    void removeSet(std::string_view set_name);
+    bool isValidSet(std::string_view set_name);
 
-	void removeNonFriendFromList(const LLUUID& non_friend_id, bool save_changes = true);
-	bool isNonFriend(const LLUUID& non_friend_id);
-	bool isFriendInSet(const LLUUID& friend_id);
-	uuid_vec_t getListOfNonFriends();
-	uuid_vec_t getListOfPseudonymAvs();
+    void removeNonFriendFromList(const LLUUID& non_friend_id, bool save_changes = true);
+    bool isNonFriend(const LLUUID& non_friend_id);
+    bool isFriendInSet(const LLUUID& friend_id);
+    uuid_vec_t getListOfNonFriends();
+    uuid_vec_t getListOfPseudonymAvs();
 
-	bool notifyForFriend(const LLUUID& friend_id);
-	void setNotifyForSet(std::string_view set_name, bool notify);
-	bool getNotifyForSet(std::string_view set_name);
+    bool notifyForFriend(const LLUUID& friend_id);
+    void setNotifyForSet(std::string_view set_name, bool notify);
+    bool getNotifyForSet(std::string_view set_name);
 
-	bool callbackAliasReset(const LLSD& notification, const LLSD& response);
+    bool callbackAliasReset(const LLSD& notification, const LLSD& response);
 
-	bool isInternalSetName(std::string_view set_name);
-	bool hasSets() { return !mContactSets.empty(); }
+    bool isInternalSetName(std::string_view set_name);
+    bool hasSets() { return !mContactSets.empty(); }
 
-	class ContactSet
-	{
-	public:
-		bool hasFriend(const LLUUID& avatar_id)
-		{
-			return (mFriends.find(avatar_id) != mFriends.end());
-		}
+    class ContactSet
+    {
+    public:
+        bool hasFriend(const LLUUID& avatar_id)
+        {
+            return (mFriends.find(avatar_id) != mFriends.end());
+        }
 
-		std::string		mName;
-		uuid_set_t		mFriends;
-		bool			mNotify;
-		LLColor4		mColor;
-	};
-	ContactSet* getContactSet(std::string_view set_name);
-	
-	// [FS:CR] Signals for updating the various UI
-	typedef enum e_contact_set_update {
-		UPDATED_MEMBERS = 0,
-		UPDATED_LISTS
-	} EContactSetUpdate;
-	typedef boost::signals2::signal<void(EContactSetUpdate type)> contact_set_changed_signal_t;
-	contact_set_changed_signal_t mChangedSignal;
-	boost::signals2::connection setContactSetChangeCallback(const contact_set_changed_signal_t::slot_type& cb)
-	{
-		return mChangedSignal.connect(cb);
-	};
-	
-	// Notification callbacks
-	static bool handleAddContactSetCallback(const LLSD& notification, const LLSD& response);
-	static bool handleRemoveContactSetCallback(const LLSD& notification, const LLSD& response);
-	static bool handleRemoveAvatarFromSetCallback(const LLSD& notification, const LLSD& response);
-	static bool handleSetAvatarPseudonymCallback(const LLSD& notification, const LLSD& response);
-	// [/FS:CR]
-	
+        std::string     mName;
+        uuid_set_t      mFriends;
+        bool            mNotify;
+        LLColor4        mColor;
+    };
+    ContactSet* getContactSet(std::string_view set_name);
+    
+    // [FS:CR] Signals for updating the various UI
+    typedef enum e_contact_set_update {
+        UPDATED_MEMBERS = 0,
+        UPDATED_LISTS
+    } EContactSetUpdate;
+    typedef boost::signals2::signal<void(EContactSetUpdate type)> contact_set_changed_signal_t;
+    contact_set_changed_signal_t mChangedSignal;
+    boost::signals2::connection setContactSetChangeCallback(const contact_set_changed_signal_t::slot_type& cb)
+    {
+        return mChangedSignal.connect(cb);
+    };
+    
+    // Notification callbacks
+    static bool handleAddContactSetCallback(const LLSD& notification, const LLSD& response);
+    static bool handleRemoveContactSetCallback(const LLSD& notification, const LLSD& response);
+    static bool handleRemoveAvatarFromSetCallback(const LLSD& notification, const LLSD& response);
+    static bool handleSetAvatarPseudonymCallback(const LLSD& notification, const LLSD& response);
+    // [/FS:CR]
+    
 private:
-	void toneDownColor(LLColor4& color) const;
-	uuid_vec_t getFriendsInSet(std::string_view set_name);
-	uuid_vec_t getFriendsInAnySet();
+    void toneDownColor(LLColor4& color) const;
+    uuid_vec_t getFriendsInSet(std::string_view set_name);
+    uuid_vec_t getFriendsInAnySet();
 
-	void setPseudonym(const LLUUID& friend_id, std::string_view pseudonym);
-	bool hasVisuallyDifferentPseudonym(const LLUUID& friend_id);
+    void setPseudonym(const LLUUID& friend_id, std::string_view pseudonym);
+    bool hasVisuallyDifferentPseudonym(const LLUUID& friend_id);
 
-	LLSD exportContactSet(std::string_view set_name);
-	bool saveContactSetToDisk(std::string_view set_name, std::string_view filename);
+    LLSD exportContactSet(std::string_view set_name);
+    bool saveContactSetToDisk(std::string_view set_name, std::string_view filename);
 
-	std::string getFilename();
-	std::string getDefaultFilename();
+    std::string getFilename();
+    std::string getDefaultFilename();
 
-	void importFromLLSD(const LLSD& data);
-	LLSD exportToLLSD();
-	void saveToDisk();
-	
-	typedef boost::unordered_map<LLUUID, std::string, FSUUIDHash> uuid_map_t;
-	typedef std::map<std::string, ContactSet*> contact_set_map_t;
-	contact_set_map_t mContactSets;
+    void importFromLLSD(const LLSD& data);
+    LLSD exportToLLSD();
+    void saveToDisk();
+    
+    typedef boost::unordered_map<LLUUID, std::string, FSUUIDHash> uuid_map_t;
+    typedef std::map<std::string, ContactSet*> contact_set_map_t;
+    contact_set_map_t mContactSets;
 
-	LLColor4		mDefaultColor;
-	uuid_set_t		mExtraAvatars;
-	uuid_map_t		mPseudonyms;
+    LLColor4        mDefaultColor;
+    uuid_set_t      mExtraAvatars;
+    uuid_map_t      mPseudonyms;
 
-	typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
-	avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
-	void onAvatarNameCache(const LLUUID& av_id);
+    typedef std::map<LLUUID, boost::signals2::connection> avatar_name_cache_connection_map_t;
+    avatar_name_cache_connection_map_t mAvatarNameCacheConnections;
+    void onAvatarNameCache(const LLUUID& av_id);
 };
 
 #endif // LGG_CONTACTSETS_H

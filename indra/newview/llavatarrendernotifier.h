@@ -89,40 +89,40 @@ typedef std::list<LLObjectComplexity> object_complexity_list_t;
 // reported that user's agent is too 'heavy' for their settings
 class LLAvatarRenderNotifier : public LLSingleton<LLAvatarRenderNotifier>
 {
-	LLSINGLETON(LLAvatarRenderNotifier);
+    LLSINGLETON(LLAvatarRenderNotifier);
 
 public:
     void displayNotification(bool show_over_limit);
-	bool isNotificationVisible();
+    bool isNotificationVisible();
 
-	void updateNotificationRegion(U32 agentcount, U32 overLimit);
+    void updateNotificationRegion(U32 agentcount, U32 overLimit);
     void updateNotificationState();
-	void updateNotificationAgent(U32 agentComplexity);
+    void updateNotificationAgent(U32 agentComplexity);
 
     void setObjectComplexityList(object_complexity_list_t object_list) { mObjectComplexityList = object_list; }
     object_complexity_list_t getObjectComplexityList() { return mObjectComplexityList; }
 
 private:
 
-	LLNotificationPtr mNotificationPtr;
+    LLNotificationPtr mNotificationPtr;
 
-	// to prevent notification from popping up too often, show it only
-	// if certain amount of time passed since previous notification
-	LLFrameTimer mPopUpDelayTimer;
+    // to prevent notification from popping up too often, show it only
+    // if certain amount of time passed since previous notification
+    LLFrameTimer mPopUpDelayTimer;
 
-	// values since last notification for comparison purposes
-	U32 mAgentsCount;
-	U32 mOverLimitAgents;
-	U32 mAgentComplexity;
-	F32 mOverLimitPct;
+    // values since last notification for comparison purposes
+    U32 mAgentsCount;
+    U32 mOverLimitAgents;
+    U32 mAgentComplexity;
+    F32 mOverLimitPct;
 
-	// last reported values
-	U32 mLatestAgentsCount;
-	U32 mLatestOverLimitAgents;
-	U32 mLatestAgentComplexity;
-	F32 mLatestOverLimitPct;
+    // last reported values
+    U32 mLatestAgentsCount;
+    U32 mLatestOverLimitAgents;
+    U32 mLatestAgentComplexity;
+    F32 mLatestOverLimitPct;
 
-	bool mShowOverLimitAgents;
+    bool mShowOverLimitAgents;
     std::string overLimitMessage();
 
     // initial outfit related variables (state control)

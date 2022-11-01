@@ -33,15 +33,15 @@
 class FSNameListAvatarMenu : public LLListContextMenu
 {
 public:
-	/*virtual*/ LLContextMenu* createMenu();
+    /*virtual*/ LLContextMenu* createMenu();
 private:
-	bool enableContextMenuItem(const LLSD& userdata);
-	void offerTeleport();
-	void teleportToAvatar();
-	void onTrackAvatarMenuItemClick();
-	void addToContactSet();
-	void copyNameToClipboard(const LLUUID& id);
-	void copySLURLToClipboard(const LLUUID& id);
+    bool enableContextMenuItem(const LLSD& userdata);
+    void offerTeleport();
+    void teleportToAvatar();
+    void onTrackAvatarMenuItemClick();
+    void addToContactSet();
+    void copyNameToClipboard(const LLUUID& id);
+    void copySLURLToClipboard(const LLUUID& id);
 };
 
 extern FSNameListAvatarMenu gFSNameListAvatarMenu;

@@ -32,18 +32,18 @@
 class LLViewerAttachMenu
 {
 public:
-	static void populateMenus(const std::string& attach_to_menu_name, const std::string& attach_to_hud_menu_name);
-	static void attachObjects(const uuid_vec_t& items, const std::string& joint_name);
+    static void populateMenus(const std::string& attach_to_menu_name, const std::string& attach_to_hud_menu_name);
+    static void attachObjects(const uuid_vec_t& items, const std::string& joint_name);
 
-	// <FS:Ansariel> FIRE-21200: Attachment Points List in Alphabetical Order
-	struct sort
-	{
-		bool operator()(const LLMenuItemGL* i1, const LLMenuItemGL* i2)
-		{
-			return i1->getName().compare(i2->getName()) <= 0;
-		}
-	};
-	// </FS:Ansariel>
+    // <FS:Ansariel> FIRE-21200: Attachment Points List in Alphabetical Order
+    struct sort
+    {
+        bool operator()(const LLMenuItemGL* i1, const LLMenuItemGL* i2)
+        {
+            return i1->getName().compare(i2->getName()) <= 0;
+        }
+    };
+    // </FS:Ansariel>
 };
 
 #endif // LL_LLVIEWERATTACHMENU_H

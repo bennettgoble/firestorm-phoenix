@@ -102,7 +102,7 @@ enum ESubpart {
         SUBPART_SKIRT,
         SUBPART_ALPHA,
         SUBPART_TATTOO,
-		SUBPART_UNIVERSAL,
+        SUBPART_UNIVERSAL,
         SUBPART_PHYSICS_BREASTS_UPDOWN,
         SUBPART_PHYSICS_BREASTS_INOUT,
         SUBPART_PHYSICS_BREASTS_LEFTRIGHT,
@@ -247,8 +247,8 @@ LLEditWearableDictionary::Wearables::Wearables()
         addEntry(LLWearableType::WT_SKIRT,              new WearableEntry(LLWearableType::WT_SKIRT,"edit_skirt_title","skirt_desc_text", texture_vec_t{TEX_SKIRT}, texture_vec_t{TEX_SKIRT}, subpart_vec_t{SUBPART_SKIRT}));
         addEntry(LLWearableType::WT_ALPHA,              new WearableEntry(LLWearableType::WT_ALPHA,"edit_alpha_title","alpha_desc_text", texture_vec_t(), texture_vec_t{TEX_LOWER_ALPHA, TEX_UPPER_ALPHA, TEX_HEAD_ALPHA, TEX_EYES_ALPHA, TEX_HAIR_ALPHA}, subpart_vec_t{SUBPART_ALPHA}));
         addEntry(LLWearableType::WT_TATTOO,     new WearableEntry(LLWearableType::WT_TATTOO,"edit_tattoo_title","tattoo_desc_text", texture_vec_t{TEX_HEAD_TATTOO}, texture_vec_t{TEX_LOWER_TATTOO, TEX_UPPER_TATTOO, TEX_HEAD_TATTOO}, subpart_vec_t{SUBPART_TATTOO}));
-		addEntry(LLWearableType::WT_UNIVERSAL, new WearableEntry(LLWearableType::WT_UNIVERSAL, "edit_universal_title", "universal_desc_text", texture_vec_t{ TEX_HEAD_UNIVERSAL_TATTOO }, texture_vec_t{ TEX_HEAD_UNIVERSAL_TATTOO, TEX_UPPER_UNIVERSAL_TATTOO, TEX_LOWER_UNIVERSAL_TATTOO, TEX_SKIRT_TATTOO, TEX_HAIR_TATTOO, TEX_EYES_TATTOO, TEX_LEFT_ARM_TATTOO, TEX_LEFT_LEG_TATTOO, TEX_AUX1_TATTOO, TEX_AUX2_TATTOO, TEX_AUX3_TATTOO }, subpart_vec_t{ SUBPART_UNIVERSAL }));
-		addEntry(LLWearableType::WT_PHYSICS,    new WearableEntry(LLWearableType::WT_PHYSICS,"edit_physics_title","physics_desc_text", texture_vec_t(), texture_vec_t(), subpart_vec_t{SUBPART_PHYSICS_BREASTS_UPDOWN, SUBPART_PHYSICS_BREASTS_INOUT, SUBPART_PHYSICS_BREASTS_LEFTRIGHT, SUBPART_PHYSICS_BELLY_UPDOWN, SUBPART_PHYSICS_BUTT_UPDOWN, SUBPART_PHYSICS_BUTT_LEFTRIGHT, SUBPART_PHYSICS_ADVANCED}));
+        addEntry(LLWearableType::WT_UNIVERSAL, new WearableEntry(LLWearableType::WT_UNIVERSAL, "edit_universal_title", "universal_desc_text", texture_vec_t{ TEX_HEAD_UNIVERSAL_TATTOO }, texture_vec_t{ TEX_HEAD_UNIVERSAL_TATTOO, TEX_UPPER_UNIVERSAL_TATTOO, TEX_LOWER_UNIVERSAL_TATTOO, TEX_SKIRT_TATTOO, TEX_HAIR_TATTOO, TEX_EYES_TATTOO, TEX_LEFT_ARM_TATTOO, TEX_LEFT_LEG_TATTOO, TEX_AUX1_TATTOO, TEX_AUX2_TATTOO, TEX_AUX3_TATTOO }, subpart_vec_t{ SUBPART_UNIVERSAL }));
+        addEntry(LLWearableType::WT_PHYSICS,    new WearableEntry(LLWearableType::WT_PHYSICS,"edit_physics_title","physics_desc_text", texture_vec_t(), texture_vec_t(), subpart_vec_t{SUBPART_PHYSICS_BREASTS_UPDOWN, SUBPART_PHYSICS_BREASTS_INOUT, SUBPART_PHYSICS_BREASTS_LEFTRIGHT, SUBPART_PHYSICS_BELLY_UPDOWN, SUBPART_PHYSICS_BUTT_UPDOWN, SUBPART_PHYSICS_BUTT_LEFTRIGHT, SUBPART_PHYSICS_ADVANCED}));
 }
 
 LLEditWearableDictionary::WearableEntry::WearableEntry(LLWearableType::EType type,
@@ -302,12 +302,12 @@ LLEditWearableDictionary::Subparts::Subparts()
         // <FS:Ansariel> Alpha, tattoo and universal don't adhere to the usual panel layout and don't have a param list and main tab
         //addEntry(SUBPART_ALPHA, new SubpartEntry(SUBPART_ALPHA, "mPelvis", "alpha", "alpha_main_param_list", "alpha_main_tab", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f),SEX_BOTH));
         //addEntry(SUBPART_TATTOO, new SubpartEntry(SUBPART_TATTOO, "mPelvis", "tattoo", "tattoo_main_param_list", "tattoo_main_tab", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f),SEX_BOTH));
-		//addEntry(SUBPART_UNIVERSAL, new SubpartEntry(SUBPART_UNIVERSAL, "mPelvis", "universal", "universal_main_param_list", "universal_main_tab", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f), SEX_BOTH));
+        //addEntry(SUBPART_UNIVERSAL, new SubpartEntry(SUBPART_UNIVERSAL, "mPelvis", "universal", "universal_main_param_list", "universal_main_tab", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f), SEX_BOTH));
         addEntry(SUBPART_ALPHA, new SubpartEntry(SUBPART_ALPHA, "mPelvis", "alpha", "", "", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f),SEX_BOTH));
         addEntry(SUBPART_TATTOO, new SubpartEntry(SUBPART_TATTOO, "mPelvis", "tattoo", "", "", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f),SEX_BOTH));
         addEntry(SUBPART_UNIVERSAL, new SubpartEntry(SUBPART_UNIVERSAL, "mPelvis", "universal", "", "", LLVector3d(0.f, 0.f, 0.1f), LLVector3d(-2.5f, 0.5f, 0.8f), SEX_BOTH));
         // </FS:Ansariel>
-		addEntry(SUBPART_PHYSICS_BREASTS_UPDOWN, new SubpartEntry(SUBPART_PHYSICS_BREASTS_UPDOWN, "mTorso", "physics_breasts_updown", "physics_breasts_updown_param_list", "physics_breasts_updown_tab", LLVector3d(0.f, 0.f, 0.3f), LLVector3d(0.f, 0.f, 0.f),SEX_FEMALE));
+        addEntry(SUBPART_PHYSICS_BREASTS_UPDOWN, new SubpartEntry(SUBPART_PHYSICS_BREASTS_UPDOWN, "mTorso", "physics_breasts_updown", "physics_breasts_updown_param_list", "physics_breasts_updown_tab", LLVector3d(0.f, 0.f, 0.3f), LLVector3d(0.f, 0.f, 0.f),SEX_FEMALE));
         addEntry(SUBPART_PHYSICS_BREASTS_INOUT, new SubpartEntry(SUBPART_PHYSICS_BREASTS_INOUT, "mTorso", "physics_breasts_inout", "physics_breasts_inout_param_list", "physics_breasts_inout_tab", LLVector3d(0.f, 0.f, 0.3f), LLVector3d(0.f, 0.f, 0.f),SEX_FEMALE));
         addEntry(SUBPART_PHYSICS_BREASTS_LEFTRIGHT, new SubpartEntry(SUBPART_PHYSICS_BREASTS_LEFTRIGHT, "mTorso", "physics_breasts_leftright", "physics_breasts_leftright_param_list", "physics_breasts_leftright_tab", LLVector3d(0.f, 0.f, 0.3f), LLVector3d(0.f, 0.f, 0.f),SEX_FEMALE));
         // <FS:Ansariel> Fix XUI warning
@@ -352,7 +352,7 @@ LLEditWearableDictionary::ColorSwatchCtrls::ColorSwatchCtrls()
         addEntry ( TEX_UPPER_UNDERSHIRT, new PickerControlEntry (TEX_UPPER_UNDERSHIRT, "Color/Tint" ));
         addEntry ( TEX_LOWER_UNDERPANTS, new PickerControlEntry (TEX_LOWER_UNDERPANTS, "Color/Tint" ));
         addEntry ( TEX_HEAD_TATTOO, new PickerControlEntry(TEX_HEAD_TATTOO, "Color/Tint" ));
-		addEntry (TEX_HEAD_UNIVERSAL_TATTOO, new PickerControlEntry(TEX_HEAD_UNIVERSAL_TATTOO, "Color/Tint"));
+        addEntry (TEX_HEAD_UNIVERSAL_TATTOO, new PickerControlEntry(TEX_HEAD_UNIVERSAL_TATTOO, "Color/Tint"));
 }
 
 LLEditWearableDictionary::TextureCtrls::TextureCtrls()
@@ -380,17 +380,17 @@ LLEditWearableDictionary::TextureCtrls::TextureCtrls()
         addEntry ( TEX_LOWER_TATTOO, new PickerControlEntry (TEX_LOWER_TATTOO, "Lower Tattoo", LLUUID::null, TRUE ));
         addEntry ( TEX_UPPER_TATTOO, new PickerControlEntry (TEX_UPPER_TATTOO, "Upper Tattoo", LLUUID::null, TRUE ));
         addEntry ( TEX_HEAD_TATTOO, new PickerControlEntry (TEX_HEAD_TATTOO, "Head Tattoo", LLUUID::null, TRUE ));
-		addEntry ( TEX_LOWER_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_LOWER_UNIVERSAL_TATTOO, "Lower Universal Tattoo", LLUUID::null, TRUE));
-		addEntry ( TEX_UPPER_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_UPPER_UNIVERSAL_TATTOO, "Upper Universal Tattoo", LLUUID::null, TRUE));
-		addEntry ( TEX_HEAD_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_HEAD_UNIVERSAL_TATTOO, "Head Universal Tattoo", LLUUID::null, TRUE));
-		addEntry ( TEX_SKIRT_TATTOO, new PickerControlEntry(TEX_SKIRT_TATTOO, "Skirt Tattoo", LLUUID::null, TRUE));
-		addEntry ( TEX_HAIR_TATTOO, new PickerControlEntry(TEX_HAIR_TATTOO, "Hair Tattoo", LLUUID::null, TRUE));
-		addEntry ( TEX_EYES_TATTOO, new PickerControlEntry(TEX_EYES_TATTOO, "Eyes Tattoo", LLUUID::null, TRUE));
-		addEntry (TEX_LEFT_ARM_TATTOO, new PickerControlEntry(TEX_LEFT_ARM_TATTOO, "Left Arm Tattoo", LLUUID::null, TRUE));
-		addEntry (TEX_LEFT_LEG_TATTOO, new PickerControlEntry(TEX_LEFT_LEG_TATTOO, "Left Leg Tattoo", LLUUID::null, TRUE));
-		addEntry (TEX_AUX1_TATTOO, new PickerControlEntry(TEX_AUX1_TATTOO, "Aux1 Tattoo", LLUUID::null, TRUE));
-		addEntry (TEX_AUX2_TATTOO, new PickerControlEntry(TEX_AUX2_TATTOO, "Aux2 Tattoo", LLUUID::null, TRUE));
-		addEntry (TEX_AUX3_TATTOO, new PickerControlEntry(TEX_AUX3_TATTOO, "Aux3 Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_LOWER_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_LOWER_UNIVERSAL_TATTOO, "Lower Universal Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_UPPER_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_UPPER_UNIVERSAL_TATTOO, "Upper Universal Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_HEAD_UNIVERSAL_TATTOO, new PickerControlEntry( TEX_HEAD_UNIVERSAL_TATTOO, "Head Universal Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_SKIRT_TATTOO, new PickerControlEntry(TEX_SKIRT_TATTOO, "Skirt Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_HAIR_TATTOO, new PickerControlEntry(TEX_HAIR_TATTOO, "Hair Tattoo", LLUUID::null, TRUE));
+        addEntry ( TEX_EYES_TATTOO, new PickerControlEntry(TEX_EYES_TATTOO, "Eyes Tattoo", LLUUID::null, TRUE));
+        addEntry (TEX_LEFT_ARM_TATTOO, new PickerControlEntry(TEX_LEFT_ARM_TATTOO, "Left Arm Tattoo", LLUUID::null, TRUE));
+        addEntry (TEX_LEFT_LEG_TATTOO, new PickerControlEntry(TEX_LEFT_LEG_TATTOO, "Left Leg Tattoo", LLUUID::null, TRUE));
+        addEntry (TEX_AUX1_TATTOO, new PickerControlEntry(TEX_AUX1_TATTOO, "Aux1 Tattoo", LLUUID::null, TRUE));
+        addEntry (TEX_AUX2_TATTOO, new PickerControlEntry(TEX_AUX2_TATTOO, "Aux2 Tattoo", LLUUID::null, TRUE));
+        addEntry (TEX_AUX3_TATTOO, new PickerControlEntry(TEX_AUX3_TATTOO, "Aux3 Tattoo", LLUUID::null, TRUE));
 }
 
 LLEditWearableDictionary::PickerControlEntry::PickerControlEntry(ETextureIndex tex_index,
@@ -659,7 +659,7 @@ LLPanelEditWearable::LLPanelEditWearable()
 LLPanelEditWearable::~LLPanelEditWearable()
 {
        if (mWearablePtr)
-       	    mWearablePtr->unregisterObserver(this);
+            mWearablePtr->unregisterObserver(this);
 }
 
 bool LLPanelEditWearable::changeHeightUnits(const LLSD& new_value)
@@ -732,7 +732,7 @@ BOOL LLPanelEditWearable::postBuild()
         mBackBtnLabel = mBtnBack->getLabelUnselected();
         mBtnBack->setLabel(LLStringUtil::null);
 
-        childSetAction("import_btn", boost::bind(&LLPanelEditWearable::onClickedImportBtn, this));	// [FS:CR] FIRE-290
+        childSetAction("import_btn", boost::bind(&LLPanelEditWearable::onClickedImportBtn, this));  // [FS:CR] FIRE-290
 
         mBtnBack->setClickedCallback(boost::bind(&LLPanelEditWearable::onBackButtonClicked, this));
 
@@ -777,7 +777,7 @@ BOOL LLPanelEditWearable::postBuild()
         mPanelSkirt = getChild<LLPanel>("edit_skirt_panel");
         mPanelAlpha = getChild<LLPanel>("edit_alpha_panel");
         mPanelTattoo = getChild<LLPanel>("edit_tattoo_panel");
-		mPanelUniversal = getChild<LLPanel>("edit_universal_panel");
+        mPanelUniversal = getChild<LLPanel>("edit_universal_panel");
         mPanelPhysics = getChild<LLPanel>("edit_physics_panel");
 
         mTxtAvatarHeight = mPanelShape->getChild<LLTextBox>("avatar_height");
@@ -882,11 +882,11 @@ BOOL LLPanelEditWearable::isDirty() const
         BOOL isDirty = FALSE;
         if (mWearablePtr)
         {
-			if (mWearablePtr->isDirty() ||
-				( mWearableItem && mNameEditor && mWearableItem->getName().compare(mNameEditor->getText()) != 0 ))
-			{
-				isDirty = TRUE;
-			}
+            if (mWearablePtr->isDirty() ||
+                ( mWearableItem && mNameEditor && mWearableItem->getName().compare(mNameEditor->getText()) != 0 ))
+            {
+                isDirty = TRUE;
+            }
         }
         return isDirty;
 }
@@ -905,8 +905,8 @@ void LLPanelEditWearable::draw()
 
 void LLPanelEditWearable::onClose()
 {
-	// any unsaved changes should be reverted at this point
-	revertChanges();
+    // any unsaved changes should be reverted at this point
+    revertChanges();
 }
 
 void LLPanelEditWearable::setVisible(BOOL visible)
@@ -922,8 +922,8 @@ void LLPanelEditWearable::setWearable(LLViewerWearable *wearable, BOOL disable_c
 {
         showWearable(mWearablePtr, FALSE, disable_camera_switch);
         if (mWearablePtr)
-       	    mWearablePtr->unregisterObserver(this);
-		mWearablePtr = wearable;
+            mWearablePtr->unregisterObserver(this);
+        mWearablePtr = wearable;
         if( mWearablePtr )
             mWearablePtr->registerObserver( this );
         showWearable(mWearablePtr, TRUE, disable_camera_switch);
@@ -933,10 +933,10 @@ void LLPanelEditWearable::setWearable(LLViewerWearable *wearable, BOOL disable_c
 void LLPanelEditWearable::onBackButtonClicked(void* userdata)
 {
     LLPanelEditWearable *panel = (LLPanelEditWearable*) userdata;
-	if ( panel->isDirty() )
-	{
-		LLAppearanceMgr::instance().setOutfitDirty( true );		
-	}
+    if ( panel->isDirty() )
+    {
+        LLAppearanceMgr::instance().setOutfitDirty( true );     
+    }
 }
 
 //static 
@@ -976,15 +976,15 @@ void LLPanelEditWearable::onCommitSexChange()
         LLWearableType::EType type = mWearablePtr->getType();
         U32 index;
         if( !gAgentWearables.getWearableIndex(mWearablePtr, index) ||
-			!gAgentWearables.isWearableModifiable(type, index))
+            !gAgentWearables.isWearableModifiable(type, index))
         {
-			return;
+            return;
         }
 
         LLViewerVisualParam* param = static_cast<LLViewerVisualParam*>(gAgentAvatarp->getVisualParam( "male" ));
         if( !param )
         {
-			return;
+            return;
         }
 
         bool is_new_sex_male = (gSavedSettings.getU32("AvatarSex") ? SEX_MALE : SEX_FEMALE) == SEX_MALE;
@@ -1034,19 +1034,19 @@ void LLPanelEditWearable::onTexturePickerCommit(const LLUICtrl* ctrl)
                         }
                         if (getWearable())
                         {
-							U32 index;
-							if (gAgentWearables.getWearableIndex(getWearable(), index))
-							{
-								gAgentAvatarp->setLocalTexture(entry->mTextureIndex, image, FALSE, index);
-								LLVisualParamHint::requestHintUpdates();
-								// <FS:Ansariel> [Legacy Bake]
-								//gAgentAvatarp->wearableUpdated(type);
-								gAgentAvatarp->wearableUpdated(type, FALSE);
-							}
-							else
-							{
-								LL_WARNS() << "wearable not found in gAgentWearables" << LL_ENDL;
-							}
+                            U32 index;
+                            if (gAgentWearables.getWearableIndex(getWearable(), index))
+                            {
+                                gAgentAvatarp->setLocalTexture(entry->mTextureIndex, image, FALSE, index);
+                                LLVisualParamHint::requestHintUpdates();
+                                // <FS:Ansariel> [Legacy Bake]
+                                //gAgentAvatarp->wearableUpdated(type);
+                                gAgentAvatarp->wearableUpdated(type, FALSE);
+                            }
+                            else
+                            {
+                                LL_WARNS() << "wearable not found in gAgentWearables" << LL_ENDL;
+                            }
                         }
                 }
                 else
@@ -1128,61 +1128,61 @@ void LLPanelEditWearable::saveChanges(bool force_save_as)
         }
 
         U32 index;
-		if (!gAgentWearables.getWearableIndex(mWearablePtr, index))
-		{
-			LL_WARNS() << "wearable not found" << LL_ENDL;
-			return;
-		}
+        if (!gAgentWearables.getWearableIndex(mWearablePtr, index))
+        {
+            LL_WARNS() << "wearable not found" << LL_ENDL;
+            return;
+        }
 
         std::string new_name = mNameEditor->getText();
 
-		// Find an existing link to this wearable's inventory item, if any, and its description field.
-		LLInventoryItem *link_item = NULL;
-		std::string description;
-		LLInventoryModel::item_array_t links =
-			LLAppearanceMgr::instance().findCOFItemLinks(mWearablePtr->getItemID());
-		if (links.size()>0)
-		{
-			link_item = links.at(0).get();
-			if (link_item && link_item->getIsLinkType())
-			{
-				description = link_item->getActualDescription();
-			}
-		}
+        // Find an existing link to this wearable's inventory item, if any, and its description field.
+        LLInventoryItem *link_item = NULL;
+        std::string description;
+        LLInventoryModel::item_array_t links =
+            LLAppearanceMgr::instance().findCOFItemLinks(mWearablePtr->getItemID());
+        if (links.size()>0)
+        {
+            link_item = links.at(0).get();
+            if (link_item && link_item->getIsLinkType())
+            {
+                description = link_item->getActualDescription();
+            }
+        }
 
         if (force_save_as)
         {
-			// the name of the wearable has changed, re-save wearable with new name
-			LLAppearanceMgr::instance().removeCOFItemLinks(mWearablePtr->getItemID(),gAgentAvatarp->mEndCustomizeCallback);
-			gAgentWearables.saveWearableAs(mWearablePtr->getType(), index, new_name, description, FALSE);
-			mNameEditor->setText(mWearableItem->getName());
+            // the name of the wearable has changed, re-save wearable with new name
+            LLAppearanceMgr::instance().removeCOFItemLinks(mWearablePtr->getItemID(),gAgentAvatarp->mEndCustomizeCallback);
+            gAgentWearables.saveWearableAs(mWearablePtr->getType(), index, new_name, description, FALSE);
+            mNameEditor->setText(mWearableItem->getName());
         }
         else
         {
-			// Make another copy of this link, with the same
-			// description.  This is needed to bump the COF
-			// version so texture baking service knows appearance has changed.
-			if (link_item)
-			{
-				// Create new link
-				LL_DEBUGS("Avatar") << "link refresh, creating new link to " << link_item->getLinkedUUID()
-									<< " removing old link at " << link_item->getUUID()
-									<< " wearable item id " << mWearablePtr->getItemID() << LL_ENDL;
+            // Make another copy of this link, with the same
+            // description.  This is needed to bump the COF
+            // version so texture baking service knows appearance has changed.
+            if (link_item)
+            {
+                // Create new link
+                LL_DEBUGS("Avatar") << "link refresh, creating new link to " << link_item->getLinkedUUID()
+                                    << " removing old link at " << link_item->getUUID()
+                                    << " wearable item id " << mWearablePtr->getItemID() << LL_ENDL;
 
-				LLInventoryObject::const_object_list_t obj_array;
-				obj_array.push_back(LLConstPointer<LLInventoryObject>(link_item));
-				link_inventory_array(LLAppearanceMgr::instance().getCOF(),
-									 obj_array, 
-									 gAgentAvatarp->mEndCustomizeCallback);
-				// Remove old link
-				remove_inventory_item(link_item->getUUID(), gAgentAvatarp->mEndCustomizeCallback);
-			}
-			// <FS:Ansariel> [Legacy Bake]
-			//gAgentWearables.saveWearable(mWearablePtr->getType(), index, new_name);
-			gAgentWearables.saveWearable(mWearablePtr->getType(), index, TRUE, new_name);
+                LLInventoryObject::const_object_list_t obj_array;
+                obj_array.push_back(LLConstPointer<LLInventoryObject>(link_item));
+                link_inventory_array(LLAppearanceMgr::instance().getCOF(),
+                                     obj_array, 
+                                     gAgentAvatarp->mEndCustomizeCallback);
+                // Remove old link
+                remove_inventory_item(link_item->getUUID(), gAgentAvatarp->mEndCustomizeCallback);
+            }
+            // <FS:Ansariel> [Legacy Bake]
+            //gAgentWearables.saveWearable(mWearablePtr->getType(), index, new_name);
+            gAgentWearables.saveWearable(mWearablePtr->getType(), index, TRUE, new_name);
         }
 
-	
+    
 }
 
 void LLPanelEditWearable::revertChanges()
@@ -1234,8 +1234,8 @@ void LLPanelEditWearable::showWearable(LLViewerWearable* wearable, BOOL show, BO
 
         targetPanel->setVisible(show);
         toggleTypeSpecificControls(type);
-		// Update type controls here
-		updateTypeSpecificControls(type);
+        // Update type controls here
+        updateTypeSpecificControls(type);
 
         if (show)
         {
@@ -1276,7 +1276,7 @@ void LLPanelEditWearable::showWearable(LLViewerWearable* wearable, BOOL show, BO
         
                         LLScrollingPanelList *panel_list = getChild<LLScrollingPanelList>(scrolling_panel);
                         LLAccordionCtrlTab *tab = getChild<LLAccordionCtrlTab>(accordion_tab);
-			
+            
                         if (!panel_list)
                         {
                                 LL_WARNS() << "could not get scrolling panel list: " << scrolling_panel << LL_ENDL;
@@ -1289,17 +1289,17 @@ void LLPanelEditWearable::showWearable(LLViewerWearable* wearable, BOOL show, BO
                                 continue;
                         }
 
-			// Don't show female subparts if you're not female, etc.
-			if (!(gAgentAvatarp->getSex() & subpart_entry->mSex))
-			{
-				tab->setVisible(FALSE);
-				continue;
-			}
-			else
-			{
-				tab->setVisible(TRUE);
-			}
-			
+            // Don't show female subparts if you're not female, etc.
+            if (!(gAgentAvatarp->getSex() & subpart_entry->mSex))
+            {
+                tab->setVisible(FALSE);
+                continue;
+            }
+            else
+            {
+                tab->setVisible(TRUE);
+            }
+            
                         // what edit group do we want to extract params for?
                         const std::string edit_group = subpart_entry->mEditGroup;
         
@@ -1308,13 +1308,13 @@ void LLPanelEditWearable::showWearable(LLViewerWearable* wearable, BOOL show, BO
                         getSortedParams(sorted_params, edit_group);
 
 //<FS:ND> Query by JointKey rather than just a string, the key can be a U32 index for faster lookup
-//						LLJoint* jointp = gAgentAvatarp->getJoint( subpart_entry->mTargetJoint );
-						LLJoint* jointp = gAgentAvatarp->getJoint( JointKey::construct( subpart_entry->mTargetJoint ) );
-						if( !jointp )
+//                      LLJoint* jointp = gAgentAvatarp->getJoint( subpart_entry->mTargetJoint );
+                        LLJoint* jointp = gAgentAvatarp->getJoint( JointKey::construct( subpart_entry->mTargetJoint ) );
+                        if( !jointp )
                         {
-//							jointp = gAgentAvatarp->getJoint( "mHead" );
-							jointp = gAgentAvatarp->getJoint( JointKey::construct( "mHead" ) );
-						}
+//                          jointp = gAgentAvatarp->getJoint( "mHead" );
+                            jointp = gAgentAvatarp->getJoint( JointKey::construct( "mHead" ) );
+                        }
 // </FS:ND>
 
                         buildParamList(panel_list, sorted_params, tab, jointp);
@@ -1364,49 +1364,49 @@ void LLPanelEditWearable::onTabExpandedCollapsed(const LLSD& param, U8 index)
 // <FS:Ansariel> Appearance panel not updating camera position
 void LLPanelEditWearable::onTabChanged(LLUICtrl* ctrl, LLWearableType::EType type)
 {
-	LLTabContainer* container = dynamic_cast<LLTabContainer*>(ctrl);
-	if (!container)
-	{
-		return;
-	}
+    LLTabContainer* container = dynamic_cast<LLTabContainer*>(ctrl);
+    if (!container)
+    {
+        return;
+    }
 
-	if (!mWearablePtr || !gAgentCamera.cameraCustomizeAvatar())
-	{
-		// we don't have a valid wearable we're editing, or we've left the wearable editor
-		return;
-	}
+    if (!mWearablePtr || !gAgentCamera.cameraCustomizeAvatar())
+    {
+        // we don't have a valid wearable we're editing, or we've left the wearable editor
+        return;
+    }
 
-	const LLEditWearableDictionary::WearableEntry* wearable_entry = LLEditWearableDictionary::getInstance()->getWearable(type);
-	if (!wearable_entry)
-	{
-		return;
-	}
+    const LLEditWearableDictionary::WearableEntry* wearable_entry = LLEditWearableDictionary::getInstance()->getWearable(type);
+    if (!wearable_entry)
+    {
+        return;
+    }
 
-	llassert_always(wearable_entry->mSubparts.size() <= 0xFF);
-	U8 num_subparts = static_cast<U8>(wearable_entry->mSubparts.size());
-	for (U8 index = 0; index < num_subparts; ++index)
-	{
-		ESubpart subpart_e = wearable_entry->mSubparts[index];
-		const LLEditWearableDictionary::SubpartEntry* subpart_entry = LLEditWearableDictionary::getInstance()->getSubpart(subpart_e);
+    llassert_always(wearable_entry->mSubparts.size() <= 0xFF);
+    U8 num_subparts = static_cast<U8>(wearable_entry->mSubparts.size());
+    for (U8 index = 0; index < num_subparts; ++index)
+    {
+        ESubpart subpart_e = wearable_entry->mSubparts[index];
+        const LLEditWearableDictionary::SubpartEntry* subpart_entry = LLEditWearableDictionary::getInstance()->getSubpart(subpart_e);
 
-		if (subpart_entry && container->getCurrentPanel()->hasChild(subpart_entry->mAccordionTab, TRUE))
-		{
-			mLastShownSubpartIndex[type] = index; // <FS:Ansariel> Correct camera position for last subpart
-			changeCamera(index);
-			break;
-		}
-	}
+        if (subpart_entry && container->getCurrentPanel()->hasChild(subpart_entry->mAccordionTab, TRUE))
+        {
+            mLastShownSubpartIndex[type] = index; // <FS:Ansariel> Correct camera position for last subpart
+            changeCamera(index);
+            break;
+        }
+    }
 }
 // </FS:Ansariel>
 
 void LLPanelEditWearable::changeCamera(U8 subpart)
 {
-	// Don't change the camera if this type doesn't have a camera switch.
-	// Useful for wearables like physics that don't have an associated physical body part.
-	if (LLWearableType::getInstance()->getDisableCameraSwitch(mWearablePtr->getType()))
-	{
-		return;
-	}
+    // Don't change the camera if this type doesn't have a camera switch.
+    // Useful for wearables like physics that don't have an associated physical body part.
+    if (LLWearableType::getInstance()->getDisableCameraSwitch(mWearablePtr->getType()))
+    {
+        return;
+    }
         const LLEditWearableDictionary::WearableEntry *wearable_entry = LLEditWearableDictionary::getInstance()->getWearable(mWearablePtr->getType());
         if (!wearable_entry)
         {
@@ -1431,8 +1431,8 @@ void LLPanelEditWearable::changeCamera(U8 subpart)
 
         // Update the camera
 //<FS:ND> Query by JointKey rather than just a string, the key can be a U32 index for faster lookup
-		//gMorphView->setCameraTargetJoint( gAgentAvatarp->getJoint( subpart_entry->mTargetJoint ) );
-		gMorphView->setCameraTargetJoint( gAgentAvatarp->getJoint( JointKey::construct( subpart_entry->mTargetJoint ) ) );
+        //gMorphView->setCameraTargetJoint( gAgentAvatarp->getJoint( subpart_entry->mTargetJoint ) );
+        gMorphView->setCameraTargetJoint( gAgentAvatarp->getJoint( JointKey::construct( subpart_entry->mTargetJoint ) ) );
 // </FS>ND>
 
         gMorphView->setCameraTargetOffset( subpart_entry->mTargetOffset );
@@ -1469,9 +1469,9 @@ void LLPanelEditWearable::updateTypeSpecificControls(LLWearableType::EType type)
         if (type == LLWearableType::WT_SHAPE)
         {
                 // Update avatar height
-				// The .195 is a fudge factor derived by measuring against
-				//  prims inworld, and carried forward from Phoenix. -- TS
-				F32 new_size = gAgentAvatarp->mBodySize.mV[VZ] + .195f;
+                // The .195 is a fudge factor derived by measuring against
+                //  prims inworld, and carried forward from Phoenix. -- TS
+                F32 new_size = gAgentAvatarp->mBodySize.mV[VZ] + .195f;
 
                 if (gSavedSettings.getBOOL("HeightUnits") == FALSE)
                 {
@@ -1595,10 +1595,10 @@ LLPanel* LLPanelEditWearable::getPanel(LLWearableType::EType type)
                 case LLWearableType::WT_TATTOO:
                         return mPanelTattoo;
                         break;
-				
-				case LLWearableType::WT_UNIVERSAL:
-					return mPanelUniversal;
-					break;
+                
+                case LLWearableType::WT_UNIVERSAL:
+                    return mPanelUniversal;
+                    break;
 
                 case LLWearableType::WT_PHYSICS:
                         return mPanelPhysics;
@@ -1735,12 +1735,12 @@ void LLPanelEditWearable::onInvisibilityCommit(LLCheckBoxCtrl* checkbox_ctrl, LL
 
         LL_INFOS() << "onInvisibilityCommit, self " << this << " checkbox_ctrl " << checkbox_ctrl << LL_ENDL;
 
-		U32 index;
-		if (!gAgentWearables.getWearableIndex(getWearable(),index))
-		{
-			LL_WARNS() << "wearable not found" << LL_ENDL;
-			return;
-		}
+        U32 index;
+        if (!gAgentWearables.getWearableIndex(getWearable(),index))
+        {
+            LL_WARNS() << "wearable not found" << LL_ENDL;
+            return;
+        }
         bool new_invis_state = checkbox_ctrl->get();
         if (new_invis_state)
         {
@@ -1748,10 +1748,10 @@ void LLPanelEditWearable::onInvisibilityCommit(LLCheckBoxCtrl* checkbox_ctrl, LL
                 mPreviousAlphaTexture[te] = lto->getID();
                 
                 LLViewerFetchedTexture* image = LLViewerTextureManager::getFetchedTexture( IMG_INVISIBLE );
-				gAgentAvatarp->setLocalTexture(te, image, FALSE, index);
-				// <FS:Ansariel> [Legacy Bake]
-				//gAgentAvatarp->wearableUpdated(getWearable()->getType());
-				gAgentAvatarp->wearableUpdated(getWearable()->getType(), FALSE);
+                gAgentAvatarp->setLocalTexture(te, image, FALSE, index);
+                // <FS:Ansariel> [Legacy Bake]
+                //gAgentAvatarp->wearableUpdated(getWearable()->getType());
+                gAgentAvatarp->wearableUpdated(getWearable()->getType(), FALSE);
         }
         else
         {
@@ -1810,81 +1810,81 @@ void LLPanelEditWearable::initPreviousAlphaTextureEntry(LLAvatarAppearanceDefine
 // [FS:CR] FIRE-10986
 void LLPanelEditWearable::onClickedImportBtn()
 {
-	(new LLFilePickerReplyThread(boost::bind(&LLPanelEditWearable::onClickedImportBtnCallback, this, _1), LLFilePicker::FFLOAD_XML, false))->getFile();
+    (new LLFilePickerReplyThread(boost::bind(&LLPanelEditWearable::onClickedImportBtnCallback, this, _1), LLFilePicker::FFLOAD_XML, false))->getFile();
 }
 
 void LLPanelEditWearable::onClickedImportBtnCallback(const std::vector<std::string>& filenames)
 {
-	const std::string filename = filenames[0];
-	LLXmlTree tree;
-	if (!tree.parseFile(filename, FALSE))
-	{
-		LL_WARNS("ShapeImport") << "Parsing " << filename << "failed miserably." << LL_ENDL;
-		LLNotificationsUtil::add("ShapeImportGenericFail", LLSD().with("FILENAME", filename));
-		return;
-	}
-	LLXmlTreeNode* root = tree.getRoot();
-	if (!root || !root->hasName("linden_genepool"))
-	{
-		LL_WARNS("ShapeImport") << filename << " has an invaid root node (not linden_genepool). Are you sure this is an avatar file?" << LL_ENDL;
-		LLNotificationsUtil::add("ShapeImportVersionFail", LLSD().with("FILENAME", filename));
-		return;
-	}
-	std::string version;
-	static LLStdStringHandle version_string = LLXmlTree::addAttributeString("version");
-	if(!root->getFastAttributeString(version_string, version) || (version != "1.0") )
-	{
-		LL_WARNS("ShapeImport") << "Invalid avatar file version: " << version << " in file: " << filename << LL_ENDL;
-		LLNotificationsUtil::add("ShapeImportVersionFail", LLSD().with("FILENAME", filename));
-		return;
-	}
-	LLXmlTreeNode* archetype = root->getChildByName("archetype");
-	if (archetype)
-	{
-		static const LLStdStringHandle id_handle = LLXmlTree::addAttributeString("id");
-		static const LLStdStringHandle value_handle = LLXmlTree::addAttributeString("value");
-		U32 parse_errors = 0;
-		
-		for (LLXmlTreeNode* child = archetype->getFirstChild(); child != NULL; child = archetype->getNextChild())
-		{
-			if (!child->hasName("param")) continue;
-			S32 id;
-			F32 value;
-			std::string wearable;
-			if (child->getFastAttributeS32(id_handle, id)
-				&& child->getFastAttributeF32(value_handle, value))
-			{
-				LLVisualParam* visual_param = getWearable()->getVisualParam(id);
-				if (visual_param)
-					// <FS:Ansariel> [AIS Merge] Change back once legacy baking is re-added
-					//visual_param->setWeight(value);
-					visual_param->setWeight(value, FALSE);
-			}
-			else
-			{
-				LL_WARNS("ShapeImport") << "Failed to parse parameters in " << filename << LL_ENDL;
-				++parse_errors;
-			}
-		}
-		if (parse_errors)
-		{
-			LLNotificationsUtil::add("ShapeImportGenericFail", LLSD().with("FILENAME", filename));
-		}
-		if (isAgentAvatarValid())
-		{
-			getWearable()->writeToAvatar(gAgentAvatarp);
-			gAgentAvatarp->updateVisualParams();
-			updateScrollingPanelUI();
-			LL_INFOS("ShapeImport") << "Shape import has finished with great success!" << LL_ENDL;
-		}
-		else
-			LL_WARNS("ShapeImport") << "Agent is not valid. Can't apply shape import changes" << LL_ENDL;
-	}
-	else
-	{
-		LL_WARNS("ShapeImport") << filename << " is missing the archetype." << LL_ENDL;
-		LLNotificationsUtil::add("ShapeImportGenericFail");
-	}
+    const std::string filename = filenames[0];
+    LLXmlTree tree;
+    if (!tree.parseFile(filename, FALSE))
+    {
+        LL_WARNS("ShapeImport") << "Parsing " << filename << "failed miserably." << LL_ENDL;
+        LLNotificationsUtil::add("ShapeImportGenericFail", LLSD().with("FILENAME", filename));
+        return;
+    }
+    LLXmlTreeNode* root = tree.getRoot();
+    if (!root || !root->hasName("linden_genepool"))
+    {
+        LL_WARNS("ShapeImport") << filename << " has an invaid root node (not linden_genepool). Are you sure this is an avatar file?" << LL_ENDL;
+        LLNotificationsUtil::add("ShapeImportVersionFail", LLSD().with("FILENAME", filename));
+        return;
+    }
+    std::string version;
+    static LLStdStringHandle version_string = LLXmlTree::addAttributeString("version");
+    if(!root->getFastAttributeString(version_string, version) || (version != "1.0") )
+    {
+        LL_WARNS("ShapeImport") << "Invalid avatar file version: " << version << " in file: " << filename << LL_ENDL;
+        LLNotificationsUtil::add("ShapeImportVersionFail", LLSD().with("FILENAME", filename));
+        return;
+    }
+    LLXmlTreeNode* archetype = root->getChildByName("archetype");
+    if (archetype)
+    {
+        static const LLStdStringHandle id_handle = LLXmlTree::addAttributeString("id");
+        static const LLStdStringHandle value_handle = LLXmlTree::addAttributeString("value");
+        U32 parse_errors = 0;
+        
+        for (LLXmlTreeNode* child = archetype->getFirstChild(); child != NULL; child = archetype->getNextChild())
+        {
+            if (!child->hasName("param")) continue;
+            S32 id;
+            F32 value;
+            std::string wearable;
+            if (child->getFastAttributeS32(id_handle, id)
+                && child->getFastAttributeF32(value_handle, value))
+            {
+                LLVisualParam* visual_param = getWearable()->getVisualParam(id);
+                if (visual_param)
+                    // <FS:Ansariel> [AIS Merge] Change back once legacy baking is re-added
+                    //visual_param->setWeight(value);
+                    visual_param->setWeight(value, FALSE);
+            }
+            else
+            {
+                LL_WARNS("ShapeImport") << "Failed to parse parameters in " << filename << LL_ENDL;
+                ++parse_errors;
+            }
+        }
+        if (parse_errors)
+        {
+            LLNotificationsUtil::add("ShapeImportGenericFail", LLSD().with("FILENAME", filename));
+        }
+        if (isAgentAvatarValid())
+        {
+            getWearable()->writeToAvatar(gAgentAvatarp);
+            gAgentAvatarp->updateVisualParams();
+            updateScrollingPanelUI();
+            LL_INFOS("ShapeImport") << "Shape import has finished with great success!" << LL_ENDL;
+        }
+        else
+            LL_WARNS("ShapeImport") << "Agent is not valid. Can't apply shape import changes" << LL_ENDL;
+    }
+    else
+    {
+        LL_WARNS("ShapeImport") << filename << " is missing the archetype." << LL_ENDL;
+        LLNotificationsUtil::add("ShapeImportGenericFail");
+    }
 }
 // [/FS:CR] FIRE-10986
 

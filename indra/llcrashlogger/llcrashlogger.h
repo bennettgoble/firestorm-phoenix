@@ -57,31 +57,31 @@ const S32 CRASH_BEHAVIOR_NEVER_SEND = 2;
 class LLCrashLogger : public LLApp
 {
 public:
-	LLCrashLogger();
-	virtual ~LLCrashLogger();
-	std::string loadCrashURLSetting();
+    LLCrashLogger();
+    virtual ~LLCrashLogger();
+    std::string loadCrashURLSetting();
     bool readFromXML(LLSD& dest, const std::string& filename );
-	void gatherFiles();
+    void gatherFiles();
     void mergeLogs( LLSD src_sd );
 
-	virtual void gatherPlatformSpecificFiles() {}
+    virtual void gatherPlatformSpecificFiles() {}
     bool sendCrashLog(std::string dump_dir);
-	bool sendCrashLogs();
-	LLSD constructPostData();
-	virtual void updateApplication(const std::string& message = LLStringUtil::null);
-	virtual bool init();
-	virtual bool frame() = 0;
-	virtual bool cleanup() = 0;
-	void commonCleanup();
-	void setUserText(const std::string& text) { mCrashInfo["UserNotes"] = text; }
-	S32 getCrashBehavior() { return mCrashBehavior; }
-	bool runCrashLogPost(std::string host, LLSD data, std::string msg, int retries, int timeout);
-	bool readMinidump(std::string minidump_path);
+    bool sendCrashLogs();
+    LLSD constructPostData();
+    virtual void updateApplication(const std::string& message = LLStringUtil::null);
+    virtual bool init();
+    virtual bool frame() = 0;
+    virtual bool cleanup() = 0;
+    void commonCleanup();
+    void setUserText(const std::string& text) { mCrashInfo["UserNotes"] = text; }
+    S32 getCrashBehavior() { return mCrashBehavior; }
+    bool runCrashLogPost(std::string host, LLSD data, std::string msg, int retries, int timeout);
+    bool readMinidump(std::string minidump_path);
 
-	// <FS:Ansariel> Restore crash report user settings
-	S32 loadCrashBehaviorSetting();
-	bool saveCrashBehaviorSetting(S32 crash_behavior);
-	// </FS:Ansariel>
+    // <FS:Ansariel> Restore crash report user settings
+    S32 loadCrashBehaviorSetting();
+    bool saveCrashBehaviorSetting(S32 crash_behavior);
+    // </FS:Ansariel>
 
 protected:
     static void init_curl();
@@ -89,20 +89,20 @@ protected:
     static void ssl_thread_id_callback(CRYPTO_THREADID*);
     static void ssl_locking_callback(int mode, int type, const char * file, int line);
 
-	S32 mCrashBehavior;
-	BOOL mCrashInPreviousExec;
-	std::map<std::string, std::string> mFileMap;
-	std::string mGridName;
-	LLControlGroup mCrashSettings;
-	std::string mProductName;
-	LLSD mCrashInfo;
+    S32 mCrashBehavior;
+    BOOL mCrashInPreviousExec;
+    std::map<std::string, std::string> mFileMap;
+    std::string mGridName;
+    LLControlGroup mCrashSettings;
+    std::string mProductName;
+    LLSD mCrashInfo;
 // [SL:KB] - Patch: Viewer-CrashLookup | Checked: 2011-03-24 (Catznip-2.6.0a) | Added: Catznip-2.6.0a
-	LLCrashLookup*	mCrashLookup;
+    LLCrashLookup*  mCrashLookup;
 // [/SL:KB]
-	std::string mCrashHost;
-	std::string mAltCrashHost;
-	LLSD mDebugLog;
-	bool mSentCrashLogs;
+    std::string mCrashHost;
+    std::string mAltCrashHost;
+    LLSD mDebugLog;
+    bool mSentCrashLogs;
     LLCrashLock mKeyMaster;
 
     static int ssl_mutex_count;

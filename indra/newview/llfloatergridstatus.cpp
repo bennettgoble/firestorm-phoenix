@@ -67,9 +67,9 @@ void LLFloaterGridStatus::onOpen(const LLSD& key)
     p.allow_address_entry = false;
 
     LLFloaterWebContent::onOpen(p);
-	// <FS:Beq> [FIRE-21236] Changes to improve usability of grid status
-	getChildView("popexternal")->setEnabled(true);
-	// </FS:Beq>
+    // <FS:Beq> [FIRE-21236] Changes to improve usability of grid status
+    getChildView("popexternal")->setEnabled(true);
+    // </FS:Beq>
     applyPreferredRect();
     if (mWebBrowser)
     {

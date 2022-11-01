@@ -504,7 +504,7 @@ void LLViewerAssetStorage::assetRequestCoro(
         result_code = LL_ERR_ASSET_REQUEST_FAILED;
         ext_status = LLExtStat::NONE;
         removeAndCallbackPendingDownloads(uuid, atype, uuid, atype, result_code, ext_status);
-		return;
+        return;
     }
     else if (!gAgent.getRegion()->capabilitiesReceived())
     {
@@ -525,10 +525,10 @@ void LLViewerAssetStorage::assetRequestCoro(
         LL_WARNS_ONCE("ViewerAsset") << "capsRecv got event" << LL_ENDL;
         LL_WARNS_ONCE("ViewerAsset") << "region " << gAgent.getRegion() << " mViewerAssetUrl " << mViewerAssetUrl << LL_ENDL;
     }
-	// <FS:Beq> FIRE-23657 [OPENSIM] Update the Viewer Asset Url irrespective of previous setting (Fix provided by Liru Færs)
-	// if (mViewerAssetUrl.empty() && gAgent.getRegion())
-	if (gAgent.getRegion())
-	// </FS:Beq>
+    // <FS:Beq> FIRE-23657 [OPENSIM] Update the Viewer Asset Url irrespective of previous setting (Fix provided by Liru Færs)
+    // if (mViewerAssetUrl.empty() && gAgent.getRegion())
+    if (gAgent.getRegion())
+    // </FS:Beq>
     {
         mViewerAssetUrl = gAgent.getRegion()->getViewerAssetUrl();
     }
@@ -567,7 +567,7 @@ void LLViewerAssetStorage::assetRequestCoro(
         // <FS:Ansariel> [UDP Assets]
         }
         // </FS:Ansariel> [UDP Assets]
-		return;
+        return;
     }
 
     // <FS:Ansariel> [UDP Assets]
@@ -578,10 +578,10 @@ void LLViewerAssetStorage::assetRequestCoro(
 
     std::string url = getAssetURL(mViewerAssetUrl, uuid,atype);
     LL_DEBUGS("ViewerAsset") << "request url: " << url << LL_ENDL;
-	// <FS:Beq> Avoid stall in texture fetch due to asset fetching.[Drake]
-	//    LLCore::HttpRequest::policy_t httpPolicy(LLAppCoreHttp::AP_TEXTURE);
-	LLCore::HttpRequest::policy_t httpPolicy(LLAppCoreHttp::AP_ASSET);
-	// </FS:Beq>
+    // <FS:Beq> Avoid stall in texture fetch due to asset fetching.[Drake]
+    //    LLCore::HttpRequest::policy_t httpPolicy(LLAppCoreHttp::AP_TEXTURE);
+    LLCore::HttpRequest::policy_t httpPolicy(LLAppCoreHttp::AP_ASSET);
+    // </FS:Beq>
     LLCoreHttpUtil::HttpCoroutineAdapter::ptr_t
         httpAdapter(new LLCoreHttpUtil::HttpCoroutineAdapter("assetRequestCoro", httpPolicy));
     LLCore::HttpRequest::ptr_t httpRequest(new LLCore::HttpRequest);
@@ -628,9 +628,9 @@ void LLViewerAssetStorage::assetRequestCoro(
         {
             mTotalBytesFetched += size;
             
-			// This create-then-rename flow is modeled on
-			// LLTransferTargetVFile, which is what's used in the UDP
-			// case.
+            // This create-then-rename flow is modeled on
+            // LLTransferTargetVFile, which is what's used in the UDP
+            // case.
             LLUUID temp_id;
             temp_id.generate();
             LLFileSystem vf(temp_id, atype, LLFileSystem::WRITE);
@@ -656,7 +656,7 @@ void LLViewerAssetStorage::assetRequestCoro(
         else
         {
             // TODO asset-http: handle invalid size case
-			LL_WARNS("ViewerAsset") << "bad size" << LL_ENDL;
+            LL_WARNS("ViewerAsset") << "bad size" << LL_ENDL;
             result_code = LL_ERR_ASSET_REQUEST_FAILED;
             ext_status = LLExtStat::NONE;
         }
